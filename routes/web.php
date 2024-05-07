@@ -17,14 +17,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     // return view('welcome');
-    return redirect()->route('login');
+    return redirect()->route('home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 /** Frontend */
+Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth'])->group(function () {
