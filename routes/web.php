@@ -24,6 +24,8 @@ Auth::routes();
 
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
+Route::get('/register', [App\Http\Controllers\Frontend\LoginController::class, 'register']);
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth'])->group(function () {

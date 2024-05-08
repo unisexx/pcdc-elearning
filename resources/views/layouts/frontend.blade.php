@@ -31,14 +31,6 @@
     ]) --}}
     @vite([])
     @stack('css')
-</head>
-
-<body>
-    @include('frontend._header')
-    <main>
-        @yield('content')
-    </main>
-    @include('frontend._footer')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('html/js/bootstrap.bundle.min.js') }}"></script>
@@ -79,6 +71,34 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
+</head>
+
+<body>
+    @include('frontend._header')
+
+    {{-- Title Page กับ breadcrumb แสดงทุกหน้าที่ไม่ใช่หน้าแรก --}}
+    @if (!request()->routeIs('home'))
+        <div class="bg-theme">
+            <div class="container">
+                <div class="title-page py-5 px-4">@yield('page')</div>
+            </div>
+            <div class="shape1"></div>
+        </div>
+        <div class="container">
+            <nav class="breadcrumb-line" aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-end mb-3">
+                    <li class="breadcrumb-item"><a href="{{ url('home') }}">หน้าแรก</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@yield('page')</li>
+                </ol>
+            </nav>
+        </div>
+    @endif
+
+    <main>
+        @yield('content')
+    </main>
+
+    @include('frontend._footer')
 </body>
 
 </html>

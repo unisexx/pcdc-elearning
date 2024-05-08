@@ -7,7 +7,7 @@
                     <div class="d-block d-sm-flex text-center">
                         <img src="{{ asset('html/images/logo_pcdc.svg') }}" class="logo_pcdc me-2" alt="logo pcdc">
                         <img src="{{ asset('html/images/logo_ddc_moph2.svg') }}" class="logo ms-2" alt="logo กรมควบคุมโรค">
-                        <a href="index.html" class="d-table mt-2">
+                        <a href="{{ url('home') }}" class="d-table mt-2">
                             <div class="organization_name"><span class="text-e">e</span>-learning</div>
                             <div class="organization_name2">โรคติดต่อในเด็กและโควิด 19</div>
                         </a>
@@ -15,8 +15,8 @@
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end align-items-center py-2">
                     <div class="btn btn-red rounded-pill text-white">
-                        <a href="login.html">เข้าสู่ระบบ</a> /
-                        <a href="register.html">สมัครสมาชิก</a>
+                        <a href="{{ url('login') }}">เข้าสู่ระบบ</a> /
+                        <a href="{{ url('register') }}">สมัครสมาชิก</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                         <div class="collapse navbar-collapse" id="navbar-content">
                             <ul class="navbar-nav nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 topmenu">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-nowrap" aria-current="page" href="index.html">หน้าแรก</a>
+                                    <a class="nav-link active text-nowrap" aria-current="page" href="{{ url('home') }}">หน้าแรก</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="stat-info.html">ข้อมูลสถิติ</a></li>
                                 <li class="nav-item"><a class="nav-link" href="e-learning.html">ขั้นตอนการเรียน e-learning</a></li>
