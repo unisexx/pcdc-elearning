@@ -8,6 +8,7 @@
 {{-- <a href="{{ route($routeName . '.show', $itemID) }}">
     <i class="fas fa-eye text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="ดู"></i>
 </a> --}}
+
 <a href="{{ route($routeName . '.edit', $itemID) }}" class="mx-3">
     <i class="fas fa-edit text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="แก้ไข"></i>
 </a>

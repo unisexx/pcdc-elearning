@@ -29,7 +29,25 @@
                         </div>
                     </div>
 
-                    <div class="carousel-item shadow-slide">
+                    @forelse($hilights as $item)
+                        <div class="carousel-item shadow-slide">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center wow flipInX mt-4">
+                                    <img src="{{ asset('html/images/slide.jpg') }}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="carousel-item shadow-slide">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center wow flipInX mt-4">
+                                    <img src="{{ asset('html/images/slide.jpg') }}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
+
+                    {{-- <div class="carousel-item shadow-slide">
                         <div class="row justify-content-center">
                             <div class="col-12 text-center wow flipInX mt-4">
                                 <img src="{{ asset('html/images/slide.jpg') }}" alt="" class="img-fluid">
@@ -51,7 +69,7 @@
                                 <img src="{{ asset('html/images/girl-1.png') }}" alt="" class="pt-lg-4 element1 mt-3 img-fluid" width="500" height="402">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

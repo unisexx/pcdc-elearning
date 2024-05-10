@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Hilight;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('frontend.home');
+        /** Hilight */
+        $hilights = Hilight::where('status', 'active')->orderBy('id', 'desc')->get();
+
+        return view('frontend.home', compact('hilights'));
     }
 }

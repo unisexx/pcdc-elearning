@@ -25,9 +25,9 @@
     <link href="{{ asset('argon/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('argon/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
-    <link href="https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css" rel="stylesheet">
-    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="{{ asset('argon/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
 
     <!-- CSS Files -->
