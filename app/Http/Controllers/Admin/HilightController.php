@@ -38,7 +38,7 @@ class HilightController extends Controller
         if ($request->hasFile('image')) {
             $fileName = uniqid() . '.' . $request->image->extension();
             $image    = ImageManager::gd()->read($request->file('image'));
-            $image    = $image->resize(1905, 620);
+            $image    = $image->resize(1400, 476);
             $image->toJpeg(80)->save(base_path('public/storage/uploads/hilight/' . $fileName));
             $input['image'] = $fileName;
         }
@@ -79,7 +79,7 @@ class HilightController extends Controller
         if ($request->hasFile('image')) {
             $fileName = uniqid() . '.' . $request->image->extension();
             $image    = ImageManager::gd()->read($request->file('image'));
-            $image    = $image->resize(1905, 620);
+            $image    = $image->resize(1400, 476);
             $image->toJpeg(80)->save(base_path('public/storage/uploads/hilight/' . $fileName));
             $input['image'] = $fileName;
         }
