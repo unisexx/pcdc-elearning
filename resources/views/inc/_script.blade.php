@@ -212,3 +212,11 @@
 
 {{-- print this --}}
 <script src="{{ asset('js/print-this/printThis.js') }}"></script>
+
+{{-- Tiny MCE --}}
+<script src="https://cdn.tiny.cloud/1/3n6gkw4fc40e1p915bhekje73ea4erdpb5b1xq85eh4z2q9o/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tiny'
+    });
+</script>

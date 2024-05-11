@@ -4,14 +4,14 @@
 
 @section('content')
     <!--====================================================
-                =                      CONTENT                         =
-                =====================================================-->
+                    =                      CONTENT                         =
+                    =====================================================-->
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
             <div class="col-lg-6">
                 <div class="box-contact">
                     <div class="title-send-us">ส่งข้อความถึงเรา</div>
-                    {!! Form::open(['url' => 'contact.save', 'method' => 'post']) !!}
+                    {!! Form::open(['url' => 'contact.save', 'method' => 'post', 'class' => 'row g-3 my-4']) !!}
 
                     <div class="col-12 mb-3">
                         <label for="inputName" class="form-label">ชื่อ - สกุล<span class="text-danger ms-1">*</span></label>

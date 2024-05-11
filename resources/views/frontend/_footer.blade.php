@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-auto">
                     สงวนลิขสิทธิ์ © 2567 กองโรคติดต่อทั่วไป กรมควบคุมโรค กระทรวงสาธารณสุข -
-                    <a href="#">นโยบายเว็บไซต์</a> | <a href="#">นโยบายการคุ้มครองข้อมูลส่วนบุคคล</a>
+                    <a href="{{ url('website-policy') }}">นโยบายเว็บไซต์</a> | <a href="{{ url('privacy-policy') }}">นโยบายการคุ้มครองข้อมูลส่วนบุคคล</a>
                 </div>
                 <div class="col-auto ms-auto">
                     ติดตาม : <a href="{{ $contact->facebook }}" target="_blank"><img src="{{ asset('html/images/icon-facebook.svg') }}" alt="facebook" width="30" class="ms-3"></a>

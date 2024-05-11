@@ -29,6 +29,8 @@ Route::get('/register', [App\Http\Controllers\Frontend\LoginController::class, '
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::get('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
+Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
+Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -36,6 +38,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('/user', App\Http\Controllers\Admin\UserController::class)->names('admin.user');
     Route::resource('/hilight', App\Http\Controllers\Admin\HilightController::class)->names('admin.hilight');
     Route::resource('/contact', App\Http\Controllers\Admin\ContactController::class)->names('admin.contact');
+    Route::resource('/website-policy', App\Http\Controllers\Admin\WebsitePolicyController::class)->names('admin.website-policy');
+    Route::resource('/privacy-policy', App\Http\Controllers\Admin\PrivacyPolicyController::class)->names('admin.privacy-policy');
     Route::resource('/faq', App\Http\Controllers\Admin\FaqController::class)->names('admin.faq');
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
 });

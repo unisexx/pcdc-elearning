@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('frontend.contact.index', compact('contact'));
+        return view('frontend.contact.index');
     }
 
     public function save()

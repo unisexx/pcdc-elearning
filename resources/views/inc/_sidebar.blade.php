@@ -44,6 +44,22 @@
                     <span class="nav-link-text ms-1">ข้อมูลติดต่อ</span>
                 </a>
             </li>
+            <li class="nav-item {{ strpos(Route::currentRouteName(), 'website-policy') === 0 ? 'active' : '' }}">
+                <a class="nav-link {{ strpos(Route::currentRouteName(), 'website-policy') === 0 ? 'active' : '' }}" href="{{ route('admin.website-policy.edit', ['website_policy' => 1]) }}">
+                    <div class="icon text-center d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-globe text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">นโยบายเว็บไซต์</span>
+                </a>
+            </li>
+            <li class="nav-item {{ strpos(Route::currentRouteName(), 'privacy-policy') === 0 ? 'active' : '' }}">
+                <a class="nav-link {{ strpos(Route::currentRouteName(), 'privacy-policy') === 0 ? 'active' : '' }}" href="{{ route('admin.privacy-policy.edit', ['privacy_policy' => 1]) }}">
+                    <div class="icon text-center d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-shield-halved text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">นโยบายข้อมูลส่วนบุคคล</span>
+                </a>
+            </li>
             <li class="nav-item {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}">
                 <a class="nav-link {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}" href="{{ route('home') }}">
                     <div class="icon text-center d-flex align-items-center justify-content-center">
