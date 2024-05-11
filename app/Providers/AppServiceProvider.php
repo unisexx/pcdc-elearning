@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Contact;
 use Form;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +30,11 @@ class AppServiceProvider extends ServiceProvider
         Form::component('bsSelect', 'components.form.select', ['name', 'label' => null, 'selectOptionArray' => null, 'value' => null, 'attributes' => []]);
         Form::component('bsPassword', 'components.form.password', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component('bsUploadAndCropImage', 'components.form.upload-and-crop-image', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+
+        /** Frontend Footer */
+        $cacheTime = 60 * 60 * 24; // 1 วัน
+        View::share('contact', Cache::remember('contact', $cacheTime, function () {
+            return Contact::first();
+        }));
     }
 }

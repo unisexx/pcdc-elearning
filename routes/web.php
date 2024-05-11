@@ -26,6 +26,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 // Route::get('/login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
 Route::get('/register', [App\Http\Controllers\Frontend\LoginController::class, 'register']);
+Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
+Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
+Route::get('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth'])->group(function () {

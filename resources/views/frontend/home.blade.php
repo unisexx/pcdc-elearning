@@ -8,8 +8,15 @@
             <div id="myCarousel" class="carousel" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+                    @if (!empty($hilights))
+                        @foreach ($hilights as $key => $item)
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
+                        @endforeach
+                    @endif
+
+                    {{-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
                 </div>
                 <div class="carousel-inner wow fadeInDown">
 
@@ -29,23 +36,17 @@
                         </div>
                     </div>
 
-                    @forelse($hilights as $item)
-                        <div class="carousel-item shadow-slide">
-                            <div class="row justify-content-center">
-                                <div class="col-12 text-center wow flipInX mt-4">
-                                    <img src="{{ asset('html/images/slide.jpg') }}" alt="" class="img-fluid">
+                    @if (!empty($hilights))
+                        @foreach ($hilights as $item)
+                            <div class="carousel-item shadow-slide">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 text-center wow flipInX mt-4">
+                                        <img src="{{ Storage::url('uploads/hilight/' . @$item->image) }}" alt="" class="img-fluid">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        <div class="carousel-item shadow-slide">
-                            <div class="row justify-content-center">
-                                <div class="col-12 text-center wow flipInX mt-4">
-                                    <img src="{{ asset('html/images/slide.jpg') }}" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                    @endforelse
+                        @endforeach
+                    @endif
 
                     {{-- <div class="carousel-item shadow-slide">
                         <div class="row justify-content-center">
@@ -282,66 +283,22 @@
         </div>
         <div class="row my-4">
             <div class="accordion accordion-style1 wow rotateInDownLeft" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            ความเสี่ยง (ร้อยละ) ที่เชื้อจะแพร่กระจายจากการติดอยู่บนสิ่งของ
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            เชื้อ COVID-19 สามารถแพร่กระจายผ่านสิ่งของที่แปดเปื้อนเชื้อโรคได้ อยู่ได้นานหลายวันหากไม่มีการทำความสะอาด ยกตัวอย่างอุปกรณ์ต่างๆ ที่ใช้ในที่สาธารณะ เช่น ลูกบิดประตู และมือจับประตู ก๊อกน้ำ ราวจับรถสาธารณะ เป็นต้น นอกจากนี้อาจมีการแปดเปื้อนผ่านมือแล้วจับโทรศัพท์มือถือ หากใช้มือสัมผัสสิ่งของแล้วนำมาแตะบริเวณหน้า หรือหยิบอาหารเข้าปาก สามารถติดเชื้อได้เช่นเดียวกับการสัมผัสเชื้อจากผู้ป่วยโดยตรง จึงควรต้องระมัดระวัง ทำความสะอาดพื้นผิวที่อาจแปดเปื้อนบ่อยๆ และล้างมือบ่อยๆ
+                @if (!empty(@$faqs))
+                    @foreach (@$faqs as $key => $item)
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button @if ($key != 0) collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $key }}" aria-expanded="@if ($key == 0) true @else false @endif" aria-controls="collapse_{{ $key }}">
+                                    {{ @$item->question }}
+                                </button>
+                            </h2>
+                            <div id="collapse_{{ $key }}" class="accordion-collapse collapse @if ($key == 0) show @endif" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {{ @$item->answer }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            เชื้อสามารถแพร่กระจายในบริเวณสระว่ายน้ำได้หรือไม่
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            ในปัจจุบันยังไม่มีรายงานการติดเชื้อจากการว่ายน้ำในสระ หรือแหล่งน้ำอื่น แต่ควรหลีกเลี่ยงสระน้ำที่มีผู้คนแออัด
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            ยาสมุนไพร เช่น ฟ้าทะลายโจร สามารถรักษาโรคไวรัสโคโรนา ได้หรือไม่
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            ฟ้าทะลายโจรเป็นยาสมุนไพรที่กรมแพทย์แผนไทยและการแพทย์ทางเลือกแนะนำให้ใช้รักษาหวัด และให้กินทันที ส่วน COVID-19 เป็นเชื้อไวรัสสายพันธ์หนึ่งในกลุ่มโคโรนาไวรัส ไม่ใช่เชื้อไวรัสไข้หวัดใหญ่ ยังไม่เคยมีการนำฟ้าทลายโจรมาทดลองใช้รักษา COVID-19
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                            การล้างมือด้วยน้ำอย่างเดียวสามารถทำลายเชื้อได้หรือไม่
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            การล้างมือเป็นการขจัดสิ่งสกปรกต่างๆ เหงื่อ ไขมัน ที่ออกมาตามธรรมชาติ และลดจำนวนเชื้อโรคที่อาศัยอยู่ชั่วคราวบนมือ การล้างมือด้วยน้ำธรรมดาไม่สามารถทำลายเชื้อได้ การล้างมืออย่างถูกวิธีต้องล้างด้วยสบู่ก้อนหรือสบู่เหลว ใช้เวลาในการฟอกมือนานประมาณ 15-20 วินาที ในกรณีที่ไม่มีสบู่ก้อนหรือสบู่เหลว ขอให้ล้างน้ำสะอาดปริมาณมากๆ นานกว่า 20 วินาที และถูมือให้ทั่วถึง
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
-                            หน้ากากอนามัย N95 แต่ละรุ่น เช่น 9001 , 8201 มีความแตกต่างกันอย่างไร สามารถป้องกันไวรัสโคโรนา 2019 ได้หรือไม่
-                        </button>
-                    </h2>
-                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            ประชาชนทั่วไปไม่จำเป็นต้องใช้ หน้ากาก N95 ผู้ที่ไม่มีอาการป่วย สามารถใช้หน้ากากอนามัยแบบผ้า หรือ หน้ากากอนามัยทางการแพทย์ได้ ผู้ที่มีอาการป่วยให้ใช้หน้ากากอนามัย สำหรับหน้ากาก N95 ที่ใช้ในการแพทย์ แนะนำให้ใช้เฉพาะกับบุคลากรที่ต้องปฏิบัติงานกับผู้ติดเชื้อหรือสงสัยติดเชื้อ COVID-19
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

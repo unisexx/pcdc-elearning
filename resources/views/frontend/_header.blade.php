@@ -51,10 +51,10 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="faq.html">คำถามที่พบบ่อย</a>
+                                    <a class="nav-link" href="{{ url('faq') }}">คำถามที่พบบ่อย</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">ติดต่อ</a>
+                                    <a class="nav-link" href="{{ url('contact') }}">ติดต่อ</a>
                                 </li>
                             </ul>
                         </div>
