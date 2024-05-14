@@ -46,7 +46,7 @@
         // 'resources/sass/app.scss',
         // 'resources/js/app.js',
     ]) --}}
-    @vite([])
+    {{-- @vite([]) --}}
 
     @include('inc._css')
     @stack('css')
