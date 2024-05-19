@@ -3,352 +3,359 @@
 @section('page', 'สมัครสมาชิก')
 
 @section('content')
-    <!--====================================================
-        =                      CONTENT                         =
-        =====================================================-->
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
             <div class="col-lg-12">
                 <div class="box-contact">
                     <div class="title-register text-center mb-3">สมัครสมาชิก</div>
-                    <form class="my-4 needs-validation register-form" novalidate>
-                        <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
-                            <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลผู้ใช้งาน</legend>
-                            <div class="row g-3 pt-4">
-                                <div class="col-md-4 col-lg-2">
-                                    <label for="" class="form-label">ประเภทผู้ใช้งาน<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" id="" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option>เจ้าหน้าที่ศูนย์เด็กเล็ก</option>
-                                        <option>เจ้าหน้าที่ครูโรงเรียน</option>
-                                        <option>เจ้าหน้าที่สาธารณสุข</option>
-                                        <option>บุคคลทั่วไป</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกประเภทผู้ใช้งาน
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-2">
-                                    <label for="validationCustom04" class="form-label">คำนำหน้า</label>
-                                    <select class="form-select" id="validationCustom04">
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option>นาย</option>
-                                        <option>นาง</option>
-                                        <option>นางสาว</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 col-lg-4">
-                                    <label for="validationCustom01" class="form-label">ชื่อ<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="validationCustom01" value="" required>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุชื่อ
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4">
-                                    <label for="validationCustom02" class="form-label">นามสกุล<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="validationCustom02" value="" required>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-2">
-                                    <label for="validationCustom04" class="form-label">เพศ</label>
-                                    <select class="form-select" id="validationCustom04" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option>ชาย</option>
-                                        <option>หญิง</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกเพศ
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="mb-3">
-                                        <label for="basic-url" class="form-label">อายุ</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" aria-label=" " maxlength="5">
-                                            <span class="input-group-text">ปี</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">ประเภทเจ้าหน้าที่</label>
-                                    <select class="form-select" id="">
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option>เจ้าหน้าที่ประจำเขต</option>
-                                        <option>เจ้าหน้าที่ประจำจังหวัด</option>
-                                        <option>เจ้าหน้าที่ประจำอำเภอ</option>
-                                        <option>เจ้าหน้าที่ประจำตำบล</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">พื้นที่ เจ้าหน้าที่ประจำเขต</label>
-                                    <select class="form-select" id="">
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="ส่วนกลาง">ส่วนกลาง</option>
-                                        <option value="สคร.1">สคร.1</option>
-                                        <option value="สคร.2">สคร.2</option>
-                                        <option value="สคร.3">สคร.3</option>
-                                        <option value="สคร.4">สคร.4</option>
-                                        <option value="สคร.5">สคร.5</option>
-                                        <option value="สคร.6">สคร.6</option>
-                                        <option value="สคร.7">สคร.7</option>
-                                        <option value="สคร.8">สคร.8</option>
-                                        <option value="สคร.9">สคร.9</option>
-                                        <option value="สคร.10">สคร.10</option>
-                                        <option value="สคร.11">สคร.11</option>
-                                        <option value="สคร.12">สคร.12</option>
-                                        <option value="สปคม.">สปคม.</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="" class="form-label">ชื่อศูนย์เด็กเล็ก<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุชื่อศูนย์เด็กเล็ก
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="" class="form-label">ชื่อสถานศึกษา<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุชื่อสถานศึกษา
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="" class="form-label">เลขที่<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอก เลขที่บ้าน
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="" class="form-label">หมู่<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุ หมู่ที่
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">เบอร์ติดต่อศูนย์<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอก เบอร์ติดต่อศูนย์
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">เบอร์ติดต่อโรงเรียน<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอก เบอร์ติดต่อโรงเรียน
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="" class="form-label">จังหวัด<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" id="" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="1">กระบี่</option>
-                                        <option value="2">กรุงเทพมหานคร</option>
-                                        <option value="3">กาญจนบุรี</option>
-                                        <option value="4">กาฬสินธุ์</option>
-                                        <option value="5">กำแพงเพชร</option>
-                                        <option value="6">ขอนแก่น</option>
-                                        <option value="7">จันทบุรี</option>
-                                        <option value="8">ฉะเชิงเทรา</option>
-                                        <option value="9">ชลบุรี</option>
-                                        <option value="10">ชัยนาท</option>
-                                        <option value="11">ชัยภูมิ</option>
-                                        <option value="12">ชุมพร</option>
-                                        <option value="15">ตรัง</option>
-                                        <option value="16">ตราด</option>
-                                        <option value="17">ตาก</option>
-                                        <option value="18">นครนายก</option>
-                                        <option value="19">นครปฐม</option>
-                                        <option value="20">นครพนม</option>
-                                        <option value="21">นครราชสีมา</option>
-                                        <option value="22">นครศรีธรรมราช</option>
-                                        <option value="23">นครสวรรค์</option>
-                                        <option value="24">นนทบุรี</option>
-                                        <option value="25">นราธิวาส</option>
-                                        <option value="26">น่าน</option>
-                                        <option value="27">บึงกาฬ</option>
-                                        <option value="28">บุรีรัมย์</option>
-                                        <option value="29">ปทุมธานี</option>
-                                        <option value="30">ประจวบคีรีขันธ์</option>
-                                        <option value="31">ปราจีนบุรี</option>
-                                        <option value="32">ปัตตานี</option>
-                                        <option value="34">พระนครศรีอยุธยา</option>
-                                        <option value="33">พะเยา</option>
-                                        <option value="35">พังงา</option>
-                                        <option value="36">พัทลุง</option>
-                                        <option value="37">พิจิตร</option>
-                                        <option value="38">พิษณุโลก</option>
-                                        <option value="42">ภูเก็ต</option>
-                                        <option value="43">มหาสารคาม</option>
-                                        <option value="44">มุกดาหาร</option>
-                                        <option value="47">ยะลา</option>
-                                        <option value="46">ยโสธร</option>
-                                        <option value="49">ระนอง</option>
-                                        <option value="50">ระยอง</option>
-                                        <option value="51">ราชบุรี</option>
-                                        <option value="48">ร้อยเอ็ด</option>
-                                        <option value="52">ลพบุรี</option>
-                                        <option value="53">ลำปาง</option>
-                                        <option value="54">ลำพูน</option>
-                                        <option value="56">ศรีสะเกษ</option>
-                                        <option value="57">สกลนคร</option>
-                                        <option value="58">สงขลา</option>
-                                        <option value="59">สตูล</option>
-                                        <option value="60">สมุทรปราการ</option>
-                                        <option value="61">สมุทรสงคราม</option>
-                                        <option value="62">สมุทรสาคร</option>
-                                        <option value="64">สระบุรี</option>
-                                        <option value="63">สระแก้ว</option>
-                                        <option value="65">สิงห์บุรี</option>
-                                        <option value="67">สุพรรณบุรี</option>
-                                        <option value="68">สุราษฎร์ธานี</option>
-                                        <option value="69">สุรินทร์</option>
-                                        <option value="66">สุโขทัย</option>
-                                        <option value="70">หนองคาย</option>
-                                        <option value="71">หนองบัวลำภู</option>
-                                        <option value="73">อำนาจเจริญ</option>
-                                        <option value="74">อุดรธานี</option>
-                                        <option value="75">อุตรดิตถ์</option>
-                                        <option value="76">อุทัยธานี</option>
-                                        <option value="77">อุบลราชธานี</option>
-                                        <option value="72">อ่างทอง</option>
-                                        <option value="13">เชียงราย</option>
-                                        <option value="14">เชียงใหม่</option>
-                                        <option value="39">เพชรบุรี</option>
-                                        <option value="40">เพชรบูรณ์</option>
-                                        <option value="55">เลย</option>
-                                        <option value="41">แพร่</option>
-                                        <option value="45">แม่ฮ่องสอน</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกจังหวัด
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="" class="form-label">เขต/อำเภอ<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" id="" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="">พญาไท</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกเขต/อำเภอ
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="" class="form-label">แขวง/ตำบล<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" id="" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="">พญาไท</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกเขต/อำเภอ
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="" class="form-label">รหัสไปรษณีย์<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกรหัสไปรษณีย์
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">สังกัด<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" id="" required>
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="สพฐ.">สพฐ.</option>
-                                        <option value="เทศบาล/ตำบล">เทศบาล/ตำบล</option>
-                                        <option value="อบจ.">อบจ.</option>
-                                        <option value="กทม.">กทม.</option>
-                                        <option value="มหาวิทยาลัย">มหาวิทยาลัย</option>
-                                        <option value="เอกชน">เอกชน</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        สังกัด
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">ตำแหน่ง<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุตำแหน่งงาน
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">ระดับการศึกษา</label>
-                                    <select class="form-select" id="">
-                                        <option selected disabled value="">โปรดเลือก...</option>
-                                        <option value="ต่ำกว่าปริญญาตรี">ต่ำกว่าปริญญาตรี</option>
-                                        <option value="ปริญญาตรีขึ้นไป">ปริญญาตรีขึ้นไป</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">เบอร์โทรศัพท์ *<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกหมายเลขเบอร์โทรศัพท์
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <label for="" class="form-label">อีเมล *<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        กรุณากรอกอีเมล
-                                    </div>
-                                </div>
-                            </div><!--.row -->
-                        </fieldset>
 
-                        <fieldset class="mb-4 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
-                            <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลการเข้าใช้งาน</legend>
-                            <div class="row g-3 pt-4">
-                                <div class="col-md-4">
-                                    <label for="validationServerUsername" class="form-label">ชื่อผู้ใช้งาน (Username)</label>
-                                    <input type="text" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        โปรดระบุชื่อผู้ใช้งาน Username
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">รหัสผ่าน</label>
-                                    <input type="password" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        โปรดกรอกรหัสผ่าน
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">ยืนยันรหัสผ่าน</label>
-                                    <input type="password" class="form-control" id="" required>
-                                    <div class="invalid-feedback">
-                                        โปรดยืนยันรหัสผ่าน
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                <label class="form-check-label" for="invalidCheck">
-                                    ฉันยอมรับข้อกำหนดและเงื่อนไข
-                                </label>
+                    {!! Form::open(['url' => 'your-route-here', 'method' => 'post', 'class' => 'my-4 needs-validation register-form', 'novalidate']) !!}
+
+                    <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
+                        <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลผู้ใช้งาน</legend>
+                        <div class="row g-3 pt-4">
+                            <div class="col-md-4 col-lg-2">
+                                {!! Form::label('user_type', 'ประเภทผู้ใช้งาน', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::select(
+                                    'user_type',
+                                    [
+                                        '1' => 'เจ้าหน้าที่ศูนย์เด็กเล็ก',
+                                        '2' => 'เจ้าหน้าที่ครูโรงเรียน',
+                                        '3' => 'เจ้าหน้าที่สาธารณสุข',
+                                        '4' => 'บุคคลทั่วไป',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'user_type', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
+                                ) !!}
                                 <div class="invalid-feedback">
-                                    คุณยังไม่ได้ติ๊กเลือกยอมรับข้อกำหนดและเงื่อนไข
+                                    กรุณาเลือกประเภทผู้ใช้งาน
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-2">
+                                {!! Form::label('prefix', 'คำนำหน้า', ['class' => 'form-label']) !!}
+                                {!! Form::select(
+                                    'prefix',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'นาย' => 'นาย',
+                                        'นาง' => 'นาง',
+                                        'นางสาว' => 'นางสาว',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'prefix'],
+                                ) !!}
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                {!! Form::label('first_name', 'ชื่อ', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'first_name', 'required']) !!}
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุชื่อ
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                {!! Form::label('last_name', 'นามสกุล', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('last_name', null, ['class' => 'form-control', 'id' => 'last_name', 'required']) !!}
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุนามสกุล
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-2">
+                                {!! Form::label('gender', 'เพศ', ['class' => 'form-label']) !!}
+                                {!! Form::select(
+                                    'gender',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'ชาย' => 'ชาย',
+                                        'หญิง' => 'หญิง',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'gender', 'required'],
+                                ) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกเพศ
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    {!! Form::label('age', 'อายุ', ['class' => 'form-label']) !!}
+                                    <div class="input-group">
+                                        {!! Form::text('age', null, ['class' => 'form-control', 'id' => 'age', 'maxlength' => 5]) !!}
+                                        <span class="input-group-text">ปี</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('officer_type', 'ประเภทเจ้าหน้าที่', ['class' => 'form-label']) !!}
+                                {!! Form::select(
+                                    'officer_type',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'เจ้าหน้าที่ประจำเขต' => 'เจ้าหน้าที่ประจำเขต',
+                                        'เจ้าหน้าที่ประจำจังหวัด' => 'เจ้าหน้าที่ประจำจังหวัด',
+                                        'เจ้าหน้าที่ประจำอำเภอ' => 'เจ้าหน้าที่ประจำอำเภอ',
+                                        'เจ้าหน้าที่ประจำตำบล' => 'เจ้าหน้าที่ประจำตำบล',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'officer_type'],
+                                ) !!}
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('area', 'พื้นที่ เจ้าหน้าที่ประจำเขต', ['class' => 'form-label']) !!}
+                                {!! Form::select(
+                                    'area',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'ส่วนกลาง' => 'ส่วนกลาง',
+                                        'สคร.1' => 'สคร.1',
+                                        'สคร.2' => 'สคร.2',
+                                        'สคร.3' => 'สคร.3',
+                                        'สคร.4' => 'สคร.4',
+                                        'สคร.5' => 'สคร.5',
+                                        'สคร.6' => 'สคร.6',
+                                        'สคร.7' => 'สคร.7',
+                                        'สคร.8' => 'สคร.8',
+                                        'สคร.9' => 'สคร.9',
+                                        'สคร.10' => 'สคร.10',
+                                        'สคร.11' => 'สคร.11',
+                                        'สคร.12' => 'สคร.12',
+                                        'สปคม.' => 'สปคม.',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'area'],
+                                ) !!}
+                            </div>
+
+                            <div class="col-md-6">
+                                {!! Form::label('center_name', 'ชื่อศูนย์เด็กเล็ก', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('center_name', null, ['class' => 'form-control', 'id' => 'center_name', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาระบุชื่อศูนย์เด็กเล็ก
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                {!! Form::label('school_name', 'ชื่อสถานศึกษา', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('school_name', null, ['class' => 'form-control', 'id' => 'school_name', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาระบุชื่อสถานศึกษา
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                {!! Form::label('address_no', 'เลขที่', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('address_no', null, ['class' => 'form-control', 'id' => 'address_no', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอก เลขที่บ้าน
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                {!! Form::label('village_no', 'หมู่', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('village_no', null, ['class' => 'form-control', 'id' => 'village_no', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาระบุ หมู่ที่
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                {!! Form::label('center_phone', 'เบอร์ติดต่อศูนย์', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('center_phone', null, ['class' => 'form-control', 'id' => 'center_phone', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอก เบอร์ติดต่อศูนย์
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                {!! Form::label('school_phone', 'เบอร์ติดต่อโรงเรียน', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('school_phone', null, ['class' => 'form-control', 'id' => 'school_phone', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอก เบอร์ติดต่อโรงเรียน
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                {!! Form::label('province', 'จังหวัด', ['class' => 'form-label']) !!} <span class="text-danger ms-1">*</span>
+                                {!! Form::select('province', $provinces, null, ['class' => 'form-select', 'placeholder' => 'โปรดเลือก...', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกจังหวัด
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {!! Form::label('district', 'เขต/อำเภอ', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::select(
+                                    'district',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'พญาไท' => 'พญาไท',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'district', 'required'],
+                                ) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกเขต/อำเภอ
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                {!! Form::label('subdistrict', 'แขวง/ตำบล', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::select(
+                                    'subdistrict',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'พญาไท' => 'พญาไท',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'subdistrict', 'required'],
+                                ) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกแขวง/ตำบล
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                {!! Form::label('zipcode', 'รหัสไปรษณีย์', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('zipcode', null, ['class' => 'form-control', 'id' => 'zipcode', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอกรหัสไปรษณีย์
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('affiliation', 'สังกัด', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::select(
+                                    'affiliation',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'สพฐ.' => 'สพฐ.',
+                                        'เทศบาล/ตำบล' => 'เทศบาล/ตำบล',
+                                        'อบจ.' => 'อบจ.',
+                                        'กทม.' => 'กทม.',
+                                        'มหาวิทยาลัย' => 'มหาวิทยาลัย',
+                                        'เอกชน' => 'เอกชน',
+                                        'อื่นๆ' => 'อื่นๆ',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'affiliation', 'required'],
+                                ) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาเลือกสังกัด
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                {!! Form::label('position', 'ตำแหน่ง', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('position', null, ['class' => 'form-control', 'id' => 'position', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณาระบุตำแหน่งงาน
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('education_level', 'ระดับการศึกษา', ['class' => 'form-label']) !!}
+                                {!! Form::select(
+                                    'education_level',
+                                    [
+                                        '' => 'โปรดเลือก...',
+                                        'ต่ำกว่าปริญญาตรี' => 'ต่ำกว่าปริญญาตรี',
+                                        'ปริญญาตรีขึ้นไป' => 'ปริญญาตรีขึ้นไป',
+                                    ],
+                                    null,
+                                    ['class' => 'form-select', 'id' => 'education_level'],
+                                ) !!}
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('phone', 'เบอร์โทรศัพท์', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอกหมายเลขเบอร์โทรศัพท์
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3">
+                                {!! Form::label('email', 'อีเมล', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    กรุณากรอกอีเมล
+                                </div>
+                            </div>
+
+                        </div><!--.row -->
+                    </fieldset>
+
+                    <fieldset class="mb-4 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
+                        <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลการเข้าใช้งาน</legend>
+                        <div class="row g-3 pt-4">
+                            <div class="col-md-4">
+                                <label for="username" class="form-label">ชื่อผู้ใช้งาน (Username)</label>
+                                <input type="text" class="form-control" id="username" required>
+                                <div class="invalid-feedback">
+                                    โปรดระบุชื่อผู้ใช้งาน Username
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="password" class="form-label">รหัสผ่าน</label>
+                                <input type="password" class="form-control" id="password" required>
+                                <div class="invalid-feedback">
+                                    โปรดกรอกรหัสผ่าน
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
+                                <input type="password" class="form-control" id="confirm_password" required>
+                                <div class="invalid-feedback">
+                                    โปรดยืนยันรหัสผ่าน
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mt-4 text-center">
-                            <button class="btn btn-primary btn-lg px-5" type="submit" data-bs-toggle="modal" data-bs-target="#modalSheet">สมัครสมาชิก</button>
+                    </fieldset>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                ฉันยอมรับข้อกำหนดและเงื่อนไข
+                            </label>
+                            <div class="invalid-feedback">
+                                คุณยังไม่ได้ติ๊กเลือกยอมรับข้อกำหนดและเงื่อนไข
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-12 mt-4 text-center">
+                        <button class="btn btn-primary btn-lg px-5" type="submit" data-bs-toggle="modal" data-bs-target="#modalSheet">สมัครสมาชิก</button>
+                    </div>
+
+                    {!! Form::close() !!}
+
                     <!-- Modal -->
                     <div class="modal fade" id="modalSheet" tabindex="-1">
                         <div class="modal-dialog">
@@ -374,8 +381,27 @@
                     </div><!-- End Modal-->
                 </div>
             </div>
-
         </div>
     </div>
-    <!--=================== End Content =================-->
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('#user_type').change(function() {
+                $('#center_name, #center_phone, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation, #officer_type, #area, #position, #education_level').parent().show();
+
+                // Handle specific user type selections
+                if ($(this).val() == '1') { // เจ้าหน้าที่ศูนย์เด็กเล็ก
+                    $('#school_name, #officer_type, #area, #school_phone').parent().hide();
+                } else if ($(this).val() == '2') { // เจ้าหน้าที่ครูโรงเรียน
+                    $('#center_name, #center_phone, #officer_type, #area').parent().hide();
+                } else if ($(this).val() == '3') { // เจ้าหน้าที่สาธารณสุข
+                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation').parent().hide();
+                } else if ($(this).val() == '4') { // บุคคลทั่วไป
+                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #affiliation, #officer_type, #area, #position, #education_level').parent().hide();
+                }
+            });
+        });
+    </script>
+@endpush

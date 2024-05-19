@@ -24,11 +24,11 @@ Auth::routes();
 
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
-// Route::get('/login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
+Route::get('/f-login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
 Route::get('/register', [App\Http\Controllers\Frontend\LoginController::class, 'register']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
-Route::get('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
+Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
 

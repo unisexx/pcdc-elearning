@@ -3,37 +3,39 @@
 @section('page', 'ติดต่อเรา')
 
 @section('content')
-    <!--====================================================
-                    =                      CONTENT                         =
-                    =====================================================-->
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
             <div class="col-lg-6">
                 <div class="box-contact">
                     <div class="title-send-us">ส่งข้อความถึงเรา</div>
-                    {!! Form::open(['url' => 'contact.save', 'method' => 'post', 'class' => 'row g-3 my-4']) !!}
+                    {!! Form::open(['route' => 'contact.save', 'method' => 'post', 'class' => 'row g-3 my-4']) !!}
 
                     <div class="col-12 mb-3">
-                        <label for="inputName" class="form-label">ชื่อ - สกุล<span class="text-danger ms-1">*</span></label>
-                        <input type="text" class="form-control" placeholder="" aria-label="First name">
+                        {!! Form::label('name', 'ชื่อ - สกุล', ['class' => 'form-label', 'for' => 'inputName']) !!}
+                        <span class="text-danger ms-1">*</span>
+                        {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '', 'aria-label' => 'First name']) !!}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="inputEmail4" class="form-label">อีเมล<span class="text-danger ms-1">*</span></label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        {!! Form::label('email', 'อีเมล', ['class' => 'form-label', 'for' => 'inputEmail4']) !!}
+                        <span class="text-danger ms-1">*</span>
+                        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'inputEmail4']) !!}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="inputPhonenumber" class="form-label">เบอร์โทรศัพท์</label>
-                        <input type="" class="form-control" id="inputPhonenumber">
+                        {!! Form::label('tel', 'เบอร์โทรศัพท์', ['class' => 'form-label', 'for' => 'inputPhonenumber']) !!}
+                        {!! Form::text('tel', null, ['class' => 'form-control', 'id' => 'inputPhonenumber']) !!}
                     </div>
                     <div class="col-12 mb-3">
-                        <label for="validationTextarea" class="form-label">ข้อความ<span class="text-danger ms-1">*</span></label>
-                        <textarea class="form-control" rows="6" id="validationTextarea" placeholder="" required></textarea>
+                        {!! Form::label('msg', 'ข้อความ', ['class' => 'form-label', 'for' => 'validationTextarea']) !!}
+                        <span class="text-danger ms-1">*</span>
+                        {!! Form::textarea('msg', null, ['class' => 'form-control', 'rows' => 6, 'id' => 'validationTextarea', 'placeholder' => '', 'required' => 'required']) !!}
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-red rounded-pill text-white fw-bold px-5 py-2">ส่งข้อความ</button>
+                        {!! Form::button('ส่งข้อความ', ['type' => 'submit', 'class' => 'btn btn-red rounded-pill text-white fw-bold px-5 py-2']) !!}
                     </div>
 
                     {!! Form::close() !!}
+
+
                 </div>
             </div>
             <div class="col-lg-4">
@@ -41,5 +43,17 @@
             </div>
         </div>
     </div>
-    <!--=================== End Content =================-->
 @endsection
+
+@push('js')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'สำเร็จ!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'ตกลง'
+            });
+        </script>
+    @endif
+@endpush
