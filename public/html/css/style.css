@@ -16,7 +16,7 @@
 .shape1{background-image: url(../images/shape1.svg); width: 100%; height: 170px; background-repeat: no-repeat; background-size: cover; background-position: top;}
 .shape2{background-image: url(../images/shape2.svg); width: 100%; height: 170px; background-repeat: no-repeat; background-size: cover; background-position: top;}
 
- .bg-theme{background-color: #2da0a5; position: relative; z-index: 0;}
+ .bg-theme{background-color: #2da0a5; position: relative; /*z-index: 0;*/}
 .logo{ width: 80px; height: 104px; 	filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)); }
 .logo_pcdc{ width: 90px; height:auto; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2)); }
 .organization_name{color: #FFF;font-family: "Kodchasan"; font-size: 40px; padding-left: 20px; font-weight: 600;}
@@ -361,7 +361,7 @@ padding-top: 50px;}
      1px  1px 5px #2da0a5;
 }
 .title-content{font-size: 22px; font-family: "Kodchasan"; color: #000;font-weight: 600;}
-.breadcrumb-line { border-bottom: 1px dashed #ccc; width: 100%; min-height: 35px; display: block; font-family: Sarabun; font-size: 13px; margin-top: -20px;}
+.breadcrumb-line { border-bottom: 1px dashed #ccc; width: 100%; min-height: 35px; display: block; font-family: Sarabun; font-size: 13px; margin-top: -20px; position: relative; margin-bottom: 25px;}
 
 /* Contact PAGE
 -------------------------------------------------- */
@@ -429,83 +429,111 @@ padding-top: 50px;}
     }
 }
 
-
-
-
-/* Floating Clouds */
-#background-wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-    padding-top: 50px;
-    right: 0;
-    top: 0;
-    overflow: hidden;
-}
+/* Floating Clouds
+-------------------------------------------------- */
+#background-wrap { position:absolute; bottom: 0; left: 0; z-index: 0; padding-top: 50px;	right: 0; top: 0; overflow: hidden;}
 
 /* KEYFRAMES */
 @-webkit-keyframes animateCloud {
-    0% { margin-left: -1000px; }
-    100% { margin-left: 100%; }
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
 }
 
 @-moz-keyframes animateCloud {
-    0% { margin-left: -1000px; }
-    100% { margin-left: 100%; }
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
 }
 
 @keyframes animateCloud {
-    0% { margin-left: -1000px; }
-    100% { margin-left: 100%; }
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
 }
 
 /* ANIMATIONS */
 .x1 {
-    -webkit-animation: animateCloud 35s linear infinite;
-    -moz-animation: animateCloud 35s linear infinite;
-    animation: animateCloud 35s linear infinite;
+	-webkit-animation: animateCloud 35s linear infinite;
+	-moz-animation: animateCloud 35s linear infinite;
+	animation: animateCloud 35s linear infinite;
 
-    -webkit-transform: scale(0.25);
-    -moz-transform: scale(0.25);
-    transform: scale(0.25);
+	-webkit-transform: scale(0.25);
+	-moz-transform: scale(0.25);
+	transform: scale(0.25);
 }
 
 .x2 {
-    -webkit-animation: animateCloud 20s linear infinite;
-    -moz-animation: animateCloud 20s linear infinite;
-    animation: animateCloud 20s linear infinite;
+	-webkit-animation: animateCloud 20s linear infinite;
+	-moz-animation: animateCloud 20s linear infinite;
+	animation: animateCloud 20s linear infinite;
 
-    -webkit-transform: scale(0.3);
-    -moz-transform: scale(0.3);
-    transform: scale(0.3);
+	-webkit-transform: scale(0.3);
+	-moz-transform: scale(0.3);
+	transform: scale(0.3);
 }
 
-/* OBJECTS */
+.x3 {
+	-webkit-animation: animateCloud 30s linear infinite;
+	-moz-animation: animateCloud 30s linear infinite;
+	animation: animateCloud 30s linear infinite;
+
+	-webkit-transform: scale(0.5);
+	-moz-transform: scale(0.5);
+	transform: scale(0.5);
+}
+
+.x4 {
+	-webkit-animation: animateCloud 18s linear infinite;
+	-moz-animation: animateCloud 18s linear infinite;
+	animation: animateCloud 18s linear infinite;
+
+	-webkit-transform: scale(0.4);
+	-moz-transform: scale(0.4);
+	transform: scale(0.4);
+}
+
+.x5 {
+	-webkit-animation: animateCloud 25s linear infinite;
+	-moz-animation: animateCloud 25s linear infinite;
+	animation: animateCloud 25s linear infinite;
+
+	-webkit-transform: scale(0.2);
+	-moz-transform: scale(0.2);
+	transform: scale(0.2);
+}
+
+/* Cloud Shape 1 */
 .cloud {
     background: #fff;
-    background: -moz-linear-gradient(top,  #fff 5%, #f1f1f1 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(5%,#fff), color-stop(100%,#f1f1f1));
-    background: -webkit-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
-    background: -o-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
-    background: -ms-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
-    background: linear-gradient(top,  #fff 5%,#f1f1f1 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f1f1f1',GradientType=0 );
+    background: -moz-linear-gradient(top, #fff 5%, #d4d4d4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(5%,#fff), color-stop(100%,#d4d4d4));
+    background: -webkit-linear-gradient(top, #fff 5%,#d4d4d4 100%);
+    background: -o-linear-gradient(top, #fff 5%,#d4d4d4 100%);
+    background: -ms-linear-gradient(top, #fff 5%,#d4d4d4 100%);
+    background: linear-gradient(to bottom, #fff 5%,#d4d4d4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#d4d4d4',GradientType=0 );
+
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
 
     -webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
     box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
 
+    height: 130px;
     position: absolute;
-}
-
-/* Cloud variations */
-.cloud1 {
-    width: 300px;
-    height: 120px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
+    width: 320px;
 }
 
 .cloud1:after, .cloud1:before {
@@ -516,56 +544,93 @@ padding-top: 50px;}
 }
 
 .cloud1:after {
-    width: 100px;
-    height: 100px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+    height: 110px;
     left: 60px;
-    top: -50px;
+    top: -40px;
+    width: 110px;
 }
 
 .cloud1:before {
-    width: 180px;
-    height: 180px;
-    -webkit-border-radius: 90px;
-    -moz-border-radius: 90px;
-    border-radius: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
     right: 60px;
-    top: -90px;
+    top: -70px;
 }
 
-.cloud2 {
-    width: 350px;
-    height: 130px;
-    -webkit-border-radius: 130px 130px 70px 70px;
-    -moz-border-radius: 130px 130px 70px 70px;
-    border-radius: 130px 130px 70px 70px;
+/* Additional smaller clouds for more complexity */
+.cloud1:after:before {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -2;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    left: 40px;
+    top: 30px;
 }
 
-.cloud2:after, .cloud2:before {
+.cloud1:before:after {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -2;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 70px;
+    width: 100px;
+    height: 100px;
+    right: 20px;
+    top: 20px;
+}
+
+/* Cloud Shape 4 */
+.cloud4:after, .cloud4:before {
     background: #fff;
     content: '';
     position: absolute;
     z-index: -1;
 }
 
-.cloud2:after {
-    width: 130px;
-    height: 130px;
-    -webkit-border-radius: 65px;
-    -moz-border-radius: 65px;
-    border-radius: 65px;
-    left: 70px;
-    top: -65px;
+.cloud4:after {
+    width: 110px;
+    height: 110px;
+    -webkit-border-radius: 55px;
+    -moz-border-radius: 55px;
+    border-radius: 55px;
+    left: 40px;
+    top: -55px;
 }
 
-.cloud2:before {
-    width: 200px;
-    height: 200px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    right: 70px;
-    top: -100px;
+.cloud4:before {
+    width: 190px;
+    height: 190px;
+    -webkit-border-radius: 95px;
+    -moz-border-radius: 95px;
+    border-radius: 95px;
+    right: 40px;
+    top: -95px;
 }
+
+
+/* Chart
+-------------------------------------------------- */
+.bg-chart-header{ background-color: #2da0a5; padding-top: 15px;}
+.graph_title{ line-height: 25px; font-size: 18px; text-align: center;}
+.table-style1 thead th { font-size: 14px; font-family: "sarabun"; width: 150px;}
+.table-style1 td { font-size: 14px; font-family: "sarabun";}
+.title-table { font-family: "Kodchasan"; font-size: 16px;}
+.table-style1 tbody th { background-color: #f6f6fb; font-family: "sarabun";}
+
+.menu_print .dropdown-item {font-size: 14px; font-family: "sarabun";}
+/*
+.text_ver .tick { writing-mode: vertical-lr;  }
+*/

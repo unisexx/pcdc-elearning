@@ -9,16 +9,26 @@
                 <div class="box-contact">
                     <div class="title-register text-center mb-3">สมัครสมาชิก</div>
 
-                    {!! Form::open(['url' => 'your-route-here', 'method' => 'post', 'class' => 'my-4 needs-validation register-form', 'novalidate']) !!}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    {!! Form::open(['url' => 'register', 'method' => 'post', 'class' => 'my-4 needs-validation register-form', 'novalidate']) !!}
 
                     <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
                         <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลผู้ใช้งาน</legend>
                         <div class="row g-3 pt-4">
                             <div class="col-md-4 col-lg-2">
-                                {!! Form::label('user_type', 'ประเภทผู้ใช้งาน', ['class' => 'form-label']) !!}
+                                {!! Form::label('user_type_id', 'ประเภทผู้ใช้งาน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
-                                    'user_type',
+                                    'user_type_id',
                                     [
                                         '1' => 'เจ้าหน้าที่ศูนย์เด็กเล็ก',
                                         '2' => 'เจ้าหน้าที่ครูโรงเรียน',
@@ -26,7 +36,7 @@
                                         '4' => 'บุคคลทั่วไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'user_type', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select', 'id' => 'user_type_id', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกประเภทผู้ใช้งาน
@@ -34,17 +44,7 @@
                             </div>
                             <div class="col-md-4 col-lg-2">
                                 {!! Form::label('prefix', 'คำนำหน้า', ['class' => 'form-label']) !!}
-                                {!! Form::select(
-                                    'prefix',
-                                    [
-                                        '' => 'โปรดเลือก...',
-                                        'นาย' => 'นาย',
-                                        'นาง' => 'นาง',
-                                        'นางสาว' => 'นางสาว',
-                                    ],
-                                    null,
-                                    ['class' => 'form-select', 'id' => 'prefix'],
-                                ) !!}
+                                {!! Form::text('prefix', null, ['class' => 'form-control', 'id' => 'prefix', 'required']) !!}
                             </div>
 
                             <div class="col-md-6 col-lg-4">
@@ -74,16 +74,16 @@
                             <div class="clearfix"></div>
 
                             <div class="col-md-2">
-                                {!! Form::label('gender', 'เพศ', ['class' => 'form-label']) !!}
+                                {!! Form::label('gender_id', 'เพศ', ['class' => 'form-label']) !!}
                                 {!! Form::select(
-                                    'gender',
+                                    'gender_id',
                                     [
-                                        '' => 'โปรดเลือก...',
-                                        'ชาย' => 'ชาย',
-                                        'หญิง' => 'หญิง',
+                                        '1' => 'ชาย',
+                                        '2' => 'หญิง',
+                                        '3' => 'ไม่ระบุ',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'gender', 'required'],
+                                    ['class' => 'form-select', 'id' => 'gender_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกเพศ
@@ -101,44 +101,42 @@
                             </div>
 
                             <div class="col-md-4 col-lg-3">
-                                {!! Form::label('officer_type', 'ประเภทเจ้าหน้าที่', ['class' => 'form-label']) !!}
+                                {!! Form::label('officer_type_id', 'ประเภทเจ้าหน้าที่', ['class' => 'form-label']) !!}
                                 {!! Form::select(
-                                    'officer_type',
+                                    'officer_type_id',
                                     [
-                                        '' => 'โปรดเลือก...',
-                                        'เจ้าหน้าที่ประจำเขต' => 'เจ้าหน้าที่ประจำเขต',
-                                        'เจ้าหน้าที่ประจำจังหวัด' => 'เจ้าหน้าที่ประจำจังหวัด',
-                                        'เจ้าหน้าที่ประจำอำเภอ' => 'เจ้าหน้าที่ประจำอำเภอ',
-                                        'เจ้าหน้าที่ประจำตำบล' => 'เจ้าหน้าที่ประจำตำบล',
+                                        '1' => 'เจ้าหน้าที่ประจำเขต',
+                                        '2' => 'เจ้าหน้าที่ประจำจังหวัด',
+                                        '3' => 'เจ้าหน้าที่ประจำอำเภอ',
+                                        '4' => 'เจ้าหน้าที่ประจำตำบล',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'officer_type'],
+                                    ['class' => 'form-select', 'id' => 'officer_type_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
                             <div class="col-md-4 col-lg-3">
-                                {!! Form::label('area', 'พื้นที่ เจ้าหน้าที่ประจำเขต', ['class' => 'form-label']) !!}
+                                {!! Form::label('area_id', 'พื้นที่ เจ้าหน้าที่ประจำเขต', ['class' => 'form-label']) !!}
                                 {!! Form::select(
-                                    'area',
+                                    'area_id',
                                     [
-                                        '' => 'โปรดเลือก...',
-                                        'ส่วนกลาง' => 'ส่วนกลาง',
-                                        'สคร.1' => 'สคร.1',
-                                        'สคร.2' => 'สคร.2',
-                                        'สคร.3' => 'สคร.3',
-                                        'สคร.4' => 'สคร.4',
-                                        'สคร.5' => 'สคร.5',
-                                        'สคร.6' => 'สคร.6',
-                                        'สคร.7' => 'สคร.7',
-                                        'สคร.8' => 'สคร.8',
-                                        'สคร.9' => 'สคร.9',
-                                        'สคร.10' => 'สคร.10',
-                                        'สคร.11' => 'สคร.11',
-                                        'สคร.12' => 'สคร.12',
-                                        'สปคม.' => 'สปคม.',
+                                        '999' => 'ส่วนกลาง',
+                                        '1' => 'สคร.1',
+                                        '2' => 'สคร.2',
+                                        '3' => 'สคร.3',
+                                        '4' => 'สคร.4',
+                                        '5' => 'สคร.5',
+                                        '6' => 'สคร.6',
+                                        '7' => 'สคร.7',
+                                        '8' => 'สคร.8',
+                                        '9' => 'สคร.9',
+                                        '10' => 'สคร.10',
+                                        '11' => 'สคร.11',
+                                        '12' => 'สคร.12',
+                                        '99' => 'สปคม.',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'area'],
+                                    ['class' => 'form-select', 'id' => 'area_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
@@ -197,41 +195,26 @@
                             </div>
 
                             <div class="col-md-3">
-                                {!! Form::label('province', 'จังหวัด', ['class' => 'form-label']) !!} <span class="text-danger ms-1">*</span>
-                                {!! Form::select('province', $provinces, null, ['class' => 'form-select', 'placeholder' => 'โปรดเลือก...', 'required']) !!}
+                                {!! Form::label('province_id', 'จังหวัด', ['class' => 'form-label']) !!} <span class="text-danger ms-1">*</span>
+                                {!! Form::select('province_id', $provinces, null, ['id' => 'province_id', 'class' => 'form-select', 'placeholder' => 'โปรดเลือก...', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกจังหวัด
                                 </div>
                             </div>
+
                             <div class="col-md-3">
-                                {!! Form::label('district', 'เขต/อำเภอ', ['class' => 'form-label']) !!}
+                                {!! Form::label('district_id', 'เขต/อำเภอ', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::select(
-                                    'district',
-                                    [
-                                        '' => 'โปรดเลือก...',
-                                        'พญาไท' => 'พญาไท',
-                                    ],
-                                    null,
-                                    ['class' => 'form-select', 'id' => 'district', 'required'],
-                                ) !!}
+                                {!! Form::select('district_id', [], null, ['class' => 'form-select', 'id' => 'district_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกเขต/อำเภอ
                                 </div>
                             </div>
 
                             <div class="col-md-3">
-                                {!! Form::label('subdistrict', 'แขวง/ตำบล', ['class' => 'form-label']) !!}
+                                {!! Form::label('subdistrict_id', 'แขวง/ตำบล', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::select(
-                                    'subdistrict',
-                                    [
-                                        '' => 'โปรดเลือก...',
-                                        'พญาไท' => 'พญาไท',
-                                    ],
-                                    null,
-                                    ['class' => 'form-select', 'id' => 'subdistrict', 'required'],
-                                ) !!}
+                                {!! Form::select('subdistrict_id', [], null, ['class' => 'form-select', 'id' => 'subdistrict_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกแขวง/ตำบล
                                 </div>
@@ -247,22 +230,21 @@
                             </div>
 
                             <div class="col-md-4 col-lg-3">
-                                {!! Form::label('affiliation', 'สังกัด', ['class' => 'form-label']) !!}
+                                {!! Form::label('affiliation_id', 'สังกัด', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
-                                    'affiliation',
+                                    'affiliation_id',
                                     [
-                                        '' => 'โปรดเลือก...',
-                                        'สพฐ.' => 'สพฐ.',
-                                        'เทศบาล/ตำบล' => 'เทศบาล/ตำบล',
-                                        'อบจ.' => 'อบจ.',
-                                        'กทม.' => 'กทม.',
-                                        'มหาวิทยาลัย' => 'มหาวิทยาลัย',
-                                        'เอกชน' => 'เอกชน',
-                                        'อื่นๆ' => 'อื่นๆ',
+                                        '1' => 'สพฐ.',
+                                        '2' => 'เทศบาล/ตำบล',
+                                        '3' => 'อบจ.',
+                                        '4' => 'กทม.',
+                                        '5' => 'มหาวิทยาลัย',
+                                        '6' => 'เอกชน',
+                                        '7' => 'อื่นๆ',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'affiliation', 'required'],
+                                    ['class' => 'form-select', 'id' => 'affiliation_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกสังกัด
@@ -279,16 +261,15 @@
                             </div>
 
                             <div class="col-md-4 col-lg-3">
-                                {!! Form::label('education_level', 'ระดับการศึกษา', ['class' => 'form-label']) !!}
+                                {!! Form::label('education_level_id', 'ระดับการศึกษา', ['class' => 'form-label']) !!}
                                 {!! Form::select(
-                                    'education_level',
+                                    'education_level_id',
                                     [
-                                        '' => 'โปรดเลือก...',
-                                        'ต่ำกว่าปริญญาตรี' => 'ต่ำกว่าปริญญาตรี',
-                                        'ปริญญาตรีขึ้นไป' => 'ปริญญาตรีขึ้นไป',
+                                        '1' => 'ต่ำกว่าปริญญาตรี',
+                                        '2' => 'ปริญญาตรีขึ้นไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'education_level'],
+                                    ['class' => 'form-select', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
@@ -351,34 +332,10 @@
                         </div>
                     </div>
                     <div class="col-12 mt-4 text-center">
-                        <button class="btn btn-primary btn-lg px-5" type="submit" data-bs-toggle="modal" data-bs-target="#modalSheet">สมัครสมาชิก</button>
+                        <button class="btn btn-primary btn-lg px-5" type="submit">สมัครสมาชิก</button>
                     </div>
 
                     {!! Form::close() !!}
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalSheet" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                                    </svg>
-                                    <h5 class="text-success fs-4 pt-2">ระบบได้ทำการบันทึกข้อมูลเรียบร้อยแล้ว</h5>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="mx-auto">
-                                        <a type="button" class="btn btn-success2 rounded-pill text-white px-4 mx-2" data-bs-dismiss="modal">OK</a>
-                                        <a href="index.html" type="" class="btn btn-outline-primary rounded-pill mx-2" value="">กลับหน้าแรก</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Modal-->
                 </div>
             </div>
         </div>
@@ -386,9 +343,10 @@
 @endsection
 
 @push('js')
+    {{-- ซ่อน / แสดงฟอร์ม --}}
     <script>
         $(document).ready(function() {
-            $('#user_type').change(function() {
+            $('#user_type_id').change(function() {
                 $('#center_name, #center_phone, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation, #officer_type, #area, #position, #education_level').parent().show();
 
                 // Handle specific user type selections
@@ -400,6 +358,85 @@
                     $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation').parent().hide();
                 } else if ($(this).val() == '4') { // บุคคลทั่วไป
                     $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #affiliation, #officer_type, #area, #position, #education_level').parent().hide();
+                }
+            });
+        });
+    </script>
+
+    {{-- Select 2 --}}
+    <script>
+        $(document).ready(function() {
+            $('#user_type_id, #gender_id, #officer_type_id, #area_id, #affiliation_id, #education_level_id, #province_id, #district_id, #subdistrict_id').select2({
+                theme: 'bootstrap-5',
+                placeholder: 'โปรดเลือก...'
+            });
+        });
+    </script>
+
+    {{-- Chain Select จังหวัด / อำเภอ / ตำบล --}}
+    <script>
+        $(document).ready(function() {
+            $('#province_id').change(function() {
+                var provinceId = $(this).val();
+                $('#district_id').empty().append('<option value="">โปรดเลือก...</option>');
+                $('#subdistrict_id').empty().append('<option value="">โปรดเลือก...</option>');
+                $('#zipcode').val('');
+
+                if (provinceId) {
+                    $.ajax({
+                        url: '/get-districts/' + provinceId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(id, name) {
+                                $('#district_id').append('<option value="' + id + '">' + name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#district_id').change(function() {
+                var districtId = $(this).val();
+                $('#subdistrict_id').empty().append('<option value="">โปรดเลือก...</option>');
+                $('#zipcode').val('');
+
+                if (districtId) {
+                    $.ajax({
+                        url: '/get-subdistricts/' + districtId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(id, name) {
+                                $('#subdistrict_id').append('<option value="' + id + '">' + name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#subdistrict_id').change(function() {
+                var province_name = $('#province_id').find('option:selected').text();
+                var district_name = $('#district_id').find('option:selected').text();
+                var subdistrict_name = $('#subdistrict_id').find('option:selected').text();
+
+                if (province_name && district_name && subdistrict_name) {
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ route('ajaxGetZipCode') }}",
+                        data: {
+                            district: subdistrict_name,
+                            amphoe: district_name,
+                            province: province_name,
+                        },
+                        success: function(data) {
+                            $('#zipcode').val(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert('Error occurred while fetching data. Please try again later.');
+                        }
+                    });
                 }
             });
         });

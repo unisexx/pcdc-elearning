@@ -36,7 +36,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active text-nowrap" aria-current="page" href="{{ url('home') }}">หน้าแรก</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="stat-info.html">ข้อมูลสถิติ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('stat') }}">ข้อมูลสถิติ</a></li>
                                 <li class="nav-item"><a class="nav-link" href="e-learning.html">ขั้นตอนการเรียน e-learning</a></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>

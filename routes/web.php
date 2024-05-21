@@ -25,7 +25,9 @@ Auth::routes();
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 Route::get('/f-login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
-Route::get('/register', [App\Http\Controllers\Frontend\LoginController::class, 'register']);
+Route::get('/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form'])->name('register');
+Route::post('/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register']);
+Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
@@ -43,6 +45,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('/faq', App\Http\Controllers\Admin\FaqController::class)->names('admin.faq');
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
 });
+
+/** Ajax */
+Route::get('/get-districts/{province}', [App\Http\Controllers\AjaxController::class, 'getDistricts']);
+Route::get('/get-subdistricts/{district}', [App\Http\Controllers\AjaxController::class, 'getSubdistricts']);
+Route::get('/ajaxGetZipCode', [App\Http\Controllers\AjaxController::class, 'ajaxGetZipCode'])->name('ajaxGetZipCode');
 
 /** Social Login */
 Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class, 'redirect']);

@@ -24,6 +24,24 @@
     <link href="{{ asset('html/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('html/css/custom.css') }}" rel="stylesheet">
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Select2 Bootstrap 5 Theme CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <style>
+        .select2-container .select2-selection--single {
+            font-family: "Sarabun", sans-serif;
+        }
+
+        .select2-container .select2-selection--multiple {
+            font-family: "Sarabun", sans-serif;
+        }
+
+        .select2-dropdown {
+            font-family: "Sarabun", sans-serif;
+        }
+    </style>
+
     <!-- Scripts -->
     {{-- @vite([
         // 'resources/sass/app.scss',
@@ -49,8 +67,11 @@
                     <div class="cloud cloud1"></div>
                 </div>
                 <div class="x2">
-                    <div class="cloud cloud2"></div>
+                    <div class="cloud cloud4"></div>
                 </div>
+                {{-- <div class="x3">
+                    <div class="cloud cloud1"></div>
+                </div> --}}
             </div>
             {{-- Floating Clouds --}}
 
@@ -113,6 +134,8 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @stack('js')
 </body>
 
