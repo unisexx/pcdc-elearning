@@ -22,9 +22,9 @@
                     {!! Form::open(['url' => 'register', 'method' => 'post', 'class' => 'my-4 needs-validation register-form', 'novalidate']) !!}
 
                     <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
-                        <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลผู้ใช้งาน</legend>
+                        <legend class="title-form w-auto rounded-2">ประเภทผู้ใช้งาน</legend>
                         <div class="row g-3 pt-4">
-                            <div class="col-md-4 col-lg-2">
+                            <div class="col-md-3">
                                 {!! Form::label('user_type_id', 'ประเภทผู้ใช้งาน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
@@ -36,12 +36,18 @@
                                         '4' => 'บุคคลทั่วไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'user_type_id', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'user_type_id', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกประเภทผู้ใช้งาน
                                 </div>
                             </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
+                        <legend class="title-form w-auto rounded-2">ข้อมูลผู้ใช้งาน</legend>
+                        <div class="row g-3 pt-4">
                             <div class="col-md-4 col-lg-2">
                                 {!! Form::label('prefix', 'คำนำหน้า', ['class' => 'form-label']) !!}
                                 {!! Form::text('prefix', null, ['class' => 'form-control', 'id' => 'prefix', 'required']) !!}
@@ -83,7 +89,7 @@
                                         '3' => 'ไม่ระบุ',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'gender_id', 'required', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'gender_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกเพศ
@@ -111,7 +117,7 @@
                                         '4' => 'เจ้าหน้าที่ประจำตำบล',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'officer_type_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'officer_type_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
@@ -136,7 +142,7 @@
                                         '99' => 'สปคม.',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'area_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'area_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
@@ -244,7 +250,7 @@
                                         '7' => 'อื่นๆ',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'affiliation_id', 'required', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'affiliation_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกสังกัด
@@ -269,7 +275,7 @@
                                         '2' => 'ปริญญาตรีขึ้นไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
 
@@ -295,10 +301,11 @@
                     </fieldset>
 
                     <fieldset class="mb-4 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
-                        <legend class="title-form w-auto rounded-2"><img src="images/user-group.svg" alt="" width="24">ข้อมูลการเข้าใช้งาน</legend>
+                        <legend class="title-form w-auto rounded-2">ข้อมูลการเข้าใช้งาน</legend>
                         <div class="row g-3 pt-4">
                             <div class="col-md-4">
                                 <label for="username" class="form-label">ชื่อผู้ใช้งาน (Username)</label>
+                                <span class="text-danger ms-1">*</span>
                                 <input type="text" class="form-control" id="username" required>
                                 <div class="invalid-feedback">
                                     โปรดระบุชื่อผู้ใช้งาน Username
@@ -306,6 +313,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="password" class="form-label">รหัสผ่าน</label>
+                                <span class="text-danger ms-1">*</span>
                                 <input type="password" class="form-control" id="password" required>
                                 <div class="invalid-feedback">
                                     โปรดกรอกรหัสผ่าน
@@ -313,6 +321,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
+                                <span class="text-danger ms-1">*</span>
                                 <input type="password" class="form-control" id="confirm_password" required>
                                 <div class="invalid-feedback">
                                     โปรดยืนยันรหัสผ่าน
@@ -343,6 +352,22 @@
 @endsection
 
 @push('js')
+    <script>
+        $(document).ready(function() {
+            // Disable all input fields initially
+            $('.form-control, .form-select').not('#user_type_id').prop('disabled', true);
+
+            // Enable fields when user_type_id is selected
+            $('#user_type_id').change(function() {
+                if ($(this).val() !== '') {
+                    $('.form-control, .form-select').not('#user_type_id').prop('disabled', false);
+                } else {
+                    $('.form-control, .form-select').not('#user_type_id').prop('disabled', true);
+                }
+            });
+        });
+    </script>
+
     {{-- ซ่อน / แสดงฟอร์ม --}}
     <script>
         $(document).ready(function() {
@@ -366,7 +391,7 @@
     {{-- Select 2 --}}
     <script>
         $(document).ready(function() {
-            $('#user_type_id, #gender_id, #officer_type_id, #area_id, #affiliation_id, #education_level_id, #province_id, #district_id, #subdistrict_id').select2({
+            $('.select2').select2({
                 theme: 'bootstrap-5',
                 placeholder: 'โปรดเลือก...'
             });
@@ -441,4 +466,8 @@
             });
         });
     </script>
+
+    {{-- JS Validation --}}
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\RegisterUserRequest', '.register-form') !!}
 @endpush

@@ -16,6 +16,7 @@
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
         "opcodesio/log-viewer": "^3.8",
+        "proengsoft/laravel-jsvalidation": "^4.9",
         "socialiteproviders/line": "^4.1"
     },
     "require-dev": {
