@@ -136,7 +136,19 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    {{-- jquery.inputmask.js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.mask-age').inputmask({
+                alias: "numeric",
+                min: 0,
+                max: 120,
+                rightAlign: false,
+                placeholder: ""
+            });
+        });
+    </script>
     @stack('js')
 </body>
 

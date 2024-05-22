@@ -43,6 +43,7 @@ class User extends Authenticatable
         'subdistrict_id',
         'zipcode',
         'affiliation_id',
+        'affiliation_other',
         'officer_type_id',
         'area_id',
         'position',

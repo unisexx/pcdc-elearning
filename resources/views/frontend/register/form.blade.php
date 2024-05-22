@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
-            <div class="col-lg-12">
+            <div class="col-lg-8 mx-auto">
                 <div class="box-contact">
                     <div class="title-register text-center mb-3">สมัครสมาชิก</div>
 
@@ -24,7 +24,7 @@
                     <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
                         <legend class="title-form w-auto rounded-2">ประเภทผู้ใช้งาน</legend>
                         <div class="row g-3 pt-4">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 {!! Form::label('user_type_id', 'ประเภทผู้ใช้งาน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
@@ -36,7 +36,7 @@
                                         '4' => 'บุคคลทั่วไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'user_type_id', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'user_type_id', 'required' => true, 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกประเภทผู้ใช้งาน
@@ -48,39 +48,29 @@
                     <fieldset class="mb-5 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
                         <legend class="title-form w-auto rounded-2">ข้อมูลผู้ใช้งาน</legend>
                         <div class="row g-3 pt-4">
-                            <div class="col-md-4 col-lg-2">
+                            <div class="col-md-12">
                                 {!! Form::label('prefix', 'คำนำหน้า', ['class' => 'form-label']) !!}
-                                {!! Form::text('prefix', null, ['class' => 'form-control', 'id' => 'prefix', 'required']) !!}
+                                {!! Form::text('prefix', null, ['class' => 'form-control form-control-lg', 'id' => 'prefix', 'required']) !!}
                             </div>
-
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6">
                                 {!! Form::label('first_name', 'ชื่อ', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'first_name', 'required']) !!}
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                {!! Form::text('first_name', null, ['class' => 'form-control form-control-lg', 'id' => 'first_name', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาระบุชื่อ
                                 </div>
                             </div>
-
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6">
                                 {!! Form::label('last_name', 'นามสกุล', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('last_name', null, ['class' => 'form-control', 'id' => 'last_name', 'required']) !!}
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                {!! Form::text('last_name', null, ['class' => 'form-control form-control-lg', 'id' => 'last_name', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาระบุนามสกุล
                                 </div>
                             </div>
-
-                            <div class="clearfix"></div>
-
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 {!! Form::label('gender_id', 'เพศ', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
                                     'gender_id',
                                     [
@@ -89,24 +79,17 @@
                                         '3' => 'ไม่ระบุ',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'gender_id', 'required', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'gender_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกเพศ
                                 </div>
                             </div>
-
-                            <div class="col-md-2">
-                                <div class="mb-3">
-                                    {!! Form::label('age', 'อายุ', ['class' => 'form-label']) !!}
-                                    <div class="input-group">
-                                        {!! Form::text('age', null, ['class' => 'form-control', 'id' => 'age', 'maxlength' => 5]) !!}
-                                        <span class="input-group-text">ปี</span>
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                {!! Form::label('age', 'อายุ', ['class' => 'form-label']) !!}
+                                {!! Form::text('age', null, ['class' => 'form-control form-control-lg mask-age', 'id' => 'age', 'maxlength' => 3]) !!}
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 {!! Form::label('officer_type_id', 'ประเภทเจ้าหน้าที่', ['class' => 'form-label']) !!}
                                 {!! Form::select(
                                     'officer_type_id',
@@ -117,11 +100,10 @@
                                         '4' => 'เจ้าหน้าที่ประจำตำบล',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'officer_type_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'officer_type_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 {!! Form::label('area_id', 'พื้นที่ เจ้าหน้าที่ประจำเขต', ['class' => 'form-label']) !!}
                                 {!! Form::select(
                                     'area_id',
@@ -142,100 +124,89 @@
                                         '99' => 'สปคม.',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'area_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'area_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
-
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 {!! Form::label('center_name', 'ชื่อศูนย์เด็กเล็ก', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('center_name', null, ['class' => 'form-control', 'id' => 'center_name', 'required']) !!}
+                                {!! Form::text('center_name', null, ['class' => 'form-control form-control-lg', 'id' => 'center_name', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาระบุชื่อศูนย์เด็กเล็ก
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 {!! Form::label('school_name', 'ชื่อสถานศึกษา', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('school_name', null, ['class' => 'form-control', 'id' => 'school_name', 'required']) !!}
+                                {!! Form::text('school_name', null, ['class' => 'form-control form-control-lg', 'id' => 'school_name', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาระบุชื่อสถานศึกษา
                                 </div>
                             </div>
-
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 {!! Form::label('address_no', 'เลขที่', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('address_no', null, ['class' => 'form-control', 'id' => 'address_no', 'required']) !!}
+                                {!! Form::text('address_no', null, ['class' => 'form-control form-control-lg', 'id' => 'address_no', 'required']) !!}
                                 <div class="invalid-feedback">
-                                    กรุณากรอก เลขที่บ้าน
+                                    กรุณาระบุเลขที่บ้าน
                                 </div>
                             </div>
-
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 {!! Form::label('village_no', 'หมู่', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('village_no', null, ['class' => 'form-control', 'id' => 'village_no', 'required']) !!}
+                                {!! Form::text('village_no', null, ['class' => 'form-control form-control-lg', 'id' => 'village_no', 'required']) !!}
                                 <div class="invalid-feedback">
-                                    กรุณาระบุ หมู่ที่
+                                    กรุณาระบุหมู่ที่
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 {!! Form::label('center_phone', 'เบอร์ติดต่อศูนย์', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('center_phone', null, ['class' => 'form-control', 'id' => 'center_phone', 'required']) !!}
+                                {!! Form::text('center_phone', null, ['class' => 'form-control form-control-lg', 'id' => 'center_phone', 'required']) !!}
                                 <div class="invalid-feedback">
-                                    กรุณากรอก เบอร์ติดต่อศูนย์
+                                    กรุณาระบุเบอร์ติดต่อศูนย์
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 {!! Form::label('school_phone', 'เบอร์ติดต่อโรงเรียน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('school_phone', null, ['class' => 'form-control', 'id' => 'school_phone', 'required']) !!}
+                                {!! Form::text('school_phone', null, ['class' => 'form-control form-control-lg', 'id' => 'school_phone', 'required']) !!}
                                 <div class="invalid-feedback">
-                                    กรุณากรอก เบอร์ติดต่อโรงเรียน
+                                    กรุณาระบุเบอร์ติดต่อโรงเรียน
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 {!! Form::label('province_id', 'จังหวัด', ['class' => 'form-label']) !!} <span class="text-danger ms-1">*</span>
-                                {!! Form::select('province_id', $provinces, null, ['id' => 'province_id', 'class' => 'form-select', 'placeholder' => 'โปรดเลือก...', 'required']) !!}
+                                {!! Form::select('province_id', $provinces, null, ['id' => 'province_id', 'class' => 'form-select select2 form-control-lg', 'placeholder' => 'โปรดเลือก...', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกจังหวัด
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 {!! Form::label('district_id', 'เขต/อำเภอ', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::select('district_id', [], null, ['class' => 'form-select', 'id' => 'district_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
+                                {!! Form::select('district_id', [], null, ['class' => 'form-select select2 form-control-lg', 'id' => 'district_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกเขต/อำเภอ
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 {!! Form::label('subdistrict_id', 'แขวง/ตำบล', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::select('subdistrict_id', [], null, ['class' => 'form-select', 'id' => 'subdistrict_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
+                                {!! Form::select('subdistrict_id', [], null, ['class' => 'form-select select2 form-control-lg', 'id' => 'subdistrict_id', 'required', 'placeholder' => 'โปรดเลือก...']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกแขวง/ตำบล
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 {!! Form::label('zipcode', 'รหัสไปรษณีย์', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('zipcode', null, ['class' => 'form-control', 'id' => 'zipcode', 'required']) !!}
+                                {!! Form::text('zipcode', null, ['class' => 'form-control form-control-lg', 'id' => 'zipcode', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณากรอกรหัสไปรษณีย์
                                 </div>
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-12">
                                 {!! Form::label('affiliation_id', 'สังกัด', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::select(
@@ -250,23 +221,29 @@
                                         '7' => 'อื่นๆ',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'affiliation_id', 'required', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'affiliation_id', 'required', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                                 <div class="invalid-feedback">
                                     กรุณาเลือกสังกัด
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-12">
+                                {!! Form::label('affiliation_other', 'อื่นๆ ระบุ', ['class' => 'form-label']) !!}
+                                <span class="text-danger ms-1">*</span>
+                                {!! Form::text('affiliation_other', null, ['class' => 'form-control form-control-lg', 'id' => 'affiliation_other', 'required']) !!}
+                                <div class="invalid-feedback">
+                                    อื่นๆ ระบุ
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 {!! Form::label('position', 'ตำแหน่ง', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('position', null, ['class' => 'form-control', 'id' => 'position', 'required']) !!}
+                                {!! Form::text('position', null, ['class' => 'form-control form-control-lg', 'id' => 'position', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณาระบุตำแหน่งงาน
                                 </div>
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 {!! Form::label('education_level_id', 'ระดับการศึกษา', ['class' => 'form-label']) !!}
                                 {!! Form::select(
                                     'education_level_id',
@@ -275,60 +252,60 @@
                                         '2' => 'ปริญญาตรีขึ้นไป',
                                     ],
                                     null,
-                                    ['class' => 'form-select select2', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 {!! Form::label('phone', 'เบอร์โทรศัพท์', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'required']) !!}
+                                {!! Form::text('phone', null, ['class' => 'form-control form-control-lg', 'id' => 'phone', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณากรอกหมายเลขเบอร์โทรศัพท์
                                 </div>
                             </div>
-
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 {!! Form::label('email', 'อีเมล', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'required']) !!}
+                                {!! Form::email('email', null, ['class' => 'form-control form-control-lg', 'id' => 'email', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณากรอกอีเมล
                                 </div>
                             </div>
-
-                        </div><!--.row -->
+                        </div>
                     </fieldset>
+
 
                     <fieldset class="mb-4 mt-4 border rounded-3 p-3 p-lg-5 position-relative">
                         <legend class="title-form w-auto rounded-2">ข้อมูลการเข้าใช้งาน</legend>
                         <div class="row g-3 pt-4">
                             <div class="col-md-4">
-                                <label for="username" class="form-label">ชื่อผู้ใช้งาน (Username)</label>
+                                {!! Form::label('username', 'ชื่อผู้ใช้งาน (Username)', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                <input type="text" class="form-control" id="username" required>
+                                {!! Form::text('username', null, ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
                                 <div class="invalid-feedback">
                                     โปรดระบุชื่อผู้ใช้งาน Username
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="password" class="form-label">รหัสผ่าน</label>
+                                {!! Form::label('password', 'รหัสผ่าน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                <input type="password" class="form-control" id="password" required>
+                                {!! Form::password('password', ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
                                 <div class="invalid-feedback">
                                     โปรดกรอกรหัสผ่าน
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
+                                {!! Form::label('confirm_password', 'ยืนยันรหัสผ่าน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                <input type="password" class="form-control" id="confirm_password" required>
+                                {!! Form::password('confirm_password', ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
                                 <div class="invalid-feedback">
                                     โปรดยืนยันรหัสผ่าน
                                 </div>
                             </div>
                         </div>
                     </fieldset>
+
+
                     <div class="col-12">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="terms" required>
@@ -351,6 +328,39 @@
     </div>
 @endsection
 
+@push('css')
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .select2-container .select2-selection--single {
+            height: calc(1.5em + 1rem + 2px) !important;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.5rem;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 2.5 !important;
+            /* Adjust this value if needed */
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: calc(1.5em + 1rem + 2px) !important;
+        }
+    </style>
+
+    <style>
+        fieldset {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1),
+                0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+@endpush
+
 @push('js')
     <script>
         $(document).ready(function() {
@@ -371,19 +381,54 @@
     {{-- ซ่อน / แสดงฟอร์ม --}}
     <script>
         $(document).ready(function() {
+            // ซ่อน/แสดงฟอร์มเมื่อเลือกประเภทผู้ใช้
             $('#user_type_id').change(function() {
-                $('#center_name, #center_phone, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation, #officer_type, #area, #position, #education_level').parent().show();
+                // แสดงฟิลด์ทั้งหมดก่อน
+                var allFields = $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province_id, #district_id, #subdistrict_id, #zipcode, #affiliation_id, #officer_type_id, #area_id, #position, #education_level_id, #affiliation_other').parent();
 
-                // Handle specific user type selections
+                allFields.removeClass('animate__animated animate__bounceIn').hide().addClass('animate__animated animate__bounceIn').show();
+
+                // ซ่อนฟิลด์ที่ไม่ต้องการ
                 if ($(this).val() == '1') { // เจ้าหน้าที่ศูนย์เด็กเล็ก
-                    $('#school_name, #officer_type, #area, #school_phone').parent().hide();
+                    $('#school_name, #school_phone, #officer_type_id, #area_id, #position, #education_level_id, #affiliation_other').parent().hide();
                 } else if ($(this).val() == '2') { // เจ้าหน้าที่ครูโรงเรียน
-                    $('#center_name, #center_phone, #officer_type, #area').parent().hide();
+                    $('#center_name, #center_phone, #officer_type_id, #area_id, #position, #education_level_id, #affiliation_other').parent().hide();
                 } else if ($(this).val() == '3') { // เจ้าหน้าที่สาธารณสุข
-                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province, #district, #subdistrict, #zipcode, #affiliation').parent().hide();
+                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province_id, #district_id, #subdistrict_id, #zipcode, #affiliation_id, #area_id, #affiliation_other').parent().hide();
                 } else if ($(this).val() == '4') { // บุคคลทั่วไป
-                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #affiliation, #officer_type, #area, #position, #education_level').parent().hide();
+                    $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #affiliation_id, #officer_type_id, #area_id, #position, #education_level_id, #affiliation_other').parent().hide();
                 }
+
+
+                $('#officer_type_id').change(function() {
+                    // เงื่อนไขเพิ่มเติม
+                    var officerType = $('#officer_type_id').val();
+
+                    if (officerType == '1') {
+                        $('#area_id').parent().show();
+                        $('#province_id, #district_id, #subdistrict_id, #zipcode').parent().hide();
+                    } else if (officerType == '2') {
+                        $('#province_id').parent().show();
+                        $('#area_id, #district_id, #subdistrict_id, #zipcode').parent().hide();
+                    } else if (officerType == '3') {
+                        $('#province_id, #district_id').parent().show();
+                        $('#area_id, #subdistrict_id, #zipcode').parent().hide();
+                    } else if (officerType == '4') {
+                        $('#province_id, #district_id, #subdistrict_id, #zipcode').parent().show();
+                        $('#area_id').parent().hide();
+                    }
+                });
+
+                $('#affiliation_id').change(function() {
+                    // เงื่อนไขเพิ่มเติม
+                    var affiliationId = $('#affiliation_id').val();
+
+                    if (affiliationId == '7') {
+                        $('#affiliation_other').parent().show();
+                    } else {
+                        $('#affiliation_other').parent().hide();
+                    }
+                });
             });
         });
     </script>
