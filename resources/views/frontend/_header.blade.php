@@ -14,12 +14,27 @@
                     </div>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end align-items-center py-2">
-                    <div class="btn btn-red rounded-pill text-white">
-                        <a id="loginBtn" href="#">เข้าสู่ระบบ</a>
-                        {{-- <a href="{{ url('f-login') }}">เข้าสู่ระบบ</a>  --}}
-                        /
-                        <a href="{{ url('register') }}">สมัครสมาชิก</a>
-                    </div>
+                    @auth
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                ยินดีต้อนรับ {{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน">ข้อมูลและประวัติการเรียน</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลส่วนตัว">ข้อมูลส่วนตัว</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว">แก้ไขข้อมูลส่วนตัว</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน">เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ออกจากระบบ">ออกจากระบบ</a></li>
+                            </ul>
+                        </div>
+                    @else
+                        <div class="btn btn-red rounded-pill text-white">
+                            <a id="loginBtn" href="#">เข้าสู่ระบบ</a>
+                            {{-- <a href="{{ url('f-login') }}">เข้าสู่ระบบ</a>  --}}
+                            /
+                            <a href="{{ url('register') }}">สมัครสมาชิก</a>
+                        </div>
+                    @endauth
                 </div>
             </div>
             <div class="row wow fadeInDown bg_menu rounded-pill">

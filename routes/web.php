@@ -56,5 +56,5 @@ Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class
 Route::get('/login/{provider}/callback', [App\Http\Controllers\SocialiteController::class, 'callback']);
 
 /** Test */
-Route::get('/test/login', [App\Http\Controllers\Frontend\TestController::class, 'login']);
-Route::get('/test/logout', [App\Http\Controllers\Frontend\TestController::class, 'logout']);
+// Route::get('/test/login', [App\Http\Controllers\Frontend\TestController::class, 'login']);
+// Route::get('/test/logout', [App\Http\Controllers\Frontend\TestController::class, 'logout']);

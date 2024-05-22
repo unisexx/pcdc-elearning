@@ -36,6 +36,7 @@ class SocialiteController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect('test/login');
+
+        return redirect('/');
     }
 }
