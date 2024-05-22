@@ -24,9 +24,10 @@ Auth::routes();
 
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
-Route::get('/f-login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
-Route::get('/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form'])->name('register');
-Route::post('/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register']);
+Route::get('/front/login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
+Route::get('/front/logout', [App\Http\Controllers\Frontend\LoginController::class, 'logout']);
+Route::get('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form']);
+Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register']);
 Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);

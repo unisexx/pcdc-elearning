@@ -255,20 +255,12 @@
                                     ['class' => 'form-select select2 form-control-lg', 'id' => 'education_level_id', 'placeholder' => 'โปรดเลือก...'],
                                 ) !!}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 {!! Form::label('phone', 'เบอร์โทรศัพท์', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
                                 {!! Form::text('phone', null, ['class' => 'form-control form-control-lg', 'id' => 'phone', 'required']) !!}
                                 <div class="invalid-feedback">
                                     กรุณากรอกหมายเลขเบอร์โทรศัพท์
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                {!! Form::label('email', 'อีเมล', ['class' => 'form-label']) !!}
-                                <span class="text-danger ms-1">*</span>
-                                {!! Form::email('email', null, ['class' => 'form-control form-control-lg', 'id' => 'email', 'required']) !!}
-                                <div class="invalid-feedback">
-                                    กรุณากรอกอีเมล
                                 </div>
                             </div>
                         </div>
@@ -279,11 +271,11 @@
                         <legend class="title-form w-auto rounded-2">ข้อมูลการเข้าใช้งาน</legend>
                         <div class="row g-3 pt-4">
                             <div class="col-md-4">
-                                {!! Form::label('username', 'ชื่อผู้ใช้งาน (Username)', ['class' => 'form-label']) !!}
+                                {!! Form::label('email', 'อีเมล (สำหรับเข้าสู่ระบบ)', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::text('username', null, ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
+                                {!! Form::email('email', null, ['class' => 'form-control form-control-lg', 'id' => 'email', 'required']) !!}
                                 <div class="invalid-feedback">
-                                    โปรดระบุชื่อผู้ใช้งาน Username
+                                    กรุณากรอกอีเมล
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -295,9 +287,9 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                {!! Form::label('confirm_password', 'ยืนยันรหัสผ่าน', ['class' => 'form-label']) !!}
+                                {!! Form::label('password_confirmation', 'ยืนยันรหัสผ่าน', ['class' => 'form-label']) !!}
                                 <span class="text-danger ms-1">*</span>
-                                {!! Form::password('confirm_password', ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
+                                {!! Form::password('password_confirmation', ['class' => 'form-control form-control-lg', 'required' => 'required']) !!}
                                 <div class="invalid-feedback">
                                     โปรดยืนยันรหัสผ่าน
                                 </div>

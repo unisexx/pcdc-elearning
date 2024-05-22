@@ -16,23 +16,54 @@
                 <div class="col-lg-6 d-flex justify-content-end align-items-center py-2">
                     @auth
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn rounded-pill btn-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 ยินดีต้อนรับ {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน">ข้อมูลและประวัติการเรียน</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลส่วนตัว">ข้อมูลส่วนตัว</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว">แก้ไขข้อมูลส่วนตัว</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน">เปลี่ยนรหัสผ่าน</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ออกจากระบบ">ออกจากระบบ</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน"><i class="fas fa-clock"></i> ข้อมูลและประวัติการเรียน</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลส่วนตัว"><i class="fas fa-user"></i> ข้อมูลส่วนตัว</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว"><i class="fas fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน"><i class="fas fa-key"></i> เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a class="dropdown-item" href="{{ url('front/logout') }}" data-bs-toggle="popover" data-bs-content="ออกจากระบบ"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
                             </ul>
                         </div>
+                        <style>
+                            .dropdown-item {
+                                color: #5a6268;
+                                /* สีเทาสำหรับข้อความ */
+                            }
+
+                            .dropdown-item i {
+                                margin-right: 10px;
+                                color: #5a6268;
+                                /* สีเทาสำหรับไอคอน */
+                            }
+
+                            .dropdown-item:hover {
+                                color: #444;
+                                /* สีเทาเข้มเมื่อ hover */
+                            }
+
+                            .btn-yellow:hover,
+                            .btn-yellow.show {
+                                background: linear-gradient(45deg, #ffeb3b, #ffd600);
+                                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                            }
+
+                            .dropdown-item:focus,
+                            .dropdown-item.active {
+                                background-color: #ffeb3b;
+                                /* สีเหลืองเมื่อถูกคลิก */
+                                color: #212529;
+                                /* สีข้อความเมื่อถูกคลิก */
+                            }
+                        </style>
                     @else
                         <div class="btn btn-red rounded-pill text-white">
                             <a id="loginBtn" href="#">เข้าสู่ระบบ</a>
                             {{-- <a href="{{ url('f-login') }}">เข้าสู่ระบบ</a>  --}}
                             /
-                            <a href="{{ url('register') }}">สมัครสมาชิก</a>
+                            <a href="{{ url('front/register') }}">สมัครสมาชิก</a>
                         </div>
                     @endauth
                 </div>
@@ -94,11 +125,12 @@
 </div>
 
 @push('js')
-    <script>
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            Swal.fire({
-                title: 'เข้าสู่ระบบ',
-                html: `
+    @guest
+        <script>
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'เข้าสู่ระบบ',
+                    html: `
             <form id="loginForm" class="g-4 my-4 justify-content-center">
                 <div class="col-lg-12 align-self-center">
                     <!-- Username input -->
@@ -148,51 +180,52 @@
                 </div>
             </form>
         `,
-                showConfirmButton: false,
-                didOpen: () => {
-                    const loginForm = document.getElementById('loginForm');
-                    loginForm.addEventListener('submit', function(e) {
-                        e.preventDefault();
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        const loginForm = document.getElementById('loginForm');
+                        loginForm.addEventListener('submit', function(e) {
+                            e.preventDefault();
 
-                        const username = document.getElementById('username').value;
-                        const password = document.getElementById('password').value;
-                        const remember = document.getElementById('remember').checked;
-                        const terms = document.getElementById('terms').checked;
+                            const username = document.getElementById('username').value;
+                            const password = document.getElementById('password').value;
+                            const remember = document.getElementById('remember').checked;
+                            const terms = document.getElementById('terms').checked;
 
-                        if (!username || !password) {
-                            Swal.showValidationMessage('กรุณากรอกชื่อผู้ใช้และรหัสผ่าน');
-                            return;
-                        } else if (!terms) {
-                            Swal.showValidationMessage('กรุณายอมรับข้อกำหนดและนโยบาย');
-                            return;
-                        }
+                            if (!username || !password) {
+                                Swal.showValidationMessage('กรุณากรอกชื่อผู้ใช้และรหัสผ่าน');
+                                return;
+                            } else if (!terms) {
+                                Swal.showValidationMessage('กรุณายอมรับข้อกำหนดและนโยบาย');
+                                return;
+                            }
 
-                        // ส่งข้อมูลฟอร์มไปยังเซิร์ฟเวอร์
-                        const formData = new FormData();
-                        formData.append('username', username);
-                        formData.append('password', password);
-                        formData.append('remember', remember);
-                        formData.append('terms', terms);
+                            // ส่งข้อมูลฟอร์มไปยังเซิร์ฟเวอร์
+                            const formData = new FormData();
+                            formData.append('username', username);
+                            formData.append('password', password);
+                            formData.append('remember', remember);
+                            formData.append('terms', terms);
 
-                        fetch('/login', {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            }).then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire('เข้าสู่ระบบสำเร็จ', '', 'success');
-                                } else {
-                                    Swal.fire('เข้าสู่ระบบไม่สำเร็จ', data.message, 'error');
-                                }
-                            }).catch(error => {
-                                Swal.fire('เกิดข้อผิดพลาด', error.toString(), 'error');
-                            });
-                    });
-                }
+                            fetch('/front/login', {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    }
+                                }).then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire('เข้าสู่ระบบสำเร็จ', '', 'success');
+                                    } else {
+                                        Swal.fire('เข้าสู่ระบบไม่สำเร็จ', data.message, 'error');
+                                    }
+                                }).catch(error => {
+                                    Swal.fire('เกิดข้อผิดพลาด', error.toString(), 'error');
+                                });
+                        });
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    @endguest
 @endpush

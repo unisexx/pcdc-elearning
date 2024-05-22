@@ -45,7 +45,6 @@ class RegisterController extends Controller
         $user->education_level_id = $request->education_level_id;
         $user->phone              = $request->phone;
         $user->email              = $request->email;
-        $user->username           = $request->username;
         $user->password           = bcrypt($request->password);
         $user->save();
 

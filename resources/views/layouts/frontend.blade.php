@@ -133,7 +133,56 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
+    {{-- Sweetalert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
+    @if (session('warning'))
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: '{{ session('warning') }}',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
+    @if (session('info'))
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: '{{ session('info') }}',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{-- jquery.inputmask.js --}}

@@ -12,7 +12,7 @@ class AjaxController extends Controller
     public function getDistricts($province)
     {
         // ดึงข้อมูลอำเภอที่ id เริ่มต้นด้วยเลขของจังหวัด
-        $districts = District::where('id', 'like', $province . '%')->pluck('name', 'id');
+        $districts = District::where('id', 'like', $province . '%')->orderBy('id', 'asc')->pluck('name', 'id');
 
         // ส่งข้อมูลในรูปแบบ JSON response
         return response()->json($districts);
@@ -21,7 +21,7 @@ class AjaxController extends Controller
     public function getSubdistricts($district)
     {
         // ดึงข้อมูลตำบลที่ id เริ่มต้นด้วยเลขของอำเภอ
-        $subdistricts = Subdistrict::where('id', 'like', $district . '%')->pluck('name', 'id');
+        $subdistricts = Subdistrict::where('id', 'like', $district . '%')->orderBy('id', 'asc')->pluck('name', 'id');
 
         // ส่งข้อมูลในรูปแบบ JSON response
         return response()->json($subdistricts);
