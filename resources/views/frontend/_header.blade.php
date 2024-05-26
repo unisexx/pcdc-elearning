@@ -88,13 +88,14 @@
                                     <ul class="dropdown-menu shadow">
                                         <li><a class="dropdown-item" href="courses-1.html">หลักสูตร 1</a></li>
                                         <li><a class="dropdown-item" href="courses-2.html">หลักสูตร 2</a></li>
-                                        <li class="dropend">
+                                        <li><a class="dropdown-item" href="courses-2.html">หลักสูตร 3</a></li>
+                                        {{-- <li class="dropend">
                                             <a href="courses-3.html" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">หลักสูตร 3</a>
                                             <ul class="dropdown-menu shadow">
                                                 <li><a class="dropdown-item" href="courses-3-1.html">หลักสูตร 3.1</a></li>
                                                 <li><a class="dropdown-item" href="courses-3-2.html">หลักสูตร 3.2</a></li>
                                             </ul>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </li>
                                 <li class="nav-item">
