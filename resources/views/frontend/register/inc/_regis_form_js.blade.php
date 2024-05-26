@@ -20,8 +20,6 @@
 
             // เรียกฟังก์ชั่นเริ่มต้นเพื่อกำหนดสถานะเบื้องต้น
             toggleFormFields();
-            toggleOfficerTypeFields();
-            toggleAffiliationOtherField();
         });
 
         function toggleFormFields() {
@@ -35,10 +33,13 @@
             var userType = $('#user_type_id').val();
             if (userType == '1') { // เจ้าหน้าที่ศูนย์เด็กเล็ก
                 $('#school_name, #school_phone, #officer_type_id, #area_id, #education_level_id, #affiliation_other').parent().hide();
+                toggleAffiliationOtherField();
             } else if (userType == '2') { // เจ้าหน้าที่ครูโรงเรียน
                 $('#center_name, #center_phone, #officer_type_id, #area_id, #education_level_id, #affiliation_other').parent().hide();
+                toggleAffiliationOtherField();
             } else if (userType == '3') { // เจ้าหน้าที่สาธารณสุข
                 $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #province_id, #district_id, #subdistrict_id, #zipcode, #affiliation_id, #area_id, #affiliation_other').parent().hide();
+                toggleOfficerTypeFields();
             } else if (userType == '4') { // บุคคลทั่วไป
                 $('#center_name, #center_phone, #school_name, #school_phone, #address_no, #village_no, #affiliation_id, #officer_type_id, #area_id, #position, #education_level_id, #affiliation_other').parent().hide();
             }
@@ -56,6 +57,7 @@
 
             if (officerType == '1') {
                 $('#area_id').parent().show();
+                $('#area_id').val('999').trigger('change');
                 $('#province_id, #district_id, #subdistrict_id, #zipcode').parent().hide();
             } else if (officerType == '2') {
                 $('#province_id').parent().show();
@@ -66,6 +68,8 @@
             } else if (officerType == '4') {
                 $('#province_id, #district_id, #subdistrict_id, #zipcode').parent().show();
                 $('#area_id').parent().hide();
+            } else {
+                $('#area_id, #province_id, #district_id, #subdistrict_id, #zipcode').parent().hide();
             }
         }
 

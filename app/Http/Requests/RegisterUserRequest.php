@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterUserRequest extends FormRequest
 {
@@ -17,26 +18,49 @@ class RegisterUserRequest extends FormRequest
 
         // Rules for create and update form
         $rules = [
-            'user_type_id'       => 'required|integer|in:1,2,3,4',
-            'first_name'         => 'required|string|max:255',
-            'last_name'          => 'required|string|max:255',
-            'gender_id'          => 'required|integer|in:1,2,3',
-            'officer_type_id'    => 'nullable|integer|in:1,2,3,4',
-            'area_id'            => 'nullable|integer',
+            'user_type_id'       => 'required',
+            'first_name'         => 'required|max:255',
+            'last_name'          => 'required|max:255',
+            'gender_id'          => 'required',
+            'officer_type_id'    => [
+                'required_if:user_type_id,3',
+            ],
+            'area_id'            => [
+                Rule::requiredIf(function () {
+                    return $this->input('user_type_id') == 3 && $this->input('officer_type_id') == 1;
+                }),
+            ],
             'center_name'        => 'required_if:user_type_id,1|max:255',
             'school_name'        => 'required_if:user_type_id,2|max:255',
-            'address_no'         => 'required|max:255',
-            'village_no'         => 'required|max:255',
+            'address_no'         => 'required_if:user_type_id,1,2|max:255',
+            'village_no'         => 'required_if:user_type_id,1,2|max:255',
             'center_phone'       => 'required_if:user_type_id,1|max:255',
             'school_phone'       => 'required_if:user_type_id,2|max:255',
-            'province_id'        => 'required|integer',
-            'district_id'        => 'required|integer',
-            'subdistrict_id'     => 'required|integer',
-            'zipcode'            => 'required|string|max:10',
-            'affiliation_id'     => 'required|integer|in:1,2,3,4,5,6,7',
+            'province_id'        => [
+                Rule::requiredIf(function () {
+                    return !($this->input('user_type_id') == 3 && $this->input('officer_type_id') == 1);
+                }),
+            ],
+            'district_id'        => [
+                Rule::requiredIf(function () {
+                    return !($this->input('user_type_id') == 3 && ($this->input('officer_type_id') == 1 || $this->input('officer_type_id') == 2));
+                }),
+            ],
+            'subdistrict_id'     => [
+                Rule::requiredIf(function () {
+                    return !($this->input('user_type_id') == 3 && ($this->input('officer_type_id') == 1 || $this->input('officer_type_id') == 2 || $this->input('officer_type_id') == 3));
+                }),
+            ],
+            'zipcode'            => [
+                'max:10',
+                Rule::requiredIf(function () {
+                    return !($this->input('user_type_id') == 3 && ($this->input('officer_type_id') == 1 || $this->input('officer_type_id') == 2 || $this->input('officer_type_id') == 3));
+                }),
+            ],
+            'affiliation_id'     => 'required_if:user_type_id,1,2',
             'affiliation_other'  => 'required_if:affiliation_id,7|max:255',
             'position'           => 'required_if:user_type_id,1,2,3|max:255',
-            'education_level_id' => 'nullable|integer|in:1,2',
+            'education_level_id' => 'nullable',
             'phone'              => 'required|max:20',
         ];
 
@@ -62,6 +86,8 @@ class RegisterUserRequest extends FormRequest
             'first_name.required'            => 'กรุณาระบุชื่อ',
             'last_name.required'             => 'กรุณาระบุนามสกุล',
             'gender_id.required'             => 'กรุณาเลือกเพศ',
+            'officer_type_id.required_if'    => 'กรุณาเลือกประเภทเจ้าหน้าที่',
+            'officer_type_id.in'             => 'ประเภทเจ้าหน้าที่ที่เลือกไม่ถูกต้อง',
             'center_name.required_if'        => 'กรุณาระบุชื่อศูนย์เด็กเล็ก',
             'school_name.required_if'        => 'กรุณาระบุชื่อสถานศึกษา',
             'address_no.required'            => 'กรุณาระบุเลขที่บ้าน',
@@ -72,7 +98,7 @@ class RegisterUserRequest extends FormRequest
             'district_id.required'           => 'กรุณาเลือกเขต/อำเภอ',
             'subdistrict_id.required'        => 'กรุณาเลือกแขวง/ตำบล',
             'zipcode.required'               => 'กรุณากรอกรหัสไปรษณีย์',
-            'affiliation_id.required'        => 'กรุณาเลือกสังกัด',
+            'affiliation_id.required_if'     => 'กรุณาเลือกสังกัด',
             'affiliation_other.required_if'  => 'กรุณาระบุสังกัดอื่นๆ ระบุ',
             'position.required_if'           => 'กรุณาระบุตำแหน่งงาน',
             'phone.required'                 => 'กรุณาระบุหมายเลขเบอร์โทรศัพท์',
@@ -80,6 +106,7 @@ class RegisterUserRequest extends FormRequest
             'password.required'              => 'โปรดกรอกรหัสผ่าน',
             'password_confirmation.required' => 'กรุณาระบุยืนยันรหัสผ่าน',
             'password_confirmation.same'     => 'รหัสผ่านไม่ตรงกัน',
+            'area_id.required'               => 'กรุณาเลือกพื้นที่ เจ้าหน้าที่ประจำเขต',
         ];
     }
 }

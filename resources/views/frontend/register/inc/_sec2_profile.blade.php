@@ -44,6 +44,7 @@
         </div>
         <div class="col-md-6">
             {!! Form::label('officer_type_id', 'ประเภทเจ้าหน้าที่', ['class' => 'form-label']) !!}
+            <span class="text-danger ms-1">*</span>
             {!! Form::select(
                 'officer_type_id',
                 [
@@ -58,6 +59,7 @@
         </div>
         <div class="col-md-6">
             {!! Form::label('area_id', 'พื้นที่ เจ้าหน้าที่ประจำเขต', ['class' => 'form-label']) !!}
+            <span class="text-danger ms-1">*</span>
             {!! Form::select(
                 'area_id',
                 [
@@ -196,7 +198,7 @@
                 กรุณาระบุตำแหน่งงาน
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             {!! Form::label('education_level_id', 'ระดับการศึกษา', ['class' => 'form-label']) !!}
             {!! Form::select(
                 'education_level_id',
