@@ -38,15 +38,16 @@ class RegisterUserRequest extends FormRequest
             'position'           => 'required_if:user_type_id,1,2,3|max:255',
             'education_level_id' => 'nullable|integer|in:1,2',
             'phone'              => 'required|max:20',
-            'email'              => 'required|email|max:255|unique:users,email,' . $userId,
         ];
 
         if (!empty($userId)) {
             // กรณีเป็นการแก้ไขข้อมูล
+            $rules['email']                 = 'nullable|email|max:255|unique:users,email,' . $userId;
             $rules['password']              = 'nullable|min:6';
             $rules['password_confirmation'] = 'nullable|same:password';
         } else {
             // กรณีเป็นการสร้างใหม่
+            $rules['email']                 = 'required|email|max:255|unique:users,email,' . $userId;
             $rules['password']              = 'required|min:6';
             $rules['password_confirmation'] = 'required|same:password';
         }

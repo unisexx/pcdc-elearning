@@ -13,41 +13,13 @@
 
     <!-- FAVICON -->
     <link rel="icon" href="{{ asset('html/images/favicon.svg') }}" type="image/x-icon" />
-
-    <link href="{{ asset('html/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('html/css/animate.css') }}" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('html/css/all.min.css') }}" />
-
-    <!-- Styles for this template -->
-    <link href="{{ asset('html/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('html/css/custom.css') }}" rel="stylesheet">
-
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Select2 Bootstrap 5 Theme CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
-    <style>
-        .select2-container .select2-selection--single {
-            font-family: "Sarabun", sans-serif;
-        }
-
-        .select2-container .select2-selection--multiple {
-            font-family: "Sarabun", sans-serif;
-        }
-
-        .select2-dropdown {
-            font-family: "Sarabun", sans-serif;
-        }
-    </style>
-
     <!-- Scripts -->
     {{-- @vite([
         // 'resources/sass/app.scss',
         // 'resources/js/app.js',
     ]) --}}
     {{-- @vite([]) --}}
+    @include('frontend._css')
     @stack('css')
 </head>
 
@@ -74,8 +46,6 @@
                 </div> --}}
             </div>
             {{-- Floating Clouds --}}
-
-
             <div class="shape1"></div>
         </div>
         <div class="container">
@@ -93,118 +63,7 @@
     </main>
 
     @include('frontend._footer')
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('html/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- JS Animate -->
-    <script src="{{ asset('html/js/wow.min.js') }}"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <script>
-        let inputBox = document.querySelector(".search-input-box"),
-            searchIcon = document.querySelector(".icon"),
-            closeIcon = document.querySelector(".close-icon");
-
-        searchIcon.addEventListener("click", () => inputBox.classList.add("open"));
-        closeIcon.addEventListener("click", () => inputBox.classList.remove("open"));
-    </script>
-
-    <script>
-        // Get the button GO TO TOP
-        let mybutton = document.getElementById("myBtn");
-
-        // When the user scrolls down 200px from the top of the document, show the button
-        window.onscroll = function() {
-            scrollFunction()
-        };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-    {{-- Sweetalert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (session('success'))
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: '{{ session('success') }}',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-    @if (session('error'))
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '{{ session('error') }}',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-    @if (session('warning'))
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Warning',
-                    text: '{{ session('warning') }}',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-    @if (session('info'))
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Info',
-                    text: '{{ session('info') }}',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2({
-                theme: 'bootstrap-5',
-            });
-        });
-    </script>
-    {{-- jquery.inputmask.js --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.mask-age').inputmask({
-                alias: "numeric",
-                min: 0,
-                max: 120,
-                rightAlign: false,
-                placeholder: ""
-            });
-        });
-    </script>
+    @include('frontend._script')
     @stack('js')
 </body>
 

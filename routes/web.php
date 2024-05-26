@@ -33,13 +33,15 @@ Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
-Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
-Route::get('/change_password/{user}/edit', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'edit'])->name('change_password.edit');
-Route::put('/change_password/{user}', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'update'])->name('change_password.update');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/change_password/{user}/edit', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'edit'])->name('change_password.edit');
+    Route::put('/change_password/{user}', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'update'])->name('change_password.update');
+});
 
 /** Admin */
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/user', App\Http\Controllers\Admin\UserController::class)->names('admin.user');
     Route::resource('/hilight', App\Http\Controllers\Admin\HilightController::class)->names('admin.hilight');

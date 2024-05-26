@@ -104,7 +104,7 @@
     <!--########### End Stat ###########-->
 
     <!--########### Start Step ###########-->
-    <div class="container">
+    <div id="learning-step" class="container">
         <div class="position-relative pb-2 mt-5">
             <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ขั้นตอนการเรียน e-learning</span>
         </div>

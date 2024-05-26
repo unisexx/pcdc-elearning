@@ -8,17 +8,28 @@
             <div class="col-lg-6">
                 <div class="box-contact">
                     <div class="title-send-us">ส่งข้อความถึงเรา</div>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     {!! Form::open(['route' => 'contact.save', 'method' => 'post', 'class' => 'row g-3 my-4']) !!}
 
                     <div class="col-12 mb-3">
                         {!! Form::label('name', 'ชื่อ - สกุล', ['class' => 'form-label', 'for' => 'inputName']) !!}
                         <span class="text-danger ms-1">*</span>
-                        {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '', 'aria-label' => 'First name']) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '', 'aria-label' => 'First name', 'required' => 'required']) !!}
                     </div>
                     <div class="col-md-6 mb-3">
                         {!! Form::label('email', 'อีเมล', ['class' => 'form-label', 'for' => 'inputEmail4']) !!}
                         <span class="text-danger ms-1">*</span>
-                        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'inputEmail4']) !!}
+                        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'inputEmail4', 'required' => 'required']) !!}
                     </div>
                     <div class="col-md-6 mb-3">
                         {!! Form::label('tel', 'เบอร์โทรศัพท์', ['class' => 'form-label', 'for' => 'inputPhonenumber']) !!}
@@ -34,8 +45,6 @@
                     </div>
 
                     {!! Form::close() !!}
-
-
                 </div>
             </div>
             <div class="col-lg-4">
