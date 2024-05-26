@@ -21,9 +21,8 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน"><i class="fas fa-clock"></i> ข้อมูลและประวัติการเรียน</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="ข้อมูลส่วนตัว"><i class="fas fa-user"></i> ข้อมูลส่วนตัว</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว"><i class="fas fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน"><i class="fas fa-key"></i> เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว"><i class="fas fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
+                                <li><a class="dropdown-item" href="{{ route('change_password.edit', ['user' => Auth::user()->id]) }}" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน"><i class="fas fa-key"></i> เปลี่ยนรหัสผ่าน</a></li>
                                 <li><a class="dropdown-item" href="{{ url('front/logout') }}" data-bs-toggle="popover" data-bs-content="ออกจากระบบ"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
                             </ul>
                         </div>
@@ -135,8 +134,8 @@
                 <div class="col-lg-12 align-self-center">
                     <!-- Username input -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="username" name="username" class="form-control form-control-md" placeholder="Username" />
-                        <label class="form-label sr-only" for="username">Username</label>
+                        <input type="text" id="email" name="email" class="form-control form-control-md" placeholder="Username" />
+                        <label class="form-label sr-only" for="email">Email</label>
                     </div>
                     <!-- Password input -->
                     <div class="form-outline mb-3">
@@ -154,15 +153,16 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- agree to the Terms & Policy -->
                         <div class="form-check mb-0 mt-2">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="terms" name="terms" />
-                            <label class="form-check-label" for="terms">ยอมรับใน<a href="#">ข้อกำหนดและนโยบาย</a></label>
+                            <input class="form-check-input me-2" type="checkbox" value="1" id="terms" name="terms" />
+                            <label class="form-check-label" for="terms">ยอมรับใน <a href="{{ url('/privacy-policy') }}">ข้อกำหนดและนโยบาย</a></label>
                         </div>
+                    </div>
                     </div>
                     <div class="text-center text-lg-start mt-4 pt-2 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary btn-md shadow rounded-pill btn-login-form" style="padding-left: 2.5rem; padding-right: 2.5rem;">เข้าสู่ระบบ</button>
                     </div>
                     <div>
-                        <p class="small fw-bold mt-2 pt-3 mb-0">ยังไม่เป็นสมาชิก? <a href="{{ url('register') }}" class="link-danger">สมัครสมาชิก</a></p>
+                        <p class="small fw-bold mt-2 pt-3 mb-0">ยังไม่เป็นสมาชิก? <a href="{{ url('/front/register') }}" class="link-danger">สมัครสมาชิก</a></p>
                     </div>
 
                     <div class="divider2 d-flex align-items-center my-4">
@@ -186,28 +186,22 @@
                         loginForm.addEventListener('submit', function(e) {
                             e.preventDefault();
 
-                            const username = document.getElementById('username').value;
+                            const email = document.getElementById('email').value;
                             const password = document.getElementById('password').value;
                             const remember = document.getElementById('remember').checked;
                             const terms = document.getElementById('terms').checked;
 
-                            if (!username || !password) {
-                                Swal.showValidationMessage('กรุณากรอกชื่อผู้ใช้และรหัสผ่าน');
+                            if (!email || !password) {
+                                Swal.showValidationMessage('กรุณากรอกอีเมล์และรหัสผ่าน');
                                 return;
                             } else if (!terms) {
                                 Swal.showValidationMessage('กรุณายอมรับข้อกำหนดและนโยบาย');
                                 return;
                             }
 
-                            // ส่งข้อมูลฟอร์มไปยังเซิร์ฟเวอร์
-                            const formData = new FormData();
-                            formData.append('username', username);
-                            formData.append('password', password);
-                            formData.append('remember', remember);
-                            formData.append('terms', terms);
-
-                            fetch('/front/login', {
-                                    method: 'POST',
+                            const formData = new FormData(loginForm);
+                            fetch('{{ route('front.login') }}', {
+                                    method: 'POST', // เปลี่ยนเป็น POST
                                     body: formData,
                                     headers: {
                                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -216,10 +210,13 @@
                                 .then(data => {
                                     if (data.success) {
                                         Swal.fire('เข้าสู่ระบบสำเร็จ', '', 'success');
+                                        // รีเฟรชหน้าเว็บหรือนำทางไปยังหน้าหลัก
+                                        window.location.href = '{{ url('home') }}';
                                     } else {
                                         Swal.fire('เข้าสู่ระบบไม่สำเร็จ', data.message, 'error');
                                     }
                                 }).catch(error => {
+                                    console.error('Error:', error);
                                     Swal.fire('เกิดข้อผิดพลาด', error.toString(), 'error');
                                 });
                         });

@@ -13,32 +13,45 @@ class RegisterUserRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'user_type_id'          => 'required|integer|in:1,2,3,4',
-            'first_name'            => 'required|string|max:255',
-            'last_name'             => 'required|string|max:255',
-            'gender_id'             => 'required|integer|in:1,2,3',
-            'officer_type_id'       => 'nullable|integer|in:1,2,3,4',
-            'area_id'               => 'nullable|integer',
-            'center_name'           => 'required_if:user_type_id,1|string|max:255',
-            'school_name'           => 'required_if:user_type_id,2|string|max:255',
-            'address_no'            => 'required|string|max:255',
-            'village_no'            => 'required|string|max:255',
-            'center_phone'          => 'required_if:user_type_id,1|string|max:255',
-            'school_phone'          => 'required_if:user_type_id,2|string|max:255',
-            'province_id'           => 'required|integer',
-            'district_id'           => 'required|integer',
-            'subdistrict_id'        => 'required|integer',
-            'zipcode'               => 'required|string|max:10',
-            'affiliation_id'        => 'required|integer|in:1,2,3,4,5,6,7',
-            'affiliation_other'     => 'required_if:affiliation_id,7|string|max:255',
-            'position'              => 'required|string|max:255',
-            'education_level_id'    => 'nullable|integer|in:1,2',
-            'phone'                 => 'required|string|max:20',
-            'email'                 => 'required|string|email|max:255|unique:users',
-            'password'              => 'required|string|min:6',
-            'password_confirmation' => 'required|same:password',
+        $userId = $this->route('user'); // ดึง userId จากเส้นทาง
+
+        // Rules for create and update form
+        $rules = [
+            'user_type_id'       => 'required|integer|in:1,2,3,4',
+            'first_name'         => 'required|string|max:255',
+            'last_name'          => 'required|string|max:255',
+            'gender_id'          => 'required|integer|in:1,2,3',
+            'officer_type_id'    => 'nullable|integer|in:1,2,3,4',
+            'area_id'            => 'nullable|integer',
+            'center_name'        => 'required_if:user_type_id,1|max:255',
+            'school_name'        => 'required_if:user_type_id,2|max:255',
+            'address_no'         => 'required|max:255',
+            'village_no'         => 'required|max:255',
+            'center_phone'       => 'required_if:user_type_id,1|max:255',
+            'school_phone'       => 'required_if:user_type_id,2|max:255',
+            'province_id'        => 'required|integer',
+            'district_id'        => 'required|integer',
+            'subdistrict_id'     => 'required|integer',
+            'zipcode'            => 'required|string|max:10',
+            'affiliation_id'     => 'required|integer|in:1,2,3,4,5,6,7',
+            'affiliation_other'  => 'required_if:affiliation_id,7|max:255',
+            'position'           => 'required_if:user_type_id,1,2,3|max:255',
+            'education_level_id' => 'nullable|integer|in:1,2',
+            'phone'              => 'required|max:20',
+            'email'              => 'required|email|max:255|unique:users,email,' . $userId,
         ];
+
+        if (!empty($userId)) {
+            // กรณีเป็นการแก้ไขข้อมูล
+            $rules['password']              = 'nullable|min:6';
+            $rules['password_confirmation'] = 'nullable|same:password';
+        } else {
+            // กรณีเป็นการสร้างใหม่
+            $rules['password']              = 'required|min:6';
+            $rules['password_confirmation'] = 'required|same:password';
+        }
+
+        return $rules;
     }
 
     public function messages()
@@ -59,8 +72,8 @@ class RegisterUserRequest extends FormRequest
             'subdistrict_id.required'        => 'กรุณาเลือกแขวง/ตำบล',
             'zipcode.required'               => 'กรุณากรอกรหัสไปรษณีย์',
             'affiliation_id.required'        => 'กรุณาเลือกสังกัด',
-            'affiliation_other.required_if'  => 'กรุณาระบุสังกัดอื่นๆ ระบุ ',
-            'position.required'              => 'กรุณาระบุตำแหน่งงาน',
+            'affiliation_other.required_if'  => 'กรุณาระบุสังกัดอื่นๆ ระบุ',
+            'position.required_if'           => 'กรุณาระบุตำแหน่งงาน',
             'phone.required'                 => 'กรุณาระบุหมายเลขเบอร์โทรศัพท์',
             'email.required'                 => 'กรุณาระบุอีเมล',
             'password.required'              => 'โปรดกรอกรหัสผ่าน',

@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
 
@@ -24,6 +25,7 @@ class RegisterController extends Controller
         $user                     = new User();
         $user->user_type_id       = $request->user_type_id;
         $user->prefix             = $request->prefix;
+        $user->name               = $request->first_name;
         $user->first_name         = $request->first_name;
         $user->last_name          = $request->last_name;
         $user->gender_id          = $request->gender_id;
@@ -47,6 +49,9 @@ class RegisterController extends Controller
         $user->email              = $request->email;
         $user->password           = bcrypt($request->password);
         $user->save();
+
+        // ล็อกอินผู้ใช้ทันทีหลังจากที่ลงทะเบียนสำเร็จ
+        Auth::login($user);
 
         return redirect()->route('home')->with('success', 'ลงทะเบียนสำเร็จ');
     }

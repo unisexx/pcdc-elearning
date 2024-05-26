@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +23,20 @@ Auth::routes();
 
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
-Route::get('/front/login', [App\Http\Controllers\Frontend\LoginController::class, 'login']);
+Route::any('/front/login', [App\Http\Controllers\Frontend\LoginController::class, 'login'])->name('front.login');
 Route::get('/front/logout', [App\Http\Controllers\Frontend\LoginController::class, 'logout']);
 Route::get('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form']);
-Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register']);
+Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register'])->name('front.register');
 Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
+Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
+Route::get('/change_password/{user}/edit', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'edit'])->name('change_password.edit');
+Route::put('/change_password/{user}', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'update'])->name('change_password.update');
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -55,7 +58,3 @@ Route::get('/ajaxGetZipCode', [App\Http\Controllers\AjaxController::class, 'ajax
 /** Social Login */
 Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class, 'redirect']);
 Route::get('/login/{provider}/callback', [App\Http\Controllers\SocialiteController::class, 'callback']);
-
-/** Test */
-// Route::get('/test/login', [App\Http\Controllers\Frontend\TestController::class, 'login']);
-// Route::get('/test/logout', [App\Http\Controllers\Frontend\TestController::class, 'logout']);

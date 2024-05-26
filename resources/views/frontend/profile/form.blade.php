@@ -1,13 +1,13 @@
 @extends('layouts.frontend')
 
-@section('page', 'สมัครสมาชิก')
+@section('page', 'แก้ไขข้อมูลส่วนตัว')
 
 @section('content')
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
             <div class="col-lg-8 mx-auto">
                 <div class="box-contact">
-                    <div class="title-register text-center mb-3">สมัครสมาชิก</div>
+                    <div class="title-register text-center mb-3">แก้ไขข้อมูลส่วนตัว</div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -19,14 +19,19 @@
                         </div>
                     @endif
 
-                    {!! Form::open(['url' => route('front.register'), 'method' => 'post', 'class' => 'my-4 needs-validation register-form', 'novalidate']) !!}
+                    {!! Form::model($rs, [
+                        'method' => 'PUT',
+                        'route' => ['profile.update', $rs->id],
+                        'class' => 'my-4 needs-validation register-form',
+                        'novalidate',
+                    ]) !!}
 
                     @include('frontend.register.inc._sec1_usertype')
                     @include('frontend.register.inc._sec2_profile')
-                    @include('frontend.register.inc._sec3_login')
+                    {{-- @include('frontend.register.inc._sec3_login') --}}
 
                     <div class="col-12 mt-4 text-center">
-                        <button class="btn btn-primary btn-lg px-5" type="submit">สมัครสมาชิก</button>
+                        <button class="btn btn-primary btn-lg px-5" type="submit">ยืนยัน</button>
                     </div>
 
                     {!! Form::close() !!}
@@ -162,8 +167,7 @@
     {{-- Chain Select จังหวัด / อำเภอ / ตำบล --}}
     <script>
         $(document).ready(function() {
-            $('#province_id').change(function() {
-                var provinceId = $(this).val();
+            function loadDistricts(provinceId, districtId = null) {
                 $('#district_id').empty().append('<option value="">โปรดเลือก...</option>');
                 $('#subdistrict_id').empty().append('<option value="">โปรดเลือก...</option>');
                 $('#zipcode').val('');
@@ -177,13 +181,15 @@
                             $.each(data, function(id, name) {
                                 $('#district_id').append('<option value="' + id + '">' + name + '</option>');
                             });
+                            if (districtId) {
+                                $('#district_id').val(districtId).change();
+                            }
                         }
                     });
                 }
-            });
+            }
 
-            $('#district_id').change(function() {
-                var districtId = $(this).val();
+            function loadSubdistricts(districtId, subdistrictId = null) {
                 $('#subdistrict_id').empty().append('<option value="">โปรดเลือก...</option>');
                 $('#zipcode').val('');
 
@@ -196,12 +202,15 @@
                             $.each(data, function(id, name) {
                                 $('#subdistrict_id').append('<option value="' + id + '">' + name + '</option>');
                             });
+                            if (subdistrictId) {
+                                $('#subdistrict_id').val(subdistrictId).change();
+                            }
                         }
                     });
                 }
-            });
+            }
 
-            $('#subdistrict_id').change(function() {
+            function loadZipcode() {
                 var province_name = $('#province_id').find('option:selected').text();
                 var district_name = $('#district_id').find('option:selected').text();
                 var subdistrict_name = $('#subdistrict_id').find('option:selected').text();
@@ -224,7 +233,33 @@
                         }
                     });
                 }
+            }
+
+            $('#province_id').change(function() {
+                loadDistricts($(this).val());
             });
+
+            $('#district_id').change(function() {
+                loadSubdistricts($(this).val());
+            });
+
+            $('#subdistrict_id').change(function() {
+                loadZipcode();
+            });
+
+
+            // รันคำสั่ง chain select ตอนโหลดหน้า form edit
+            var initialProvinceId = "{{ @$rs->province_id }}";
+            var initialDistrictId = "{{ @$rs->district_id }}";
+            var initialSubdistrictId = "{{ @$rs->subdistrict_id }}";
+
+            if (initialProvinceId) {
+                loadDistricts(initialProvinceId, initialDistrictId);
+            }
+
+            if (initialDistrictId) {
+                loadSubdistricts(initialDistrictId, initialSubdistrictId);
+            }
         });
     </script>
 
