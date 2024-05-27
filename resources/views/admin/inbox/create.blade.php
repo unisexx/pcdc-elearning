@@ -4,12 +4,12 @@
 
 @section('content')
     {!! Form::open([
-        'route' => 'admin.faq.store',
+        'route' => 'admin.inbox.store',
         'method' => 'POST',
         'files' => true,
         'class' => 'form',
         'autocomplete' => 'off',
     ]) !!}
-    @include('admin.faq.form')
+    @include('admin.inbox.form')
     {!! Form::close() !!}
 @endsection

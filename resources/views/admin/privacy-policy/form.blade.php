@@ -1,6 +1,6 @@
 @component('components.card.form')
     @slot('cardHeaderText')
-        ข้อมูลติดต่อ
+        นโยบายส่วนบุคคล
     @endslot
 
     @slot('form')

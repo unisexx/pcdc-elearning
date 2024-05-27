@@ -5,11 +5,11 @@
 @section('content')
     {!! Form::model($rs, [
         'method' => 'PATCH',
-        'route' => ['admin.faq.update', $rs->id],
+        'route' => ['admin.inbox.update', $rs->id],
         'files' => true,
         'class' => 'form',
         'autocomplete' => 'off',
     ]) !!}
-    @include('admin.faq.form')
+    @include('admin.inbox.form')
     {!! Form::close() !!}
 @endsection
