@@ -60,14 +60,14 @@
                     <span class="nav-link-text ms-1">นโยบายข้อมูลส่วนบุคคล</span>
                 </a>
             </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}">
                 <a class="nav-link {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}" href="{{ route('home') }}">
                     <div class="icon text-center d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-briefcase text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">สิทธิ์การใช้งาน</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}">
                 <a class="nav-link {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
                     <div class="icon text-center d-flex align-items-center justify-content-center">
