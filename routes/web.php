@@ -33,6 +33,7 @@ Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
+Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
