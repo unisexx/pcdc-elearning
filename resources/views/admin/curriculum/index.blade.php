@@ -21,7 +21,7 @@
                     <tbody>
                         @foreach ($rs as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>                                
+                                <td class="text-center">{{ autoNumber($rs) }}</td>                  
                                 <td>{{ @$item->name }}</td>
                                 <td class="text-center">{!! statusBadge(@$item->status) !!}</td>
                                 <td class="text-center text-sm">
@@ -43,8 +43,8 @@
                 </table>
             </div>
             <!-- Pagination -->
-            <div class="mt-3">
-                {{ $rs->links() }}
+            <div class="mt-3">                
+                {{ $rs->appends(@$_GET)->render("vendor.pagination.bootstrap-5-right") }}
             </div>
         @endslot
     @endcomponent
