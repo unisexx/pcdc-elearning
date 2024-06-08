@@ -20,6 +20,14 @@
                     <span class="nav-link-text ms-1">แดชบอร์ด</span>
                 </a>
             </li>
+            <li class="nav-item {{ strpos(Route::currentRouteName(), 'curriculum') === 0 ? 'active' : '' }}">
+                <a class="nav-link {{ strpos(Route::currentRouteName(), 'curriculum') === 0 ? 'active' : '' }}" href="{{ route('admin.curriculum.index') }}">
+                    <div class="icon text-center d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-images text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">หลักสูตร</span>
+                </a>
+            </li>
             <li class="nav-item {{ strpos(Route::currentRouteName(), 'hilight') === 0 ? 'active' : '' }}">
                 <a class="nav-link {{ strpos(Route::currentRouteName(), 'hilight') === 0 ? 'active' : '' }}" href="{{ route('admin.hilight.index') }}">
                     <div class="icon text-center d-flex align-items-center justify-content-center">
