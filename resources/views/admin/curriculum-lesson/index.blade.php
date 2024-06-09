@@ -28,6 +28,7 @@
                     <thead>
                         <tr>
                             <th width="50" scope="col">#</th>
+                            <th width="150" scope="col">ภาพหน้าปก</th>     
                             <th scope="col">ชื่อหน่วยการเรียนรู้/บทเรียน</th>                            
                             <th width="100" class="text-center" scope="col">จำนวน<br>เนื้อหา</th>                                                        
                             <th width="100" class="text-center" scope="col">จำนวน<br>แบบทดสอบท้ายบท</th>                                                        
@@ -39,7 +40,8 @@
                         @foreach ($rs as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>                                
-                                <td>{{ @$item->name }}</td>
+                                <td><img src="{{ Storage::url('uploads/curriculum_lesson/' . @$item->cover_image) }}" height="100"></td>          
+                                <td style="vertical-align:top;padding-left:20px;">{{ @$item->name }}</td>
                                 <td class="text-center">{{ @$item->curriculum_lesson_detail->count() }}</td>
                                 <td class="text-center">{{ @$item->curriculum_lesson_question->where('status','active')->count().'/'.@$item->curriculum_lesson_question->count() }}</td>
                                 <td class="text-center">{!! statusBadge(@$item->status) !!}</td>

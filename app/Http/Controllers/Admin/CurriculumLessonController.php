@@ -50,6 +50,15 @@ class CurriculumLessonController extends Controller
             'pos' => (CurriculumLesson::where('curriculum_id',$request->curriculum_id)->max('pos') + 1)
         ]);
         $input = $request->all();
+
+        // อัพโหลดรูป
+        if ($request->hasFile('cover_image')) {
+            $fileName = uniqid() . '.' . $request->cover_image->extension();
+            $image    = ImageManager::gd()->read($request->file('cover_image'));
+            $image    = $image->resize(740, 370);
+            $image->toJpeg(80)->save(base_path('public/storage/uploads/curriculum_lesson/' . $fileName));
+            $input['cover_image'] = $fileName;
+        }
         
         $curriculum_lesson = CurriculumLesson::create($input);
 
@@ -95,6 +104,16 @@ class CurriculumLessonController extends Controller
         $input = $request->all();
 
         $rs = CurriculumLesson::find($id);
+
+        // อัพโหลดรูป
+        if ($request->hasFile('cover_image')) {
+            $fileName = uniqid() . '.' . $request->cover_image->extension();
+            $image    = ImageManager::gd()->read($request->file('cover_image'));
+            $image    = $image->resize(740, 370);
+            $image->toJpeg(80)->save(base_path('public/storage/uploads/curriculum_lesson/' . $fileName));
+            $input['cover_image'] = $fileName;
+        }
+
         $rs->update($input);
 
         CurriculumLessonDetail::where('curriculum_lesson_id',$id)->delete();

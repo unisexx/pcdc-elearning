@@ -34,6 +34,15 @@ class CurriculumController extends Controller
     {
         $input = $request->all();
 
+        // อัพโหลดรูป
+        if ($request->hasFile('cover_image')) {
+            $fileName = uniqid() . '.' . $request->cover_image->extension();
+            $image    = ImageManager::gd()->read($request->file('cover_image'));
+            $image    = $image->resize(1400, 476);
+            $image->toJpeg(80)->save(base_path('public/storage/uploads/curriculum/' . $fileName));
+            $input['cover_image'] = $fileName;
+        }
+
         $curriculum = Curriculum::create($input);
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
@@ -67,6 +76,16 @@ class CurriculumController extends Controller
         $input = $request->all();
 
         $rs = Curriculum::find($id);
+
+        // อัพโหลดรูป
+        if ($request->hasFile('cover_image')) {
+            $fileName = uniqid() . '.' . $request->cover_image->extension();
+            $image    = ImageManager::gd()->read($request->file('cover_image'));
+            $image    = $image->resize(1400, 476);
+            $image->toJpeg(80)->save(base_path('public/storage/uploads/curriculum/' . $fileName));
+            $input['cover_image'] = $fileName;
+        }
+
         $rs->update($input);
 
         set_notify('success', 'แก้ไขข้อมูลเรียบร้อย');

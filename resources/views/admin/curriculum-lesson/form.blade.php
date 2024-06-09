@@ -12,6 +12,10 @@
             <div class="col-12">
                 {{ Form::bsTextArea('description', 'คำอธิบายบทเรียน') }}
             </div>
+
+            <div class="col-12">
+                {{ Form::bsFile('cover_image', 'ภาพหน้าปก (ขนาด 740 x 370 px)', @$rs->cover_image, 'uploads/curriculum_lesson', ['accept' => 'image/*']) }}
+            </div>
             
             @if(empty(@$rs))
             <div class="card card-body">

@@ -15,6 +15,9 @@
                 {{ Form::bsTiny('objective', 'วัตถุประสงค์') }}
             </div>
             <div class="col-12">
+                {{ Form::bsFile('cover_image', 'ภาพหน้าปก (ขนาด 1400 x 476 px)', @$rs->cover_image, 'uploads/curriculum', ['accept' => 'image/*']) }}
+            </div>
+            <div class="col-12">
                 {{ Form::bsSwitch('status', 'เปิดใช้งาน', @$rs->status, 'active', 'inactive') }}
             </div>
         </div>

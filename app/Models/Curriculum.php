@@ -31,6 +31,7 @@ class Curriculum extends Model
         'name',
         'intro',        
         'objective',        
+        'cover_image',
         'status',
         'deleted_at',
     ];

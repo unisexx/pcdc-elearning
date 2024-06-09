@@ -15,6 +15,7 @@ class CurriculumLesson extends Model
         'curriculum_id',
         'name',        
         'description',     
+        'cover_image',
         'pos',   
         'status',
         'deleted_at',
