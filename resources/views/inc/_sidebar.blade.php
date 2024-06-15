@@ -1,3 +1,40 @@
+@php
+    $menuItems = [
+        ['name' => 'แดชบอร์ด', 'route' => 'admin.dashboard', 'icon' => 'fa-house'],
+        ['name' => 'หลักสูตร', 'route' => 'admin.curriculum.index', 'icon' => 'fa-graduation-cap', 'additional_routes' => ['admin.curriculum-lesson', 'admin.curriculum-lesson-question', 'admin.curriculum-exam-setting']],
+        ['name' => 'ไฮไลท์', 'route' => 'admin.hilight.index', 'icon' => 'fa-images'],
+        ['name' => 'คำถามที่พบบ่อย', 'route' => 'admin.faq.index', 'icon' => 'fa-circle-question'],
+        ['name' => 'ข้อมูลติดต่อ', 'route' => ['admin.contact.edit', ['contact' => 1]], 'icon' => 'fa-map-location-dot'],
+        ['name' => 'นโยบายเว็บไซต์', 'route' => ['admin.website-policy.edit', ['website_policy' => 1]], 'icon' => 'fa-globe'],
+        ['name' => 'นโยบายข้อมูลส่วนบุคคล', 'route' => ['admin.privacy-policy.edit', ['privacy_policy' => 1]], 'icon' => 'fa-shield-halved'],
+        ['name' => 'แบบสำรวจความพึงพอใจ', 'route' => 'admin.survey.index', 'icon' => 'fa-poll'],
+        ['name' => 'ผู้ใช้งาน', 'route' => 'admin.user.index', 'icon' => 'fa-user'],
+        ['name' => 'กล่องข้อความ', 'route' => 'admin.inbox.index', 'icon' => 'fa-inbox'],
+    ];
+@endphp
+
+
+@php
+    function isActive($baseRoute, $additionalRoutes = [])
+    {
+        $routes = array_merge([$baseRoute], $additionalRoutes);
+        $currentRoute = Route::currentRouteName();
+
+        foreach ($routes as $route) {
+            // ตัดส่วนที่เป็น .index และ .edit ออก
+            $baseRouteOnly = preg_replace('/\.(index|edit)$/', '', $route);
+            $currentRouteOnly = preg_replace('/\.(index|edit)$/', '', $currentRoute);
+
+            if (strpos($currentRouteOnly, $baseRouteOnly) === 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+@endphp
+
+
+
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps ps--active-y" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -9,93 +46,20 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto h-auto ps" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            {{-- <li class="nav-item">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">แดชบอร์ด</h6>
-            </li> --}}
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'dashboard') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'dashboard') === 0 ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-house text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">แดชบอร์ด</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'curriculum') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'curriculum') === 0 ? 'active' : '' }}" href="{{ route('admin.curriculum.index') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-images text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">หลักสูตร</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'hilight') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'hilight') === 0 ? 'active' : '' }}" href="{{ route('admin.hilight.index') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-images text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">ไฮไลท์</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'faq') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'faq') === 0 ? 'active' : '' }}" href="{{ route('admin.faq.index') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-circle-question text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">คำถามที่พบบ่อย</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'contact') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'contact') === 0 ? 'active' : '' }}" href="{{ route('admin.contact.edit', ['contact' => 1]) }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-map-location-dot text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">ข้อมูลติดต่อ</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'website-policy') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'website-policy') === 0 ? 'active' : '' }}" href="{{ route('admin.website-policy.edit', ['website_policy' => 1]) }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-globe text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">นโยบายเว็บไซต์</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'privacy-policy') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'privacy-policy') === 0 ? 'active' : '' }}" href="{{ route('admin.privacy-policy.edit', ['privacy_policy' => 1]) }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-shield-halved text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">นโยบายข้อมูลส่วนบุคคล</span>
-                </a>
-            </li>
-            {{-- <li class="nav-item {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'home') === 0 ? 'active' : '' }}" href="{{ route('home') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-briefcase text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">สิทธิ์การใช้งาน</span>
-                </a>
-            </li> --}}
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-user text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">ผู้ใช้งาน</span>
-                </a>
-            </li>
-            <li class="nav-item {{ strpos(Route::currentRouteName(), 'inbox') === 0 ? 'active' : '' }}">
-                <a class="nav-link {{ strpos(Route::currentRouteName(), 'inbox') === 0 ? 'active' : '' }}" href="{{ route('admin.inbox.index') }}">
-                    <div class="icon text-center d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-inbox text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">กล่องข้อความ</span>
-                </a>
-            </li>
+            @foreach ($menuItems as $item)
+                @php
+                    $baseRoute = $item['base_route'] ?? (is_array($item['route']) ? $item['route'][0] : $item['route']);
+                    $additionalRoutes = $item['additional_routes'] ?? [];
+                @endphp
+                <li class="nav-item {{ isActive($baseRoute, $additionalRoutes) ? 'active' : '' }}">
+                    <a class="nav-link {{ isActive($baseRoute, $additionalRoutes) ? 'active' : '' }}" href="{{ is_array($item['route']) ? route($item['route'][0], $item['route'][1]) : route($item['route']) }}">
+                        <div class="icon text-center d-flex align-items-center justify-content-center">
+                            <i class="fa-solid {{ $item['icon'] }} text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">{{ $item['name'] }}</span>
+                    </a>
+                </li>
+            @endforeach
         </ul>
     </div>
 </aside>
-@push('js')
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('argon/assets/js/argon-dashboard.js?v=2.0.4') }}"></script>
-@endpush

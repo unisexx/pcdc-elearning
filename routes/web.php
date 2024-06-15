@@ -56,12 +56,17 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('/privacy-policy', App\Http\Controllers\Admin\PrivacyPolicyController::class)->names('admin.privacy-policy');
     Route::resource('/faq', App\Http\Controllers\Admin\FaqController::class)->names('admin.faq');
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
+    Route::resource('/survey', App\Http\Controllers\Admin\SurveyController::class)->names('admin.survey');
 
-
-    Route::resource('/curriculum', App\Http\Controllers\Admin\CurriculumController::class)->names('admin.curriculum');    
+    Route::resource('/curriculum', App\Http\Controllers\Admin\CurriculumController::class)->names('admin.curriculum');
     Route::resource('/curriculum-lesson', App\Http\Controllers\Admin\CurriculumLessonController::class)->names('admin.curriculum-lesson');
     Route::resource('/curriculum-lesson-question', App\Http\Controllers\Admin\CurriculumLessonQuestionController::class)->names('admin.curriculum-lesson-question');
     Route::resource('/curriculum-exam-setting', App\Http\Controllers\Admin\CurriculumExamSettingController::class)->names('admin.curriculum-exam-setting');
+
+    // drag&drop order
+    Route::post('/faq/update-order', [App\Http\Controllers\Admin\FaqController::class, 'updateOrder'])->name('faq.updateOrder');
+    Route::post('/survey/update-order', [App\Http\Controllers\Admin\SurveyController::class, 'updateOrder'])->name('survey.updateOrder');
+
 });
 
 /** Ajax */

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'คำถามที่พบบ่อย')
+@section('title', 'แบบสำรวจความพึงพอใจ')
 
 @section('content')
     @component('components.card.index')
         @slot('cardHeaderText')
-            คำถามที่พบบ่อย
+            แบบสำรวจความพึงพอใจ
         @endslot
         @slot('table')
             <div class="table-responsive">
@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th scope="col">จัดลำดับ</th>
-                            <th scope="col">คำถาม</th>
+                            <th scope="col">หัวข้อแบบสำรวจ</th>
                             <th scope="col">เปิดใช้งาน</th>
                             <th scope="col">จัดการ</th>
                         </tr>
@@ -22,8 +22,7 @@
                         @foreach ($rs as $item)
                             <tr data-id="{{ $item->id }}">
                                 <td class="drag-handle"><i class="fas fa-grip-lines"></i></td>
-                                <td>{{ @$item->question }}</td>
-                                {{-- <td>{{ @$item->order }}</td> --}}
+                                <td>{{ @$item->title }}</td>
                                 <td>{!! statusBadge(@$item->status) !!}</td>
                                 <td class="text-sm">
                                     @component('components.table.button')
@@ -50,7 +49,7 @@
                         attribute: 'data-id'
                     });
                     $.ajax({
-                        url: '{{ route('faq.updateOrder') }}',
+                        url: '{{ route('survey.updateOrder') }}',
                         method: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',

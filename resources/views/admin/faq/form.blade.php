@@ -11,9 +11,9 @@
             <div class="col-12">
                 {{ Form::bsTextArea('answer', 'คำตอบ') }}
             </div>
-            <div class="col-12">
+            {{-- <div class="col-12">
                 {{ Form::bsText('order', 'ลำดับที่', null, ['class' => 'mask-alphanumeric form-control form-control-lg']) }}
-            </div>
+            </div> --}}
             <div class="col-12">
                 {{ Form::bsSwitch('status', 'เปิดใช้งาน', @$rs->status, 'active', 'inactive') }}
             </div>

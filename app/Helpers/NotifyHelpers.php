@@ -19,10 +19,7 @@ if (!function_exists('jsNotify')) {
     function js_notify()
     {
         if (Session::get('notify')) {
-            return '
-                <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
-                <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-				<script type="text/javascript">
+            return '<script type="text/javascript">
                     Toastify({
                         text: "' . Session::get('msg') . '",
                         duration: ' . Session::get('delay') . ',

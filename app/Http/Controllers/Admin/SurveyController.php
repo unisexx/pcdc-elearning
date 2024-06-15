@@ -3,32 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
+use App\Models\Survey;
 use Illuminate\Http\Request;
 
-class FaqController extends Controller
+class SurveyController extends Controller
 {
+
     public function index()
     {
-        $rs = Faq::orderBy('order', 'asc')->get();
+        $rs = Survey::orderBy('order', 'asc')->get();
 
-        return view('admin.faq.index', compact('rs'));
+        return view('admin.survey.index', compact('rs'));
     }
 
     public function create()
     {
-        return view('admin.faq.create');
+        return view('admin.survey.create');
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
 
-        $faq = Faq::create($input);
+        $Survey = Survey::create($input);
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 
-        return redirect()->route('admin.faq.index');
+        return redirect()->route('admin.survey.index');
     }
 
     public function show(string $id)
@@ -38,25 +39,26 @@ class FaqController extends Controller
 
     public function edit(string $id)
     {
-        $rs = Faq::find($id);
+        $rs = Survey::find($id);
 
-        return view('admin.faq.edit', @compact('rs'));
+        return view('admin.survey.edit', @compact('rs'));
     }
 
     public function update(Request $request, string $id)
     {
         $input = $request->all();
-        $rs    = Faq::find($id);
+
+        $rs = Survey::find($id);
         $rs->update($input);
 
         set_notify('success', 'แก้ไขข้อมูลเรียบร้อย');
 
-        return redirect()->route('admin.faq.index');
+        return redirect()->route('admin.survey.index');
     }
 
     public function destroy(string $id)
     {
-        Faq::find($id)->delete();
+        Survey::find($id)->delete();
         set_notify('success', 'ลบข้อมูลเรียบร้อย');
 
         return back();
@@ -66,7 +68,7 @@ class FaqController extends Controller
     {
         $order = $request->input('order');
         foreach ($order as $index => $id) {
-            $faq        = Faq::find($id);
+            $faq        = Survey::find($id);
             $faq->order = $index + 1;
             $faq->save();
         }
