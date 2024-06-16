@@ -10,9 +10,6 @@ class ElearningStepsController extends Controller
 {
     public function index()
     {
-        /** PrivacyPolicy */
-        $rs = PrivacyPolicy::first();
-
-        return view('frontend.elearning-steps.index', compact('rs'));
+        return view('frontend.elearning-steps.index');
     }
 }
