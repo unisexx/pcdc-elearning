@@ -30,29 +30,36 @@
         src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
     }
 
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
     body {
         font-family: "THSarabunNew";
+        background-image: url("{{ asset('images/certificate/certificate_bg.jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0 auto;
+        display: block;
     }
 
-    .certificate {
+    h1 {
+        position: absolute;
+        font-size: 200px;
+        font-weight: bolder;
+        top: 500px;
+        left: 50%;
+        /* กำหนดตำแหน่งซ้ายเป็นกึ่งกลางของหน้า */
+        transform: translateX(-50%);
+        /* ย้ายตำแหน่งในแนวนอนกลับไปครึ่งหนึ่งของความกว้างของ h1 */
         text-align: center;
-        border: 10px solid #000;
-        padding: 20px;
-        margin: 50px auto;
-        width: 70%;
-    }
-
-    .certificate h1 {
-        font-size: 50px;
-        margin-bottom: 0;
-    }
-
-    .certificate p {
-        font-size: 20px;
-    }
-
-    .qrcode {
-        margin-top: 20px;
+        /* จัดข้อความให้อยู่กึ่งกลางใน h1 */
     }
 </style>
 
@@ -61,17 +68,7 @@
 </head>
 
 <body>
-    <div class="certificate">
-        <h1>Certificate of Completion</h1>
-        <p>This is to certify that</p>
-        <h2>{{ $name }}</h2>
-        <p>has successfully completed the course</p>
-        <h2>{{ $course }}</h2>
-        <p>{{ $date }}</p>
-        <div class="qrcode">
-            <img src="data:image/png;base64,{{ $qrcode }}" alt="QR Code">
-        </div>
-    </div>
+    <h1>{{ $title }}</h1>
 </body>
 
 </html>
