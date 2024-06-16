@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h2>Survey Form</h2>
+        <h2>Survey Form (เอาปุ่มไปใส่ในหน้าหลักสูตรที่ต้องการ)</h2>
         <button type="button" class="btn btn-primary open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="1">
             แบบสอบถามสำหรับหลักสูตร (curriculum_id = 1)
         </button>

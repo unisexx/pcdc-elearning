@@ -10,9 +10,9 @@
                 <form id="surveyForm" method="POST">
                     @csrf
                     <input type="hidden" name="curriculum_id" id="curriculum_id">
-                    @foreach ($surveys as $item)
+                    @foreach ($surveys as $key => $item)
                         <div class="mb-3">
-                            <label for="question{{ $item->id }}" class="form-label">{{ $item->title }}</label>
+                            <label for="question{{ $item->id }}" class="form-label">{{ $key + 1 }}. {{ $item->title }}</label>
                             <div class="smiley-group">
                                 <input type="radio" id="question{{ $item->id }}_1" name="question{{ $item->id }}" value="1">
                                 <label for="question{{ $item->id }}_1"><i class="fas fa-frown"></i></label>
@@ -32,12 +32,12 @@
                         </div>
                     @endforeach
                     <div class="mb-3">
-                        <label for="suggestion" class="form-label">ข้อเสนอแนะ</label>
+                        <label for="suggestion" class="form-label">ข้อเสนอแนะ (ถ้ามี)</label>
                         <textarea class="form-control" id="suggestion" name="suggestion" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
                         <button type="submit" class="btn btn-primary" id="submitBtn" disabled>ส่งแบบสำรวจ</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
                     </div>
                 </form>
             </div>
