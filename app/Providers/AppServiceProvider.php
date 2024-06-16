@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Contact;
+use App\Models\Survey;
 use Form;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -37,5 +38,10 @@ class AppServiceProvider extends ServiceProvider
         View::share('contact', Cache::remember('contact', $cacheTime, function () {
             return Contact::first();
         }));
+
+        // หน้าบ้าน แบบสำรวจความพึงพอใจ
+        View::composer('components.frontend.survey', function ($view) {
+            $view->with('surveys', Survey::where('status', 'active')->orderBy('order', 'asc')->get());
+        });
     }
 }

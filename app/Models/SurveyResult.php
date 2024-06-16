@@ -9,7 +9,7 @@ class SurveyResult extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['survey_id', 'score'];
+    protected $fillable = ['survey_id', 'rating', 'suggestion', 'user_id', 'curriculum_id'];
 
     public function survey()
     {
