@@ -45,11 +45,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculum'])->name('elearning.curriculum.index');
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
 
-    /** แบบสำรวจความพึงพอใจ */
     Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
     Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
 
-    /** ใบประกาศ */
     Route::get('/certificate/pdf', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
     Route::get('/certificate/verify/{id}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
 });
