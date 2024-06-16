@@ -34,11 +34,6 @@ Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::c
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
 Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsController::class, 'index']);
-Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
-Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
-Route::get('/certificate/pdf', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
-Route::get('/certificate/verify/{id}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
@@ -49,6 +44,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/index', [App\Http\Controllers\Frontend\ElearningController::class, 'index'])->name('elearning.index');
     Route::get('/elearning/curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculum'])->name('elearning.curriculum.index');
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
+
+    /** แบบสำรวจความพึงพอใจ */
+    Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
+    Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
+
+    /** ใบประกาศ */
+    Route::get('/certificate/pdf', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
+    Route::get('/certificate/verify/{id}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
 });
 
 /** Admin */
