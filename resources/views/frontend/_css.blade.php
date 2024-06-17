@@ -1,5 +1,6 @@
 <link href="{{ asset('html/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('html/css/animate.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('html/css/all.min.css') }}" />

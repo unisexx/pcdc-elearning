@@ -36,7 +36,7 @@ Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyContro
 Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsController::class, 'index']);
 Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
 Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
-Route::get('/certificate/verify/{encodedToken}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
+Route::get('/certificate/verify/{verifyToken}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');

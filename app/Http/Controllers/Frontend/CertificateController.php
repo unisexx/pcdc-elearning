@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
@@ -30,25 +29,41 @@ class CertificateController extends Controller
         $courseName  = $curriculum->name;
         $currentYear = Carbon::now()->year + 543;
 
-        // ค้นหา running number สูงสุดของปีปัจจุบันสำหรับผู้ใช้และเพิ่มหนึ่ง
-        $maxRunningNumber = Certificate::whereYear('issued_at', Carbon::now()->year)
-            ->max('running_number');
-        $runningNumber          = $maxRunningNumber ? $maxRunningNumber + 1 : 1;
+        // ตรวจสอบว่ามี certificate ที่ออกให้ผู้ใช้และหลักสูตรนี้แล้วหรือไม่
+        $existingCertificate = Certificate::where('user_id', $user->id)
+            ->where('curriculum_id', $curriculum->id)
+            ->whereYear('issued_at', Carbon::now()->year)
+            ->first();
+
+        if ($existingCertificate) {
+            // ใช้ running number เดิม
+            $runningNumber = $existingCertificate->running_number;
+        } else {
+            // ค้นหา running number สูงสุดของปีปัจจุบันสำหรับผู้ใช้และเพิ่มหนึ่ง
+            $maxRunningNumber = Certificate::whereYear('issued_at', Carbon::now()->year)
+                ->max('running_number');
+            $runningNumber = $maxRunningNumber ? $maxRunningNumber + 1 : 1;
+        }
+
         $formattedRunningNumber = $runningNumber . '/' . $currentYear;
 
         // คำนวณวันหมดอายุ 3 ปีหลังจากวันที่ออก และเป็นวันสุดท้ายของปี (31 ธันวาคม)
         $expiresAt         = Carbon::now()->addYears(3)->endOfYear();
-        $expiresAtThaiYear = $expiresAt->format('d/m') . '/' . ($expiresAt->year + 543);
+        $expiresAtThaiYear = ($expiresAt->year + 543);
 
-        // บันทึกใบประกาศนียบัตรใหม่ในฐานข้อมูล
-        $certificate = Certificate::create([
-            'user_id'        => $user->id,
-            'curriculum_id'  => $curriculum->id,
-            'running_number' => $runningNumber,
-            'issued_at'      => Carbon::now(),
-            'expires_at'     => $expiresAt,
-            'verify_token'   => bin2hex(random_bytes(16)),
-        ]);
+        if (!$existingCertificate) {
+            // บันทึกใบประกาศนียบัตรใหม่ในฐานข้อมูล
+            $certificate = Certificate::create([
+                'user_id'        => $user->id,
+                'curriculum_id'  => $curriculum->id,
+                'running_number' => $runningNumber,
+                'issued_at'      => Carbon::now(),
+                'expires_at'     => $expiresAt,
+                'verify_token'   => bin2hex(random_bytes(16)),
+            ]);
+        } else {
+            $certificate = $existingCertificate;
+        }
 
         /************ ส่วนของการสร้าง verify certificate  *************/
 
@@ -64,34 +79,14 @@ class CertificateController extends Controller
         ];
         /************ ดึงข้อมูลสำหรับโชว์ในใบประกาศนียบัตร  *************/
 
-        /************ ทำ qrcode สำหรับสแกน  *************/
-        // เข้ารหัสข้อมูลเป็น parameter เดียว
-        $verifyTokenData = [
-            'verify_token'   => $certificate->verify_token,
-            'name'           => $data['name'],
-            'course'         => $data['course'],
-            'date'           => $data['date'],
-            'running_number' => $data['running_number'],
-            'expires_at'     => $data['expires_at'],
-        ];
-        $encodedVerifyToken = base64_encode(json_encode($verifyTokenData));
-
-        // สร้างข้อมูลลับสำหรับฝังใน QR Code
-        $secretData = [
-            'verify_url' => route('certificate.verify', ['encoded_token' => $encodedVerifyToken]),
-        ];
-
-        // สร้าง QR Code และแปลงเป็น Base64 image
+        /************ ทำ qrcode สำหรับสแกน verify *************/
         $qrcode = base64_encode(
-            QrCode::format('png')
-                ->size(200)
-                ->margin(1)
-                ->errorCorrection('H')
+            QrCode::format('svg')
+                ->size(300)
+                ->margin(2)
+                ->errorCorrection('L')
                 ->backgroundColor(255, 255, 255)
-                ->color(0, 0, 0)
-                ->style('dot')
-                ->eye('circle')
-                ->generate(json_encode($secretData))
+                ->color(0, 0, 0)->generate(route('certificate.verify', ['verifyToken' => $certificate->verify_token]))
         );
 
         // เพิ่ม QR Code ลงในข้อมูลที่ส่งไปยัง view
@@ -101,6 +96,12 @@ class CertificateController extends Controller
         $pdf = PDF::loadView('frontend.certificate.pdf', $data);
 
         $pdf->setPaper([0, 0, 3508, 2480]);
+
+        // การตั้งค่าฟอนต์ใน CSS
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled'      => true,
+        ]);
 
         return $pdf->stream('certificate.pdf');
     }
@@ -139,26 +140,35 @@ class CertificateController extends Controller
         return $months[$month];
     }
 
-    public function verify($encodedToken)
+    public function verify($verifyToken)
     {
-        $decodedToken = json_decode(base64_decode($encodedToken), true);
+        try {
+            // ค้นหาใบประกาศนียบัตรด้วย verify token
+            $certificate = Certificate::where('verify_token', $verifyToken)->firstOrFail();
 
-        $certificate = Certificate::where('verify_token', $decodedToken['verify_token'])->firstOrFail();
+            // แปลงวันหมดอายุและวันที่ออกเป็นวัตถุ Carbon
+            $issuedAt  = Carbon::parse($certificate->issued_at);
+            $expiresAt = Carbon::parse($certificate->expires_at);
 
-        $expiresAtThaiYear = $certificate->expires_at->format('d/m') . '/' . ($certificate->expires_at->year + 543);
+            // แปลงวันหมดอายุเป็นปี พ.ศ.
+            $expiresAtThaiYear = $expiresAt->format('d/m') . '/' . ($expiresAt->year + 543);
 
-        return response()->json([
-            'id'                     => $certificate->id,
-            'user'                   => $certificate->user->name,
-            'course_name'            => $certificate->curriculum->name,
-            'issued_at'              => $certificate->issued_at,
-            'running_number'         => $certificate->running_number,
-            'expires_at'             => $expiresAtThaiYear,
-            'name_from_qr'           => $decodedToken['name'],
-            'course_from_qr'         => $decodedToken['course'],
-            'date_from_qr'           => $decodedToken['date'],
-            'running_number_from_qr' => $decodedToken['running_number'],
-            'expires_at_from_qr'     => $decodedToken['expires_at'],
-        ]);
+            // เตรียมข้อมูลสำหรับการตอบกลับ
+            $data = [
+                'id'             => $certificate->id,
+                'user'           => $certificate->user->prefix . $certificate->user->first_name . ' ' . $certificate->user->last_name,
+                'course_name'    => $certificate->curriculum->name,
+                'issued_at'      => $issuedAt->format('d/m/Y'), // แปลงวันที่ออกใบประกาศ
+                'running_number' => $certificate->running_number . '/' . ($issuedAt->format('Y') + 543),
+                'expires_at'     => $expiresAtThaiYear,
+            ];
+
+            // ส่งข้อมูลไปยัง view
+            return view('frontend.certificate.verify', compact('data'));
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // หากไม่พบใบประกาศนียบัตร ให้ตอบกลับด้วยข้อความข้อผิดพลาด
+            return view('frontend.certificate.verify', ['error' => 'ใบประกาศนียบัตรไม่ถูกต้องหรือไม่พบข้อมูล']);
+        }
     }
 }
