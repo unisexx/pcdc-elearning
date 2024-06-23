@@ -30,11 +30,14 @@ class Curriculum extends Model
     protected $fillable = [
         'name',
         'intro',        
-        'objective',        
+        'objective',  
+        'pass_criteria',      
         'cover_image',
         'status',
         'deleted_at',
     ];
 
     public function curriculum_lesson() { return $this->hasMany('App\Models\CurriculumLesson','curriculum_id','id'); }
+    public function curriculum_user_type() { return $this->hasMany('App\Models\CurriculumUserType','curriculum_id','id'); }
+    public function curriculum_exam_setting() { return $this->hasOne(CurriculumExamSetting::class);}
 }

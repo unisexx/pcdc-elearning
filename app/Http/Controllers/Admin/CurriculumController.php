@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Curriculum;
+use App\Models\CurriculumUserType;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 
@@ -44,6 +45,14 @@ class CurriculumController extends Controller
         }
 
         $curriculum = Curriculum::create($input);
+        if(!empty($request->user_type_id)){
+            foreach($request->user_type_id as $ut){
+                $data['curriculum_id'] = $curriculum->id;
+                $data['user_type_id'] = $ut;
+                CurriculumUserType::create($data);
+            }
+        }
+
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 
@@ -88,6 +97,15 @@ class CurriculumController extends Controller
 
         $rs->update($input);
 
+        CurriculumUserType::where('curriculum_id',$id)->delete();
+        if(!empty($request->user_type_id)){
+            foreach($request->user_type_id as $ut){
+                $data['curriculum_id'] = $id;
+                $data['user_type_id'] = $ut;
+                CurriculumUserType::create($data);
+            }
+        }
+
         set_notify('success', 'แก้ไขข้อมูลเรียบร้อย');
 
         return redirect()->route('admin.curriculum.index');
@@ -98,7 +116,7 @@ class CurriculumController extends Controller
      */
     public function destroy(string $id)
     {
-        Hilight::find($id)->delete();
+        Curriculum::find($id)->delete();
         set_notify('success', 'ลบข้อมูลเรียบร้อย');
 
         return back();

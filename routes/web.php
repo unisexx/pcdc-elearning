@@ -47,8 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/index', [App\Http\Controllers\Frontend\ElearningController::class, 'index'])->name('elearning.index');
     Route::get('/elearning/curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculum'])->name('elearning.curriculum.index');
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
+    Route::get('/elearning/curriculum/exam-lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExam'])->name('elearning.curriculum-lesson.index');
 
-    Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
+    Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');    
 });
 
 /** Admin */

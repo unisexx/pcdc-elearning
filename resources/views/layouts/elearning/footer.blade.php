@@ -1,0 +1,1 @@
+<footer class="bg_footer mt-5 pt-4"></footer>

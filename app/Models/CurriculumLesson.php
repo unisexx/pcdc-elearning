@@ -26,4 +26,5 @@ class CurriculumLesson extends Model
     public function curriculum_lesson_detail() { return $this->hasMany('App\Models\CurriculumLessonDetail','curriculum_lesson_id','id'); }
 
     public function curriculum_lesson_question() { return $this->hasMany('App\Models\CurriculumLessonQuestion','curriculum_lesson_id','id'); }
+    
 }

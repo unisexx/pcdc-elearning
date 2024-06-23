@@ -1,6 +1,6 @@
-@extends('layouts.frontend')
+@extends('layouts.elearning')
 
-@section('page', 'ระบบการเรียนรู้ออนไลน์ e-learning')
+@section('page', $curriculum_lesson->name )
 
 @section('content')
     <div class="container">        
@@ -35,34 +35,7 @@
                                     {!!$curriculum_lesson->name!!}
                                 </div>
                             </td>
-                        </tr>
-                        <tr class="my-4">
-                            <th colspan="2" class="text-center">
-                                <div class="float-start">
-                                    @if($total_page <= $page && $page > 1)
-                                        <a href="{{ url('elearning/curriculum/lesson/9?page='.($page-1))}}" class="btn btn-lg btn-success">
-                                            <i class="fa fa-angle-left"></i> ย้อนกลับ
-                                        </a>
-                                    @else
-                                        <a href="{{ url('elearning/curriculum/'.$curriculum_lesson->curriculum_id) }}" class="btn btn-lg btn-success">
-                                            <i class="fa fa-angle-left"></i> ย้อนกลับ
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="float-end">
-                                    @if($total_page > $page)
-                                        <a href="{{ url('elearning/curriculum/lesson/9?page='.($page+1))}}" class="btn btn-lg btn-success">
-                                            หน้าถัดไป
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    @else
-                                        <a href="" class="btn btn-lg btn-success">
-                                            <i class="fa fa-edit"></i> ทำแบบทดสอบ
-                                        </a>
-                                    @endif
-                                </div>                                
-                            </th>
-                        </tr>
+                        </tr>                        
                         <tr class="my-4">
                             <th colspan="2" class="text-left">
                                 <div class="my-4">

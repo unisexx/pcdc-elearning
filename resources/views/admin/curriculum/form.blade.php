@@ -15,7 +15,31 @@
                 {{ Form::bsTiny('objective', 'วัตถุประสงค์') }}
             </div>
             <div class="col-12">
+                {{ Form::bsTiny('pass_criteria', 'เกณฑ์การผ่านหลักสูตร') }}
+            </div>            
+            <div class="col-12">
                 {{ Form::bsFile('cover_image', 'ภาพหน้าปก (ขนาด 1400 x 476 px)', @$rs->cover_image, 'uploads/curriculum', ['accept' => 'image/*']) }}
+            </div>
+            <div class="col-12">
+                <label>ประเภทสมาชิกที่สามารถเข้าเรียน</label>
+                <div>
+                    @php
+                        $user_type = \App\Models\UserType::orderBy('pos','asc')->get();   
+                    @endphp
+                    @foreach($user_type as $key=>$ut)                  
+                        @php
+                            if(@$rs){
+                                $checked = $rs->curriculum_user_type()->where('user_type_id',$ut->id)->count() ? true : false;
+                            }else{
+                                $checked = false;
+                            }
+                        @endphp  
+                        <label>
+                            {!! Form::checkbox('user_type_id[]', $ut->id, @$checked, ['class' => 'form-check-input ms-2', 'style'=>'border:1px solid #CCC;']) !!}
+                            {{$ut->name}}                    
+                        </label>
+                    @endforeach
+                </div>
             </div>
             <div class="col-12">
                 {{ Form::bsSwitch('status', 'เปิดใช้งาน', @$rs->status, 'active', 'inactive') }}

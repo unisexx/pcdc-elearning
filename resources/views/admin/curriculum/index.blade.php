@@ -15,6 +15,7 @@
                             <th width="50" class="text-center" scope="col">#</th>
                             <th width="200" scope="col">ภาพหน้าปก</th>
                             <th class="text-start" scope="col">ชื่อหลักสูตร</th>                            
+                            <th class="text-center" scope="col">ประเภทสมาชิก</th> 
                             <th width="100" class="text-center" scope="col">เปิดใช้งาน</th>
                             <th width="200" class="text-center" scope="col">จัดการ</th>
                         </tr>
@@ -25,8 +26,17 @@
                                 <td class="text-center">{{ autoNumber($rs) }}</td>        
                                 <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="250"></td>          
                                 <td style="vertical-align:top;padding-left:20px;">{{ @$item->name }}</td>
-                                <td class="text-center">{!! statusBadge(@$item->status) !!}</td>
-                                <td class="text-center text-sm">
+                                <td style="vertical-align:top;padding-left:20px;">
+                                    @php
+                                        if($item->curriculum_user_type()->count() > 0){
+                                            foreach($item->curriculum_user_type()->get() as $ut){
+                                                echo '<div>-'.$ut->user_type->name.'</div>';
+                                            }
+                                        }
+                                    @endphp
+                                </td>
+                                <td style="vertical-align:top;" class="text-center">{!! statusBadge(@$item->status) !!}</td>
+                                <td style="vertical-align:top;" class="text-center text-sm">
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}
