@@ -85,11 +85,13 @@
                     <a href="#"><em class="fa fa-home fs-5 me-2 icon_list_menu "></em> บทนำ</a>
                   </div>
                 </li>
-                <li>
-                  <div class="pass_score">
-                    <a href="lesson_pre_test.html"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
-                  </div>
-                </li>
+                @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                  <li>
+                    <div class="pass_score">
+                      <a href="{{ url('elearning/curriculum/4/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
+                    </div>
+                  </li>
+                @endif
                 <hr>
                 <div class="list_menu">เรียนรู้บทเรียน (Learning)</div>
                 @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
@@ -115,8 +117,14 @@
                         </li>
                     @endif
                 @endforeach
-                <hr>
-                <li><div class="pass_score"><a href="post_test.html" class=""><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a></div></li>
+                <hr>                
+                @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                  <li>
+                    <div class="pass_score">
+                      <a href="{{ url('elearning/curriculum/4/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
+                    </div>
+                  </li>
+                @endif
                 {{-- <li><div class="pass_score"><a href="quiz_1.html"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่1 (Quiz 1)</a></div></li>
                 <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่2 โรคติดต่อที่พบบ่อยในเด็ก</a></div></li>
                 <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่2 (Quiz 2)</a></div></li>

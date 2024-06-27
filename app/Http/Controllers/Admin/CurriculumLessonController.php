@@ -92,7 +92,7 @@ class CurriculumLessonController extends Controller
     public function edit(string $id)
     {
         $rs = CurriculumLesson::find($id);
-        $curriculum = $rs->curriculum->first();
+        $curriculum = $rs->curriculum()->first();        
         return view('admin.curriculum-lesson.edit', @compact('rs', 'curriculum'));
     }
 
