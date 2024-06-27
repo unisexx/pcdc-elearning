@@ -1898,3 +1898,476 @@ Timeline Css
 		display: none;
 	}
 }
+
+/* -------------------------------- 
+TABS HOME
+-------------------------------- */
+.title_courses {
+	z-index: 0;
+}
+
+.tab-class .nav-item a.active {
+	background-color: #00bbae !important;
+}
+
+.tab-class .nav-item a {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	padding: 10px 30px 13px;
+	color: #001430;
+	background-color: #edfbfa;
+	border: 1.5px dashed #00bbae;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+.title_tab {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	font-size: 20px;
+	color: #02a499;
+	text-align: center;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.title_tab span {
+	color: #323846;
+	padding-right: 10px;
+}
+
+.viewall {
+	text-align: center;
+	border: 1px solid #e8e6e6;
+	color: #69778a;
+	padding: 12px 30px 12px;
+	border-radius: 50px;
+}
+
+.viewall:hover {
+	color: #0d6efd;
+}
+
+/* -------------------------------- 
+TABS LESSON
+-------------------------------- */
+.title_welcome {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #0e9aa1;
+	font-size: 30px;
+	text-align: center;
+}
+
+.bg-1 {
+	background-image: url(../images/bg-2.jpg);
+	background-size: cover;
+	border-radius: 30px;
+}
+
+.title-page span {
+	color: #000;
+	font-size: 19px;
+}
+
+.title-lesson1 {
+	font-weight: 600;
+}
+
+.tab_lesson .nav-link {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	padding: 15px 30px 10px 30px;
+	background-color: #eee;
+	border-radius: 20px 20px 0px 0px;
+	margin-right: 5px;
+}
+
+.tab_lesson .nav-link.active {
+	background-color: #f9ac30;
+	color: #000;
+	border: 1px solid #f9ac30;
+	margin-top: 1px;
+}
+
+.tab_lesson .nav-tabs {
+	border-bottom: 10px solid #f9ac30;
+}
+
+.tab_lesson .tab-content {
+	margin-top: 30px;
+}
+
+.tab_lesson_title {
+	background-color: #e6f4f8;
+	color: #000;
+	font-size: 17px;
+	font-weight: 600;
+	padding: 5px 15px 5px 15px;
+	position: absolute;
+	left: 20px;
+	top: -20px;
+	border: 1px solid #dee2e6;
+}
+
+.bg_lesson {
+	background-color: transparent;
+	background-image: linear-gradient(180deg, #FFFFFF, #edf6f8 40%, #FFFFFF);
+}
+
+.list_menu {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #000;
+	font-size: 26px;
+	position: relative;
+}
+
+.list_menu:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 4px;
+	width: 30px;
+	background-color: #ffd600;
+	border-radius: 9999px;
+}
+
+.icon_list_menu {
+	color: #6c1684;
+	background-color: #FFF;
+	border-radius: 100%;
+}
+
+.widget_block {
+	height: 100%;
+	background-color: #ddedf6;
+	margin-bottom: 40px;
+	border-radius: 30px;
+	padding: 40px 40px;
+}
+
+.widget_categories ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.widget_categories ul li a {
+	border-radius: 50px;
+	background-color: #FFF;
+	position: relative;
+	display: block;
+	padding: 15px 20px 15px 20px;
+	margin: 10px 0 10px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+	letter-spacing: 0.05em;
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.widget_categories ul li a:hover,
+.widget_categories ul li a.active {
+	background-color: #e43d88;
+	color: #FFF;
+}
+
+.widget_categories ul li .pass_score {
+	display: flex;
+	background-image: url(../images/check-green.svg);
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 40px;
+}
+
+.widget_categories ul li .none_score {
+	display: flex;
+	background-image: url(../images/check-gray.svg);
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 40px;
+}
+
+.title_pre_test {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #000;
+	font-size: 20px;
+	text-align: center;
+}
+
+.btn_next_quiz,
+.btn_prev_quiz {
+	width: 160px;
+	height: 45px;
+}
+
+.btn_next_quiz {
+	margin-left: 10px;
+}
+
+.btn_prev_quiz {
+	margin-top: 10px;
+}
+
+.text-pass {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #0d8e47;
+	font-size: 30px;
+	text-align: center;
+}
+
+/* scroll bar */
+.sticky-offset {
+	top: 0px;
+	margin-bottom: 0px;
+}
+
+.scrollable-element1 {
+	scrollbar-color: #62c0f3 #c8e8fa;
+}
+
+/* ปรับแต่งขอบเขตของข้อความแจ้งเตือน */
+.was-validated .label_answer {
+	color: red !important;
+}
+
+.was-validated input.input_answer {
+	border-color: red !important;
+}
+
+.title_scores {
+	color: #ee8803;
+	font-family: "Kodchasan";
+	font-weight: 600;
+	font-size: 20px;
+	text-align: center;
+}
+
+.title_disease {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #000;
+	font-size: 24px;
+	text-align: center;
+}
+
+.title_disease2 {
+	color: #f84193;
+	font-family: "Kodchasan";
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.text_content {
+	font-size: 18px;
+}
+
+.ol_list1 li {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.ol_list1 ol>li::marker {
+	font-weight: bold;
+}
+
+ol.nested-counter-list {
+	counter-reset: item;
+}
+
+ol.nested-counter-list li {
+	display: block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+ol.nested-counter-list li::before {
+	content: counters(item, ".") ") ";
+	counter-increment: item;
+	font-weight: bold;
+}
+
+ol.nested-counter-list ol {
+	counter-reset: item;
+}
+
+.text_pass {
+	color: #048c10;
+	font-size: 24px;
+	font-weight: 600;
+	padding: 0px 10px;
+}
+
+@media (max-width: 575.98px) {
+	.widget_block {
+		padding: 20px 15px;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.widget_block {
+		margin-top: 30px;
+	}
+
+	.btn_next_quiz {
+		margin-top: 10px;
+		margin-left: 0px;
+	}
+}
+
+/* -------------------------------- 
+TABS academic_results
+-------------------------------- */
+.results_list1 {
+	list-style: none;
+	padding-left: 0;
+}
+
+.results_list1 li {
+	color: #000;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 26px;
+	border-radius: 50px;
+	background: #fff;
+	border: 1px solid #dee2e6;
+	padding: 11px 38px 12px;
+	margin-bottom: 10px;
+	transition: all 0.3s ease;
+	display: block;
+	;
+}
+
+.results_pass {
+	color: #04a524;
+	float: right;
+}
+
+.notyet_pass {
+	color: #999;
+	float: right;
+}
+
+.cloud_pink {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #000;
+	font-size: 19px;
+	text-align: center;
+	padding: 20px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url(../images/cloud_pink.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.cloud_blue {
+	font-family: "Kodchasan";
+	font-weight: 600;
+	color: #000;
+	font-size: 19px;
+	text-align: center;
+	padding: 20px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url(../images/cloud_blue.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.box-bar {
+	background-color: #F0F6FA;
+	padding: 20px;
+	margin: 22px 0 30px 0;
+	border-radius: 25px 76px 25px 25px;
+}
+
+.box_point_style1 {
+	position: relative;
+	text-align: center;
+	z-index: 1;
+	padding: 40px 35px 40px 35px;
+	border-radius: 30px;
+	margin: 10px 0 40px 0;
+}
+
+.box_point_style1 .box_point_bg1 {
+	background-color: #FFF;
+	z-index: -1;
+}
+
+.box_point_style1 .box_point_bg2 {
+	background-color: #490d59;
+	transform: scale(0.9) translateY(-10px);
+	z-index: -2;
+}
+
+.box_point_style1 .box_point_bg1,
+.box_point_style1 .box_point_bg2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border-radius: 30px;
+	opacity: 1;
+	visibility: visible;
+	transform-origin: top center;
+	transition: all ease 0.4s;
+	box-shadow: 0 10px 4px rgba(120, 51, 138, 0.3);
+}
+
+.box_point_style1 .card-text {
+	color: #490d59;
+	font-family: "Kodchasan";
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.title_score_points span {
+	font-family: "Kodchasan";
+	color: #e8063c;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.title_score_nopoints span {
+	font-family: "Kodchasan";
+	color: #999;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.title_score_points {
+	color: #444;
+	font-family: "Kodchasan";
+	font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+	.results_pass {
+		float: none;
+	}
+}
+
+.text_small_welcome {
+	font-size: 13px;
+	color: #FFF;
+}

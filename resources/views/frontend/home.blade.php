@@ -173,7 +173,7 @@
     </div>
     <!--########### End Step ###########-->
 
-    <!--########### Start courses ###########-->
+    {{-- <!--########### Start courses ###########-->
     <div class="container pt-2 pt-lg-5 position-relative">
         <div class="position-relative pb-2 my-4">
             <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">หลักสูตร (courses)</span>
@@ -247,6 +247,64 @@
         </div>
         <div class="icon_star"><img src="{{ asset('html/images/icon_star.svg') }}" alt="" width="90"></div>
         <div class="icon_slide"><img src="{{ asset('html/images/icon_slide.svg') }}" alt="" width="80"></div>
+    </div>
+    <!--########### End courses ###########--> --}}
+
+    <!--########### Start courses ###########-->
+    <div class="container pt-2 pt-lg-5 position-relative pb-5 mb-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="position-relative pb-2 my-4 title_courses">
+                    <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">หลักสูตร (courses)</span>
+                </div>
+            </div>
+            <div class="col-lg-8 text-center text-lg-end">
+                <!--##### Nav tabs #####-->
+                <ul class="nav nav-pills tab-class d-inline-flex flex-column flex-sm-row justify-content-lg-end wow bounceInUp" id="myTab" role="tablist">
+                    @foreach ($curriculums as $index => $item)
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link d-flex rounded-pill @if ($index === 0) active @endif" id="courses{{ $item->id }}-tab" data-bs-toggle="tab" data-bs-target="#courses{{ $item->id }}" type="button" role="tab" aria-controls="courses{{ $item->id }}" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                {{ $item->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <!--##### Tab panes ####-->
+        <div class="tab-content">
+            @foreach ($curriculums as $index => $item)
+                <div class="tab-pane @if ($index === 0) active @endif" id="courses{{ $item->id }}" role="tabpanel" aria-labelledby="courses{{ $item->id }}-tab" tabindex="0">
+                    <div class="w-100">
+                        <div class="title_tab"><span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}</div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center wow fadeInDown">
+                        @foreach ($item->curriculum_lesson as $key => $lesson)
+                            <div class="col my-4">
+                                <div class="blog-style1">
+                                    <div class="blog-img">
+                                        <a href="lesson.html"><img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
+                                        <h3 class="blog-title h5"><a href="#">{{ $lesson->name }}</a></h3>
+                                        <p>{{ $lesson->description }}</p>
+                                    </div>
+                                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="w-100 d-flex justify-content-center">
+                            <a class="viewall" href="courses-{{ $item->id }}.html">ดูทั้งหมด</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="icon_star"><img src="images/icon_star.svg" alt="" width="90"></div>
+        <div class="icon_slide"><img src="images/icon_slide.svg" alt="" width="80"></div>
     </div>
     <!--########### End courses ###########-->
 
