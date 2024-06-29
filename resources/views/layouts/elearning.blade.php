@@ -227,12 +227,44 @@
                   </div>
                  </div>
             </div>
+            @if($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
             <div class="row box-bar text-center">
-              <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร 
-                <a href="#" class="btn btn-secondary rounded-pill text-white disabled"><em class="fa fa-download me-2"></em>ดาวน์โหลดใบประกาศนียบัตรของคุณ</a>
+              <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร                 
+                <button type="button" class="btn btn-success rounded-pill text-white btn-download-cert">
+                  <em class="fa fa-download me-2"></em>
+                  ดาวน์โหลดใบประกาศนียบัตรของคุณ
+                </button>
+                @push('js')
+                <script>
+                    $(document).ready(function(){
+                        $(".btn-download-cert").click(function(){
+                            $exists_survey = $("#exists_survey").val();
+                            if($exists_survey>=1){
+                              window.open("{{ url('certificate/pdf/'.$curriculum->id)}}")
+                            }else{
+                              Swal.fire({
+                                  title: 'แจ้งเตือนการใช้งาน',
+                                  html: 'กรุณากรอกแบบสอบถามความพึงพอใจก่อนดาวน์โหลดใบประกาศนียบัตรของคุณ',
+                                  showConfirmButton: true,                                        
+                              });
+                            }
+                        });
+                    });
+                </script>
+                @endpush
               </p>
-              <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning <a href="#" class="btn btn-info rounded-pill">แบบสอบถามความพึงพอใจ</a></p>
+              <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning                 
+                <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
+                  แบบสอบถามความพึงพอใจ
+                </button>
+                @php
+                  $n_survey = \App\Models\SurveyResult::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->count();                  
+                @endphp
+                <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey,0) }}">
+              </p>
             </div>
+            @include('components.frontend.survey')
+            @endif
              <div class="row box-bar">
               <div class="col-lg-11 mx-auto">
                 <ul class="results_list1">
@@ -293,7 +325,7 @@
                           ยังไม่ผ่าน 
                           {{ number_format($posttest->total_score) }} / {{ $posttest->n_question }} 
                         </div>
-                      @elseif($posttest->total_question == $posttest->n_question)
+                      @elseif($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
                         <div class="results_pass">
                           <em class="fa fa-check me-2"></em>ผ่าน  
                           {{ number_format($posttest->total_score) }} / {{ $posttest->n_question }} 

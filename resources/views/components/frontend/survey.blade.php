@@ -147,6 +147,7 @@
                                 checkRadios();
                                 submitBtn.disabled = true;
                                 var modal = bootstrap.Modal.getInstance(document.getElementById('surveyModal'));
+                                document.getElementById('exists_survey').value = 1;
                                 modal.hide();
                             });
                         } else {
