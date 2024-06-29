@@ -47,7 +47,7 @@
                             <th colspan="2" class="text-center">
                                 <div class="float-start">
                                     @if($total_page <= $page && $page > 1)
-                                        <a href="{{ url('elearning/curriculum/lesson/9?page='.($page-1))}}" class="btn btn-lg btn-success">
+                                        <a href="{{ url('elearning/curriculum/lesson/'.$curriculum_lesson->id.'?page='.($page-1))}}" class="btn btn-lg btn-success">
                                             <i class="fa fa-angle-left"></i> ย้อนกลับ
                                         </a>
                                     @else
@@ -58,12 +58,12 @@
                                 </div>
                                 <div class="float-end">
                                     @if($total_page > $page)
-                                        <a href="{{ url('elearning/curriculum/lesson/9?page='.($page+1))}}" class="btn btn-lg btn-success">
+                                        <a href="{{ url('elearning/curriculum/lesson/'.$curriculum_lesson->id.'?page='.($page+1))}}" class="btn btn-lg btn-success">
                                             หน้าถัดไป
                                             <i class="fa fa-angle-right"></i>
                                         </a>
                                     @else
-                                        <a href="" class="btn btn-lg btn-success">
+                                        <a href="{{ url('elearning/curriculum/lesson-exam/'.$curriculum_lesson->id)}}" class="btn btn-lg btn-success">
                                             <i class="fa fa-edit"></i> ทำแบบทดสอบ
                                         </a>
                                     @endif

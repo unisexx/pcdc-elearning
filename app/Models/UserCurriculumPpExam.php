@@ -31,6 +31,8 @@ class UserCurriculumPpExam extends Model
         'user_id',
         'exam_type',        
         'curriculum_id',    
+        'curriculum_lesson_id',
+        'question_random_status',
         'n_question',
         'pass_score',
         'total_question',

@@ -8,7 +8,15 @@
     $pwidth = $question_no / $total_question * 100;
 @endphp
 <div class="bg-1 h-100">
-    <div class="d-flex justify-content-center title_welcome">{{ $bread_crumb_name }}</div>
+    <div class="d-flex justify-content-center title_welcome">
+        {{ $bread_crumb_name }}
+        <br>
+        {{ $curriculum->name }}
+        @if($user_curriculum_pp_exam->exam_type=='lesson')
+        <br>
+        {{ $current_question->curriculum_lesson_question->curriculum_lesson->name }}
+        @endif
+    </div>
     <hr>
     <div class="row">
         <div class="col-12 text-center">
@@ -38,17 +46,17 @@
                 <div class="my-3" style="font-weight:bold!important;">{!! $current_question->curriculum_lesson_question->name !!}</div>
                 <hr>
                     @foreach($current_question->curriculum_lesson_question->curriculum_lesson_question_answer()->get() as $answer)
-                        <div class="form-check my-3" style="padding-left:60px!important;">
-                            <label class="form-check-label label_answer">
+                        <div class="form-check my-3" style="padding-left:60px!important;">                            
+                            <label class="form-check-label label_answer">                                
                                 @php
-                                  $checked = $current_question->curriculum_lesson_answer_id == $answer->id ? 'checked="checked"' : '';
+                                  $checked = $current_question->curriculum_lesson_question_answer_id == $answer->id ? 'checked="checked"' : '';
                                 @endphp
                                 <input class="form-check-input input_answer" type="radio" name="answer_id" value="{{$answer->id}}" {!! $checked !!}>                                                            
-                                {!! $answer->name !!}
-                                @if(\Auth::user()->email == 'admin@admin.com' && $answer->score > 0)
-                                <span style="color:#47a66c!important;">X</span>                                                                
-                                @endif
+                                {!! $answer->name !!}                                
                             </label>
+                            @if(\Auth::user()->email == 'admin@admin.com' && $answer->score > 0)
+                                <span style="color:#47a66c!important;">X</span>                                                                
+                            @endif
                         </div>                
                     @endforeach
                     <!-- ส่วนแสดงข้อความแจ้งเตือน -->
@@ -62,8 +70,11 @@
                 <div class="col-12">
                 <div class="d-block d-lg-flex">
                     @if($question_no==1)
+                      @php
+                        $back_url = $user_curriculum_pp_exam->exam_type == 'lesson' ? url('elearning/curriculum/lesson-exam/'.$user_curriculum_pp_exam->curriculum_lesson_id) : url('elearning/curriculum/'.$user_curriculum_pp_exam->curriculum_id.'/'.$user_curriculum_pp_exam->exam_type);
+                      @endphp
                       <div class="flex-grow-1">                    
-                          <a class="btn btn-outline-secondary rounded-pill py-2 btn_prev_quiz" href="{{ url('elearning/curriculum/'.$user_curriculum_pp_exam->curriculum_id.'/'.$user_curriculum_pp_exam->exam_type) }}">
+                          <a class="btn btn-outline-secondary rounded-pill py-2 btn_prev_quiz" href="{{ $back_url }}">
                               <em class="fa fa-angle-left me-3"></em> ย้อนกลับ
                           </a>
                       </div>
@@ -100,7 +111,6 @@
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {        
-        if(confirm('ยืนยันคำตอบ ?')){
             if (!form.checkValidity()) {              
               event.preventDefault()
               event.stopPropagation()              
@@ -122,7 +132,6 @@
               }
             }
             form.classList.add('was-validated')
-          }
       }, false)
     })
   })()

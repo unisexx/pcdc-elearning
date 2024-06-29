@@ -780,3 +780,7 @@ TABS academic_results
 .form-check-input{
 	border-color:#333!important;	
 }
+
+.none_score>a{
+	background: #d6d6d6!important;
+}

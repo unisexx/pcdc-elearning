@@ -59,92 +59,254 @@
     <!--##### Nav tabs #####-->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item mt-2" role="presentation">
-        <a class="nav-link active" id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
+        <a class="nav-link " id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
       </li>
       <li class="nav-item mt-2" role="presentation">
-        <a class="nav-link" id="academic_results-tab" data-bs-toggle="tab" data-bs-target="#academic_results-tab-pane" type="button" role="tab" aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
+        <a class="nav-link active" id="academic_results-tab" data-bs-toggle="tab" data-bs-target="#academic_results-tab-pane" type="button" role="tab" aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
       </li>
     </ul>
 
     <!--##### Tab content ####-->
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
-      <div class="row bg-white rounded-5 p-3">
-        <div class="col-lg-8">
-            @yield('content')
-        </div>
-        <div class="col-lg-4">
-          <div class="widget_block sticky-top sticky-offset vh-100 overflow-auto scrollable-element1">
-            <div class="list_menu">{{ $curriculum->name }}</div>
-            <hr>
-            <div class="list_menu">สารบัญ</div>
-            <div class="widget_categories">
-              <ul>
-                <li>
-                  <div class="pass_score">
-                    <a href="#"><em class="fa fa-home fs-5 me-2 icon_list_menu "></em> บทนำ</a>
-                  </div>
-                </li>
-                @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                  <li>
-                    <div class="pass_score">
-                      <a href="{{ url('elearning/curriculum/4/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
-                    </div>
-                  </li>
-                @endif
+    <div class="tab-content" id="myTabContent">
+        <!-- Start Tab-content 1-->
+        <div class="tab-pane fade" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
+          <div class="row bg-white rounded-5 p-3">
+            <div class="col-lg-8">
+                @yield('content')
+            </div>
+            <div class="col-lg-4">
+              <div class="widget_block sticky-top sticky-offset vh-100 overflow-auto scrollable-element1">
+                <div class="list_menu">{{ $curriculum->name }}</div>
                 <hr>
-                <div class="list_menu">เรียนรู้บทเรียน (Learning)</div>
-                @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
+                <div class="list_menu">สารบัญ</div>
+                <div class="widget_categories">
+                  <ul>
                     <li>
-                        <div class="pass_score">
-                            <a href="{{ url("elearning/curriculum/lesson/".$lesson->id) }}">
-                                <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>
-                                {{ $lesson->name }}
-                            </a>
-                        </div>
+                      <div class="pass_score">
+                        <a href="{{ url('elearning/curriculum/'.$curriculum->id) }}"><em class="fa fa-home fs-5 me-2 icon_list_menu "></em> บทนำ</a>
+                      </div>
                     </li>
+                    @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                      <li>
+                        <div class="pass_score">
+                          <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
+                        </div>
+                      </li>
+                    @endif
+                    <hr>
+                    <div class="list_menu">เรียนรู้บทเรียน (Learning)</div>                
                     @php
-                        $lesson_exam = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->first();
+                      $pretest_exam = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('exam_type','pretest')->whereRaw('n_question = total_question')->count();                                        
                     @endphp
-                    @if($lesson_exam->exam_status == 'active')
-                        <li style="padding-left:30px;">
+                    @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
+                      @php
+                        $exam_lesson[$key] = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('curriculum_lesson_id',$lesson->id)->where('exam_type','lesson')->whereRaw('total_score >= pass_score and n_question = total_question')->count();                                        
+                        $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
+                        $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
+                        $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
+                        $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
+                        $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร'
+                                            : 'กรุณาทำแบบทดสอบท้ายบท <br>"<span style="color:blue;">'.$lesson_name[$key-1].'</span>"<br><span style="color:green;">ให้ผ่าน</span><br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท';
+                        // $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร <a href="'.url('elearning/curriculum/'.$curriculum->id.'/pretest').'" class="btn btn-primary">ไปทำแบบทดสอบก่อนเรียน (Pre-Test)</a>'
+                        //                     : 'กรุณาทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท <a href="'.url('elearning/curriculum/lesson-exam/'.$lesson->id).'" class="btn btn-primary">ไปทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"</a>';
+                      @endphp                    
+                      @if($can_action == 1)
+                        <li>
                             <div class="pass_score">
-                                <a href="quiz_1.html">
-                                    <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
-                                    ทำแบบทดสอบท้ายบท                                    
+                                <a href="{{ url("elearning/curriculum/lesson/".$lesson->id) }}">
+                                    <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>
+                                    {{ $lesson->name }}
                                 </a>
                             </div>
                         </li>
-                    @endif
-                @endforeach
-                <hr>                
-                @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                  <li>
-                    <div class="pass_score">
-                      <a href="{{ url('elearning/curriculum/4/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
-                    </div>
-                  </li>
-                @endif
-                {{-- <li><div class="pass_score"><a href="quiz_1.html"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่1 (Quiz 1)</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่2 โรคติดต่อที่พบบ่อยในเด็ก</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่2 (Quiz 2)</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่3 การป้องกันควบคุมโรคติดต่อ</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่3 (Quiz 3)</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่4 แนวปฏิบัติการเฝ้าระวังป้องกัน ควบคุมโรคติดเชื้อไวรัส โคโรนา 2019 (Covid-19) ในสถานศึกษา</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่4 (Quiz 4)</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่5 การดูแลเด็กป่วยเบื้องต้น</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่5 (Quiz 5)</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>บทเรียนที่6 สถานการณ์โรค</a></div></li>
-                <li><div class="pass_score"><a href="#"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบท้ายบทเรียนที่6 (Quiz 6)</a></div></li> --}}
-                {{-- <hr>
-                <li><div class="pass_score"><a href="post_test.html" class="active"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a></div></li> --}}
-              </ul>
-            </div>
+                      @else
+                        <li>
+                          <div class="none_score">
+                            <a href="#" id="btn_do_lesson_{{ $lesson->id}}"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>{{ $lesson->name }}</a>
+                            <script>
+                              document.getElementById('btn_do_lesson_{{ $lesson->id}}').addEventListener('click', function() {
+                                  Swal.fire({
+                                      title: 'แจ้งเตือนการใช้งาน',
+                                      html: '{!! $alert_msg_html !!}',
+                                      showConfirmButton: false,                                        
+                                  });
+                              });
+                          </script>
+                          </div>
+                        </li>                          
+                      @endif
+                      @php
+                            
+                      @endphp
+                      @if($lesson_has_exam[$key] > 0)
+                          @if($can_action == 1)
+                            <li style="padding-left:30px;">
+                                <div class="pass_score">
+                                    <a href="{{ url('elearning/curriculum/lesson-exam/'.$lesson->id)}}">
+                                        <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
+                                        ทำแบบทดสอบท้ายบท                                    
+                                    </a>
+                                </div>
+                            </li>
+                          @else
+                            <li style="padding-left:30px;">
+                                <div class="none_score">
+                                    <a id="btn_do_test_{{$lesson->id}}" href="#">
+                                        <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
+                                        ทำแบบทดสอบท้ายบท                                    
+                                    </a>
+                                    <script>
+                                        document.getElementById('btn_do_test_{{$lesson->id}}').addEventListener('click', function() {
+                                            Swal.fire({
+                                                title: 'แจ้งเตือนการใช้งาน',
+                                                html: '{!! $alert_msg_html !!}',
+                                                showConfirmButton: false,                                        
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </li>
+                          @endif
+                      @endif                                                                               
+                    @endforeach
+                    <hr>                
+                    @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                      <li>
+                        <div class="pass_score">
+                          <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
+                        </div>
+                      </li>
+                    @endif                
+                  </ul>
+                </div>
 
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div><!-- End tab-content 1 -->
+        <!-- End tab-content 1 -->
+
+        <!-- Start Tab-content 2-->
+        <div class="tab-pane fade active show" id="academic_results-tab-pane" role="tabpanel" aria-labelledby="academic_results-tab" tabindex="0">
+          <div class="container">
+            <div class="title_disease">ผลการเรียน</div>
+            <hr>
+            <div class="row justify-content-center gx-5 box-bar">
+                <div class="col-lg-5">
+                  <div class="box_point_style1">
+                    <div class="box_point_bg1"></div>
+                    <div class="box_point_bg2"></div>
+                    <div class="card-text">คะแนนแบบทดสอบก่อนเรียน (pre-Test)</div>
+                    @php
+                        $pretest = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('exam_type','pretest')->first();
+                        $total_score = empty($pretest) ? 0 : $pretest->total_score;
+                        $total_question = empty($pretest) ? 0 : $pretest->n_question;
+                    @endphp
+                    @if(empty($pretest))
+                      <div class="title_score_nopoints"><span>ยังไม่มี</span> คะแนน</div>
+                    @else
+                      <div class="title_score_points"><span>{{ number_format($pretest->total_score,0) }}/{{ number_format($pretest->total_question,0)}}</span> คะแนน</div>
+                    @endif
+                  </div>
+                 </div>
+                 <div class="col-lg-5">
+                  <div class="box_point_style1">
+                    <div class="box_point_bg1"></div>
+                    <div class="box_point_bg2"></div>
+                    <div class="card-text">คะแนนวัดผลหลังเรียนรู้ (Post-test)</div>
+                    @php
+                    $posttest = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('exam_type','posttest')->first();
+                    $total_score = empty($pretest) ? 0 : $pretest->total_score;
+                    $total_question = empty($pretest) ? 0 : $pretest->n_question;
+                    @endphp
+                    @if(empty($posttest))
+                      <div class="title_score_nopoints"><span>ยังไม่มี</span> คะแนน</div>
+                    @else
+                      <div class="title_score_points"><span>{{ number_format($posttest->total_score,0) }}/{{ number_format($posttest->total_question,0)}}</span> คะแนน</div>
+                    @endif
+                  </div>
+                 </div>
+            </div>
+            <div class="row box-bar text-center">
+              <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร 
+                <a href="#" class="btn btn-secondary rounded-pill text-white disabled"><em class="fa fa-download me-2"></em>ดาวน์โหลดใบประกาศนียบัตรของคุณ</a>
+              </p>
+              <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning <a href="#" class="btn btn-info rounded-pill">แบบสอบถามความพึงพอใจ</a></p>
+            </div>
+             <div class="row box-bar">
+              <div class="col-lg-11 mx-auto">
+                <ul class="results_list1">
+                  <li>
+                    <strong>แบบทดสอบก่อนเรียน (pre-Test)</strong> 
+                    
+                      @if(empty($pretest) || $pretest->total_question < $pretest->n_question)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)                          
+                        </div>                      
+                      @elseif($pretest->total_question == $pretest->n_question && $pretest->total_score < $pretest->pass_score)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน 
+                          {{ number_format($pretest->total_score) }} / {{ $pretest->n_question }} 
+                        </div>
+                      @elseif($pretest->total_question == $pretest->n_question)
+                        <div class="results_pass">
+                          <em class="fa fa-check me-2"></em>ผ่าน  
+                          {{ number_format($pretest->total_score) }} / {{ $pretest->n_question }} 
+                        </div>
+                      @endif                    
+                  </li>
+                  @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
+                  @php
+                      $lesson_exam = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_lesson_id',$lesson->id)->where('exam_type','lesson')->first();
+                      $total_score = empty($lesson_exam) ? 0 : $pretest->total_score;
+                      $total_question = empty($lesson_exam) ? 0 : $pretest->n_question;                                        
+                  @endphp                                    
+                  <li>
+                    <strong>{{ $lesson->name }}</strong> 
+                    
+                      @if(empty($lesson_exam) || $lesson_exam->total_question < $lesson_exam->n_question)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)                          
+                        </div>                      
+                      @elseif($lesson_exam->total_question == $lesson_exam->n_question && $lesson_exam->total_score < $lesson_exam->pass_score)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน 
+                          {{ number_format($lesson_exam->total_score) }} / {{ $lesson_exam->n_question }} 
+                        </div>
+                      @elseif($lesson_exam->total_question == $lesson_exam->n_question)
+                        <div class="results_pass">
+                          <em class="fa fa-check me-2"></em>ผ่าน  
+                          {{ number_format($lesson_exam->total_score) }} / {{ $lesson_exam->n_question }} 
+                        </div>
+                      @endif                    
+                  </li>
+                  @endforeach                  
+                  <li>
+                    <strong>วัดผลหลังเรียนรู้ (Post-test)</strong> 
+                    
+                      @if(empty($posttest) || $posttest->total_question < $posttest->n_question)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)                          
+                        </div>                      
+                      @elseif($posttest->total_question == $posttest->n_question && $posttest->total_score < $posttest->pass_score)
+                        <div class="notyet_pass">
+                          ยังไม่ผ่าน 
+                          {{ number_format($posttest->total_score) }} / {{ $posttest->n_question }} 
+                        </div>
+                      @elseif($posttest->total_question == $posttest->n_question)
+                        <div class="results_pass">
+                          <em class="fa fa-check me-2"></em>ผ่าน  
+                          {{ number_format($posttest->total_score) }} / {{ $posttest->n_question }} 
+                        </div>
+                      @endif                    
+                  </li>
+                </ul>
+              </div>
+            </div>
+           </div>
+            <hr>
+        </div>
+        <!-- End tab-content 2 -->
 
     </div><!-- End Tab-content-->
 

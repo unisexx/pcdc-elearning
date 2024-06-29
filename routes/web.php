@@ -47,15 +47,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/index', [App\Http\Controllers\Frontend\ElearningController::class, 'index'])->name('elearning.index');
     Route::get('/elearning/curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculum'])->name('elearning.curriculum.index');
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
-    Route::get('/elearning/curriculum/exam-lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExam'])->name('elearning.curriculum-lesson.index');
+    Route::get('/elearning/curriculum/lesson-exam/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamIntro'])->name('elearning.curriculum-lesson.index');
     
     //Pretest-Posttest
     Route::get('/elearning/curriculum/{curriculum_id}/{exam_type_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePost'])->name('elearning.curriculum-lesson.index');
-    Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/execute', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePostExecute'])->name('elearning.curriculum-lesson.start');
+    Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/execute', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamExecute'])->name('elearning.curriculum-lesson.start');
     //Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/restart', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePostReStart'])->name('elearning.curriculum-lesson.restart');
 
-    Route::get('/elearning/{user_curriculum_pp_exam}/exam', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePostExam'])->name('elearning.curriculum-lesson.exam');
-    Route::post('/elearning/{user_curriculum_pp_exam}/exam/save', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePostExamSave'])->name('elearning.curriculum-lesson.exam');
+    Route::get('/elearning/{user_curriculum_pp_exam}/exam', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExam'])->name('elearning.curriculum-lesson.exam');
+    Route::post('/elearning/{user_curriculum_pp_exam}/exam/save', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamSave'])->name('elearning.curriculum-lesson.exam');
     
 
 

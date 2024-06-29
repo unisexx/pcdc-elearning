@@ -30,7 +30,7 @@ class UserCurriculumPpExamQas extends Model
     protected $fillable = [
         'user_curriculum_pp_exam_id',
         'curriculum_lesson_question_id',
-        'curriculum_lesson_answer_id',
+        'curriculum_lesson_question_answer_id',
         'question_no',
         'score',
     ];
