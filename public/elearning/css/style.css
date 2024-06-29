@@ -777,5 +777,6 @@ TABS academic_results
 }
 .text_small_welcome{font-size: 13px; color: #FFF;}
 
-
-
+.form-check-input{
+	border-color:#333!important;	
+}

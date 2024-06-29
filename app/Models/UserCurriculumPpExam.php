@@ -30,7 +30,11 @@ class UserCurriculumPpExam extends Model
     protected $fillable = [
         'user_id',
         'exam_type',        
-        'curriculum_id',                  
+        'curriculum_id',    
+        'n_question',
+        'pass_score',
+        'total_question',
+        'total_score',              
     ];
     
     

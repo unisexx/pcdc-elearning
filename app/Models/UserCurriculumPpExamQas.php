@@ -31,6 +31,8 @@ class UserCurriculumPpExamQas extends Model
         'user_curriculum_pp_exam_id',
         'curriculum_lesson_question_id',
         'curriculum_lesson_answer_id',
+        'question_no',
+        'score',
     ];
     
     // public function curriculum_user_type() { return $this->hasMany('App\Models\CurriculumUserType','curriculum_id','id'); }
