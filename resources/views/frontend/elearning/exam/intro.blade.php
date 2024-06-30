@@ -75,10 +75,12 @@
                             ทำแบบทดสอบต่อ
                         </a>        
                     @endif
-                    <button type="submit" id="submit_restart" name="submit_restart" class="btn btn-warning btn-lg btn-restart"  value="restart">
-                        <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
-                        เริ่มทำใหม่อีกครั้ง
-                    </button>
+                    @if($pass_score > $exam_result->total_score)
+                        <button type="submit" id="submit_restart" name="submit_restart" class="btn btn-warning btn-lg btn-restart"  value="restart">
+                            <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
+                            เริ่มทำใหม่อีกครั้ง
+                        </button>
+                    @endif
                 @endif
                 {!! Form::close() !!}        
             </div>  

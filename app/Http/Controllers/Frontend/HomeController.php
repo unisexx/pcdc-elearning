@@ -21,6 +21,10 @@ class HomeController extends Controller
         /** Faq */
         $faqs = Faq::where('status', 'active')->orderBy('order', 'asc')->take(5)->get();
 
-        return view('frontend.home', compact('hilights', 'faqs', 'curriculums'));
+        $post_test_curriculum = Curriculum::whereHas('curriculum_exam_setting', function($q){
+                                    $q->where('post_test_status', 'active');
+                                })->orderBy('pos','asc')->get();
+
+        return view('frontend.home', compact('hilights', 'faqs', 'curriculums', 'post_test_curriculum'));
     }
 }

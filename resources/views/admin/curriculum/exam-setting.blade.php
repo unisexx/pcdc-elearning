@@ -132,6 +132,13 @@
                                             {!! Form::checkbox('post_test_status', 'active', @$rs->post_test_status == 'active' ? true : false, ['class' => 'form-check-input check-question']) !!}
                                         </div>     
                                     </div>
+                                    <div style="margin-left:30px;">
+                                        เปิดให้ทำ Post-Test ได้หลังจากที่ทำ Pre Test แล้ว
+                                        <div class="form-switch" style="display:block;">
+                                            {!! Form::hidden('post_test_after_pre', 'inactive') !!}
+                                            {!! Form::checkbox('post_test_after_pre', 'active', @$rs->post_test_after_pre == 'active' ? true : false, ['class' => 'form-check-input check-question']) !!}
+                                        </div>     
+                                    </div>
                                 </div>
                             </th>
                         </tr>

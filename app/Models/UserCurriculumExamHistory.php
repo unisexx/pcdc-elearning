@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class CurriculumExamSetting extends Model
+class UserCurriculumExamHistory extends Model
 {
     use HasFactory;
-    protected $table = 'curriculum_exam_settings';
+    protected $table = 'user_curriculum_exam_histories';
 
     public static function boot()
     {
@@ -28,13 +28,13 @@ class CurriculumExamSetting extends Model
     }
 
     protected $fillable = [
+        'user_id',
         'curriculum_id',
-        'prepost_pass_score',
-        'pre_test_status',
-        'prepost_n_question',
-        'post_test_status',
-        'post_test_after_pre',
+        'post_date_started',        
+        'post_date_finished',      
+        'post_pass_status',      
     ];
-
-    public function curriculum_exam_setting_detail() { return $this->hasMany('App\Models\CurriculumExamSettingDetail','curriculum_exam_setting_id','id'); }
+    
+        
+    public function user_curriculum_pp_exam() { return $this->hasMany('App\Models\UserCurriculumPpExam','user_curriculum_exam_history_id','id'); }
 }
