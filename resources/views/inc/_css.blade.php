@@ -65,4 +65,8 @@
      .drag-handle {
          cursor: move;
      }
+
+     .navbar-vertical.navbar-expand-xs {
+         z-index: 999 !important;
+     }
  </style>

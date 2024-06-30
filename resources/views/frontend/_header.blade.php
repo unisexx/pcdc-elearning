@@ -60,8 +60,8 @@
                     @else
                         <div class="btn btn-red rounded-pill text-white">
                             <a id="loginBtn" href="#">เข้าสู่ระบบ</a>
-                            {{-- <a href="{{ url('f-login') }}">เข้าสู่ระบบ</a>  --}}
-                            /
+                        </div>
+                        <div class="btn btn-red rounded-pill text-white ms-2">
                             <a href="{{ url('front/register') }}">สมัครสมาชิก</a>
                         </div>
                     @endauth
@@ -83,30 +83,31 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('stat') }}">ข้อมูลสถิติ</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('elearning-steps') }}">ขั้นตอนการเรียน e-learning</a></li>
-                                @if(\Auth::user())
-                                @php
-                                $curriculum_menu = \App\Models\Curriculum::where('status','active')
-                                                ->where(function($q) {
-                                                        if(Auth::user()->is_admin!='1'){
-                                                            $q->whereHas('CurriculumUserTYpe', function ($q) {
-                                                                $q->where('user_type_id', Auth::user()->user_type_id);
-                                                            });
-                                                        }
-                                                })
-                                                ->orderBy('pos','asc')->get();
-                                @endphp
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
-                                    <ul class="dropdown-menu shadow">
-                                        @foreach($curriculum_menu as $curriculum_menu)
-                                        <li><a class="dropdown-item" href="{{ url("elearning/curriculum/".$curriculum_menu->id)}}">{{ $curriculum_menu->name }}</a></li>
-                                        @endforeach                                        
-                                    </ul>
-                                </li>
+                                @if (\Auth::user())
+                                    @php
+                                        $curriculum_menu = \App\Models\Curriculum::where('status', 'active')
+                                            ->where(function ($q) {
+                                                if (Auth::user()->is_admin != '1') {
+                                                    $q->whereHas('CurriculumUserTYpe', function ($q) {
+                                                        $q->where('user_type_id', Auth::user()->user_type_id);
+                                                    });
+                                                }
+                                            })
+                                            ->orderBy('pos', 'asc')
+                                            ->get();
+                                    @endphp
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
+                                        <ul class="dropdown-menu shadow">
+                                            @foreach ($curriculum_menu as $curriculum_menu)
+                                                <li><a class="dropdown-item" href="{{ url('elearning/curriculum/' . $curriculum_menu->id) }}">{{ $curriculum_menu->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 @else
-                                <li class="nav-item dropdown">
-                                    <a id="CurriculumLoginMenu" class="nav-link dropdown-toggle" href="#" >หลักสูตร</a>                                    
-                                </li>
+                                    <li class="nav-item dropdown">
+                                        <a id="CurriculumLoginMenu" class="nav-link dropdown-toggle" href="#">หลักสูตร</a>
+                                    </li>
                                 @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('faq') }}">คำถามที่พบบ่อย</a>
@@ -136,11 +137,11 @@
 
 @push('js')
     @guest
-    <script>
-        document.getElementById('CurriculumLoginMenu').addEventListener('click', function() {
-            Swal.fire({
-                title: 'เข้าสู่ระบบ',
-                html: `
+        <script>
+            document.getElementById('CurriculumLoginMenu').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'เข้าสู่ระบบ',
+                    html: `
         <form id="loginForm" class="g-4 my-4 justify-content-center">
             <div class="col-lg-12 align-self-center">
                 <!-- Username input -->
@@ -191,50 +192,50 @@
             </div>
         </form>
     `,
-                showConfirmButton: false,
-                didOpen: () => {
-                    const loginForm = document.getElementById('loginForm');
-                    loginForm.addEventListener('submit', function(e) {
-                        e.preventDefault();
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        const loginForm = document.getElementById('loginForm');
+                        loginForm.addEventListener('submit', function(e) {
+                            e.preventDefault();
 
-                        const email = document.getElementById('email').value;
-                        const password = document.getElementById('password').value;
-                        const remember = document.getElementById('remember').checked;
-                        const terms = document.getElementById('terms').checked;
+                            const email = document.getElementById('email').value;
+                            const password = document.getElementById('password').value;
+                            const remember = document.getElementById('remember').checked;
+                            const terms = document.getElementById('terms').checked;
 
-                        if (!email || !password) {
-                            Swal.showValidationMessage('กรุณากรอกอีเมล์และรหัสผ่าน');
-                            return;
-                        } else if (!terms) {
-                            Swal.showValidationMessage('กรุณายอมรับข้อกำหนดและนโยบาย');
-                            return;
-                        }
+                            if (!email || !password) {
+                                Swal.showValidationMessage('กรุณากรอกอีเมล์และรหัสผ่าน');
+                                return;
+                            } else if (!terms) {
+                                Swal.showValidationMessage('กรุณายอมรับข้อกำหนดและนโยบาย');
+                                return;
+                            }
 
-                        const formData = new FormData(loginForm);
-                        fetch('{{ route('front.login') }}', {
-                                method: 'POST', // เปลี่ยนเป็น POST
-                                body: formData,
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            }).then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire('เข้าสู่ระบบสำเร็จ', '', 'success');
-                                    // รีเฟรชหน้าเว็บหรือนำทางไปยังหน้าหลัก
-                                    window.location.href = '{{ url('home') }}';
-                                } else {
-                                    Swal.fire('เข้าสู่ระบบไม่สำเร็จ', data.message, 'error');
-                                }
-                            }).catch(error => {
-                                console.error('Error:', error);
-                                Swal.fire('เกิดข้อผิดพลาด', error.toString(), 'error');
-                            });
-                    });
-                }
+                            const formData = new FormData(loginForm);
+                            fetch('{{ route('front.login') }}', {
+                                    method: 'POST', // เปลี่ยนเป็น POST
+                                    body: formData,
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    }
+                                }).then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire('เข้าสู่ระบบสำเร็จ', '', 'success');
+                                        // รีเฟรชหน้าเว็บหรือนำทางไปยังหน้าหลัก
+                                        window.location.href = '{{ url('home') }}';
+                                    } else {
+                                        Swal.fire('เข้าสู่ระบบไม่สำเร็จ', data.message, 'error');
+                                    }
+                                }).catch(error => {
+                                    console.error('Error:', error);
+                                    Swal.fire('เกิดข้อผิดพลาด', error.toString(), 'error');
+                                });
+                        });
+                    }
+                });
             });
-        });
-    </script>
+        </script>
         <script>
             document.getElementById('loginBtn').addEventListener('click', function() {
                 Swal.fire({

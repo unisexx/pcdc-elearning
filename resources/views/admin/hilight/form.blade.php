@@ -12,6 +12,9 @@
                 {{ Form::bsText('link', 'ลิ้งค์') }}
             </div>
             <div class="col-12">
+                {{ Form::bsTiny('description', 'รายละเอียด') }}
+            </div>
+            <div class="col-12">
                 {{ Form::bsSwitch('status', 'เปิดใช้งาน', @$rs->status, 'active', 'inactive') }}
             </div>
         </div>

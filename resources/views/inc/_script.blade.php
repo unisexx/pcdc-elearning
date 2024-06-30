@@ -217,9 +217,48 @@
 
 {{-- Tiny MCE --}}
 {{-- <script src="https://cdn.tiny.cloud/1/3n6gkw4fc40e1p915bhekje73ea4erdpb5b1xq85eh4z2q9o/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
-<script src="{{ asset('js/tinymce_7.1.2/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+{{-- <script src="{{ asset('js/tinymce_7.1.2/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: '.tiny'
+        selector: '.tiny',
+        external_plugins: {
+            "responsivefilemanager": "{{ asset('js/tinymce_7.1.2/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+            'youtube': '{{ asset('js/tinymce_7.1.2/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}', // ตัวอย่างการเพิ่มปลั๊กอินจาก URL ภายนอก
+        },
+        plugins: 'link image code youtube responsivefilemanager', // ระบุชื่อปลั๊กอินที่ต้องการใช้ใน TinyMCE
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link responsivefilemanager youtube',
+        external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+        filemanager_title: "Responsive Filemanager",
+    });
+</script> --}}
+
+<script src="{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: "textarea.tiny",
+        menubar: false,
+        theme: "silver",
+        min_height: 600,
+        resize: 'vertical',
+        external_plugins: {
+            "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+            'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+        },
+        plugins: [
+            "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+        ],
+        menubar: 'file edit view insert format tools table tc help',
+        toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+        // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+        toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+        image_advtab: true,
+        external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+        filemanager_title: "Responsive Filemanager",
+        // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+        // relative_urls : false,
+        // remove_script_host : false,
+        // convert_urls : true,
     });
 </script>

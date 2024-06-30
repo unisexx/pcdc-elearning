@@ -351,27 +351,18 @@
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
 
-        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
         new Chart(ctx1, {
-            type: "line",
+            type: "bar", // เปลี่ยนประเภทกราฟเป็น bar
             data: {
                 labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                     label: "Mobile apps",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
-                    borderColor: "#5e72e4",
-                    backgroundColor: gradientStroke1,
-                    borderWidth: 3,
-                    fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
-
+                    backgroundColor: 'rgba(94, 114, 228, 0.5)', // สีพื้นหลังของแท่งกราฟ
+                    borderColor: '#5e72e4', // สีขอบของแท่งกราฟ
+                    borderWidth: 1, // ความหนาของขอบแท่งกราฟ
+                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500], // ข้อมูลในกราฟ
+                    maxBarThickness: 50, // กำหนดความหนาสูงสุดของแท่งกราฟ
+                    barThickness: 40, // กำหนดความหนาของแท่งกราฟ
                 }],
             },
             options: {
@@ -425,7 +416,10 @@
                                 style: 'normal',
                                 lineHeight: 2
                             },
-                        }
+                        },
+                        // ปรับการตั้งค่าสำหรับการจัดกลุ่มแท่งกราฟ
+                        categoryPercentage: 0.8, // เพิ่มเปอร์เซ็นต์ของการจัดกลุ่ม
+                        barPercentage: 0.9, // เพิ่มเปอร์เซ็นต์ของความหนาแท่งกราฟ
                     },
                 },
             },
