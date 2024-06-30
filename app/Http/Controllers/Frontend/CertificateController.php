@@ -102,8 +102,9 @@ class CertificateController extends Controller
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled'      => true,
         ]);
-
-        return $pdf->stream('certificate.pdf');
+        dd($data);
+        return view('frontend.certificate.pdf', compact('data'));
+        //return $pdf->stream('certificate.pdf');
     }
 
     private function getFormattedDate()
