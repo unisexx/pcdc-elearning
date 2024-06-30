@@ -52,10 +52,11 @@ Route::middleware(['auth'])->group(function () {
     //Pretest-Posttest
     Route::get('/elearning/curriculum/{curriculum_id}/{exam_type_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePost'])->name('elearning.curriculum-lesson.index');
     Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/execute', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamExecute'])->name('elearning.curriculum-lesson.start');
-    //Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/restart', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePostReStart'])->name('elearning.curriculum-lesson.restart');
-
+    
     Route::get('/elearning/{user_curriculum_pp_exam}/exam', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExam'])->name('elearning.curriculum-lesson.exam');
     Route::post('/elearning/{user_curriculum_pp_exam}/exam/save', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamSave'])->name('elearning.curriculum-lesson.exam');
+
+    Route::get('/elearning/history', [App\Http\Controllers\Frontend\ElearningHistoryController::class, 'index'])->name('elearning.history.index');
     
 
 

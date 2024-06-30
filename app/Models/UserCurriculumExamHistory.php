@@ -35,6 +35,7 @@ class UserCurriculumExamHistory extends Model
         'post_pass_status',      
     ];
     
-        
+    public function user() { return $this->hasOne('App\Models\User','user_id','id'); }
+    public function curriculum() { return $this->hasOne('App\Models\Curriculum','id','curriculum_id'); }
     public function user_curriculum_pp_exam() { return $this->hasMany('App\Models\UserCurriculumPpExam','user_curriculum_exam_history_id','id'); }
 }
