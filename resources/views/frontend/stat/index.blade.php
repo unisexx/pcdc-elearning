@@ -11,85 +11,77 @@
             <div class="col-lg-12">
                 <div class="box-contact">
 
-                    <form class="mb-4 needs-validation register-form" novalidate>
+                    <form class="mb-4 needs-validation register-form">
                         <div class="row g-3 pt-4">
                             <div class="col-md-4 col-lg-4">
-                                <label for="" class="form-label fs-5 text-primary">หลักสูตร<span class="text-danger ms-1">*</span></label>
-                                <select class="form-select" id="" required>
-                                    <option selected disabled value="">--ทั้งหมด--</option>
-                                    <option>หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19</option>
-                                    <option>หลักสูตรที่ 2 โรคติดเชื้อทางเดินหายใจจากเชื้อไวรัสอาร์เอสวี</option>
-                                    <option>หลักสูตรที่ 3 โรคไข้หวัดใหญ่ในเด็ก</option>
-                                    <option>หลักสูตรที่ 4 โรคมือเท้าปาก</option>
-                                    <option>หลักสูตรที่ 5 โรคเฮอร์แปงไจน่า</option>
-                                    <option>หลักสูตรที่ 6 โรคติดเชื้อไอพีดี</option>
-                                    <option>หลักสูตรที่ 7 โรคท้องเสียจากการติดเชื้อโนโรไวรัส</option>
-                                    <option>หลักสูตรที่ 8 โรคอีสุกอีใส</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    กรุณาเลือกหลักสูตร
-                                </div>
+                                <label for="" class="form-label fs-5 text-primary">หลักสูตร</label>     
+                                {!! Form::select(
+                                    'curriculum_id',
+                                    $curriculum_list,
+                                    @$_GET['curriculum_id'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'user_type_id', 'placeholder' => '--ทั้งหมด--'],
+                                ) !!}                                                                                          
                             </div>
 
                             <div class="col-12 col-md-3 pt-1">
                                 <label for="" class="form-label">ประเภทของผู้ทดสอบ</label>
-                                <select class="form-select" id="">
-                                    <option selected disabled value="">--ทั้งหมด--</option>
-                                    <option>เจ้าหน้าที่ศูนย์เด็กเล็ก</option>
-                                    <option>เจ้าหน้าที่ครูโรงเรียน</option>
-                                    <option>เจ้าหน้าที่สาธารณสุข</option>
-                                    <option>บุคคลทั่วไป</option>
-                                </select>
+                                {!! Form::select(
+                                    'user_type_id',
+                                    $user_type,
+                                    @$_GET['user_type_id'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'user_type_id', 'placeholder' => '--ทั้งหมด--'],
+                                ) !!}                                   
                             </div>
                             <div class="col-12 col-sm-auto pt-1">
                                 <label for="" class="form-label">ปี</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" id="exam_year" name="exam_year">
                                     <option selected disabled value="">--ทั้งหมด--</option>
-                                    <option>2567</option>
-                                    <option>2566</option>
-                                    <option>2565</option>
+                                    @for($i=(date("Y")+543);$i>=$min_year;$i--)
+                                    @php
+                                        $selected = @$_GET['exam_year'] == $i ? 'selected="selected"' : '';
+                                    @endphp
+                                    <option value="{{ $i }}" {!! $selected !!}>{{ $i }}</option>
+                                    @endfor
                                 </select>
                             </div>
                             <div class="clearfix"></div>
                             <div class="fs-5 fw-medium text-primary">เขตพื้นที่</div>
                             <div class="col-12 col-sm-auto">
                                 <label for="" class="form-label">เจ้าหน้าที่ประจำเขต</label>
-                                <select class="form-select" id="">
-                                    <option selected disabled value="">--ทั้งหมด--</option>
-                                    <option value="ส่วนกลาง">ส่วนกลาง</option>
-                                    <option value="สคร.1">สคร.1</option>
-                                    <option value="สคร.2">สคร.2</option>
-                                    <option value="สคร.3">สคร.3</option>
-                                    <option value="สคร.4">สคร.4</option>
-                                    <option value="สคร.5">สคร.5</option>
-                                    <option value="สคร.6">สคร.6</option>
-                                    <option value="สคร.7">สคร.7</option>
-                                    <option value="สคร.8">สคร.8</option>
-                                    <option value="สคร.9">สคร.9</option>
-                                    <option value="สคร.10">สคร.10</option>
-                                    <option value="สคร.11">สคร.11</option>
-                                    <option value="สคร.12">สคร.12</option>
-                                    <option value="สปคม.">สปคม.</option>
-                                </select>
+                                {!! Form::select(
+                                    'area_id',
+                                    [
+                                        '999' => 'ส่วนกลาง',
+                                        '1' => 'สคร.1',
+                                        '2' => 'สคร.2',
+                                        '3' => 'สคร.3',
+                                        '4' => 'สคร.4',
+                                        '5' => 'สคร.5',
+                                        '6' => 'สคร.6',
+                                        '7' => 'สคร.7',
+                                        '8' => 'สคร.8',
+                                        '9' => 'สคร.9',
+                                        '10' => 'สคร.10',
+                                        '11' => 'สคร.11',
+                                        '12' => 'สคร.12',
+                                        '99' => 'สปคม.',
+                                    ],
+                                    @$_GET['area_id'],
+                                    ['class' => 'form-select select2 form-control-lg', 'id' => 'area_id', 'placeholder' => '--ทั้งหมด--'],
+                                ) !!}
                             </div>
                             <div class="col-auto">หรือ</div>
                             <div class="col-12 col-sm-3">
                                 <label for="" class="form-label">จังหวัด</label>
-                                <select class="form-select" id="">
-                                    <option selected disabled value="">--ทั้งหมด--</option>
-                                </select>
+                                {!! Form::select('province_id', $provinces, @$_GET['province_id'], ['id' => 'province_id', 'class' => 'form-select select2 form-control-lg', 'placeholder' => '--ทั้งหมด--']) !!}
                             </div>
                             <div class="col-12 col-sm-auto">
                                 <label for="" class="form-label">เขต/อำเภอ</label>
-                                <select class="form-select" id="">
-                                    <option value="">ทั้งหมด</option>
-                                </select>
+                                {!! Form::select('district_id', $districts, @$_GET['district_id'], ['class' => 'form-select select2 form-control-lg', 'id' => 'district_id', 'placeholder' => '--ทั้งหมด--']) !!}
                             </div>
                             <div class="col-12 col-sm-auto">
                                 <label for="" class="form-label">แขวง/ตำบล</label>
-                                <select class="form-select" id="">
-                                    <option value="">ทั้งหมด</option>
-                                </select>
+                                {!! Form::select('subdistrict_id', $subdistricts, @$_GET['subdistrict_id'], ['class' => 'form-select select2 form-control-lg', 'id' => 'subdistrict_id', 'placeholder' => '--ทั้งหมด--']) !!}
                             </div>
                             <div class="col-auto text-center d-flex flex-column-reverse">
                                 <button class="btn btn-primary px-5" type="submit"><span class="fa fa-fw fa-search"></span> ค้นหา</button>
