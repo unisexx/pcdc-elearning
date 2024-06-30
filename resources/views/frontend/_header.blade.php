@@ -82,28 +82,27 @@
                                     <a class="nav-link active text-nowrap" aria-current="page" href="{{ url('home') }}">หน้าแรก</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('stat') }}">ข้อมูลสถิติ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('elearning-steps') }}">ขั้นตอนการเรียน e-learning</a></li>
-                                @if (\Auth::user())
-                                    @php
-                                        $curriculum_menu = \App\Models\Curriculum::where('status', 'active')
-                                            ->where(function ($q) {
-                                                if (Auth::user()->is_admin != '1') {
-                                                    $q->whereHas('CurriculumUserTYpe', function ($q) {
-                                                        $q->where('user_type_id', Auth::user()->user_type_id);
-                                                    });
-                                                }
-                                            })
-                                            ->orderBy('pos', 'asc')
-                                            ->get();
-                                    @endphp
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
-                                        <ul class="dropdown-menu shadow">
-                                            @foreach ($curriculum_menu as $curriculum_menu)
-                                                <li><a class="dropdown-item" href="{{ url('elearning/curriculum/' . $curriculum_menu->id) }}">{{ $curriculum_menu->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('elearning-steps') }}">ขั้นตอนการเรียน e-learning</a></li>                               
+                                @if(\Auth::user())
+                                @php
+                                $curriculum_menu = \App\Models\Curriculum::where('status','active')
+                                                ->where(function($q) {
+                                                        if(Auth::user()->is_admin!='1'){
+                                                            $q->whereHas('curriculum_user_type', function ($q) {
+                                                                $q->where('user_type_id', Auth::user()->user_type_id);
+                                                            });
+                                                        }
+                                                })
+                                                ->orderBy('pos','asc')->get();
+                                @endphp
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
+                                    <ul class="dropdown-menu shadow">
+                                        @foreach($curriculum_menu as $curriculum_menu)
+                                        <li><a class="dropdown-item" href="{{ url("elearning/curriculum/".$curriculum_menu->id)}}">{{ $curriculum_menu->name }}</a></li>
+                                        @endforeach                                        
+                                    </ul>
+                                </li>
                                 @else
                                     <li class="nav-item dropdown">
                                         <a id="CurriculumLoginMenu" class="nav-link dropdown-toggle" href="#">หลักสูตร</a>

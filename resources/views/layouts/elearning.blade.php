@@ -104,21 +104,30 @@
                     @endphp
                     @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
                       @php
+                        //มีการทำแบบทดสอบผ่านแล้วหรือไม่
                         $exam_lesson[$key] = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('curriculum_lesson_id',$lesson->id)->where('exam_type','lesson')->whereRaw('total_score >= pass_score and n_question = total_question')->count();                                        
-                        if(empty($curriculum->curriculum_exam_setting)){
-                          $lesson_has_exam[$key] = 0;
-                          $can_action = 1;
-                          $lesson_name[$key] = $lesson->name;
-                        }else{
-                          $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
+                        
+                        //เปิดให้ทดสอบหรือไม่
+                        $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
+                        
+                        if(empty($curriculum->curriculum_exam_setting) && $key == 0){                          
+                            $can_action = 1;
+                            $lesson_name[$key] = $lesson->name;
+                        }else{                          
                           if($key==0){
-                            $exam_lesson[$key] = $pretest_exam;
-                            $lesson_name[$key] = '';
+                            $exam_lesson[$key] =  $exam_lesson[$key];
+                            $lesson_name[$key] =  $lesson->name;
                             $can_action = $pretest_exam;
                           }else{
-                            $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
-                            $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
-                            $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
+                              if($lesson_has_exam[$key-1] > 0){
+                                  if($exam_lesson[$key-1])
+                                    $can_action = 1;
+                                  else
+                                    $can_action = 0;
+                              }
+
+                              $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
+                              $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;                                                        
                           }
                           
                         }

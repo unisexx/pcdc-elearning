@@ -22,7 +22,7 @@ class ElearningController extends Controller
         $curriculum = Curriculum::where('status','active')
                       ->where(function($q) use($req) {
                             if(Auth::user()->is_admin!='1'){
-                                $q->whereHas('CurriculumUserTYpe', function ($q) {
+                                $q->whereHas('curriculum_user_type', function ($q) {
                                     $q->where('user_type_id', Auth::user()->user_type_id);
                                 });
                             }

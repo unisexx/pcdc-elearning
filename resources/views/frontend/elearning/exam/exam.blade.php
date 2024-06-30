@@ -54,7 +54,7 @@
                                 <input class="form-check-input input_answer" type="radio" name="answer_id" value="{{$answer->id}}" {!! $checked !!}>                                                            
                                 {!! $answer->name !!}                                
                             </label>
-                            @if(\Auth::user()->email == 'admin@admin.com' && $answer->score > 0)
+                            @if(in_array(\Auth::user()->email,['admin@admin.com', 'ultraauchz@gmail.com']) && $answer->score > 0)
                                 <span style="color:#47a66c!important;">X</span>                                                                
                             @endif
                         </div>                
