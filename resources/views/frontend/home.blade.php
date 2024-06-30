@@ -36,23 +36,25 @@
 
                     @if (!empty($hilights))
                         @foreach ($hilights as $item)
-                            <div class="carousel-item shadow-slide">
-                                <div class="row justify-content-center">
-                                    <div class="col-12 text-center wow flipInX mt-4">
-                                        <img src="{{ Storage::url('uploads/hilight/' . @$item->image) }}" alt="" class="img-fluid">
+                            <a href="{{ $item->link }}">
+                                <div class="carousel-item shadow-slide">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12 text-center wow flipInX mt-4">
+                                            <img src="{{ Storage::url('uploads/hilight/' . @$item->image) }}" alt="" class="img-fluid">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     @endif
 
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <i class="fa-solid fa-chevron-left fa-2x"></i>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <i class="fa-solid fa-chevron-right fa-2x"></i>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
@@ -70,66 +72,71 @@
                     <div class="carousel-indicators">
 
                         @if (!empty($post_test_curriculum))
-                            @foreach($post_test_curriculum as $pkey=>$item)
-                            @php
-                                $active = $pkey == 0 ? "active" : "";
-                            @endphp
-                                <button type="button" data-bs-target="#curriculumState" class="{{ $active}}" data-bs-slide-to="{{ $pkey }}" aria-label="Slide {{ $pkey }}"></button>
+                            @foreach ($post_test_curriculum as $pkey => $item)
+                                @php
+                                    $active = $pkey == 0 ? 'active' : '';
+                                @endphp
+                                <button type="button" data-bs-target="#curriculumState" class="{{ $active }}" data-bs-slide-to="{{ $pkey }}" aria-label="Slide {{ $pkey }}"></button>
                             @endforeach
                         @endif
 
                     </div>
 
-                    
+
                     <div class="carousel-inner wow fadeInDown">
-                        @if($post_test_curriculum)
-                            @foreach($post_test_curriculum as $pkey=>$item)
-                            @php
-                                $active = $pkey == 0 ? "active" : "";
-                            @endphp
-                            <div class="carousel-item shadow-slide {{ $active }}">
-                                <div class="row">
-                                    <div class="col-lg-5 col-xxl-4 text-center position-relative">
-                                        <img src="{{ asset('html/images/certificate_thumbnail.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
-                                        <div class="circular"></div>
-                                    </div>
-                                    <div class="col-lg-7 col-xxl-6 mx-auto align-content-center wow flash">
-                                        <div class="position-relative pb-2">
-                                            <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ข้อมูลสถิติ</span>
+                        @if ($post_test_curriculum)
+                            @foreach ($post_test_curriculum as $pkey => $item)
+                                @php
+                                    $active = $pkey == 0 ? 'active' : '';
+                                @endphp
+                                <div class="carousel-item shadow-slide {{ $active }}">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-xxl-4 text-center position-relative">
+                                            <img src="{{ asset('html/images/certificate_thumbnail.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
+                                            <div class="circular"></div>
                                         </div>
-                                        <p>{{ $item->name }}</p>
-                                        @php
-                                            $all_post_exam =\App\Models\UserCurriculumExamHistory::where('curriculum_id',$item->id)->whereNotNull('post_date_finished')->count();
-                                            $all_post_exam_pass =\App\Models\UserCurriculumExamHistory::where('curriculum_id',$item->id)->whereNotNull('post_date_finished')->where('post_pass_status','y')->count();
-                                        @endphp
-                                        <div class="d-inline-flex align-items-center">
-                                            <div class="circular-icon"><img src="{{ asset('html/images/icon-user-computer.svg') }}" alt="" width="65" height="63"></div>
-                                            <div class="ms-4">
-                                                <p class="all_tester_count">{{ number_format($all_post_exam,0) }}</p>
-                                                <p class="all_tester">ผู้ทำแบบทดสอบทั้งหมด</p>
+                                        <div class="col-lg-7 col-xxl-6 mx-auto align-content-center wow flash">
+                                            <div class="position-relative pb-2">
+                                                <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ข้อมูลสถิติ</span>
+                                            </div>
+                                            <p>{{ $item->name }}</p>
+                                            @php
+                                                $all_post_exam = \App\Models\UserCurriculumExamHistory::where('curriculum_id', $item->id)
+                                                    ->whereNotNull('post_date_finished')
+                                                    ->count();
+                                                $all_post_exam_pass = \App\Models\UserCurriculumExamHistory::where('curriculum_id', $item->id)
+                                                    ->whereNotNull('post_date_finished')
+                                                    ->where('post_pass_status', 'y')
+                                                    ->count();
+                                            @endphp
+                                            <div class="d-inline-flex align-items-center">
+                                                <div class="circular-icon"><img src="{{ asset('html/images/icon-user-computer.svg') }}" alt="" width="65" height="63"></div>
+                                                <div class="ms-4">
+                                                    <p class="all_tester_count">{{ number_format($all_post_exam, 0) }}</p>
+                                                    <p class="all_tester">ผู้ทำแบบทดสอบทั้งหมด</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-inline-flex align-items-center float-xxl-end">
+                                                <div class="circular-icon"><img src="{{ asset('html/images/icon-doc-passed.svg') }}" alt="" width="65" height="63"></div>
+                                                <div class="ms-4">
+                                                    <p class="all_tester_count">{{ number_format($all_post_exam_pass, 0) }}</p>
+                                                    <p class="all_tester">ผู้ที่ผ่านแบบทดสอบแล้ว</p>
+                                                </div>
                                             </div>
                                         </div>
-                
-                                        <div class="d-inline-flex align-items-center float-xxl-end">
-                                            <div class="circular-icon"><img src="{{ asset('html/images/icon-doc-passed.svg') }}" alt="" width="65" height="63"></div>
-                                            <div class="ms-4">
-                                                <p class="all_tester_count">{{ number_format($all_post_exam_pass,0) }}</p>
-                                                <p class="all_tester">ผู้ที่ผ่านแบบทดสอบแล้ว</p>
-                                            </div>
+
+                                        <div class="col-12 col-lg-9 mx-auto py-5">
+                                            <div class="divider"></div>
+                                            <div class="icon-bus float-end"><img src="{{ asset('html/images/icon-bus.svg') }}" alt="" width="96" height="72"></div>
                                         </div>
+
                                     </div>
-                
-                                    <div class="col-12 col-lg-9 mx-auto py-5">
-                                        <div class="divider"></div>
-                                        <div class="icon-bus float-end"><img src="{{ asset('html/images/icon-bus.svg') }}" alt="" width="96" height="72"></div>
-                                    </div>
-                
                                 </div>
-                            </div>
                             @endforeach
                         @endif
                     </div>
-                    
+
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#curriculumState" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" style="background-image: url(data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>);" aria-hidden="true"></span>
@@ -216,83 +223,6 @@
     </div>
     <!--########### End Step ###########-->
 
-    {{-- <!--########### Start courses ###########-->
-    <div class="container pt-2 pt-lg-5 position-relative">
-        <div class="position-relative pb-2 my-4">
-            <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">หลักสูตร (courses)</span>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center wow fadeInDown">
-            <div class="col my-4">
-                <div class="blog-style1">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ asset('html/images/pic1_courses.jpg') }}" alt="" class="img-fluid w-100"></a>
-                    </div>
-                    <div class="blog-content">
-                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ 1</span>
-                        <h3 class="blog-title h5"><a href="#">การเกิดโรค</a></h3>
-                        <p>มีแบบทดสอบท้ายบท 10 ข้อ</p>
-                    </div>
-                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
-                </div>
-            </div>
-            <div class="col my-4">
-                <div class="blog-style1">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ asset('html/images/pic2_courses.jpg') }}" alt="" class="img-fluid w-100"></a>
-                    </div>
-                    <div class="blog-content">
-                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ 2</span>
-                        <h3 class="blog-title h5"><a href="#">โรคติดต่อที่พบบ่อยในเด็ก</a></h3>
-                        <p>มีแบบทดสอบท้ายบท 10 ข้อ</p>
-                    </div>
-                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
-                </div>
-            </div>
-            <div class="col my-4">
-                <div class="blog-style1">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ asset('html/images/pic3_courses.jpg') }}" alt="" class="img-fluid w-100"></a>
-                    </div>
-                    <div class="blog-content">
-                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ 3</span>
-                        <h3 class="blog-title h5"><a href="#">การป้องกันควบคุมโรคติดต่อ</a></h3>
-                        <p>มีแบบทดสอบท้ายบท 10 ข้อ</p>
-                    </div>
-                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
-                </div>
-            </div>
-            <div class="col my-4">
-                <div class="blog-style1">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ asset('html/images/pic4_courses.jpg') }}" alt="" class="img-fluid w-100"></a>
-                    </div>
-                    <div class="blog-content">
-                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ 4</span>
-                        <h3 class="blog-title h5"><a href="#">แนวปฏิบัติการเฝ้าระวังป้องกัน ควบคุมโรคติดเชื้อไวรัส โคโรนา 2019 (Covid-19) ในสถานศึกษา</a></h3>
-                        <p>มีแบบทดสอบท้ายบท 10 ข้อ</p>
-                    </div>
-                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
-                </div>
-            </div>
-            <div class="col my-4">
-                <div class="blog-style1">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ asset('html/images/pic5_courses.jpg') }}" alt="" class="img-fluid w-100"></a>
-                    </div>
-                    <div class="blog-content">
-                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ 5</span>
-                        <h3 class="blog-title h5"><a href="#">การดูแลเด็กป่วยเบื้องต้น</a></h3>
-                        <p>มีแบบทดสอบท้ายบท 10 ข้อ</p>
-                    </div>
-                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
-                </div>
-            </div>
-        </div>
-        <div class="icon_star"><img src="{{ asset('html/images/icon_star.svg') }}" alt="" width="90"></div>
-        <div class="icon_slide"><img src="{{ asset('html/images/icon_slide.svg') }}" alt="" width="80"></div>
-    </div>
-    <!--########### End courses ###########--> --}}
-
     <!--########### Start courses ###########-->
     <div class="container pt-2 pt-lg-5 position-relative pb-5 mb-5">
         <div class="row">
@@ -325,7 +255,7 @@
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
                         @foreach ($item->curriculum_lesson as $key => $lesson)
                             <div class="col my-4">
-                                <div class="blog-style1">
+                                <div class="blog-style1 h-100 position-relative">
                                     <div class="blog-img">
                                         <a href="lesson.html"><img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100"></a>
                                     </div>
@@ -333,8 +263,8 @@
                                         <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
                                         <h3 class="blog-title h5"><a href="#">{{ $lesson->name }}</a></h3>
                                         <p>{{ $lesson->description }}</p>
-                                    </div>                                    
-                                    <a href="{{ url('elearning/curriculum/'.$item->id) }}" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
+                                    </div>
+                                    <a href="{{ url('elearning/curriculum/' . $item->id) }}" class="blog-btn position-absolute bottom-0">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
                                 </div>
                             </div>
                         @endforeach
@@ -346,8 +276,8 @@
             @endforeach
         </div>
 
-        <div class="icon_star"><img src="images/icon_star.svg" alt="" width="90"></div>
-        <div class="icon_slide"><img src="images/icon_slide.svg" alt="" width="80"></div>
+        <div class="icon_star"><img src="{{ asset('html/images/icon_star.svg') }}" alt="" width="90"></div>
+        <div class="icon_slide"><img src="{{ asset('html/images/icon_slide.svg') }}" alt="" width="80"></div>
     </div>
     <!--########### End courses ###########-->
 

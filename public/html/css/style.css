@@ -452,12 +452,12 @@ a:hover {
 -------------------------------------------------- */
 /* Carousel base class */
 .carousel-control-prev {
-	left: 5%;
+	left: -5%;
 	width: auto;
 }
 
 .carousel-control-next {
-	right: 5%;
+	right: -5%;
 	width: auto;
 }
 
@@ -957,8 +957,8 @@ a:hover {
 .icon_star {
 	animation: nudge 5s linear infinite alternate;
 	position: absolute;
-	bottom: 26%;
-	left: 0;
+	bottom: 50%;
+	left: -125px;
 	transform: rotate(-95deg);
 	display: inline-block;
 	line-height: 1;
@@ -968,8 +968,8 @@ a:hover {
 .icon_slide {
 	animation: nudge 7s linear infinite alternate;
 	position: absolute;
-	bottom: 22%;
-	right: 0;
+	bottom: 30%;
+	right: -125px;
 }
 
 .icon_book {

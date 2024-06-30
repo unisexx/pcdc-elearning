@@ -6,6 +6,9 @@
     @slot('form')
         <div class="row mt-3">
             <div class="col-12">
+                {{ Form::bsText('title', 'ชื่อหัวข้อ') }}
+            </div>
+            <div class="col-12">
                 {{ Form::bsFile('image', 'รูป (ขนาด 1400 x 476 px)', @$rs->image, 'uploads/hilight', ['accept' => 'image/*']) }}
             </div>
             <div class="col-12">

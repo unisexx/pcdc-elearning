@@ -31,6 +31,7 @@ Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
+Route::get('/hilight/view/{id}', [App\Http\Controllers\Frontend\HilightController::class, 'view']);
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
 Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsController::class, 'index']);

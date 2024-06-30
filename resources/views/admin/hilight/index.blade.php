@@ -14,6 +14,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">รูป</th>
+                            <th scope="col">ชื่อหัวข้อ</th>
                             <th scope="col">ลิ้งค์</th>
                             <th scope="col">เปิดใช้งาน</th>
                             <th scope="col">จัดการ</th>
@@ -24,6 +25,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><img src="{{ Storage::url('uploads/hilight/' . @$item->image) }}" width="300"></td>
+                                <td>{{ @$item->title }}</td>
                                 <td>{{ @$item->link }}</td>
                                 <td>{!! statusBadge(@$item->status) !!}</td>
                                 <td class="text-sm">
