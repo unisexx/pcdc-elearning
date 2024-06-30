@@ -8,9 +8,10 @@ use App\Models\Inbox;
 use App\Models\Curriculum;
 use App\Models\CurriculumLesson;
 use App\Models\CurriculumLessonDetail;
-use App\Models\UserCurriculumPpExam;
 use App\Models\CurriculumLessonQuestion;
 use App\Models\CurriculumLessonQuestionAnswer;
+use App\Models\UserCurriculumExamHistory;
+use App\Models\UserCurriculumPpExam;
 use App\Models\UserCurriculumPpExamQas;
 use Illuminate\Http\Request;
 
@@ -80,19 +81,37 @@ class ElearningController extends Controller
     }
 
     public function curriculumLessonExamExecute($curriculum_id, $exam_type){                                    
+        $user = \Auth::user();
         $curriculum = Curriculum::find($curriculum_id);//ค้นหาหลักสูตร        
         $curriculum_exam_setting = $curriculum->curriculum_exam_setting()->first(); //ค้นหาข้อมูลกำหนดค่าการทดสอบ
-        // dd(request('submit_start'),request('submit_restart'));
+        
+        if($exam_type == 'pretest' && request('submit_start')){
+            $exam_history = UserCurriculumExamHistory::where('user_id', $user->id)->where('curriculum_id', $curriculum_id)->whereNull('post_date_finished')->first();
+            if(!$exam_history){
+                $exam_history = UserCurriculumExamHistory::create(['user_id' => $user->id, 'curriculum_id' => $curriculum_id]);
+            }
+        }else{
+            $exam_history = UserCurriculumExamHistory::where('user_id', $user->id)->where('curriculum_id', $curriculum_id)->whereNull('post_date_finished')->first();
+            if(!$exam_history)
+                $exam_history = UserCurriculumExamHistory::where('user_id', $user->id)->where('curriculum_id', $curriculum_id)->orderBy('id','desc')->first();
+        }
+        
         if( !empty(request('submit_start')) || !empty(request('submit_restart'))){            
-            if($exam_type=='lesson')
-                UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('exam_type',$exam_type)->where('curriculum_lesson_id',request('curriculum_lesson_id'))->delete();
-            else
-                UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('exam_type',$exam_type)->where('curriculum_id',$curriculum_id)->delete();
             if($exam_type=='lesson'){
+                UserCurriculumPpExam::where('user_curriculum_exam_history_id',$exam_history->id)->where('exam_type',$exam_type)->where('curriculum_lesson_id',request('curriculum_lesson_id'))->delete();
                 $exam_lesson_detail = $curriculum_exam_setting->curriculum_exam_setting_detail()->where('exam_status','active')->where('curriculum_lesson_id',request('curriculum_lesson_id'))->first();
                 $random_status = $exam_lesson_detail->question_random_status;
+            }else{
+                UserCurriculumPpExam::where('user_curriculum_exam_history_id',$exam_history->id)->where('exam_type',$exam_type)->where('curriculum_id',$curriculum_id)->delete();
             }
-            $pp_exam['user_id'] = \Auth::user()->id;
+            
+            if($exam_type == 'posttest'){                                                    
+                $exam_history->update(['post_date_started' => date("Y-m-d H:i:s"), 'post_pass_status' => null]);
+            }
+
+            
+            $pp_exam['user_id'] = $user->id;
+            $pp_exam['user_curriculum_exam_history_id'] = $exam_history->id;
             $pp_exam['exam_type'] = $exam_type;
             $pp_exam['curriculum_id'] = $curriculum_id;
             $pp_exam['curriculum_lesson_id'] = $exam_type == 'lesson' ? request('curriculum_lesson_id') : null;
@@ -204,17 +223,30 @@ class ElearningController extends Controller
         $user_curriculum_pp_exam->update(['total_question' => $user_curriculum_pp_exam->user_curriculum_pp_exam_qas()->whereNotNull('question_no')->count() , 'total_score'=> $user_curriculum_pp_exam->user_curriculum_pp_exam_qas()->sum('score')]);                                
         $total_question = $user_curriculum_pp_exam->user_curriculum_pp_exam_qas->count();
         $total_answer = $user_curriculum_pp_exam->user_curriculum_pp_exam_qas->whereNotNull('curriculum_lesson_question_answer_id')->count();
-        if($total_question == $total_answer){
-            if($user_curriculum_pp_exam->exam_type == 'lesson'){
-                return redirect(url('elearning/curriculum/lesson-exam/'.$user_curriculum_pp_exam->curriculum_lesson_id));
-            }else{
-                return redirect(url('elearning/curriculum/'.$user_curriculum_pp_exam->curriculum_id.'/'.$user_curriculum_pp_exam->exam_type));
-            }            
+        
+        if($user_curriculum_pp_exam->exam_type == 'lesson' && $total_question == $total_answer){
+            return redirect(url('elearning/curriculum/lesson-exam/'.$user_curriculum_pp_exam->curriculum_lesson_id));
+        }        
+        elseif($user_curriculum_pp_exam->exam_type == 'posttest'){
+            $exam_history = UserCurriculumExamHistory::find($user_curriculum_pp_exam->user_curriculum_exam_history_id);
+            if($exam_history){
+                if(empty($exam_history->post_date_started))
+                    $exam_history->update(['post_date_started' => date("Y-m-d H:i:s")]);
+
+                if($total_question == $total_answer){
+                    if($user_curriculum_pp_exam->pass_score <= $user_curriculum_pp_exam->total_score)
+                        $exam_history->update(['post_date_finished' => date("Y-m-d H:i:s"), 'post_pass_status' => 'y']);
+                    else
+                        $exam_history->update(['post_date_finished' => date("Y-m-d H:i:s"), 'post_pass_status' => 'n']);
+
+                    return redirect(url('elearning/curriculum/'.$user_curriculum_pp_exam->curriculum_id.'/'.$user_curriculum_pp_exam->exam_type));
+                }
+            }
+        }elseif($user_curriculum_pp_exam->exam_type == 'pretest'  && $total_question == $total_answer){
+            return redirect(url('elearning/curriculum/'.$user_curriculum_pp_exam->curriculum_id.'/'.$user_curriculum_pp_exam->exam_type));
         }
 
         $exists_next_question = $user_curriculum_pp_exam->user_curriculum_pp_exam_qas()->where('question_no',($req->question_no + 1))->count();
-
-        // dd($exists_next_question, $req, $answer_score, $current_pp_exam, $current_question);
         if($exists_next_question>0)
             return redirect(url('elearning/'.$user_curriculum_pp_exam->id.'/exam?q='.($req->question_no + 1)));
         else

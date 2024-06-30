@@ -62,10 +62,12 @@
                                             หน้าถัดไป
                                             <i class="fa fa-angle-right"></i>
                                         </a>
-                                    @else
-                                        <a href="{{ url('elearning/curriculum/lesson-exam/'.$curriculum_lesson->id)}}" class="btn btn-lg btn-success">
-                                            <i class="fa fa-edit"></i> ทำแบบทดสอบ
-                                        </a>
+                                    @else                                        
+                                        @if(\App\Models\CurriculumExamSettingDetail::where('curriculum_lesson_id',$curriculum_lesson->id)->where('exam_status','active')->count() > 0)
+                                            <a href="{{ url('elearning/curriculum/lesson-exam/'.$curriculum_lesson->id)}}" class="btn btn-lg btn-success">
+                                                <i class="fa fa-edit"></i> ทำแบบทดสอบ
+                                            </a>
+                                        @endif
                                     @endif
                                 </div>                                
                             </th>

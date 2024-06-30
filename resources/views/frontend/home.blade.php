@@ -66,38 +66,81 @@
     <div class="bg-stat">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-xxl-4 text-center position-relative">
-                    <img src="{{ asset('html/images/certificate_thumbnail.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
-                    <div class="circular"></div>
-                </div>
-                <div class="col-lg-7 col-xxl-6 mx-auto align-content-center wow flash">
-                    <div class="position-relative pb-2">
-                        <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ข้อมูลสถิติ</span>
-                    </div>
-                    <p>สถิติผู้ทำแบบทดสอบ และผู้ที่ผ่านแบบทดสอบ e-Learning โรคติดต่อในเด็กและโควิด 19</p>
+                <div id="curriculumState" class="carousel" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
 
-                    <div class="d-inline-flex align-items-center">
-                        <div class="circular-icon"><img src="{{ asset('html/images/icon-user-computer.svg') }}" alt="" width="65" height="63"></div>
-                        <div class="ms-4">
-                            <p class="all_tester_count">6,240</p>
-                            <p class="all_tester">ผู้ทำแบบทดสอบทั้งหมด</p>
-                        </div>
+                        @if (!empty($post_test_curriculum))
+                            @foreach($post_test_curriculum as $pkey=>$item)
+                            @php
+                                $active = $pkey == 0 ? "active" : "";
+                            @endphp
+                                <button type="button" data-bs-target="#curriculumState" class="{{ $active}}" data-bs-slide-to="{{ $pkey }}" aria-label="Slide {{ $pkey }}"></button>
+                            @endforeach
+                        @endif
+
                     </div>
 
-                    <div class="d-inline-flex align-items-center float-xxl-end">
-                        <div class="circular-icon"><img src="{{ asset('html/images/icon-doc-passed.svg') }}" alt="" width="65" height="63"></div>
-                        <div class="ms-4">
-                            <p class="all_tester_count">5,133</p>
-                            <p class="all_tester">ผู้ที่ผ่านแบบทดสอบแล้ว</p>
-                        </div>
+                    
+                    <div class="carousel-inner wow fadeInDown">
+                        @if($post_test_curriculum)
+                            @foreach($post_test_curriculum as $pkey=>$item)
+                            @php
+                                $active = $pkey == 0 ? "active" : "";
+                            @endphp
+                            <div class="carousel-item shadow-slide {{ $active }}">
+                                <div class="row">
+                                    <div class="col-lg-5 col-xxl-4 text-center position-relative">
+                                        <img src="{{ asset('html/images/certificate_thumbnail.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
+                                        <div class="circular"></div>
+                                    </div>
+                                    <div class="col-lg-7 col-xxl-6 mx-auto align-content-center wow flash">
+                                        <div class="position-relative pb-2">
+                                            <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ข้อมูลสถิติ</span>
+                                        </div>
+                                        <p>{{ $item->name }}</p>
+                                        @php
+                                            $all_post_exam =\App\Models\UserCurriculumExamHistory::where('curriculum_id',$item->id)->whereNotNull('post_date_finished')->count();
+                                            $all_post_exam_pass =\App\Models\UserCurriculumExamHistory::where('curriculum_id',$item->id)->whereNotNull('post_date_finished')->where('post_pass_status','y')->count();
+                                        @endphp
+                                        <div class="d-inline-flex align-items-center">
+                                            <div class="circular-icon"><img src="{{ asset('html/images/icon-user-computer.svg') }}" alt="" width="65" height="63"></div>
+                                            <div class="ms-4">
+                                                <p class="all_tester_count">{{ number_format($all_post_exam,0) }}</p>
+                                                <p class="all_tester">ผู้ทำแบบทดสอบทั้งหมด</p>
+                                            </div>
+                                        </div>
+                
+                                        <div class="d-inline-flex align-items-center float-xxl-end">
+                                            <div class="circular-icon"><img src="{{ asset('html/images/icon-doc-passed.svg') }}" alt="" width="65" height="63"></div>
+                                            <div class="ms-4">
+                                                <p class="all_tester_count">{{ number_format($all_post_exam_pass,0) }}</p>
+                                                <p class="all_tester">ผู้ที่ผ่านแบบทดสอบแล้ว</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-12 col-lg-9 mx-auto py-5">
+                                        <div class="divider"></div>
+                                        <div class="icon-bus float-end"><img src="{{ asset('html/images/icon-bus.svg') }}" alt="" width="96" height="72"></div>
+                                    </div>
+                
+                                </div>
+                            </div>
+                            @endforeach
+                        @endif
                     </div>
-                </div>
+                    
 
-                <div class="col-12 col-lg-9 mx-auto py-5">
-                    <div class="divider"></div>
-                    <div class="icon-bus float-end"><img src="{{ asset('html/images/icon-bus.svg') }}" alt="" width="96" height="72"></div>
-                </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#curriculumState" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" style="background-image: url(data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>);" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#curriculumState" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
 
+                </div>
             </div>
         </div>
     </div>
@@ -290,13 +333,13 @@
                                         <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
                                         <h3 class="blog-title h5"><a href="#">{{ $lesson->name }}</a></h3>
                                         <p>{{ $lesson->description }}</p>
-                                    </div>
-                                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
+                                    </div>                                    
+                                    <a href="{{ url('elearning/curriculum/'.$item->id) }}" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
                                 </div>
                             </div>
                         @endforeach
                         <div class="w-100 d-flex justify-content-center">
-                            <a class="viewall" href="courses-{{ $item->id }}.html">ดูทั้งหมด</a>
+                            <a class="viewall" href="{{ url('elearning/index') }}">ดูทั้งหมด</a>
                         </div>
                     </div>
                 </div>

@@ -59,17 +59,17 @@
     <!--##### Nav tabs #####-->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item mt-2" role="presentation">
-        <a class="nav-link " id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
+        <a class="nav-link active" id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
       </li>
       <li class="nav-item mt-2" role="presentation">
-        <a class="nav-link active" id="academic_results-tab" data-bs-toggle="tab" data-bs-target="#academic_results-tab-pane" type="button" role="tab" aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
+        <a class="nav-link" id="academic_results-tab" data-bs-toggle="tab" data-bs-target="#academic_results-tab-pane" type="button" role="tab" aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
       </li>
     </ul>
 
     <!--##### Tab content ####-->
     <div class="tab-content" id="myTabContent">
         <!-- Start Tab-content 1-->
-        <div class="tab-pane fade" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
+        <div class="tab-pane fade active show" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
           <div class="row bg-white rounded-5 p-3">
             <div class="col-lg-8">
                 @yield('content')
@@ -86,26 +86,48 @@
                         <a href="{{ url('elearning/curriculum/'.$curriculum->id) }}"><em class="fa fa-home fs-5 me-2 icon_list_menu "></em> บทนำ</a>
                       </div>
                     </li>
-                    @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                      <li>
-                        <div class="pass_score">
-                          <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
-                        </div>
-                      </li>
+                    @if(!empty($curriculum->curriculum_exam_setting))
+                      @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                        <li>
+                          <div class="pass_score">
+                            <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
+                          </div>
+                        </li>
+                      @endif
                     @endif
                     <hr>
                     <div class="list_menu">เรียนรู้บทเรียน (Learning)</div>                
                     @php
                       $pretest_exam = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('exam_type','pretest')->whereRaw('n_question = total_question')->count();                                        
+                      $pretest_exam = $curriculum->curriculum_exam_setting->pre_test_status == 'inactive' ? 1 : $pretest_exam;
+                      $all_pass = false;
                     @endphp
                     @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
                       @php
                         $exam_lesson[$key] = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('curriculum_lesson_id',$lesson->id)->where('exam_type','lesson')->whereRaw('total_score >= pass_score and n_question = total_question')->count();                                        
-                        $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
-                        $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
-                        $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
-                        $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
-                        $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร'
+                        if(empty($curriculum->curriculum_exam_setting)){
+                          $lesson_has_exam[$key] = 0;
+                          $can_action = 1;
+                          $lesson_name[$key] = $lesson->name;
+                        }else{
+                          $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
+                          if($key==0){
+                            $exam_lesson[$key] = $pretest_exam;
+                            $lesson_name[$key] = '';
+                            $can_action = $pretest_exam;
+                          }else{
+                            $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
+                            $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
+                            $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
+                          }
+                          
+                        }
+                        
+                        if($lesson_has_exam[$key] > 0){
+                            $all_pass = empty($exam_lesson[$key]) || $exam_lesson[$key] == 0 ? false : true;
+                        }
+                        
+                        $alert_msg_html = $key == 0 ? 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน</span>"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร'
                                             : 'กรุณาทำแบบทดสอบท้ายบท <br>"<span style="color:blue;">'.$lesson_name[$key-1].'</span>"<br><span style="color:green;">ให้ผ่าน</span><br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท';
                         // $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร <a href="'.url('elearning/curriculum/'.$curriculum->id.'/pretest').'" class="btn btn-primary">ไปทำแบบทดสอบก่อนเรียน (Pre-Test)</a>'
                         //                     : 'กรุณาทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท <a href="'.url('elearning/curriculum/lesson-exam/'.$lesson->id).'" class="btn btn-primary">ไปทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"</a>';
@@ -128,7 +150,7 @@
                                   Swal.fire({
                                       title: 'แจ้งเตือนการใช้งาน',
                                       html: '{!! $alert_msg_html !!}',
-                                      showConfirmButton: false,                                        
+                                      showConfirmButton: true,                                        
                                   });
                               });
                           </script>
@@ -160,7 +182,7 @@
                                             Swal.fire({
                                                 title: 'แจ้งเตือนการใช้งาน',
                                                 html: '{!! $alert_msg_html !!}',
-                                                showConfirmButton: false,                                        
+                                                showConfirmButton: true,                                        
                                             });
                                         });
                                     </script>
@@ -169,14 +191,42 @@
                           @endif
                       @endif                                                                               
                     @endforeach
-                    <hr>                
-                    @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                      <li>
-                        <div class="pass_score">
-                          <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
-                        </div>
+                    <hr>  
+                    @if(!empty($curriculum->curriculum_exam_setting))              
+                      @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                        @php
+                            $can_post_exam = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? $pretest_exam : $all_pass;
+                            $alert_msg_html = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? 
+                                            'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน (Pre-test)</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)' :
+                                            'กรุณาทำ "<span style="color:blue;">ทำแบบทดสอบท้ายบทเรียนให้ผ่านทั้งหมด</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)';
+                        @endphp
+                        @if($can_post_exam == 1)
+                        <li>
+                          <div class="pass_score">
+                            <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
+                          </div>
+                        </li>
+                        @else
+                        <li style="padding-left:30px;">
+                          <div class="none_score">
+                              <a id="btn_do_posttest" href="#">
+                                <em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>
+                                  วัดผลหลังเรียนรู้ (Post-test)                                    
+                              </a>
+                              <script>
+                                  document.getElementById('btn_do_posttest').addEventListener('click', function() {
+                                      Swal.fire({
+                                          title: 'แจ้งเตือนการใช้งาน',
+                                          html: '{!! $alert_msg_html !!}',
+                                          showConfirmButton: true,                                        
+                                      });
+                                  });
+                              </script>
+                          </div>
                       </li>
-                    @endif                
+                        @endif
+                      @endif                
+                    @endif
                   </ul>
                 </div>
 
@@ -187,7 +237,7 @@
         <!-- End tab-content 1 -->
 
         <!-- Start Tab-content 2-->
-        <div class="tab-pane fade active show" id="academic_results-tab-pane" role="tabpanel" aria-labelledby="academic_results-tab" tabindex="0">
+        <div class="tab-pane fade " id="academic_results-tab-pane" role="tabpanel" aria-labelledby="academic_results-tab" tabindex="0">
           <div class="container">
             <div class="title_disease">ผลการเรียน</div>
             <hr>
@@ -227,43 +277,45 @@
                   </div>
                  </div>
             </div>
-            @if($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
-            <div class="row box-bar text-center">
-              <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร                 
-                <button type="button" class="btn btn-success rounded-pill text-white btn-download-cert">
-                  <em class="fa fa-download me-2"></em>
-                  ดาวน์โหลดใบประกาศนียบัตรของคุณ
-                </button>
-                @push('js')
-                <script>
-                    $(document).ready(function(){
-                        $(".btn-download-cert").click(function(){
-                            $exists_survey = $("#exists_survey").val();
-                            if($exists_survey>=1){
-                              window.open("{{ url('certificate/pdf/'.$curriculum->id)}}")
-                            }else{
-                              Swal.fire({
-                                  title: 'แจ้งเตือนการใช้งาน',
-                                  html: 'กรุณากรอกแบบสอบถามความพึงพอใจก่อนดาวน์โหลดใบประกาศนียบัตรของคุณ',
-                                  showConfirmButton: true,                                        
-                              });
-                            }
-                        });
-                    });
-                </script>
-                @endpush
-              </p>
-              <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning                 
-                <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
-                  แบบสอบถามความพึงพอใจ
-                </button>
-                @php
-                  $n_survey = \App\Models\SurveyResult::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->count();                  
-                @endphp
-                <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey,0) }}">
-              </p>
-            </div>
-            @include('components.frontend.survey')
+            @if(!empty($posttest))
+              @if($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
+              <div class="row box-bar text-center">
+                <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร                 
+                  <button type="button" class="btn btn-success rounded-pill text-white btn-download-cert">
+                    <em class="fa fa-download me-2"></em>
+                    ดาวน์โหลดใบประกาศนียบัตรของคุณ
+                  </button>
+                  @push('js')
+                  <script>
+                      $(document).ready(function(){
+                          $(".btn-download-cert").click(function(){
+                              $exists_survey = $("#exists_survey").val();
+                              if($exists_survey>=1){
+                                window.open("{{ url('certificate/pdf/'.$curriculum->id)}}")
+                              }else{
+                                Swal.fire({
+                                    title: 'แจ้งเตือนการใช้งาน',
+                                    html: 'กรุณากรอกแบบสอบถามความพึงพอใจก่อนดาวน์โหลดใบประกาศนียบัตรของคุณ',
+                                    showConfirmButton: true,                                        
+                                });
+                              }
+                          });
+                      });
+                  </script>
+                  @endpush
+                </p>
+                <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning                 
+                  <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
+                    แบบสอบถามความพึงพอใจ
+                  </button>
+                  @php
+                    $n_survey = \App\Models\SurveyResult::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->count();                  
+                  @endphp
+                  <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey,0) }}">
+                </p>
+              </div>
+              @include('components.frontend.survey')
+              @endif
             @endif
              <div class="row box-bar">
               <div class="col-lg-11 mx-auto">

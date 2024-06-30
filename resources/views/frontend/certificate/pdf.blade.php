@@ -6,28 +6,28 @@
         font-family: 'THSarabunNew';
         font-style: normal;
         font-weight: normal;
-        src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
+        src: url("{{ asset('fonts/THSarabunNew.ttf') }}") format('truetype');
     }
 
     @font-face {
         font-family: 'THSarabunNew';
         font-style: normal;
         font-weight: bold;
-        src: url("{{ public_path('fonts/THSarabunNew_Bold.ttf') }}") format('truetype');
+        src: url("{{ asset('fonts/THSarabunNew_Bold.ttf') }}") format('truetype');
     }
 
     @font-face {
         font-family: 'THSarabunNew';
         font-style: italic;
         font-weight: normal;
-        src: url("{{ public_path('fonts/THSarabunNew_Italic.ttf') }}") format('truetype');
+        src: url("{{ asset('fonts/THSarabunNew_Italic.ttf') }}") format('truetype');
     }
 
     @font-face {
         font-family: 'THSarabunNew';
         font-style: italic;
         font-weight: bold;
-        src: url("{{ public_path('fonts/THSarabunNew_BoldItalic.ttf') }}") format('truetype');
+        src: url("{{ asset('fonts/THSarabunNew_BoldItalic.ttf') }}") format('truetype');
     }
 
     html,

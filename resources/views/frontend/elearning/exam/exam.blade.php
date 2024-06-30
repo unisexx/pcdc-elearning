@@ -7,7 +7,7 @@
     $question_no = empty(request('q')) ? $total_answer + 1 : request('q');
     $pwidth = $question_no / $total_question * 100;
 @endphp
-<div class="bg-1 h-100">
+<div class="bg-1 h-100 wow fadeIn">
     <div class="d-flex justify-content-center title_welcome">
         {{ $bread_crumb_name }}
         <br>

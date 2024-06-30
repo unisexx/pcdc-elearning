@@ -29,6 +29,7 @@ class UserCurriculumPpExam extends Model
 
     protected $fillable = [
         'user_id',
+        'user_curriculum_exam_history_id',
         'exam_type',        
         'curriculum_id',    
         'curriculum_lesson_id',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use App\Models\Curriculum;
+use App\Models\UserCurriculumPpExam;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,8 @@ class CertificateController extends Controller
 {
     public function pdf($curriculum_id)
     {
+        ini_set('max_execution_time', -1);
+        ini_set("memory_limit", "-1");
         /************ ส่วนของการสร้าง verify certificate  *************/
         $user = Auth::user();
         if (!$user) {
@@ -24,6 +27,12 @@ class CertificateController extends Controller
         $curriculum = Curriculum::find($curriculum_id);
         if (!$curriculum) {
             abort(404, 'Curriculum not found.');
+        }
+
+        //ตรวจสอบว่า user ผ่าน posttest ของ หลักสูตรนั้นจริงไหม
+        $pass_posttest = UserCurriculumPpExam::where('user_id',$user->id)->where('curriculum_id',$curriculum_id)->whereRaw('n_question = total_question and pass_score <= total_score')->first();
+        if(!$pass_posttest){
+            abort(404, 'Curriculum Post-Test not pass.');
         }
 
         $courseName  = $curriculum->name;
@@ -102,7 +111,7 @@ class CertificateController extends Controller
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled'      => true,
         ]);
-
+                
         return $pdf->stream('certificate.pdf');
     }
 
