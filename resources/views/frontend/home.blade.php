@@ -275,11 +275,11 @@
         <!--##### Tab panes ####-->
         <div class="tab-content">
             @foreach ($curriculums as $index => $item)
-                <div class="tab-pane @if ($index === 0) active @endif" id="courses{{ $item->id }}" role="tabpanel" aria-labelledby="courses{{ $item->id }}-tab" tabindex="0">
+                <div class="tab-pane @if ($index === 0) wow fadeInDown active @else fade @endif" id="courses{{ $item->id }}" role="tabpanel" aria-labelledby="courses{{ $item->id }}-tab" tabindex="0">
                     <div class="w-100">
                         <div class="title_tab"><span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}</div>
                     </div>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center wow fadeInDown">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
                         @foreach ($item->curriculum_lesson as $key => $lesson)
                             <div class="col my-4">
                                 <div class="blog-style1">
