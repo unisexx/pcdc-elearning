@@ -50,20 +50,20 @@ class CurriculumLessonQuestionController extends Controller
         $request->merge([
             'pos' => (CurriculumLessonQuestion::where('curriculum_lesson_id',$request->curriculum_lesson_id)->max('pos') + 1)
         ]);
-        $input = $request->all();
-        
+        $input = $request->all();        
         $curriculum_lesson_question = CurriculumLessonQuestion::create($input);
 
-        if(!empty($request->page_detail)){
-            foreach($request->page_detail as $key=>$detail){
-                $data['curriculum_lesson_question_id'] = $curriculum_lesson_question->id;
-                $data['name'] = $detail;
-                $data['score'] = $request->score[$key];
-                $data['status'] = 'active';
-                $data['pos'] = (CurriculumLessonQuestionAnswer::where('curriculum_lesson_question_id',$curriculum_lesson_question->id)->max('pos') + 1);
-                $curriculum_lession_detail = CurriculumLessonQuestionAnswer::create($data);
-            }
-
+        if(@$request->total_answer > 0){
+            for($i=1;$i<=$request->total_answer;$i++){
+                if(@$request->{'page_detail_'.$i}){
+                    $data['curriculum_lesson_question_id'] = $curriculum_lesson_question->id;
+                    $data['name'] = $request->{'page_detail_'.$i};
+                    $data['score'] = @$request->correct_answer == $i ? 1 : 0;
+                    $data['status'] = 'active';
+                    $data['pos'] = $request->{'answer_pos_'.$i};
+                    $curriculum_lession_detail = CurriculumLessonQuestionAnswer::create($data);
+                }
+            }            
         }
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
@@ -99,16 +99,28 @@ class CurriculumLessonQuestionController extends Controller
         $rs = CurriculumLessonQuestion::find($id);
         $rs->update($input);
 
-        CurriculumLessonQuestionAnswer::where('curriculum_lesson_question_id',$id)->delete();
+        if(@$request->total_answer > 0){
+            for($i=1;$i<=$request->total_answer;$i++){
+                if(@$request->{'page_detail_'.$i}){
+                    $data['curriculum_lesson_question_id'] = $rs->id;
+                    $data['name'] = $request->{'page_detail_'.$i};
+                    $data['score'] = @$request->correct_answer == $i ? 1 : 0;
+                    $data['status'] = 'active';
+                    $data['pos'] = $request->{'answer_pos_'.$i};
+                    if($request->{'answer_id_'.$i} == 'new'){
+                        CurriculumLessonQuestionAnswer::create($data);
+                    }else{
+                        CurriculumLessonQuestionAnswer::find($request->{'answer_id_'.$i})->update($data);
+                    }
+                    
+                }
+            }            
+        }
 
-        if(!empty($request->page_detail)){
-            foreach($request->page_detail as $key=>$detail){
-                $data['curriculum_lesson_question_id'] = $id;
-                $data['name'] = $detail;
-                $data['score'] = $request->score[$key];
-                $data['status'] = 'active';
-                $data['pos'] = (CurriculumLessonQuestionAnswer::where('curriculum_lesson_question_id',$id)->max('pos') + 1);
-                $curriculum_lession_detail = CurriculumLessonQuestionAnswer::create($data);
+        if(!empty($request->delete_answer)){
+            foreach($request->delete_answer as $item){
+                if($item)
+                    CurriculumLessonQuestionAnswer::find($item)->delete();
             }
         }
 
