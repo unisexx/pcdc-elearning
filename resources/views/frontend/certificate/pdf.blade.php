@@ -158,13 +158,13 @@
 </head>
 
 <body>
-    <div class="running_number">{{ $running_number }}</div>
+    <div class="running_number">{{ @$running_number }}</div>
     <div class="content-position">
-        <div class="title">{{ $title }}</div>
-        <div class="name">{{ $name }}</div>
-        <div class="description">{{ $description }}</div>
-        <div class="course">หลักสูตร{{ $course }}</div>
-        <div class="date">{{ $date }}</div>
+        <div class="title">{{ @$title }}</div>
+        <div class="name">{{ @$name }}</div>
+        <div class="description">{{ @$description }}</div>
+        <div class="course">หลักสูตร{{ @$course }}</div>
+        <div class="date">{{ @$date }}</div>
     </div>
     <div class="sign sign1">
         <div>(นายแพทย์ธงชัย กีรติหัตถยากร)</div>
@@ -192,11 +192,13 @@
         <div>ผู้อำนวยการสำนักอนามัย กทม.</div>
     </div>
     <div class="expire">
-        <div>ประกาศนียบัตรนี้มีผลรับรองถึงปี {{ $expires_at }}</div>
+        <div>ประกาศนียบัตรนี้มีผลรับรองถึงปี {{ @$expires_at }}</div>
     </div>
-    <div class="qr">
-        <img src="data:image/png;base64,{{ $qrcode }}" />
-    </div>
+    @if (isset($qrcode))
+        <div class="qr">
+            <img src="data:image/png;base64,{{ $qrcode }}" />
+        </div>
+    @endif
 </body>
 
 </html>
