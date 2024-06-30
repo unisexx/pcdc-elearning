@@ -69,4 +69,8 @@
      .navbar-vertical.navbar-expand-xs {
          z-index: 999 !important;
      }
+
+     .tox-tinymce{
+        border-radius: .5rem !important;
+     }
  </style>
