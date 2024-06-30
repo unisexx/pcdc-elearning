@@ -18,12 +18,6 @@
             วัตถุประสงค์
         </legend>
         {!!$curriculum->objective!!}
-    </fieldset>
-    <fieldset class="my-5 border rounded-3 pt-5 px-3 position-relative">
-        <legend class="tab_lesson_title w-auto rounded-pill">
-            <img src="{{ asset("elearning/images/persent2.svg") }}" alt="" height="35" class="me-2">เกณฑ์
-        </legend>
-        {!! $curriculum->pass_criteria !!}
-    </fieldset>
+    </fieldset>    
   </div>
 @endsection

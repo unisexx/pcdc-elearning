@@ -777,5 +777,54 @@ TABS academic_results
 }
 .text_small_welcome{font-size: 13px; color: #FFF;}
 
+.form-check-input{
+	border-color:#333!important;	
+}
 
+.none_score>a{
+	background: #d6d6d6!important;
+}
 
+.smiley-group {
+	display: flex;
+	gap: 10px;
+	justify-content: space-around;
+}
+
+.smiley-group input[type="radio"] {
+	display: none;
+}
+
+.smiley-group label {
+	cursor: pointer;
+	font-size: 2rem;
+	transition: opacity 0.3s ease;
+}
+
+.smiley-group label .fa-frown {
+	color: red;
+}
+
+.smiley-group label .fa-frown-open {
+	color: #ff7e19;
+}
+
+.smiley-group label .fa-meh {
+	color: #ffbf31;
+}
+
+.smiley-group label .fa-smile {
+	color: #20a8f8;
+}
+
+.smiley-group label .fa-laugh {
+	color: green;
+}
+
+.smiley-group input[type="radio"]:not(:checked)+label {
+	opacity: 0.5;
+}
+
+.smiley-group input[type="radio"]:checked+label {
+	opacity: 1;
+}

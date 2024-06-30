@@ -31,6 +31,7 @@ class CurriculumExamSetting extends Model
         'curriculum_id',
         'prepost_pass_score',
         'pre_test_status',
+        'prepost_n_question',
         'post_test_status',
     ];
 
