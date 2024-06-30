@@ -99,6 +99,7 @@
                     <div class="list_menu">เรียนรู้บทเรียน (Learning)</div>                
                     @php
                       $pretest_exam = \App\Models\UserCurriculumPpExam::where('user_id',\Auth::user()->id)->where('curriculum_id',$curriculum->id)->where('exam_type','pretest')->whereRaw('n_question = total_question')->count();                                        
+                      $pretest_exam = $curriculum->curriculum_exam_setting->pre_test_status == 'inactive' ? 1 : $pretest_exam;
                       $all_pass = false;
                     @endphp
                     @foreach($curriculum->curriculum_lesson()->where('status','active')->orderBy('pos','asc')->get() as $key=>$lesson)
@@ -110,9 +111,16 @@
                           $lesson_name[$key] = $lesson->name;
                         }else{
                           $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting->curriculum_exam_setting_detail()->where('curriculum_lesson_id',$lesson->id)->where('exam_status','active')->count();
-                          $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
-                          $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
-                          $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
+                          if($key==0){
+                            $exam_lesson[$key] = $pretest_exam;
+                            $lesson_name[$key] = '';
+                            $can_action = $pretest_exam;
+                          }else{
+                            $exam_lesson[$key] = $lesson_has_exam[$key] == 0 ? $exam_lesson[$key-1] : $exam_lesson[$key];
+                            $lesson_name[$key] = $lesson_has_exam[$key] == 0 ? $lesson_name[$key-1] : $lesson->name;
+                            $can_action = $key == 0 ? $pretest_exam : $exam_lesson[$key-1];
+                          }
+                          
                         }
                         
                         if($lesson_has_exam[$key] > 0){

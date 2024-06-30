@@ -333,13 +333,13 @@
                                         <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
                                         <h3 class="blog-title h5"><a href="#">{{ $lesson->name }}</a></h3>
                                         <p>{{ $lesson->description }}</p>
-                                    </div>
-                                    <a href="#" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
+                                    </div>                                    
+                                    <a href="{{ url('elearning/curriculum/'.$item->id) }}" class="blog-btn">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
                                 </div>
                             </div>
                         @endforeach
                         <div class="w-100 d-flex justify-content-center">
-                            <a class="viewall" href="courses-{{ $item->id }}.html">ดูทั้งหมด</a>
+                            <a class="viewall" href="{{ url('elearning/index') }}">ดูทั้งหมด</a>
                         </div>
                     </div>
                 </div>
