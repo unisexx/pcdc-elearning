@@ -15,7 +15,9 @@
                 <label for="name">หัวข้อคำถาม <span class="text-danger">*</span></label>
                 <textarea name="name" class="form-control form-control-lg tiny-answer">{!!@$rs->name!!}</textarea>                    
             </div>
-            
+            @php
+                $key = 0;
+            @endphp
             @if(@$rs)
                 @forelse($rs->curriculum_lesson_question_answer as $key=>$detail)
                     @php
