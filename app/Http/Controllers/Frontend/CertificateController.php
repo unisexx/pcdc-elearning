@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use App\Models\Curriculum;
-use App\Models\UserCurriculumPpExam;
+use App\Models\UserCurriculumExamHistory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +30,7 @@ class CertificateController extends Controller
         }
 
         //ตรวจสอบว่า user ผ่าน posttest ของ หลักสูตรนั้นจริงไหม
-        $pass_posttest = UserCurriculumPpExam::where('user_id',$user->id)->where('curriculum_id',$curriculum_id)->whereRaw('n_question = total_question and pass_score <= total_score')->first();
+        $pass_posttest = UserCurriculumExamHistory::where('user_id',$user->id)->where('curriculum_id',$curriculum_id)->where('post_pass_status','y')->orderBy('post_date_finished','desc')->first();
         if(!$pass_posttest){
             abort(404, 'Curriculum Post-Test not pass.');
         }
