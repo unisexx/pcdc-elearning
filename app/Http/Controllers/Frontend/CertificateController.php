@@ -30,8 +30,8 @@ class CertificateController extends Controller
         }
 
         //ตรวจสอบว่า user ผ่าน posttest ของ หลักสูตรนั้นจริงไหม
-        $pass_posttest = UserCurriculumExamHistory::where('user_id',$user->id)->where('curriculum_id',$curriculum_id)->where('post_pass_status','y')->orderBy('post_date_finished','desc')->first();
-        if(!$pass_posttest){
+        $pass_posttest = UserCurriculumExamHistory::where('user_id', $user->id)->where('curriculum_id', $curriculum_id)->where('post_pass_status', 'y')->orderBy('post_date_finished', 'desc')->first();
+        if (!$pass_posttest) {
             abort(404, 'Curriculum Post-Test not pass.');
         }
 
@@ -111,7 +111,7 @@ class CertificateController extends Controller
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled'      => true,
         ]);
-                
+
         return $pdf->stream('certificate.pdf');
     }
 
