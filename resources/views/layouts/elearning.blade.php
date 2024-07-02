@@ -203,38 +203,40 @@
                     <hr>  
                     @if(!empty($curriculum->curriculum_exam_setting))              
                       @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                        @php
-                            $can_post_exam = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? $pretest_exam : $all_pass;
-                            $alert_msg_html = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? 
-                                            'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน (Pre-test)</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)' :
-                                            'กรุณาทำ "<span style="color:blue;">ทำแบบทดสอบท้ายบทเรียนให้ผ่านทั้งหมด</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)';
-                        @endphp
-                        @if($can_post_exam == 1)
-                        <li>
-                          <div class="pass_score">
-                            <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
-                          </div>
-                        </li>
-                        @else
-                        <li style="padding-left:30px;">
-                          <div class="none_score">
-                              <a id="btn_do_posttest" href="#">
-                                <em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>
-                                  วัดผลหลังเรียนรู้ (Post-test)                                    
-                              </a>
-                              <script>
-                                  document.getElementById('btn_do_posttest').addEventListener('click', function() {
-                                      Swal.fire({
-                                          title: 'แจ้งเตือนการใช้งาน',
-                                          html: '{!! $alert_msg_html !!}',
-                                          showConfirmButton: true,                                        
+                          @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                            @php
+                                $can_post_exam = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? $pretest_exam : $all_pass;
+                                $alert_msg_html = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? 
+                                                'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน (Pre-test)</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)' :
+                                                'กรุณาทำ "<span style="color:blue;">ทำแบบทดสอบท้ายบทเรียนให้ผ่านทั้งหมด</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)';
+                            @endphp
+                            @if($can_post_exam == 1)
+                            <li>
+                              <div class="pass_score">
+                                <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/posttest') }}"><em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>วัดผลหลังเรียนรู้ (Post-test)</a>
+                              </div>
+                            </li>
+                            @else
+                            <li style="padding-left:30px;">
+                              <div class="none_score">
+                                  <a id="btn_do_posttest" href="#">
+                                    <em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>
+                                      วัดผลหลังเรียนรู้ (Post-test)                                    
+                                  </a>
+                                  <script>
+                                      document.getElementById('btn_do_posttest').addEventListener('click', function() {
+                                          Swal.fire({
+                                              title: 'แจ้งเตือนการใช้งาน',
+                                              html: '{!! $alert_msg_html !!}',
+                                              showConfirmButton: true,                                        
+                                          });
                                       });
-                                  });
-                              </script>
-                          </div>
-                      </li>
-                        @endif
-                      @endif                
+                                  </script>
+                              </div>
+                          </li>
+                            @endif
+                          @endif        
+                      @endif        
                     @endif
                   </ul>
                 </div>
