@@ -92,11 +92,14 @@
                     </li>
                     @if(!empty($curriculum->curriculum_exam_setting))
                       @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                        <li>
-                          <div class="pass_score">
-                            <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>ทำแบบทดสอบก่อนเรียน (pre-Test)</a>
-                          </div>
-                        </li>
+                      <li>
+                        <div class="pass_score">
+                            <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}" class="d-flex align-items-center">
+                                <em class="fa fa-pencil fs-5 me-2 icon_list_menu"></em>
+                                ทำแบบทดสอบก่อนเรียน (pre-Test)
+                            </a>
+                        </div>
+                      </li>
                       @endif
                     @endif
                     <hr>
@@ -406,21 +409,20 @@
                   </li>
                   <li class="text-center">
                     {!! Form::open([
-                      'url' => url('elearning/curriculum/'.$curriculum->id.'/reset'),
-                      'method' => 'POST',
-                      'files' => false,
-                      'class' => 'form',
-                      'autocomplete' => 'off',
-                      'class' => 'needs-validation',
+                        'url' => url('elearning/curriculum/'.$curriculum->id.'/reset'),
+                        'method' => 'POST',
+                        'files' => false,
+                        'class' => 'form needs-validation',
+                        'autocomplete' => 'off',
                     ]) !!}
                         <button type="submit" class="btn btn-lg btn-danger ms-3 btn-reset-class" name="btn_reset" value="reset"><i class="fa fa-undo"></i> เริ่มเรียนใหม่อีกครั้ง</button>
                     {!! Form::close() !!}   
-                  </li>
+                </li>
                 </ul>                
               </div>
             </div>
            </div>
-            <hr>
+          <hr>
         </div>
         <!-- End tab-content 2 -->
 
@@ -440,15 +442,25 @@
     @stack('js')
     <script>
       $(document).ready(function(){
-          $(".btn-reset-class").click(function(){
-                if(confirm('เริ่มเรียนใหม่อีกครั้ง')){
-                  return true;
-                }else{
-                  return false;
-                }
-          })
+          $(".btn-reset-class").click(function(event){
+              event.preventDefault(); // ป้องกันการส่งฟอร์มแบบดั้งเดิม
+              Swal.fire({
+                  title: 'เริ่มเรียนใหม่อีกครั้ง',
+                  text: "คุณแน่ใจหรือไม่ว่าต้องการเริ่มต้นเรียนใหม่อีกครั้ง?",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'ใช่, ฉันต้องการเริ่มใหม่',
+                  cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      // ดำเนินการต่อเมื่อตอบ "ใช่"
+                      $(this).closest('form').submit();
+                  }
+              });
+          });
       });
-    </script>
-
+  </script>
 </body>
 </html>
