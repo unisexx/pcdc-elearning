@@ -19,12 +19,14 @@
         </legend>
         {!!$curriculum->objective!!}
     </fieldset>
-    @if($curriculum->curriculum_exam_setting)
-      @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-        <div class="y-4 text-center">      
-          <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}" class="btn btn-lg btn-primary"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em> ทำแบบทดสอบก่อนเรียน (Pre-Test)</a>
-        </div>    
-      @endif
-    @endif
+    <div class="row">
+      <div class="col-12 text-center">
+          @if($curriculum->curriculum_exam_setting)
+            @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')              
+                <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}" class="btn btn-lg btn-primary"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em> ทำแบบทดสอบก่อนเรียน (Pre-Test)</a>
+            @endif
+          @endif                  
+      </div>
+    </div>
   </div>
 @endsection
