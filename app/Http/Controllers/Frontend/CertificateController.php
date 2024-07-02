@@ -82,7 +82,7 @@ class CertificateController extends Controller
             'name'           => $user->prefix . $user->first_name . ' ' . $user->last_name,
             'description'    => 'ได้ผ่านการเรียนรู้ด้วยตนเองในรูปแบบออนไลน์ (e-Learning)',
             'course'         => $courseName,
-            'date'           => $this->getFormattedDate(),
+            'date'           => $this->getFormattedDate($pass_posttest->post_date_finished),
             'running_number' => $formattedRunningNumber,
             'expires_at'     => $expiresAtThaiYear, // รูปแบบวันหมดอายุเป็นปีไทย
         ];
@@ -115,10 +115,10 @@ class CertificateController extends Controller
         return $pdf->stream('certificate.pdf');
     }
 
-    private function getFormattedDate()
+    private function getFormattedDate($post_date_finished)
     {
-        // กำหนดวันที่ปัจจุบัน
-        $date = Carbon::now();
+        // แปลง $post_date_finished เป็นวัตถุ Carbon
+        $date = Carbon::parse($post_date_finished);
 
         // แปลงวันที่เป็นรูปแบบที่ต้องการ
         $day   = $date->day;
