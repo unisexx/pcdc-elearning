@@ -24,6 +24,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- <div id="chart-monthly22" class="chartsh text_ver"></div> --}}
                 <div id="chart-monthly2" class="chartsh text_ver"></div>
             </div>
             <div class="table-responsive px-4">
@@ -51,7 +52,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $province_list_str='';
+                            $province_pass_str='';
+                        @endphp
                         @forelse($province_exam as $key=>$item)
+                            @php
+                                $province_list_str.= $province_list_str ? ",'".$item->name."'" : "'".$item->name."'";
+                                $province_pass_str.= $province_pass_str ? ",".number_format($item->all_exam,0) : number_format($item->all_exam,0);
+                            @endphp
                         <tr>
                             <td>{{$item->name}}</td>
                             <td>{{ number_format($item->all_exam,0) }}</td>
@@ -69,3 +78,42 @@
         </div>
     </div>
 </div>
+@push('js')
+<script>
+    $(document).ready(function(){        
+        var chart = c3.generate({
+                bindto: '#chart-monthly2',
+                data: {                    
+                    x : 'x',
+                    columns: [                        
+                        ['x',{!! $province_list_str !!}],
+                        ['ผ่าน',{!! $province_pass_str !!}],
+                    ],
+                    type: 'bar',
+                },
+                axis: {
+                    x: {
+                        type: 'category',                        
+                        tick: {
+                            rotate: 75,
+                            multiline: false,
+                        },
+                        height: 130
+                    },
+                    y: {            
+                        min: 1,
+                    }
+                },
+                bar: {
+                    /*width: 6*/
+                    width: {
+                        ratio: 0.2
+                    }
+                },
+                legend: {
+                    show: false, //hide legend
+                },
+            });
+    });
+</script>
+@endpush
