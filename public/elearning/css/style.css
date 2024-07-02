@@ -704,7 +704,10 @@ TABS LESSON
 .widget_categories ul li a{border-radius: 50px; background-color: #FFF;position: relative;  display: block;  padding:15px 20px 15px 20px;
     margin: 10px 0 10px 0;  font-size: 16px;  font-weight: 600; color: #000;  letter-spacing: 0.05em; display: block;
     position: relative; width: 100%;}
-.widget_categories ul li a:hover, .widget_categories ul li a.active {background-color: #e43d88; color: #FFF;}
+.widget_categories ul li a:hover, .widget_categories ul li a.active {
+	background-color: #007bff; 
+	color: #FFF;
+}
 /* .widget_categories ul li .pass_score { display: flex; background-image:url(../images/check-green.svg); background-size: 30px; background-repeat: no-repeat;
 	background-position:left center; padding-left: 40px; }
 .widget_categories ul li .none_score { display: flex; background-image:url(../images/check-gray.svg); background-size: 30px; background-repeat: no-repeat;
