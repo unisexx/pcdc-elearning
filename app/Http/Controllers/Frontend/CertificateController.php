@@ -66,7 +66,7 @@ class CertificateController extends Controller
                 'user_id'        => $user->id,
                 'curriculum_id'  => $curriculum->id,
                 'running_number' => $runningNumber,
-                'issued_at'      => Carbon::now(),
+                'issued_at'      => $pass_posttest->post_date_finished,
                 'expires_at'     => $expiresAt,
                 'verify_token'   => bin2hex(random_bytes(16)),
             ]);

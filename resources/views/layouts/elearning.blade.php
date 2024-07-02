@@ -395,7 +395,19 @@
                         </div>
                       @endif                    
                   </li>
-                </ul>
+                  <li class="text-center">
+                    {!! Form::open([
+                      'url' => url('elearning/curriculum/'.$curriculum->id.'/reset'),
+                      'method' => 'POST',
+                      'files' => false,
+                      'class' => 'form',
+                      'autocomplete' => 'off',
+                      'class' => 'needs-validation',
+                    ]) !!}
+                        <button type="submit" class="btn btn-lg btn-danger ms-3 btn-reset-class" name="btn_reset" value="reset"><i class="fa fa-undo"></i> เริ่มเรียนใหม่อีกครั้ง</button>
+                    {!! Form::close() !!}   
+                  </li>
+                </ul>                
               </div>
             </div>
            </div>
@@ -417,5 +429,17 @@
     @include('layouts.elearning.footer')
     @include('frontend._script')
     @stack('js')
+    <script>
+      $(document).ready(function(){
+          $(".btn-reset-class").click(function(){
+                if(confirm('เริ่มเรียนใหม่อีกครั้ง')){
+                  return true;
+                }else{
+                  return false;
+                }
+          })
+      });
+    </script>
+
 </body>
 </html>

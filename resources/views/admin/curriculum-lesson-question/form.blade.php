@@ -101,8 +101,34 @@
 @push('js')
 <script>
     $(document).ready(function(){
-        runPageNo();
-        tinymce.init({selector: '.tiny-answer', max_height: 250});
+        runPageNo();        
+        tinymce.init({
+            selector: "textarea.tiny-answer",
+            menubar: false,
+            theme: "silver",
+            min_height: 250,
+            resize: 'vertical',
+            external_plugins: {
+                "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+            },
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+            ],
+            menubar: 'file edit view insert format tools table tc help',
+            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+            // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+            toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+            image_advtab: true,
+            external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+            filemanager_title: "Responsive Filemanager",
+            // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+            // relative_urls : false,
+            // remove_script_host : false,
+            // convert_urls : true,
+        });
         $("#cl-page-1").toggle();
         function runPageNo(){
             page_index = 1;
@@ -122,16 +148,125 @@
             tinymce.remove();
             $(this).closest('div.card').insertBefore($(this).closest('div.card').prev('div.card'));                      
             runPageNo();
-            tinymce.init({selector: '.tiny'});
-            tinymce.init({selector: '.tiny-answer', max_height: 250});
+            // tinymce.init({selector: '.tiny'});
+            // tinymce.init({selector: '.tiny-answer', max_height: 250});
+            tinymce.init({
+                selector: "textarea.tiny",
+                menubar: false,
+                theme: "silver",
+                min_height: 350,
+                resize: 'vertical',
+                external_plugins: {
+                    "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                    'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+                },
+                plugins: [
+                    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                    "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+                ],
+                menubar: 'file edit view insert format tools table tc help',
+                toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+                // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+                toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+                image_advtab: true,
+                external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+                filemanager_title: "Responsive Filemanager",
+                // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+                // relative_urls : false,
+                // remove_script_host : false,
+                // convert_urls : true,
+            });
+            tinymce.init({
+                selector: "textarea.tiny-answer",
+                menubar: false,
+                theme: "silver",
+                min_height: 250,
+                resize: 'vertical',
+                external_plugins: {
+                    "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                    'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+                },
+                plugins: [
+                    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                    "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+                ],
+                menubar: 'file edit view insert format tools table tc help',
+                toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+                // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+                toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+                image_advtab: true,
+                external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+                filemanager_title: "Responsive Filemanager",
+                // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+                // relative_urls : false,
+                // remove_script_host : false,
+                // convert_urls : true,
+            });
         });
 
         $("body").on("click",".btn-down",function(){    
             tinymce.remove();        
             $(this).closest('div.card').insertAfter($(this).closest('div.card').next('div.card'));                        
             runPageNo();
-            tinymce.init({selector: '.tiny'});
-            tinymce.init({selector: '.tiny-answer', max_height: 250});
+            // tinymce.init({selector: '.tiny'});
+            // tinymce.init({selector: '.tiny-answer', max_height: 250});
+            tinymce.init({
+                selector: "textarea.tiny",
+                menubar: false,
+                theme: "silver",
+                min_height: 350,
+                resize: 'vertical',
+                external_plugins: {
+                    "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                    'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+                },
+                plugins: [
+                    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                    "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+                ],
+                menubar: 'file edit view insert format tools table tc help',
+                toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+                // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+                toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+                image_advtab: true,
+                external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+                filemanager_title: "Responsive Filemanager",
+                // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+                // relative_urls : false,
+                // remove_script_host : false,
+                // convert_urls : true,
+            });
+            tinymce.init({
+                selector: "textarea.tiny-answer",
+                menubar: false,
+                theme: "silver",
+                min_height: 250,
+                resize: 'vertical',
+                external_plugins: {
+                    "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                    'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+                },
+                plugins: [
+                    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                    "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+                ],
+                menubar: 'file edit view insert format tools table tc help',
+                toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+                // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+                toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+                image_advtab: true,
+                external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+                filemanager_title: "Responsive Filemanager",
+                // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+                // relative_urls : false,
+                // remove_script_host : false,
+                // convert_urls : true,
+            });
+            
         });
 
         $("body").on("click",".btn-remove",function(){
@@ -188,8 +323,35 @@
                 
                 $(str_panel).insertBefore($("#pn_page_btn"));
                 runPageNo();
-                tinymce.init({selector: '.tiny-answer', max_height: 250});
-                $("[name=total_answer]").val(current_key);
+                // tinymce.init({selector: '.tiny-answer', max_height: 250});
+                $("[name=total_answer]").val(current_key);                
+                tinymce.init({
+                    selector: "textarea.tiny-answer",
+                    menubar: false,
+                    theme: "silver",
+                    min_height: 250,
+                    resize: 'vertical',
+                    external_plugins: {
+                        "responsivefilemanager": "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/tinymce/plugins/responsivefilemanager/plugin.min.js') }}",
+                        'youtube': '{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/youtube/plugin.min.js') }}',
+                    },
+                    plugins: [
+                        "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                        "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code youtube"
+                    ],
+                    menubar: 'file edit view insert format tools table tc help',
+                    toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | fontsizeselect",
+                    // toolbar2: "| responsivefilemanager | link unlink | image media | youtube | forecolor backcolor | preview code ",
+                    toolbar2: "| responsivefilemanager | youtube | link unlink | forecolor backcolor | preview code ",
+                    image_advtab: true,
+                    external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
+                    filemanager_title: "Responsive Filemanager",
+                    // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
+                    // relative_urls : false,
+                    // remove_script_host : false,
+                    // convert_urls : true,
+                });
         });
     })    
 </script>

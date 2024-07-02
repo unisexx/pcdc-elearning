@@ -252,4 +252,12 @@ class ElearningController extends Controller
         else
             return redirect(url('elearning/'.$user_curriculum_pp_exam->id.'/exam'));
     }
+
+    public function curriculumReset($curriculum_id, Request $req){        
+        if($req->btn_reset){
+            UserCurriculumExamHistory::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
+            UserCurriculumPpExam::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
+        }
+        return redirect(url('elearning/curriculum/'.$curriculum_id));
+    }
 }
