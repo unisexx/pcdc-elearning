@@ -57,7 +57,7 @@ class CertificateController extends Controller
         $formattedRunningNumber = $runningNumber . '/' . $currentYear;
 
         // คำนวณวันหมดอายุ 3 ปีหลังจากวันที่ออก และเป็นวันสุดท้ายของปี (31 ธันวาคม)
-        $expiresAt         = Carbon::now()->addYears(3)->endOfYear();
+        $expiresAt         = Carbon::parse($pass_posttest->post_date_finished)->addYears(3)->endOfYear();
         $expiresAtThaiYear = ($expiresAt->year + 543);
 
         if (!$existingCertificate) {
