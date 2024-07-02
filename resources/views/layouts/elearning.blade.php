@@ -84,7 +84,10 @@
                   <ul>
                     <li>
                       <div class="pass_score">
-                        <a href="{{ url('elearning/curriculum/'.$curriculum->id) }}"><em class="fa fa-home fs-5 me-2 icon_list_menu "></em> บทนำ</a>
+                          <a href="{{ url('elearning/curriculum/'.$curriculum->id) }}" class="d-flex align-items-center">
+                              <em class="fa fa-home fs-5 me-2 icon_list_menu"></em> บทนำ
+                              <img src="{{ asset('images/checked.png') }}" width="24" class="ms-auto">
+                          </a>
                       </div>
                     </li>
                     @if(!empty($curriculum->curriculum_exam_setting))
