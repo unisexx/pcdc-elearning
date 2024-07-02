@@ -124,5 +124,5 @@ extract($data);
     <script src="{{ asset('html/js/charts-c3/d3.v5.min.js') }}"></script>
     <script src="{{ asset('html/js/charts-c3/c3-chart.js') }}"></script>
     <!-- Chart -->    
-    {{-- <script src="{{ asset('html/js/charts.js') }}"></script> --}}
+    <script src="{{ asset('html/js/charts.js') }}"></script>
 @endpush
