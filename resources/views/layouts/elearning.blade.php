@@ -404,7 +404,7 @@
                       'autocomplete' => 'off',
                       'class' => 'needs-validation',
                     ]) !!}
-                        <button type="submit" class="btn btn-lg btn-warning ms-3 btn-reset-class" name="btn_reset" value="reset"><i class="fa fa-undo"></i> เริ่มเรียนใหม่อีกครั้ง</button>
+                        <button type="submit" class="btn btn-lg btn-danger ms-3 btn-reset-class" name="btn_reset" value="reset"><i class="fa fa-undo"></i> เริ่มเรียนใหม่อีกครั้ง</button>
                     {!! Form::close() !!}   
                   </li>
                 </ul>                
