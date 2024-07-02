@@ -19,6 +19,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset("elearning/css/all.min.css") }}" />
+    
     <!-- Styles for this template -->
     <link href="{{ asset("elearning/css/style.css") }}" rel="stylesheet">
     <link href="{{ asset("elearning/css/custom.css") }}" rel="stylesheet">
@@ -153,49 +154,53 @@
                       @else
                         <li>
                           <div class="none_score">
-                            <a href="#" id="btn_do_lesson_{{ $lesson->id}}"><em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>{{ $lesson->name }}</a>
-                            <script>
-                              document.getElementById('btn_do_lesson_{{ $lesson->id}}').addEventListener('click', function() {
-                                  Swal.fire({
-                                      title: 'แจ้งเตือนการใช้งาน',
-                                      html: '{!! $alert_msg_html !!}',
-                                      showConfirmButton: true,                                        
+                              <a href="#" id="btn_do_lesson_{{ $lesson->id }}" class="d-flex align-items-center">
+                                  <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu"></em>{{ $lesson->name }}
+                                  <img src="{{ asset('images/lock.png') }}" width="24" class="ms-auto">
+                              </a>
+                              <script>
+                                  document.getElementById('btn_do_lesson_{{ $lesson->id }}').addEventListener('click', function() {
+                                      Swal.fire({
+                                          title: 'แจ้งเตือนการใช้งาน',
+                                          html: '{!! $alert_msg_html !!}',
+                                          showConfirmButton: true,                                        
+                                      });
                                   });
-                              });
-                          </script>
+                              </script>
                           </div>
-                        </li>                          
+                        </li>
                       @endif
                       @php
                             
                       @endphp
                       @if($lesson_has_exam[$key] > 0)
                           @if($can_action == 1)
-                            <li style="padding-left:30px;">
+                            <li style="/* padding-left:30px; */">
                                 <div class="pass_score">
                                     <a href="{{ url('elearning/curriculum/lesson-exam/'.$lesson->id)}}">
                                         <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
-                                        ทำแบบทดสอบท้ายบท                                    
+                                        ทำแบบทดสอบท้ายบท                         
                                     </a>
                                 </div>
                             </li>
                           @else
-                            <li style="padding-left:30px;">
-                                <div class="none_score">
-                                    <a id="btn_do_test_{{$lesson->id}}" href="#">
-                                        <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
-                                        ทำแบบทดสอบท้ายบท                                    
-                                    </a>
-                                    <script>
-                                        document.getElementById('btn_do_test_{{$lesson->id}}').addEventListener('click', function() {
-                                            Swal.fire({
-                                                title: 'แจ้งเตือนการใช้งาน',
-                                                html: '{!! $alert_msg_html !!}',
-                                                showConfirmButton: true,                                        
-                                            });
-                                        });
-                                    </script>
-                                </div>
+                            <li style="/* padding-left:30px; */">
+                              <div class="none_score">
+                                  <a id="btn_do_test_{{$lesson->id}}" href="#" class="d-flex align-items-center">
+                                      <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu"></em>
+                                      ทำแบบทดสอบท้ายบท 
+                                      <img src="{{ asset('images/lock.png') }}" width="24" class="ms-auto">
+                                  </a>
+                                  <script>
+                                      document.getElementById('btn_do_test_{{$lesson->id}}').addEventListener('click', function() {
+                                          Swal.fire({
+                                              title: 'แจ้งเตือนการใช้งาน',
+                                              html: '{!! $alert_msg_html !!}',
+                                              showConfirmButton: true,                                        
+                                          });
+                                      });
+                                  </script>
+                              </div>
                             </li>
                           @endif
                       @endif                                                                               
@@ -217,11 +222,12 @@
                               </div>
                             </li>
                             @else
-                            <li style="padding-left:30px;">
+                            <li style="/* padding-left:30px; */">
                               <div class="none_score">
-                                  <a id="btn_do_posttest" href="#">
-                                    <em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu "></em>
-                                      วัดผลหลังเรียนรู้ (Post-test)                                    
+                                  <a id="btn_do_posttest" href="#" class="d-flex align-items-center">
+                                      <em class="fas fa-graduation-cap fs-5 me-2 icon_list_menu"></em>
+                                      วัดผลหลังเรียนรู้ (Post-test)
+                                      <img src="{{ asset('images/lock.png') }}" width="24" class="ms-auto">
                                   </a>
                                   <script>
                                       document.getElementById('btn_do_posttest').addEventListener('click', function() {
@@ -233,7 +239,7 @@
                                       });
                                   </script>
                               </div>
-                          </li>
+                            </li>
                             @endif
                           @endif        
                       @endif        
