@@ -28,7 +28,7 @@ class CurriculumLessonQuestionController extends Controller
     public function index(Request $req){
 
         $curriculum_lesson = $this->getCurriculumLesson($req);
-        $rs = CurriculumLessonQuestion::where('curriculum_lesson_id',$req->curriculum_lesson_id)->paginate(10);
+        $rs = CurriculumLessonQuestion::where('curriculum_lesson_id',$req->curriculum_lesson_id)->orderBy('pos','asc')->get();
 
         return view('admin.curriculum-lesson-question.index', compact('rs','curriculum_lesson'));
     }
@@ -138,5 +138,16 @@ class CurriculumLessonQuestionController extends Controller
         set_notify('success', 'ลบข้อมูลเรียบร้อย');
 
         return back();
+    }
+
+    public function updateOrder(Request $request)
+    {
+        $order = $request->input('order');
+        foreach ($order as $index => $id) {
+            $item        = CurriculumLessonQuestion::find($id);
+            $item->pos = $index + 1;
+            $item->save();
+        }
+        return response()->json(['status' => 'success']);
     }
 }

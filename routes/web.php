@@ -85,6 +85,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     // drag&drop order
     Route::post('/faq/update-order', [App\Http\Controllers\Admin\FaqController::class, 'updateOrder'])->name('faq.updateOrder');
     Route::post('/survey/update-order', [App\Http\Controllers\Admin\SurveyController::class, 'updateOrder'])->name('survey.updateOrder');
+    Route::post('/curriculum-lesson-question/update-order', [App\Http\Controllers\Admin\CurriculumLessonQuestionController::class, 'updateOrder'])->name('admin.curriculum-lesson-question.updateOrder');
 
 });
 

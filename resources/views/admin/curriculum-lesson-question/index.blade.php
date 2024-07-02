@@ -35,14 +35,11 @@
                             <th width="70" scope="col">จัดการ</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="sortable">
                         @foreach ($rs as $item)
-                            <tr>
-                                <td class="text-center text-sm">
-                                    <a href="" class="mx-3"><i class="ni ni-bold-up" data-toggle="tooltip" data-bs-original-title="เลื่อนขึ้น"></i></a>
-                                    <a href="" class="mx-3"><i class="ni ni-bold-down" data-toggle="tooltip" data-bs-original-title="เลื่อนลง"></i></a>
-                                </td>
-                                <td class="text-center">{{ autoNumber($rs) }}</td>                                
+                            <tr data-id="{{ $item->id }}">
+                                <td class="drag-handle"><i class="fas fa-grip-lines"></i></td>
+                                <td class="text-center td-item-no">{{ autoNumber($rs) }}</td>                                
                                 <td>{!! @$item->name !!}</td>                                
                                 <td class="text-center">{!! statusBadge(@$item->status) !!}</td>                                
                                 <td class="text-center text-sm">
@@ -59,9 +56,61 @@
             </div>
             <!-- Pagination -->
             <div class="mt-3">                
-                {{ $rs->appends(@$_GET)->render("vendor.pagination.bootstrap-5-right") }}
+                {{-- {{ $rs->appends(@$_GET)->render("vendor.pagination.bootstrap-5-right") }} --}}
             </div>
         </div>
     </div>
 
 @endsection
+@push('js')
+    <script>
+        $(function() {
+
+            function runItemNo(){
+                item_no = 1;
+                $(".td-item-no").each(function(item_no){                                
+                    $(this).html(item_no+1);                    
+                });                
+            }
+
+            $("#sortable").sortable({
+                update: function(event, ui) {
+                    let order = $(this).sortable('toArray', {
+                        attribute: 'data-id'
+                    });
+                    $.ajax({
+                        url: '{{ url('admin/curriculum-lesson-question/update-order') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            order: order
+                        },
+                        success: function(response) {
+                            runItemNo();
+                            Toastify({
+                                text: "เรียงลำดับใหม่สำเร็จ",
+                                duration: 3000,
+                                close: true,
+                                gravity: "top", // `top` or `bottom`
+                                position: "center", // `left`, `center` or `right`
+                                backgroundColor: "#4fbe87",
+                                stopOnFocus: true // Prevents dismissing of toast on hover
+                            }).showToast();                            
+                        },
+                        error: function(xhr) {
+                            Toastify({
+                                text: "เรียงลำดับไม่สำเร็จ",
+                                duration: 3000,
+                                close: true,
+                                gravity: "top", // `top` or `bottom`
+                                position: "center", // `left`, `center` or `right`
+                                backgroundColor: "#dc3545",
+                                stopOnFocus: true // Prevents dismissing of toast on hover
+                            }).showToast();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endpush
