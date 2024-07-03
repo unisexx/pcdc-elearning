@@ -4,6 +4,12 @@
 
 @section('content')
     <div class="row">
+
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            {!! Form::select('curriculum_id', $curriculums, null, ['class' => 'form-select float-end', 'placeholder' => 'เลือกหลักสูตร...', 'id' => 'curriculumSelect']) !!}
+        </div>
+        <div class="w-100 mb-3"></div>
+
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
@@ -12,12 +18,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนในระบบ</p>
                                 <h5 class="font-weight-bolder">
-                                    2,345
+                                    {{ number_format($userCount) }}
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span>
-                                    จากเดือนก่อน
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -37,12 +39,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนใหม่วันนี้</p>
                                 <h5 class="font-weight-bolder">
-                                    18
+                                    {{ number_format($userCountToday) }}
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                    จากเมื่อวาน
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -60,14 +58,12 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">จำนวนผู้เข้าร่วมทำแบบทดสอบ</p>
-                                <h5 class="font-weight-bolder">
-                                    1,835
-                                </h5>
-                                <p class="mb-0">
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                    จากเดือนก่อน
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                    จำนวนผู้เข้าร่วมทำแบบทดสอบ
                                 </p>
+                                <h5 id="allPostExamCount" class="font-weight-bolder">
+                                    {{-- Ajax Data Here --}}
+                                </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -86,12 +82,9 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">จำนวนผู้ผ่านแบบทดสอบ</p>
-                                <h5 class="font-weight-bolder">
-                                    945
+                                <h5 id="allPostExamPassCount" class="font-weight-bolder">
+                                    {{-- Ajax Data Here --}}
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span> จากเดือนก่อน
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -108,15 +101,11 @@
         <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
-                    <h6 class="text-capitalize">จำนวนผู้ผ่านแบบทดสอบ (ออกใบประกาศ)</h6>
-                    <p class="text-sm mb-0">
-                        <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4%</span> จากปีก่อน
-                    </p>
+                    <h6 class="text-capitalize">จำนวนผู้ทำแบบทดสอบ</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
-                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                        <canvas id="stackedBarChart" class="chart-canvas" height="300"> {{-- Ajax Data Here --}}</canvas>
                     </div>
                 </div>
             </div>
@@ -127,35 +116,7 @@
                     <div class="carousel-inner border-radius-lg h-100">
                         <div class="carousel-item h-100 active" style="background-image: url('{{ asset('images/cert.png') }}');
         background-size: cover;">
-                            {{-- <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Get started with Argon</h5>
-                                <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-                            </div> --}}
                         </div>
-                        {{-- <div class="carousel-item h-100" style="background-image: url('./img/carousel-2.jpg');
-        background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                                <p>That’s my skill. I’m not really specifically talented at anything except for the
-                                    ability to learn.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100" style="background-image: url('./img/carousel-3.jpg');
-        background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-trophy text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                                <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
-                            </div>
-                        </div> --}}
                     </div>
                     <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -266,7 +227,8 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center">
-                        <tbody>
+                        {{-- Ajax Data Here --}}
+                        <tbody id="surveyResultsTable">
                             <tr>
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
@@ -277,7 +239,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">8.5</h6>
+                                        <h6 class="text-sm mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -291,7 +253,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">7.8</h6>
+                                        <h6 class="text-sm mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -305,7 +267,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">9.2</h6>
+                                        <h6 class="text-sm mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -319,7 +281,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">8.0</h6>
+                                        <h6 class="text-sm mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -333,7 +295,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">8.7</h6>
+                                        <h6 class="text-sm mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -348,81 +310,105 @@
 @push('js')
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-    <script>
-        var ctx1 = document.getElementById("chart-line").getContext("2d");
 
-        new Chart(ctx1, {
-            type: "bar", // เปลี่ยนประเภทกราฟเป็น bar
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    backgroundColor: 'rgba(94, 114, 228, 0.5)', // สีพื้นหลังของแท่งกราฟ
-                    borderColor: '#5e72e4', // สีขอบของแท่งกราฟ
-                    borderWidth: 1, // ความหนาของขอบแท่งกราฟ
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500], // ข้อมูลในกราฟ
-                    maxBarThickness: 50, // กำหนดความหนาสูงสุดของแท่งกราฟ
-                    barThickness: 40, // กำหนดความหนาของแท่งกราฟ
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
+    <script>
+        $(document).ready(function() {
+            var ctx = document.getElementById('stackedBarChart').getContext('2d');
+            var stackedBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [{
+                            label: 'ผู้ทำแบบทดสอบไม่ผ่าน',
+                            data: [], // Initial empty data
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            stack: 'Stack 0',
                         },
-                        ticks: {
+                        {
+                            label: 'ผู้ทำแบบทดสอบผ่าน',
+                            data: [], // Initial empty data
+                            backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                            stack: 'Stack 0',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
                             display: true,
-                            padding: 10,
-                            color: '#fbfbfb',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
+                            text: 'จำนวนผู้ทำแบบทดสอบผ่านและไม่ผ่านในแต่ละเดือน'
                         }
                     },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
+                    scales: {
+                        x: {
+                            stacked: true,
                         },
-                        ticks: {
-                            display: true,
-                            color: '#ccc',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        },
-                        // ปรับการตั้งค่าสำหรับการจัดกลุ่มแท่งกราฟ
-                        categoryPercentage: 0.8, // เพิ่มเปอร์เซ็นต์ของการจัดกลุ่ม
-                        barPercentage: 0.9, // เพิ่มเปอร์เซ็นต์ของความหนาแท่งกราฟ
+                        y: {
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 1 // ตั้งค่าให้แกน y แสดงเฉพาะจำนวนเต็ม
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Load data when page loads
+            ajaxDashboard($('#curriculumSelect').val());
+
+            // Load data when curriculum changes
+            $('#curriculumSelect').change(function() {
+                var curriculum_id = $(this).val();
+                ajaxDashboard(curriculum_id);
+            });
+
+            function ajaxDashboard(curriculum_id) {
+                $.ajax({
+                    url: "{{ route('ajax.dashboard') }}",
+                    type: "GET",
+                    data: {
+                        curriculum_id: curriculum_id
                     },
-                },
-            },
+                    success: function(response) {
+                        var tbody = $('#surveyResultsTable');
+                        tbody.empty();
+
+                        $.each(response.surveyResults, function(index, survey) {
+                            var row = '<tr>' +
+                                '<td class="w-50">' +
+                                '<div class="d-flex px-2 py-1 align-items-center">' +
+                                '<div class="ms-4">' +
+                                '<h6 class="text-sm mb-0">' + survey.survey.title + '</h6>' +
+                                '</div>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td>' +
+                                '<div class="text-center">' +
+                                '<h6 class="text-sm mb-0">' + parseFloat(survey.average_rating).toFixed(1) + '</h6>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+
+                            tbody.append(row);
+                        });
+
+                        // Update allPostExam and allPostExamPass with number_format
+                        $('#allPostExamCount').text(response.allPostExamCount.toLocaleString());
+                        $('#allPostExamPassCount').text(response.allPostExamPassCount.toLocaleString());
+
+                        // Update chart data
+                        stackedBarChart.data.datasets[0].data = response.postExamNotPassDataChart;
+                        stackedBarChart.data.datasets[1].data = response.postExamPassDataChart;
+                        stackedBarChart.update();
+                    }
+                });
+            }
         });
     </script>
 @endpush

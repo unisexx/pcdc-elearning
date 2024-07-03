@@ -50,25 +50,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculum'])->name('elearning.curriculum.index');
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
     Route::get('/elearning/curriculum/lesson-exam/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamIntro'])->name('elearning.curriculum-lesson.index');
-    
+
     //Pretest-Posttest
     Route::get('/elearning/curriculum/{curriculum_id}/{exam_type_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePost'])->name('elearning.curriculum-lesson.index');
     Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/execute', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamExecute'])->name('elearning.curriculum-lesson.start');
-    
+
     Route::get('/elearning/{user_curriculum_pp_exam}/exam', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExam'])->name('elearning.curriculum-lesson.exam');
     Route::post('/elearning/{user_curriculum_pp_exam}/exam/save', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamSave'])->name('elearning.curriculum-lesson.exam');
     Route::post('/elearning/curriculum/{curriculum_id}/reset', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumReset'])->name('elearning.curriculum-lesson.reset');
 
     Route::get('/elearning/history', [App\Http\Controllers\Frontend\ElearningHistoryController::class, 'index'])->name('elearning.history.index');
-    
 
-
-    Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');    
+    Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
 });
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/ajax-dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'ajaxDashboard'])->name('ajax.dashboard');
+
     Route::resource('/user', App\Http\Controllers\Admin\UserController::class)->names('admin.user');
     Route::resource('/hilight', App\Http\Controllers\Admin\HilightController::class)->names('admin.hilight');
     Route::resource('/contact', App\Http\Controllers\Admin\ContactController::class)->names('admin.contact');
