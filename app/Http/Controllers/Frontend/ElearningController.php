@@ -30,6 +30,17 @@ class ElearningController extends Controller
                       ->orderBy('pos','asc')->get();
         return view('frontend.elearning.index', compact('curriculum'));
     }
+
+    public function curriculumContinue($curriculum_id){
+        $curriculum = Curriculum::find($curriculum_id);
+        $all_exam_result = UserCurriculumPpExam::where('user_id', Auth::user()->id)
+                        ->where('curriculum_id', $curriculum->id)
+                        ->get();
+
+        //check pretest continue
+        // if (!empty($curriculum->curriculum_exam_setting))
+        //     if ($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+    }
     
     public function curriculum($curriculum_id){
         $curriculum = Curriculum::find($curriculum_id);        
@@ -253,10 +264,8 @@ class ElearningController extends Controller
     }
 
     public function curriculumReset($curriculum_id, Request $req){        
-        if($req->btn_reset){
-            UserCurriculumExamHistory::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
-            UserCurriculumPpExam::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
-        }
+        UserCurriculumExamHistory::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
+        UserCurriculumPpExam::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
         return redirect(url('elearning/curriculum/'.$curriculum_id));
     }
 }
