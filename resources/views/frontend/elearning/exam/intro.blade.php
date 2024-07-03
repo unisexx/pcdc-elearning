@@ -76,10 +76,40 @@
                         </a>        
                     @endif
                     @if($pass_score > $exam_result->total_score)
+                        @if($exam_type == 'lesson')
+                            <a href="{{ url('elearning/curriculum/lesson/'.$curriculum_lesson->id) }}" class="btn btn-lg btn-success"><i class="fa fa-book"></i> ทบทวนเนื้อหาบทเรียน</a>
+                        @endif
                         <button type="submit" id="submit_restart" name="submit_restart" class="btn btn-warning btn-lg btn-restart"  value="restart">
                             <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
                             เริ่มทำใหม่อีกครั้ง
                         </button>
+                    @elseif($exam_result->total_score >= $pass_score)
+                        @php                            
+                            if($exam_type == 'lesson'){
+                                $exam_curriculum_pos = $exam_result->curriculum_lesson->pos;
+                                if($exam_curriculum_pos){
+                                    $next_lesson = $curriculum->curriculum_lesson()->where('pos','>',$exam_curriculum_pos)->first();
+                                    if($next_lesson){
+                                        echo '<a href="'.url('elearning/curriculum/lesson/'.$curriculum_lesson->id).'" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                    }else{
+                                        if($curriculum->curriculum_exam_setting)
+                                            if($curriculum->curriculum_exam_setting->post_test_status == 'active')
+                                            {
+                                                echo '<a href="'.url('elearning/curriculum/'.$curriculum->id.'/posttest').'" class="btn btn-lg btn-success">วัดผลหลังเรียนรู้ (Post-test) <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                            }
+                                    }
+                                }
+                            }elseif($exam_type == 'pretest'){
+                                $next_lesson = $curriculum->curriculum_lesson()->orderBy('pos','asc')->first();
+                                if($next_lesson){
+                                    echo '<a href="'.url('elearning/curriculum/lesson/'.$curriculum_lesson->id).'" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                }
+                            }elseif($exam_type=='posttest'){
+                                if($exam_result->pass_score <= $exam_result->total_score){
+                                    echo '<button type="button" class="btn btn-lg btn-success" id="btn-show-result">ตรวจสอบผลการเรียน/ดาวนโหลดใบประกาศ</a>';                                    
+                                }
+                            }
+                        @endphp                        
                     @endif
                 @endif
                 {!! Form::close() !!}        
@@ -105,6 +135,23 @@
             }else{
                 return false;
             }
+        });
+    });
+</script>
+@endpush
+
+@push('js')
+<script>
+    $(document).ready(function(){
+        function setResultTab(){
+            $("#lesson-tab").attr("class", "nav-link");
+            $("#lesson-tab-pane").attr("class","tab-pane fade");
+            $("#academic_results-tab").attr("class", "nav-link active");
+            $("#academic_results-tab-pane").attr("class","tab-pane fade active show");
+        }        
+
+        $("#btn-show-result").click(function(){
+            setResultTab();
         });
     });
 </script>
