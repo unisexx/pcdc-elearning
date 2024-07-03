@@ -148,8 +148,8 @@
             $("#submit_start").click(function() {
                 if (confirm('ต้องการเริ่มทำแบบทดสอบ ?')) {
                     Swal.fire({
-                        title: 'แจ้งเตือนการใช้งาน',
-                        html: '<img src="{{ asset('images/preload.gif') }}" width="200"><br>...กำลังดำเนินการ...',
+                        title: '...กำลังดำเนินการ...',
+                        html: '<img src="{{ asset('images/preload.gif') }}" width="200">',
                         showConfirmButton: false,
                     });
                     return true;
@@ -160,8 +160,8 @@
             $("#submit_restart").click(function() {
                 if (confirm('ต้องการเริ่มทำแบบทดสอบใหม่อีกครั้ง ?')) {
                     Swal.fire({
-                        title: 'แจ้งเตือนการใช้งาน',
-                        html: '<img src="{{ asset('images/preload.gif') }}" width="200"><br>...กำลังดำเนินการ...',
+                        title: '...กำลังดำเนินการ...',
+                        html: '<img src="{{ asset('images/preload.gif') }}" width="200">',
                         showConfirmButton: false,
                     });
                     return true;
