@@ -42,5 +42,6 @@ class UserCurriculumPpExam extends Model
     
     
     public function curriculum() { return $this->belongTo(Curriculum::class);}
+    public function curriculum_lesson() { return $this->hasOne('App\Models\CurriculumLesson','id', 'curriculum_lesson_id'); }
     public function user_curriculum_pp_exam_qas() { return $this->hasMany('App\Models\UserCurriculumPpExamQas','user_curriculum_pp_exam_id','id'); }
 }
