@@ -99,7 +99,10 @@
                                     <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
                                     <ul class="dropdown-menu shadow">
                                         @foreach($curriculum_menu as $curriculum_menu)
-                                        <li><a class="dropdown-item" href="{{ url("elearning/curriculum/".$curriculum_menu->id)}}">{{ $curriculum_menu->name }}</a></li>
+                                        @php
+                                            $url = env('CURRICULUM_CONTINUE') ? url("elearning/curriculum/".$curriculum_menu->id.'/continue') : url("elearning/curriculum/".$curriculum_menu->id);
+                                        @endphp
+                                        <li><a class="dropdown-item" href="{{ $url }}">{{ $curriculum_menu->name }}</a></li>
                                         @endforeach                                        
                                     </ul>
                                 </li>

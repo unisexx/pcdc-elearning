@@ -37,9 +37,38 @@ class ElearningController extends Controller
                         ->where('curriculum_id', $curriculum->id)
                         ->get();
 
-        //check pretest continue
-        // if (!empty($curriculum->curriculum_exam_setting))
-        //     if ($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+        //check exam setting
+        if (!empty($curriculum->curriculum_exam_setting)){
+            //check pretest continue
+             if ($curriculum->curriculum_exam_setting->pre_test_status == 'active'){
+                    $pretest_exam = $all_exam_result->where('exam_type','pretest')->first();
+                    if($pretest_exam){
+                        if($pretest_exam->total_question < $pretest_exam->n_question){
+                            return redirect(url('elearning/curriculum/'.$curriculum->id.'/pretest'));
+                        }
+                    }else{
+                        return redirect(url('elearning/curriculum/'.$curriculum->id));
+                    }
+             }
+
+            //check lesson continue
+            $exam_lesson = $all_exam_result->where('exam_type','lesson');
+            if($exam_lesson)
+                foreach($exam_lesson as $item)
+                    if($item->n_question > $item->total_question)
+                        if($item->total_question > 0 && $item->pass_score > $item->total_score)
+                            return redirect(url('elearning/curriculum/lesson-exam/'.$item->curriculum_lesson_id));
+                        else
+                            return redirect(url('elearning/curriculum/lesson/'.$item->curriculum_lesson_id));
+                        
+
+            //check post test
+            $exam_lesson = $all_exam_result->where('exam_type','posttest');
+            if($exam_lesson)
+                return redirect(url('elearning/curriculum/'.$curriculum->id.'/posttest'));
+        }
+
+        return redirect(url('elearning/curriculum/'.$curriculum->id));
     }
     
     public function curriculum($curriculum_id){

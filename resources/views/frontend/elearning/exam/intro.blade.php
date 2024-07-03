@@ -141,6 +141,11 @@
         $(document).ready(function() {
             $("#submit_start").click(function() {
                 if (confirm('ต้องการเริ่มทำแบบทดสอบ ?')) {
+                    Swal.fire({
+                        title: 'แจ้งเตือนการใช้งาน',
+                        html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังดำเนินการ...',
+                        showConfirmButton: false,                                        
+                    });
                     return true;
                 } else {
                     return false;
@@ -148,6 +153,11 @@
             });
             $("#submit_restart").click(function() {
                 if (confirm('ต้องการเริ่มทำแบบทดสอบใหม่อีกครั้ง ?')) {
+                    Swal.fire({
+                        title: 'แจ้งเตือนการใช้งาน',
+                        html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังดำเนินการ...',
+                        showConfirmButton: false,                                        
+                    });
                     return true;
                 } else {
                     return false;

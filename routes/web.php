@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/elearning/curriculum/lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLesson'])->name('elearning.curriculum-lesson.index');
     Route::get('/elearning/curriculum/lesson-exam/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamIntro'])->name('elearning.curriculum-lesson.index');
 
+    Route::get('/elearning/curriculum/{curriculum_id}/continue', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumContinue'])->name('elearning.continue');
+
     //Pretest-Posttest
     Route::get('/elearning/curriculum/{curriculum_id}/{exam_type_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamPrePost'])->name('elearning.curriculum-lesson.index');
     Route::post('/elearning/curriculum/{curriculum_id}/{exam_type_id}/execute', [App\Http\Controllers\Frontend\ElearningController::class, 'curriculumLessonExamExecute'])->name('elearning.curriculum-lesson.start');
