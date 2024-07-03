@@ -45,9 +45,28 @@ class StatController extends Controller
         $data['districts'] = $province_id ? District::whereRaw('left(id,2) = '.$province_id)->orderBy('name', 'asc')->pluck('name','id') : [];
         $data['subdistricts'] = $district_id  ? Subdistrict::whereRaw('left(id,4) = '.$district_id)->orderBy('name', 'asc')->pluck('name','id') : [];
 
-        $data['province_exam'] = $this->provinceReportTable($data);
+        $data['curriculum_list_rep'] = $curriculum_id ? Curriculum::where('id',$curriculum_id)->get() : Curriculum::get();
         
+        $data['curriculum_month_pass_report'] = $this->curriculumPassMonthReport($data);
+        $data['province_exam'] = $this->provinceReportTable($data);
+                
+
         return view('frontend.stat.index', compact('data'));
+    }
+
+    function curriculumPassMonthReport($data){
+        extract($data);
+        $curriculum_month_pass_report = [];        
+        $year_condition = $exam_year ? " and year(post_date_finished) =".($exam_year-543) : '';        
+        foreach($curriculum_list_rep as $item){
+            $curriculum_month_pass_report[$item->id]['name'] = $item->name;
+            for($m=1;$m<=12;$m++){
+                $rep_sql = "SELECT count(*) n_pass_m_".$m." FROM user_curriculum_exam_histories uceh JOIN users u ON uceh.user_id = u.id  WHERE 1=1 AND curriculum_id = ".$item->id." AND post_pass_status = 'y'";
+                $month_condition = " and month(post_date_finished) =".$m;
+                $curriculum_month_pass_report[$item->id]['n_pass_m_'.$m] = \DB::select($rep_sql.$year_condition.$month_condition)[0]->{'n_pass_m_'.$m};
+            }
+        }        
+        return $curriculum_month_pass_report;
     }
 
     function provinceReportTable($data){

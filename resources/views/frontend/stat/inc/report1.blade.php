@@ -25,6 +25,7 @@
                     </div>
                 </div>
                 <div id="chart-bar2" class="chartsh"></div>
+                {{-- <div id="chart-bar12" class="chartsh"></div> --}}
             </div>
             <div class="table-responsive px-4">
                 <table class="table table-bordered table-hover text-center table-style1">
@@ -35,95 +36,34 @@
                                 <div class="title-table">จำนวนผู้ผ่านหลักสูตรต่างๆ (คน)</div>
                             </th>
                         </tr>
-                        <tr>
-                            <th>หลักสูตรที่ 1<br>โรคติดต่อในเด็กและโควิด 19</th>
-                            <th>หลักสูตรที่ 2<br>โรคติดเชื้อทางเดินหายใจจากเชื้อไวรัสอาร์เอสวี</th>
-                            <th>หลักสูตรที่ 3<br>โรคไข้หวัดใหญ่ในเด็ก</th>
-                            <th>หลักสูตรที่ 4<br>โรคมือเท้าปาก</th>
-                            <th>หลักสูตรที่ 5<br>โรคเฮอร์แปงไจน่า</th>
-                            <th>หลักสูตรที่ 6<br>โรคติดเชื้อไอพีดี</th>
-                            <th>หลักสูตรที่ 7<br>โรคท้องเสียจากการติดเชื้อโนโรไวรัส</th>
-                            <th>หลักสูตรที่ 8<br>โรคอีสุกอีใส</th>
+                        <tr>                            
+                            @foreach($curriculum_month_pass_report as $key=>$item)                                
+                                <th>{!! $item['name'] !!}</th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
+                        @php                            
+                            $max_month = (intval($exam_year)-543) == date('Y') ? date("m") : 12;
+                            $chart_curriculum_name_value_str ='';
+                            $chart_curriculum_name_str_month = '';
+                            $chart_curriculum_name_str = '';
+                            // 'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
+                        @endphp
+                        @for($m=1;$m<=$max_month;$m++)
                         <tr>
-                            <td>มกราคม</td>
-                            <td>11</td>
-                            <td>50</td>
-                            <td>70</td>
-                            <td>20</td>
-                            <td>40</td>
-                            <td>21</td>
-                            <td>8</td>
-                            <td>70</td>
+                            <td>{{ get_month()[$m] }}</td>
+                            @foreach($curriculum_month_pass_report as $key=>$item)
+                                @php
+                                    $chart_curriculum_name_str_month.= $chart_curriculum_name_str_month ? "'data".($key+1)."', ".number_format($item['n_pass_m_'.$m],0) : ", ".number_format($item['n_pass_m_'.$m],0);
+                                @endphp
+                                <th>{{ number_format($item['n_pass_m_'.$m],0) }}</th>
+                            @endforeach  
+                            @php
+                                $chart_curriculum_name_value_str = '['.$chart_curriculum_name_str_month.'],';
+                            @endphp                          
                         </tr>
-                        <tr>
-                            <td>กุมภาพันธ์</td>
-                            <td>8</td>
-                            <td>50</td>
-                            <td>40</td>
-                            <td>30</td>
-                            <td>20</td>
-                            <td>31</td>
-                            <td>12</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>มีนาคม</td>
-                            <td>15</td>
-                            <td>15</td>
-                            <td>25</td>
-                            <td>35</td>
-                            <td>55</td>
-                            <td>65</td>
-                            <td>60</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>เมษายน</td>
-                            <td>18</td>
-                            <td>41</td>
-                            <td>22</td>
-                            <td>100</td>
-                            <td>20</td>
-                            <td>30</td>
-                            <td>44</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>พฤษภาคม</td>
-                            <td>19</td>
-                            <td>59</td>
-                            <td>41</td>
-                            <td>20</td>
-                            <td>99</td>
-                            <td>40</td>
-                            <td>39</td>
-                            <td>29</td>
-                        </tr>
-                        <tr>
-                            <td>มิถุนายน</td>
-                            <td>17</td>
-                            <td>42</td>
-                            <td>22</td>
-                            <td>75</td>
-                            <td>30</td>
-                            <td>50</td>
-                            <td>12</td>
-                            <td>122</td>
-                        </tr>
-                        <tr>
-                            <th>รวม</th>
-                            <th>88</th>
-                            <th>257</th>
-                            <th>220</th>
-                            <th>280</th>
-                            <th>264</th>
-                            <th>237</th>
-                            <th>175</th>
-                            <th>253</th>
-                        </tr>
+                        @endfor                        
                     </tbody>
                 </table>
             </div>
@@ -132,3 +72,61 @@
 
 
 </div>
+@push('js')
+{{-- <script>
+    $(document).ready(function(){
+        var chart = c3.generate({
+            bindto: '#chart-bar12', // id of chart wrapper
+            data: {
+                columns: [
+                    // each columns data
+                    // ['data1', 11, 8, 15, 18, 19, 17],
+                    // ['data2', 50, 50, 15, 41, 59, 42],
+                    // ['data3', 70, 40, 25, 22, 41, 22],
+                    // ['data4', 20, 30, 35, 100, 20, 75],
+                    {!! $chart_curriculum_name_value_str !!}                    
+                ],
+                type: 'bar', // default type of chart
+                colors: {
+                    data1: '#f86e90',
+                    data2: '#05c3fb',
+                    data3: '#4cb140',
+                    data4: '#009596',
+                    data5: '#5752d1',
+                    data6: '#ec7a08',
+                    data7: '#ecc35c',
+                    data8: '#2a64c5'
+                },
+                names: {
+                    // name of each serie
+                    'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
+                    'data2': 'หลักสูตรที่ 2 โรคติดเชื้อทางเดินหายใจจากเชื้อไวรัสอาร์เอสวี',
+                    'data3': 'หลักสูตรที่ 3 โรคไข้หวัดใหญ่ในเด็ก',
+                    'data4': 'หลักสูตรที่ 4 โรคมือเท้าปาก',
+                
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    // name of each category
+                    categories: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน']
+                },
+            },
+            bar: {
+                /*width: 10*/
+                width: {
+                    ratio: 0.5
+                }
+            },
+            legend: {
+                show: true, //hide legend
+            },
+            padding: {
+                bottom: 0,
+                top: 0
+            },
+        });   
+    });
+</script> --}}
+@endpush

@@ -127,11 +127,17 @@
                 event.preventDefault()
                 event.stopPropagation()
                 form.querySelector('.invalid-feedback').style.display = 'block'
+                form.classList.add('was-validated')
               } else {
                 form.querySelector('.invalid-feedback').style.display = 'none'
+                form.classList.remove('was-validated')
+                Swal.fire({
+                    title: 'แจ้งเตือนการใช้งาน',
+                    html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังส่งคำตอบ...',
+                    showConfirmButton: false,                                        
+                });
               }
-            }
-            form.classList.add('was-validated')
+            }            
       }, false)
     })
   })()

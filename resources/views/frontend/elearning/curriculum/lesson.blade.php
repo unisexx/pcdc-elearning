@@ -46,14 +46,14 @@
                         <tr class="my-4">
                             <th colspan="2" class="text-center">
                                 <div class="float-start">
-                                    @if($total_page <= $page && $page > 1)
+                                    @if($page > 1)
                                         <a href="{{ url('elearning/curriculum/lesson/'.$curriculum_lesson->id.'?page='.($page-1))}}" class="btn btn-lg btn-success">
                                             <i class="fa fa-angle-left"></i> ย้อนกลับ
                                         </a>
                                     @else
-                                        <a href="{{ url('elearning/curriculum/'.$curriculum_lesson->curriculum_id) }}" class="btn btn-lg btn-success">
+                                        {{-- <a href="{{ url('elearning/curriculum/'.$curriculum_lesson->curriculum_id) }}" class="btn btn-lg btn-success">
                                             <i class="fa fa-angle-left"></i> ย้อนกลับ
-                                        </a>
+                                        </a> --}}
                                     @endif
                                 </div>
                                 <div class="float-end">
