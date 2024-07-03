@@ -40,8 +40,7 @@ class ElearningController extends Controller
         $curriculum_lesson = CurriculumLesson::find($curriculum_lesson_id);        
         $curriculum = Curriculum::find($curriculum_lesson->curriculum_id);
         $page = empty(Request('page')) ? 1 : Request("page");
-        $total_page = $curriculum_lesson->curriculum_lesson_detail->count();
-
+        $total_page = $curriculum_lesson->curriculum_lesson_detail->count();        
         $detail = CurriculumLessonDetail::where('curriculum_lesson_id',$curriculum_lesson_id)->orderBy('pos','asc')->paginate(1);
         return view('frontend.elearning.curriculum.lesson', compact('curriculum','curriculum_lesson', 'detail','page', 'total_page'));
     }

@@ -30,3 +30,8 @@
     </div>
   </div>
 @endsection
+@push('js')
+<script>
+  $("#a_intro").addClass("active");
+</script>
+@endpush

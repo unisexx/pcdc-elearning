@@ -143,3 +143,14 @@
   })()
 </script>
 @endpush
+@push('js')
+<script>
+    @if($user_curriculum_pp_exam->exam_type == 'pretest')
+        $("#a_pretest").addClass("active");
+    @elseif($user_curriculum_pp_exam->exam_type == 'lesson')
+        $("#a_lesson_test_{{$user_curriculum_pp_exam->curriculum_lesson_id}}").addClass("active");
+    @elseif($user_curriculum_pp_exam->exam_type == 'posttest')
+        $("#a_posttest").addClass("active");
+    @endif
+</script>
+@endpush
