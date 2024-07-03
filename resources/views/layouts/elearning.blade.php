@@ -617,6 +617,11 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // ดำเนินการต่อเมื่อตอบ "ใช่"
+                        Swal.fire({
+                            title: 'แจ้งเตือนการใช้งาน',
+                            html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังดำเนินการ...',
+                            showConfirmButton: false,                                        
+                        });
                         $(this).closest('form').submit();
                     }
                 });
