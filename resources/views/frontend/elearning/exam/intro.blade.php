@@ -41,7 +41,8 @@
                             <div class="card-text">คะแนนที่ได้</div>
                             <div class="title_score_points">
                                 <span>{{ number_format($exam_result->total_score, 0) }}/{{ $exam_result->n_question }}</span>
-                                คะแนน</div>
+                                คะแนน
+                            </div>
                             @if ($exam_result->total_question == $exam_result->n_question)
                                 @if ($pass_score > $exam_result->total_score)
                                     <div class="title_score_points"><span>ไม่ผ่าน</span></div>
@@ -89,6 +90,17 @@
                                 <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
                                 เริ่มทำใหม่อีกครั้ง
                             </button>
+
+                            @if ($exam_type == 'pretest')
+                                @php
+                                    $next_lesson = $curriculum->curriculum_lesson()->orderBy('pos', 'asc')->first();
+                                    if ($next_lesson) {
+                                        echo '<a href="' .
+                                            url('elearning/curriculum/lesson/' . $next_lesson->id) .
+                                            '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                    }
+                                @endphp
+                            @endif
                         @elseif($exam_result->total_score >= $pass_score)
                             @php
                                 if ($exam_type == 'lesson') {
@@ -114,14 +126,8 @@
                                             }
                                         }
                                     }
-                                } elseif ($exam_type == 'pretest') {
-                                    $next_lesson = $curriculum->curriculum_lesson()->orderBy('pos', 'asc')->first();
-                                    if ($next_lesson) {
-                                        echo '<a href="' .
-                                            url('elearning/curriculum/lesson/' . $next_lesson->id) .
-                                            '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
-                                    }
-                                } elseif ($exam_type == 'posttest') {
+                                }
+                                if ($exam_type == 'posttest') {
                                     if ($exam_result->pass_score <= $exam_result->total_score) {
                                         echo '<button type="button" class="btn btn-lg btn-success" id="btn-show-result">ตรวจสอบผลการเรียน/ดาวนโหลดใบประกาศ</a>';
                                     }
@@ -143,8 +149,8 @@
                 if (confirm('ต้องการเริ่มทำแบบทดสอบ ?')) {
                     Swal.fire({
                         title: 'แจ้งเตือนการใช้งาน',
-                        html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังดำเนินการ...',
-                        showConfirmButton: false,                                        
+                        html: '<img src="{{ asset('images/preload.gif') }}" width="200"><br>...กำลังดำเนินการ...',
+                        showConfirmButton: false,
                     });
                     return true;
                 } else {
@@ -155,8 +161,8 @@
                 if (confirm('ต้องการเริ่มทำแบบทดสอบใหม่อีกครั้ง ?')) {
                     Swal.fire({
                         title: 'แจ้งเตือนการใช้งาน',
-                        html: '<img src="{{ asset("images/preload.gif") }}" width="200"><br>...กำลังดำเนินการ...',
-                        showConfirmButton: false,                                        
+                        html: '<img src="{{ asset('images/preload.gif') }}" width="200"><br>...กำลังดำเนินการ...',
+                        showConfirmButton: false,
                     });
                     return true;
                 } else {
