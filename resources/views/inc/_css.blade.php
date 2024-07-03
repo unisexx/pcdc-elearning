@@ -70,7 +70,11 @@
          z-index: 999 !important;
      }
 
-     .tox-tinymce{
-        border-radius: .5rem !important;
+     .tox-tinymce {
+         border-radius: .5rem !important;
+     }
+
+     .navbar-vertical.bg-white .navbar-nav>.nav-item .nav-link.active {
+         background-color: #dee2e6 !important;
      }
  </style>
