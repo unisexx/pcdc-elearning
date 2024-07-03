@@ -60,10 +60,14 @@ class ElearningController extends Controller
                             return redirect(url('elearning/curriculum/lesson-exam/'.$item->curriculum_lesson_id));
                         else
                             return redirect(url('elearning/curriculum/lesson/'.$item->curriculum_lesson_id));
-                        
+            
+                            
+            $lesson = $curriculum->curriculum_lesson()->where('status', 'active')->orderBy('pos', 'asc')->first();
+            if($lesson)
+                return redirect(url('elearning/curriculum/lesson/'.$lesson->id));
 
             //check post test
-            $exam_lesson = $all_exam_result->where('exam_type','posttest');
+            $exam_lesson = $all_exam_result->where('exam_type','posttest')->first();
             if($exam_lesson)
                 return redirect(url('elearning/curriculum/'.$curriculum->id.'/posttest'));
         }
