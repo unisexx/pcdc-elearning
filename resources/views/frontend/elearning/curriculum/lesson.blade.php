@@ -77,3 +77,8 @@
         </div>        
     </div>    
 @endsection
+@push('js')
+<script>    
+    $("#a_lesson_{{$curriculum_lesson->id}}").addClass("active");        
+</script>
+@endpush
