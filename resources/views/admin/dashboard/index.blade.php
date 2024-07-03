@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนในระบบ</p>
+                                <p class=" mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนในระบบ</p>
                                 <h5 class="font-weight-bolder">
                                     {{ number_format($userCount) }}
                                 </h5>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนใหม่วันนี้</p>
+                                <p class=" mb-0 text-uppercase font-weight-bold">ผู้ใช้ที่ลงทะเบียนใหม่วันนี้</p>
                                 <h5 class="font-weight-bolder">
                                     {{ number_format($userCountToday) }}
                                 </h5>
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                <p class=" mb-0 text-uppercase font-weight-bold">
                                     จำนวนผู้เข้าร่วมทำแบบทดสอบ
                                 </p>
                                 <h5 id="allPostExamCount" class="font-weight-bolder">
@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">จำนวนผู้ผ่านแบบทดสอบ</p>
+                                <p class=" mb-0 text-uppercase font-weight-bold">จำนวนผู้ผ่านแบบทดสอบ</p>
                                 <h5 id="allPostExamPassCount" class="font-weight-bolder">
                                     {{-- Ajax Data Here --}}
                                 </h5>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
-                        <canvas id="stackedBarChart" class="chart-canvas" height="300"> {{-- Ajax Data Here --}}</canvas>
+                        <canvas id="stackedBarChart" class="chart-canvas" height="400"> {{-- Ajax Data Here --}}</canvas>
                     </div>
                 </div>
             </div>
@@ -131,95 +131,32 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
-
+        <div class="col-lg-4 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">เวลาที่ใช้ทำแบบทดสอบโดยเฉลี่ย</h6>
+                        <h6 class="mb-2">ประเภทผู้ใช้งานทั้งหมด</h6>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center ">
-                        <tbody>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class="text-sm mb-0">บทเรียนที่ 1 การเกิดโรค</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class="text-sm mb-0">8 นาที</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class="text-sm mb-0">บทเรียนที่ 2 โรคติดต่อที่พบบ่อยในเด็ก</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class="text-sm mb-0">15 นาที</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class="text-sm mb-0">บทเรียนที่ 3 การป้องกันควบคุมโรคติดต่อ</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class="text-sm mb-0">12 นาที</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class="text-sm mb-0">บทเรียนที่ 4 แนวปฏิบัติการเฝ้าระวังป้องกัน</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class="text-sm mb-0">10 นาที</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class="text-sm mb-0">บทเรียนที่ 5 การดูแลเด็กป่วยเบื้องต้น</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class="text-sm mb-0">14 นาที</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <canvas id="userTypePieChart" class="chart-canvas" height="300"></canvas>
                 </div>
             </div>
-
         </div>
-        <div class="col-lg-5">
-            <div class="card mb-4">
+        <div class="col-lg-4 mb-lg-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-2">ช่องทางการลงทะเบียน</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="providerPieChart" class="chart-canvas" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-2">แบบประเมินความพึงพอใจ</h6>
@@ -227,19 +164,25 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th>หัวข้อ</th>
+                                <th>คะแนนเฉลี่ย (เต็ม 5)</th>
+                            </tr>
+                        </thead>
                         {{-- Ajax Data Here --}}
                         <tbody id="surveyResultsTable">
                             <tr>
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <h6 class="text-sm mb-0">ความน่าสนใจของเนื้อหา</h6>
+                                            <h6 class=" mb-0">ความน่าสนใจของเนื้อหา</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">0</h6>
+                                        <h6 class=" mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -247,13 +190,13 @@
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <h6 class="text-sm mb-0">ความยากง่ายของบทเรียน</h6>
+                                            <h6 class=" mb-0">ความยากง่ายของบทเรียน</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">0</h6>
+                                        <h6 class=" mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -261,13 +204,13 @@
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <h6 class="text-sm mb-0">ความพึงพอใจ</h6>
+                                            <h6 class=" mb-0">ความพึงพอใจ</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">0</h6>
+                                        <h6 class=" mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -275,13 +218,13 @@
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <h6 class="text-sm mb-0">ระบบง่ายต่อการใช้งาน</h6>
+                                            <h6 class=" mb-0">ระบบง่ายต่อการใช้งาน</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">0</h6>
+                                        <h6 class=" mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -289,13 +232,13 @@
                                 <td class="w-50">
                                     <div class="d-flex px-2 py-1 align-items-center">
                                         <div class="ms-4">
-                                            <h6 class="text-sm mb-0">ประโยชน์ต่อการนำไปใช้</h6>
+                                            <h6 class=" mb-0">ประโยชน์ต่อการนำไปใช้</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <h6 class="text-sm mb-0">0</h6>
+                                        <h6 class=" mb-0">0</h6>
                                     </div>
                                 </td>
                             </tr>
@@ -384,13 +327,13 @@
                                 '<td class="w-50">' +
                                 '<div class="d-flex px-2 py-1 align-items-center">' +
                                 '<div class="ms-4">' +
-                                '<h6 class="text-sm mb-0">' + survey.survey.title + '</h6>' +
+                                '<h6 class=" mb-0">' + survey.survey.title + '</h6>' +
                                 '</div>' +
                                 '</div>' +
                                 '</td>' +
                                 '<td>' +
                                 '<div class="text-center">' +
-                                '<h6 class="text-sm mb-0">' + parseFloat(survey.average_rating).toFixed(1) + '</h6>' +
+                                '<h6 class=" mb-0">' + parseFloat(survey.average_rating).toFixed(1) + '</h6>' +
                                 '</div>' +
                                 '</td>' +
                                 '</tr>';
@@ -409,6 +352,78 @@
                     }
                 });
             }
+        });
+    </script>
+@endpush
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // กราฟประเภทผู้ใช้
+            var ctx1 = document.getElementById('userTypePieChart').getContext('2d');
+            var userTypePieChart = new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: @json($userTypeLabels),
+                    datasets: [{
+                        data: @json($userTypeData),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'ประเภทผู้ใช้งานทั้งหมดในระบบ'
+                        }
+                    }
+                }
+            });
+
+            // กราฟช่องทางการลงทะเบียน
+            var ctx2 = document.getElementById('providerPieChart').getContext('2d');
+            var providerPieChart = new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: @json($providerLabels),
+                    datasets: [{
+                        data: @json($providerData),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'ช่องทางการลงทะเบียนผู้ใช้งาน'
+                        }
+                    }
+                }
+            });
         });
     </script>
 @endpush

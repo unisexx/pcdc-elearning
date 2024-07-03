@@ -26,7 +26,40 @@ class DashboardController extends Controller
         // ดึงข้อมูลผู้ใช้ที่ลงทะเบียนวันนี้
         $userCountToday = User::whereDate('created_at', $today)->count();
 
-        return view('admin.dashboard.index', compact('userCount', 'userCountToday', 'curriculums'));
+        /************** Pie Chart ประเภทผู้ใช้งาน **************/
+        // ดึงข้อมูลและจัดกลุ่มผู้ใช้ตาม user_type_id พร้อมกับโหลดข้อมูลของ UserType
+        $userTypes = User::with('userType')
+            ->selectRaw('user_type_id, COUNT(*) as count')
+            ->groupBy('user_type_id')
+            ->get();
+
+        // เตรียมข้อมูลสำหรับแสดงผลในกราฟ
+        $userTypeLabels = [];
+        $userTypeData   = [];
+
+        foreach ($userTypes as $userType) {
+            $userTypeLabels[] = $userType->userType->name ?? 'ไม่ระบุ';
+            $userTypeData[]   = $userType->count;
+        }
+        /************** Pie Chart ประเภทผู้ใช้งาน **************/
+
+        /************** Pie Chart ช่องทางการสมัคร **************/
+        // ดึงข้อมูลและจัดกลุ่มผู้ใช้ตาม provider
+        $providers = User::selectRaw("provider, COUNT(*) as count")
+            ->groupBy('provider')
+            ->get();
+
+        // เตรียมข้อมูลสำหรับแสดงผลในกราฟช่องทางการลงทะเบียน
+        $providerLabels = [];
+        $providerData   = [];
+
+        foreach ($providers as $provider) {
+            $providerLabels[] = $provider->provider ?? 'เว็บไซต์';
+            $providerData[]   = $provider->count;
+        }
+        /************** Pie Chart ช่องทางการสมัคร **************/
+
+        return view('admin.dashboard.index', compact('userCount', 'userCountToday', 'curriculums', 'userTypeLabels', 'userTypeData', 'providerLabels', 'providerData'));
     }
 
     public function ajaxDashboard(Request $request)
