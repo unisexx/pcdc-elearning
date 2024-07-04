@@ -25,7 +25,7 @@
                                 <td>{{ @$item->question }}</td>
                                 {{-- <td>{{ @$item->order }}</td> --}}
                                 <td>{!! statusBadge(@$item->status) !!}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}

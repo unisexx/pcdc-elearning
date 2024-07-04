@@ -24,7 +24,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ $item->id }}

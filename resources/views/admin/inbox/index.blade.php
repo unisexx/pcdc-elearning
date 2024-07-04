@@ -28,7 +28,7 @@
                                 <td>{{ @$item->email }}</td>
                                 <td>{{ @$item->tel }}</td>
                                 <td>{{ @$item->msg }}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}

@@ -28,7 +28,7 @@
                                 <td>{{ @$item->title }}</td>
                                 <td>{{ @$item->link }}</td>
                                 <td>{!! statusBadge(@$item->status) !!}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}

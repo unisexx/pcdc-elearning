@@ -15,7 +15,7 @@
                             <th width="50" class="text-center" scope="col">#</th>
                             <th width="200" scope="col">ภาพหน้าปก</th>
                             <th class="text-start" scope="col">ชื่อหลักสูตร</th>
-                            <th class="text-center" scope="col">ประเภทสมาชิก</th>
+                            <th class="text-start" scope="col">ประเภทสมาชิก</th>
                             <th width="100" class="text-center" scope="col">เปิดใช้งาน</th>
                             <th width="200" class="text-center" scope="col">จัดการ</th>
                         </tr>
@@ -36,7 +36,7 @@
                                     @endphp
                                 </td>
                                 <td style="vertical-align:top;" class="text-center">{!! statusBadge(@$item->status) !!}</td>
-                                <td style="vertical-align:top;" class="text-center text-sm">
+                                <td style="vertical-align:top;" class="text-center">
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}

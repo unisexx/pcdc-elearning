@@ -24,7 +24,7 @@
                                 <td class="drag-handle"><i class="fas fa-grip-lines"></i></td>
                                 <td>{{ @$item->title }}</td>
                                 <td>{!! statusBadge(@$item->status) !!}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}

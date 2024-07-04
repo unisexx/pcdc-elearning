@@ -9,8 +9,8 @@
                 <h5>หลักสูตร : <span class="text-success">{{ $curriculum->name }}</span></h5>
             </div>
             <div class="d-flex align-items-center">
-                <div>                    
-                    <h5 class="mb-0">บทเรียนในหลักสูตร</h5>                    
+                <div>
+                    <h5 class="mb-0">บทเรียนในหลักสูตร</h5>
                 </div>
                 <div class="ms-auto my-auto">
                     @php
@@ -18,7 +18,7 @@
                         array_pop($parts);
                         $routeName = implode('.', $parts);
                     @endphp
-                    <a href="{{ route($routeName . '.create').'?curriculum_id='.request('curriculum_id') }}" class="btn bg-gradient-primary btn-lg mb-0">+&nbsp;เพิ่มรายการ</a>
+                    <a href="{{ route($routeName . '.create') . '?curriculum_id=' . request('curriculum_id') }}" class="btn bg-gradient-primary btn-lg mb-0">+&nbsp;เพิ่มรายการ</a>
                 </div>
             </div>
         </div>
@@ -28,10 +28,10 @@
                     <thead>
                         <tr>
                             <th width="50" scope="col">#</th>
-                            <th width="150" scope="col">ภาพหน้าปก</th>     
-                            <th scope="col">ชื่อหน่วยการเรียนรู้/บทเรียน</th>                            
-                            <th width="100" class="text-center" scope="col">จำนวน<br>เนื้อหา</th>                                                        
-                            <th width="100" class="text-center" scope="col">จำนวน<br>แบบทดสอบท้ายบท</th>                                                        
+                            <th width="150" scope="col">ภาพหน้าปก</th>
+                            <th scope="col">ชื่อหน่วยการเรียนรู้/บทเรียน</th>
+                            <th width="100" class="text-center" scope="col">จำนวน<br>เนื้อหา</th>
+                            <th width="100" class="text-center" scope="col">จำนวน<br>แบบทดสอบท้ายบท</th>
                             <th class="text-center" scope="col">เปิดใช้งาน</th>
                             <th scope="col">จัดการ</th>
                         </tr>
@@ -39,21 +39,21 @@
                     <tbody>
                         @foreach ($rs as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>                                
-                                <td><img src="{{ Storage::url('uploads/curriculum_lesson/' . @$item->cover_image) }}" height="100"></td>          
+                                <td>{{ $loop->iteration }}</td>
+                                <td><img src="{{ Storage::url('uploads/curriculum_lesson/' . @$item->cover_image) }}" height="100"></td>
                                 <td style="vertical-align:top;padding-left:20px;">{{ @$item->name }}</td>
                                 <td class="text-center">{{ @$item->curriculum_lesson_detail->count() }}</td>
-                                <td class="text-center">{{ @$item->curriculum_lesson_question->where('status','active')->count().'/'.@$item->curriculum_lesson_question->count() }}</td>
+                                <td class="text-center">{{ @$item->curriculum_lesson_question->where('status', 'active')->count() . '/' . @$item->curriculum_lesson_question->count() }}</td>
                                 <td class="text-center">{!! statusBadge(@$item->status) !!}</td>
-                                <td class="text-sm">
+                                <td>
                                     @component('components.table.button')
                                         @slot('itemID')
                                             {{ @$item->id }}
                                         @endslot
-                                    @endcomponent              
-                                    <a href="{{ url('admin/curriculum-lesson-question?curriculum_lesson_id='.$item->id) }}" class="mx-3">
+                                    @endcomponent
+                                    <a href="{{ url('admin/curriculum-lesson-question?curriculum_lesson_id=' . $item->id) }}" class="mx-3">
                                         <i class="fas fa-check text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="จัดการแบบทดสอบท้ายบทเรียน"></i>
-                                    </a>                   
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
