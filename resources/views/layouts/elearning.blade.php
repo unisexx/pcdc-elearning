@@ -117,7 +117,7 @@
                                                                         ->first();
                                                                 @endphp
                                                                 @if ($pretest_result)
-                                                                    @if ($pretest_result->pass_score <= $pretest_result->total_score)
+                                                                    @if ($pretest_result->n_question == $pretest_result->total_question)
                                                                         <img src="{{ asset('images/checked.png') }}"
                                                                             width="24" class="ms-auto">
                                                                     @endif
