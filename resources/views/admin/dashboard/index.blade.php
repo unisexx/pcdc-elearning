@@ -6,7 +6,7 @@
     <div class="row">
 
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            {!! Form::select('curriculum_id', $curriculums, null, ['class' => 'form-select float-end', 'placeholder' => 'เลือกหลักสูตร...', 'id' => 'curriculumSelect']) !!}
+            {!! Form::select('curriculum_id', $curriculums, null, ['class' => 'form-select float-end', 'id' => 'curriculumSelect']) !!}
         </div>
         <div class="w-100 mb-3"></div>
 
