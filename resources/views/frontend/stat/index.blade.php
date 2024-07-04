@@ -102,9 +102,16 @@ extract($data);
 
                     @include('frontend.stat.inc.report1')
 
-                    @include('frontend.stat.inc.report2')
+                    <div class="row my-5">
+                        <div class="col-lg-6 col-md-12">
+                            @include('frontend.stat.inc.report2')
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            @include('frontend.stat.inc.report3')
+                        </div>
+                    </div>
 
-                    @include('frontend.stat.inc.report3')                    
+                    @include('frontend.stat.inc.report4')                    
 
                 </div>
             </div>

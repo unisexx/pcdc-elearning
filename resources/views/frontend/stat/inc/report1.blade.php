@@ -1,3 +1,42 @@
+@php
+
+$chart_curriculum_name_value_str ='';
+$chart_curriculum_name_str_month = '';
+$chart_curriculum_name_str = '';
+
+$max_month = (intval($exam_year)-543) == date('Y') ? date("m") : 12;
+
+// For column chart value
+// ['data1', 11, 8, 15, 18, 19, 17],
+$index=0;
+foreach($curriculum_month_pass_report as $key=>$item){    
+    $index++;    
+    $row_value = "'data".$index."'";
+    for($m=1;$m<=$max_month;$m++){
+        $row_value.=  ", ".number_format($item['n_pass_m_'.$m],0);
+    }
+    $chart_curriculum_name_value_str.='['.$row_value.'],';
+}
+// echo $chart_curriculum_name_value_str.'<hr>';
+
+// 'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
+$index=0;
+foreach($curriculum_month_pass_report as $key=>$item){    
+    $index++;    
+    $chart_curriculum_name_str.= $index > 1 ? ',' : '';
+    $chart_curriculum_name_str.= "'data".$index."': '".$item['name']."'"; 
+}
+// echo $chart_curriculum_name_str.'<hr>';
+
+// ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน']
+$index=0;
+$month_list = get_month();
+for($m=1;$m<=$max_month;$m++){
+    $chart_curriculum_name_str_month.= $m>1 ? ',' : '';
+    $chart_curriculum_name_str_month.= "'".$month_list[$m]."'";
+}
+// echo $chart_curriculum_name_str_month;
+@endphp
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -6,7 +45,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <div class="dropdown show menu_print">
+                    {{-- <div class="dropdown show menu_print">
                         <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
                             <span class=""><em class="fas fa-bars fs-5"></em></span>
                         </a>
@@ -23,9 +62,9 @@
                             <a class="dropdown-item" href="javascript:void(0)">View data table</a>
                         </div>
                     </div>
-                </div>
-                <div id="chart-bar2" class="chartsh"></div>
-                {{-- <div id="chart-bar12" class="chartsh"></div> --}}
+                </div> --}}
+                {{-- <div id="chart-bar2" class="chartsh"></div> --}}
+                <div id="chart-table-1" class="chartsh"></div>
             </div>
             <div class="table-responsive px-4">
                 <table class="table table-bordered table-hover text-center table-style1">
@@ -42,26 +81,13 @@
                             @endforeach
                         </tr>
                     </thead>
-                    <tbody>
-                        @php                            
-                            $max_month = (intval($exam_year)-543) == date('Y') ? date("m") : 12;
-                            $chart_curriculum_name_value_str ='';
-                            $chart_curriculum_name_str_month = '';
-                            $chart_curriculum_name_str = '';
-                            // 'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
-                        @endphp
+                    <tbody>                        
                         @for($m=1;$m<=$max_month;$m++)
                         <tr>
                             <td>{{ get_month()[$m] }}</td>
-                            @foreach($curriculum_month_pass_report as $key=>$item)
-                                @php
-                                    $chart_curriculum_name_str_month.= $chart_curriculum_name_str_month ? "'data".($key+1)."', ".number_format($item['n_pass_m_'.$m],0) : ", ".number_format($item['n_pass_m_'.$m],0);
-                                @endphp
+                            @foreach($curriculum_month_pass_report as $key=>$item)                                
                                 <th>{{ number_format($item['n_pass_m_'.$m],0) }}</th>
-                            @endforeach  
-                            @php
-                                $chart_curriculum_name_value_str = '['.$chart_curriculum_name_str_month.'],';
-                            @endphp                          
+                            @endforeach                                                   
                         </tr>
                         @endfor                        
                     </tbody>
@@ -73,19 +99,19 @@
 
 </div>
 @push('js')
-{{-- <script>
-    $(document).ready(function(){
+<script>
+    $(document).ready(function(){        
         var chart = c3.generate({
-            bindto: '#chart-bar12', // id of chart wrapper
+            bindto: '#chart-table-1', // id of chart wrapper
             data: {
-                columns: [
-                    // each columns data
-                    // ['data1', 11, 8, 15, 18, 19, 17],
-                    // ['data2', 50, 50, 15, 41, 59, 42],
-                    // ['data3', 70, 40, 25, 22, 41, 22],
-                    // ['data4', 20, 30, 35, 100, 20, 75],
-                    {!! $chart_curriculum_name_value_str !!}                    
-                ],
+                columns: [{!!$chart_curriculum_name_value_str!!}],
+                // columns: [
+                //     // each columns data
+                //     // ['data1', 11, 8, 15, 18, 19, 17],
+                //     // ['data2', 50, 50, 15, 41, 59, 42],
+                //     // ['data3', 70, 40, 25, 22, 41, 22],
+                //     // ['data4', 20, 30, 35, 100, 20, 75],                                       
+                // ],
                 type: 'bar', // default type of chart
                 colors: {
                     data1: '#f86e90',
@@ -97,20 +123,23 @@
                     data7: '#ecc35c',
                     data8: '#2a64c5'
                 },
-                names: {
-                    // name of each serie
-                    'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
-                    'data2': 'หลักสูตรที่ 2 โรคติดเชื้อทางเดินหายใจจากเชื้อไวรัสอาร์เอสวี',
-                    'data3': 'หลักสูตรที่ 3 โรคไข้หวัดใหญ่ในเด็ก',
-                    'data4': 'หลักสูตรที่ 4 โรคมือเท้าปาก',
-                
-                }
+                names:{{!! $chart_curriculum_name_str !!}}
+                // names: {
+                //     // name of each serie
+                //     // 'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
+                //     // 'data2': 'หลักสูตรที่ 2 โรคติดเชื้อทางเดินหายใจจากเชื้อไวรัสอาร์เอสวี',
+                //     // 'data3': 'หลักสูตรที่ 3 โรคไข้หวัดใหญ่ในเด็ก',
+                //     // 'data4': 'หลักสูตรที่ 4 โรคมือเท้าปาก',                    
+                // }
             },
             axis: {
                 x: {
                     type: 'category',
                     // name of each category
-                    categories: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน']
+                    categories: [{!! $chart_curriculum_name_str_month !!}]
+                    // categories: [
+                    //     // 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน'                        
+                    // ]
                 },
             },
             bar: {
@@ -128,5 +157,5 @@
             },
         });   
     });
-</script> --}}
+</script>
 @endpush

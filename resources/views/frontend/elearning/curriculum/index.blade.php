@@ -24,6 +24,10 @@
           @if($curriculum->curriculum_exam_setting)
             @if($curriculum->curriculum_exam_setting->pre_test_status == 'active')              
                 <a href="{{ url('elearning/curriculum/'.$curriculum->id.'/pretest') }}" class="btn btn-lg btn-primary"><em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em> ทำแบบทดสอบก่อนเรียน (Pre-Test)</a>
+            @else
+                @if($curriculum->curriculum_lesson)                  
+                  <a href="{{ url('elearning/curriculum/lesson/'.$curriculum->curriculum_lesson->first()->id) }}" class="btn btn-lg btn-primary">ไปที่เนื้อหาบทเรียนถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>
+                @endif
             @endif
           @endif                  
       </div>
