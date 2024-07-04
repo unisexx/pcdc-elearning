@@ -41,7 +41,11 @@ for($m=1;$m<=$max_month;$m++){
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header bg-chart-header text-white">
-                <div class="graph_title">รายงานสถิติ จำนวนผู้ผ่านหลักสูตรต่างๆ ปี 2567</div>
+                <div class="graph_title">รายงานสถิติ จำนวนผู้ผ่านหลักสูตรต่างๆ 
+                    @if(!empty($exam_year))
+                        ปี {{$exam_year}}
+                    @endif
+                </div>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
@@ -141,6 +145,9 @@ for($m=1;$m<=$max_month;$m++){
                     //     // 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน'                        
                     // ]
                 },
+                y: {
+                    min: 1,
+                }
             },
             bar: {
                 /*width: 10*/

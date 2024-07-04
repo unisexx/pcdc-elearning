@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Province extends Model
+class PreventionOffice extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,5 @@ class Province extends Model
         'name',
     ];
 
-
-    public function prevention_office() { return $this->belongsTo(PreventionOffice::class);}
+    public function province() { return $this->hasMany(Province::class);}
 }

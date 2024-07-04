@@ -45,7 +45,7 @@ extract($data);
                             <div class="col-12 col-sm-auto pt-1">
                                 <label for="" class="form-label">ปี</label>
                                 <select class="form-select" id="exam_year" name="exam_year">
-                                    <option selected disabled value="">--ทั้งหมด--</option>
+                                    <option value="">--ทั้งหมด--</option>
                                     @for($i=(date("Y")+543);$i>=$min_year;$i--)
                                     @php
                                         $selected = @$exam_year == $i ? 'selected="selected"' : '';
@@ -60,22 +60,7 @@ extract($data);
                                 <label for="" class="form-label">เจ้าหน้าที่ประจำเขต</label>
                                 {!! Form::select(
                                     'area_id',
-                                    [
-                                        '999' => 'ส่วนกลาง',
-                                        '1' => 'สคร.1',
-                                        '2' => 'สคร.2',
-                                        '3' => 'สคร.3',
-                                        '4' => 'สคร.4',
-                                        '5' => 'สคร.5',
-                                        '6' => 'สคร.6',
-                                        '7' => 'สคร.7',
-                                        '8' => 'สคร.8',
-                                        '9' => 'สคร.9',
-                                        '10' => 'สคร.10',
-                                        '11' => 'สคร.11',
-                                        '12' => 'สคร.12',
-                                        '99' => 'สปคม.',
-                                    ],
+                                    $prevention_office_list,
                                     @$area_id,
                                     ['class' => 'form-select select2 form-control-lg', 'id' => 'area_id', 'placeholder' => '--ทั้งหมด--'],
                                 ) !!}

@@ -470,43 +470,43 @@
     // });   
 
      /*chart-bar รายงานสถิติ ผู้ผ่านแบบทดสอบหลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19 จำแนกรายเขตและจังหวัด ปี 2567*/
-     var chart = c3.generate({
-         bindto: '#chart-monthly', // id of chart wrapper
-         data: {
-             columns: [
-                 // each columns data
-                 ['data1', 11, 8, 35, 18, 19, 17, 33, 39, 48, 57, 39, 63]
-             ],
-             type: 'bar', // default type of chart
-             colors: {
-                 data1: '#6c5ffc'
-             },
-             names: {
-                 // name of each serie
-                 'data1': 'ผ่าน'
-             }
-         },
-         axis: {
-             x: {
-                 type: 'category',
-                 // name of each category
-                 categories: ['สคร.1', 'สคร.2', 'สคร.3', 'สคร.4', 'สคร.5', 'สคร.6', 'สคร.7', 'สคร.8', 'สคร.9', 'สคร.10', 'สคร.11', 'สคร.12', 'กทม.']
-             },
-         },
-         bar: {
-             /*width: 30*/
-             width: {
-                ratio: 0.7
-            }
-         },
-         legend: {
-             show: false, //hide legend
-         },
-         padding: {
-             bottom: 0,
-             top: 0
-         },
-     });
+    //  var chart = c3.generate({
+    //      bindto: '#chart-monthly', // id of chart wrapper
+    //      data: {
+    //          columns: [
+    //              // each columns data
+    //              ['data1', 11, 8, 35, 18, 19, 17, 33, 39, 48, 57, 39, 63]
+    //          ],
+    //          type: 'bar', // default type of chart
+    //          colors: {
+    //              data1: '#6c5ffc'
+    //          },
+    //          names: {
+    //              // name of each serie
+    //              'data1': 'ผ่าน'
+    //          }
+    //      },
+    //      axis: {
+    //          x: {
+    //              type: 'category',
+    //              // name of each category
+    //              categories: ['สคร.1', 'สคร.2', 'สคร.3', 'สคร.4', 'สคร.5', 'สคร.6', 'สคร.7', 'สคร.8', 'สคร.9', 'สคร.10', 'สคร.11', 'สคร.12', 'กทม.']
+    //          },
+    //      },
+    //      bar: {
+    //          /*width: 30*/
+    //          width: {
+    //             ratio: 0.7
+    //         }
+    //      },
+    //      legend: {
+    //          show: false, //hide legend
+    //      },
+    //      padding: {
+    //          bottom: 0,
+    //          top: 0
+    //      },
+    //  });
 
 /*chart-bar รายงานสถิติ ผู้ผ่านแบบทดสอบหลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19 จำแนกรายเขตและจังหวัด ปี 2567*/
     //  var chart = c3.generate({
@@ -590,49 +590,49 @@
      });
 
      /*chart-bar-stacked รายงานสถิติ ผู้ทำแบบทดสอบหลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19<br>เปรียบเทียบ ผู้ที่ผ่าน และ ไม่ผ่าน ปี 2567 */
-     var chart = c3.generate({
-         bindto: '#chart-bar-stacked', // id of chart wrapper
-         data: {
-             columns: [
-                 // each columns data
-                 ['data1', 11, 8, 15, 18, 19, 17, 20, 25, 32, 20, 14, 20],
-                 ['data2', 7, 7, 5, 7, 9, 12, 4, 6, 2, 5, 2, 8]
-             ],
-             type: 'bar', // default type of chart
-             groups: [
-                 ['data1', 'data2']
-             ],
-             colors: {
-                 data1: '#6c5ffc',
-                 data2: '#05c3fb'
-             },
-             names: {
-                 // name of each serie
-                 'data1': 'ผ่าน',
-                 'data2': 'ไม่ผ่าน'
-             }
-         },
-         axis: {   
-             x: {
-                 type: 'category',
-                 // name of each category
-                 categories: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
-             },
-         },
-         bar: {
-             /*width: 16*/
-             width: {
-                ratio: 0.5
-            }
-         },
-         legend: {
-             show: true, //hide legend
-         },
-         padding: {
-             bottom: 0,
-             top: 0
-         },
-     });
+    //  var chart = c3.generate({
+    //      bindto: '#chart-bar-stacked', // id of chart wrapper
+    //      data: {
+    //          columns: [
+    //              // each columns data
+    //              ['data1', 11, 8, 15, 18, 19, 17, 20, 25, 32, 20, 14, 20],
+    //              ['data2', 7, 7, 5, 7, 9, 12, 4, 6, 2, 5, 2, 8]
+    //          ],
+    //          type: 'bar', // default type of chart
+    //          groups: [
+    //              ['data1', 'data2']
+    //          ],
+    //          colors: {
+    //              data1: '#6c5ffc',
+    //              data2: '#05c3fb'
+    //          },
+    //          names: {
+    //              // name of each serie
+    //              'data1': 'ผ่าน',
+    //              'data2': 'ไม่ผ่าน'
+    //          }
+    //      },
+    //      axis: {   
+    //          x: {
+    //              type: 'category',
+    //              // name of each category
+    //              categories: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+    //          },
+    //      },
+    //      bar: {
+    //          /*width: 16*/
+    //          width: {
+    //             ratio: 0.5
+    //         }
+    //      },
+    //      legend: {
+    //          show: true, //hide legend
+    //      },
+    //      padding: {
+    //          bottom: 0,
+    //          top: 0
+    //      },
+    //  });
 
      /*chart-pie*/
      var chart = c3.generate({
