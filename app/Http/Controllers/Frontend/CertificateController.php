@@ -30,7 +30,10 @@ class CertificateController extends Controller
         }
 
         //ตรวจสอบว่า user ผ่าน posttest ของ หลักสูตรนั้นจริงไหม
-        $pass_posttest = UserCurriculumExamHistory::where('user_id', $user->id)->where('curriculum_id', $curriculum_id)->where('post_pass_status', 'y')->orderBy('post_date_finished', 'desc')->first();
+        $pass_posttest = UserCurriculumExamHistory::where('user_id', $user->id)
+            ->where('curriculum_id', $curriculum_id)
+            ->where('post_pass_status', 'y')
+            ->orderBy('post_date_finished', 'desc')->first();
         if (!$pass_posttest) {
             abort(404, 'Curriculum Post-Test not pass.');
         }
@@ -160,6 +163,7 @@ class CertificateController extends Controller
             $expiresAt = Carbon::parse($certificate->expires_at);
 
             // แปลงวันหมดอายุเป็นปี พ.ศ.
+            $issuedAtThaiYear  = $issuedAt->format('d/m') . '/' . ($issuedAt->year + 543);
             $expiresAtThaiYear = $expiresAt->format('d/m') . '/' . ($expiresAt->year + 543);
 
             // เตรียมข้อมูลสำหรับการตอบกลับ
@@ -167,7 +171,7 @@ class CertificateController extends Controller
                 'id'             => $certificate->id,
                 'user'           => $certificate->user->prefix . $certificate->user->first_name . ' ' . $certificate->user->last_name,
                 'course_name'    => $certificate->curriculum->name,
-                'issued_at'      => $issuedAt->format('d/m/Y'), // แปลงวันที่ออกใบประกาศ
+                'issued_at'      => $issuedAtThaiYear, // แปลงวันที่ออกใบประกาศ
                 'running_number' => $certificate->running_number . '/' . ($issuedAt->format('Y') + 543),
                 'expires_at'     => $expiresAtThaiYear,
             ];

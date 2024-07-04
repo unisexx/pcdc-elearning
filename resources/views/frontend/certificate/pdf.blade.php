@@ -163,7 +163,7 @@
         <div class="title">{{ @$title }}</div>
         <div class="name">{{ @$name }}</div>
         <div class="description">{{ @$description }}</div>
-        <div class="course">หลักสูตร{{ @$course }}</div>
+        <div class="course">{{ @$course }}</div>
         <div class="date">{{ @$date }}</div>
     </div>
     <div class="sign sign1">
