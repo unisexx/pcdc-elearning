@@ -47,7 +47,7 @@ class StatController extends Controller
         $data['districts'] = !empty($province_id) ? District::whereRaw('left(id,2) = '.$province_id)->orderBy('name', 'asc')->pluck('name','id') : [];
         $data['subdistricts'] = !empty($district_id)  ? Subdistrict::whereRaw('left(id,4) = '.$district_id)->orderBy('name', 'asc')->pluck('name','id') : [];
 
-        $data['curriculum_list_rep'] = !empty($curriculum_id) ? Curriculum::where('id',$curriculum_id)->get() : Curriculum::get();
+        $data['curriculum_list_rep'] = !empty($curriculum_id) ? Curriculum::where('status', 'active')->where('id',$curriculum_id)->get() : Curriculum::where('status', 'active')->get();
 
         $data['curriculum_condition'] = !empty($curriculum_id) ? " AND uceh.curriculum_id =".$curriculum_id : "";
         $data['user_type_condition'] = !empty($user_type_id) ? " AND u.user_type_id =".$user_type_id : "";
