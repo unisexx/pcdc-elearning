@@ -5,14 +5,14 @@
 <script>
     new WOW().init();
 </script>
-<script>
+{{-- <script>
     let inputBox = document.querySelector(".search-input-box"),
         searchIcon = document.querySelector(".icon"),
         closeIcon = document.querySelector(".close-icon");
 
     searchIcon.addEventListener("click", () => inputBox.classList.add("open"));
     closeIcon.addEventListener("click", () => inputBox.classList.remove("open"));
-</script>
+</script> --}}
 
 <script>
     // Get the button GO TO TOP
