@@ -123,7 +123,11 @@
                                                     ->where('exam_type', 'pretest')
                                                     ->whereRaw('n_question = total_question')
                                                     ->count();
-                                                $pretest_exam = $curriculum->curriculum_exam_setting->pre_test_status == 'inactive' ? 1 : $pretest_exam;
+                                                if($curriculum->curriculum_exam_setting){
+                                                    $pretest_exam = $curriculum->curriculum_exam_setting->pre_test_status == 'inactive' ? 1 : $pretest_exam;
+                                                }else{
+                                                    $pretest_exam = 1;
+                                                }
                                                 $all_pass = false;
                                             @endphp
                                             @foreach ($curriculum->curriculum_lesson()->where('status', 'active')->orderBy('pos', 'asc')->get() as $key => $lesson)
@@ -137,11 +141,15 @@
                                                         ->count();
 
                                                     //เปิดให้ทดสอบหรือไม่
+                                                    if($curriculum->curriculum_exam_setting){
                                                     $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting
                                                         ->curriculum_exam_setting_detail()
                                                         ->where('curriculum_lesson_id', $lesson->id)
                                                         ->where('exam_status', 'active')
                                                         ->count();
+                                                    }else{
+                                                        $lesson_has_exam[$key] = 0;
+                                                    }
 
                                                     if (empty($curriculum->curriculum_exam_setting) && $key == 0) {
                                                         $can_action = 1;
