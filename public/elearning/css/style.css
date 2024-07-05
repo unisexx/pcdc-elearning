@@ -2360,6 +2360,11 @@ TABS academic_results
 	line-height: 45px;
 }
 
+.lessonContent img {
+	max-width: 100%;
+	height: auto;
+}
+
 #tab1Page .intro-text{
 	line-height: 35px;
 }
