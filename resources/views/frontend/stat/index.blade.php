@@ -57,7 +57,7 @@ extract($data);
                             <div class="clearfix"></div>
                             <div class="fs-5 fw-medium text-primary">เขตพื้นที่</div>
                             <div class="col-12 col-sm-auto">
-                                <label for="" class="form-label">เจ้าหน้าที่ประจำเขต</label>
+                                <label for="" class="form-label">เขตพื้นที่</label>
                                 {!! Form::select(
                                     'area_id',
                                     $prevention_office_list,
