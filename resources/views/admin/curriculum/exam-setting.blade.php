@@ -67,11 +67,13 @@
                                     $n_prepost_lesson_question = 0;
                                     $sum_prepost_question += $n_prepost_lesson_question;
                                 }
+                                $n_question_active = $item->curriculum_lesson_question->where('status', 'active')->count();
+                                $n_all_question = @$item->curriculum_lesson_question->count();
                             @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td style="white-space: break-spaces;">{{ @$item->name }}</td>
-                                <td class="text-center">{{ @$item->curriculum_lesson_question->where('status', 'active')->count() . '/' . @$item->curriculum_lesson_question->count() }}</td>
+                                <td class="text-center">{{ @$n_question_active . '/' . @$n_all_question }}</td>
                                 <td class="text-center">
                                     <div class="form-switch" style="display:block;">
                                         {!! Form::hidden('exam_status_' . $item->id, 'inactive') !!}
@@ -93,6 +95,7 @@
                                     </div>                                    
                                 </td> --}}
                                 <td class="text-center">
+                                    <input type="hidden" name="n_question_active" id="n_question_active" value="{{$n_question_active}}">
                                     <input type="number" style="" class="form-control text-center input-question" name="n_question_{{ $item->id }}" value="{{ $n_question }}">
                                 </td>
                                 <td class="text-center">
@@ -115,7 +118,7 @@
                         <tr>
                             <th class="text-start" colspan="9">
                                 ระบุคะแนนขั้นต่ำเพื่อผ่านการทดสอบ Pre/Post Test
-                                <input type="number" name="prepost_pass_score" class="form-control text-center" style="max-width:200px;" value="{{ @$rs->prepost_pass_score }}">
+                                <input type="number" id="prepost_pass_score" name="prepost_pass_score" class="form-control text-center" style="max-width:200px;" value="{{ @$rs->prepost_pass_score }}">
                             </th>
                         </tr>
                         <tr>
@@ -161,6 +164,52 @@
     <script>
         $(document).ready(function() {
 
+            $("#prepost_pass_score").keydown(function(){
+                var n_total_prepost_question = $("#sp_sum_prepost_question").html();
+                console.log(n_total_prepost_question, $(this).val());
+                if(parseInt(n_total_prepost_question) < parseInt($(this).val())){
+                    $(this).val('');
+                    // $(this).addClass('border-danger');
+                    // $(this).attr('style','background:#ffd1d1;');
+                }
+            });
+
+            $("#prepost_pass_score").keyup(function(){
+                var n_total_prepost_question = $("#sp_sum_prepost_question").html();
+                console.log(n_total_prepost_question, $(this).val());
+                if(parseInt(n_total_prepost_question) < parseInt($(this).val())){
+                    $(this).val('');
+                    $(this).addClass('border-danger');
+                    $(this).attr('style','background:#ffd1d1;max-width:200px;');
+                }else{
+                    $(this).removeClass('border-danger');
+                    $(this).attr('style','max-width:200px;');
+                }
+            });
+
+            $(".input-question, .input-score").keydown(function(){
+                var n_question_active = $(this).closest('tr').find("#n_question_active").val();
+                console.log(n_question_active, $(this).val());
+                if(parseInt(n_question_active) < parseInt($(this).val())){
+                    $(this).val('');
+                    // $(this).addClass('border-danger');
+                    // $(this).attr('style','background:#ffd1d1;');
+                }
+            });
+
+            $(".input-question, .input-score").keyup(function(){
+                var n_question_active = $(this).closest('tr').find("#n_question_active").val();
+                console.log(n_question_active, $(this).val());
+                if(parseInt(n_question_active) < parseInt($(this).val())){
+                    $(this).val('');
+                    $(this).addClass('border-danger');
+                    $(this).attr('style','background:#ffd1d1;');
+                }else{
+                    $(this).removeClass('border-danger');
+                    $(this).removeAttr('style');
+                }
+            });
+
             function checkExamEnable(element) {
                 if (element.prop('checked')) {
                     element.closest('tr').find('.check-question, .check-answer, .input-question, .input-score').each(function() {
@@ -185,6 +234,16 @@
                     n_question += $(this).val() != '' ? parseInt($(this).val()) : 0;
                 });
                 $("#sp_sum_prepost_question").html(n_question);
+                var n_total_prepost_question = $("#sp_sum_prepost_question").html();
+                var prepost_pass_score = $("#prepost_pass_score").val() != "" ? $("#prepost_pass_score").val() : 0;
+                if(parseInt(n_total_prepost_question) < parseInt(prepost_pass_score)){
+                    $("#prepost_pass_score").val('');
+                    $("#prepost_pass_score").addClass('border-danger');
+                    $("#prepost_pass_score").attr('style','background:#ffd1d1;max-width:200px;');
+                }else{
+                    $("#prepost_pass_score").removeClass('border-danger');
+                    $("#prepost_pass_score").attr('style','max-width:200px;');
+                }
             });
 
             $(".exam_status").click(function() {
