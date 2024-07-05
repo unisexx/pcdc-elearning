@@ -127,7 +127,8 @@ extract($data);
                 $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>');
                 $('#zipcode').val('');
 
-                if (area_id) {
+                area_id = area_id ? area_id : 0;
+                
                     $.ajax({
                         url: '/get-provinces/' + area_id,
                         type: 'GET',
@@ -146,9 +147,7 @@ extract($data);
                             deferred.reject();
                         }
                     });
-                } else {
-                    deferred.resolve();
-                }
+               
 
                 return deferred.promise();
             }
