@@ -31,7 +31,7 @@
                     {{-- @include('frontend.register.inc._sec3_login') --}}
 
                     <div class="col-12 mt-4 text-center">
-                        <button class="btn btn-primary btn-lg px-5" type="submit">ยืนยัน</button>
+                        <button id="registerSubmitBtn" class="btn btn-primary btn-lg px-5" type="submit">อัพเดทข้อมูลส่วนตัว</button>
                     </div>
 
                     {!! Form::close() !!}
@@ -53,4 +53,45 @@
     </style>
 @endpush
 
-@include('frontend.register.inc._regis_form_js')
+@push('js')
+    <script>
+        $(document).ready(function() {
+            // เรียกใช้ฟังก์ชั่นเมื่อมีการเปลี่ยนแปลง #user_type_id
+            $('#user_type_id').change(function() {
+                var userTypeId = $(this).val();
+                loadFieldset(userTypeId);
+            });
+
+            // เรียกใช้ฟังก์ชั่นเมื่อโหลดเพจครั้งแรก
+            var initialUserTypeId = $('#user_type_id').val();
+            loadFieldset(initialUserTypeId);
+        });
+
+        function loadFieldset(userTypeId) {
+            if (userTypeId) {
+                $.ajax({
+                    url: '/get-fieldset/' + userTypeId,
+                    method: 'GET',
+                    success: function(response) {
+                        $('#form-container').html(response);
+                        $('#loginSection, #registerSubmitBtn').show();
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            } else {
+                $('#form-container').html('');
+                $('#loginSection, #registerSubmitBtn').hide();
+            }
+        }
+    </script>
+@endpush
+
+@push('js')
+    {{-- JS Validation --}}
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\RegisterUserRequest', '.register-form') !!}
+@endpush
+
+{{-- @include('frontend.register.inc._regis_form_js') --}}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +19,11 @@ class ProfileController extends Controller
             return redirect('/home')->with('error', 'คุณไม่มีสิทธิ์ในการแก้ไขโปรไฟล์นี้');
         }
 
+        $userTypes = UserType::where('status', '1')->orderBy('id', 'asc')->pluck('name', 'id');
         $provinces = Province::orderBy('id', 'asc')->pluck('name', 'id');
         $rs        = User::findOrFail($id);
 
-        return view('frontend.profile.form', compact('rs', 'provinces'));
+        return view('frontend.profile.form', compact('rs', 'provinces', 'userTypes'));
     }
 
     public function update(RegisterUserRequest $request, $id)

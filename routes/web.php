@@ -97,6 +97,7 @@ Route::get('/get-provinces/{area_id}', [App\Http\Controllers\AjaxController::cla
 Route::get('/get-districts/{province}', [App\Http\Controllers\AjaxController::class, 'getDistricts']);
 Route::get('/get-subdistricts/{district}', [App\Http\Controllers\AjaxController::class, 'getSubdistricts']);
 Route::get('/ajaxGetZipCode', [App\Http\Controllers\AjaxController::class, 'ajaxGetZipCode'])->name('ajaxGetZipCode');
+Route::get('/get-fieldset/{userTypeId}', [App\Http\Controllers\Frontend\RegisterController::class, 'getFieldset']);
 
 /** Social Login */
 Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class, 'redirect']);
