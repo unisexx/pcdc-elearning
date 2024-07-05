@@ -13,7 +13,10 @@ class AjaxController extends Controller
     public function getProvinces($area_id)
     {
         // ดึงข้อมูลจังหวัด จาก สคร
-        $provinces = Province::where('prevention_office_id', $area_id )->orderBy('id', 'asc')->pluck('name', 'id');
+        if(!empty($area_id))
+            $provinces = Province::where('prevention_office_id', $area_id )->orderBy('id', 'asc')->pluck('name', 'id');
+        else
+            $provinces = Province::orderBy('id', 'asc')->pluck('name', 'id');
 
         // ส่งข้อมูลในรูปแบบ JSON response
         return response()->json($provinces);
