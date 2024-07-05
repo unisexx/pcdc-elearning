@@ -93,6 +93,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 });
 
 /** Ajax */
+Route::get('/get-provinces/{area_id}', [App\Http\Controllers\AjaxController::class, 'getProvinces']);
 Route::get('/get-districts/{province}', [App\Http\Controllers\AjaxController::class, 'getDistricts']);
 Route::get('/get-subdistricts/{district}', [App\Http\Controllers\AjaxController::class, 'getSubdistricts']);
 Route::get('/ajaxGetZipCode', [App\Http\Controllers\AjaxController::class, 'ajaxGetZipCode'])->name('ajaxGetZipCode');

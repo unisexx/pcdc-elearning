@@ -116,5 +116,46 @@ extract($data);
     <script src="{{ asset('html/js/charts-c3/d3.v5.min.js') }}"></script>
     <script src="{{ asset('html/js/charts-c3/c3-chart.js') }}"></script>
     <!-- Chart -->    
-    <script src="{{ asset('html/js/charts.js') }}"></script>
+    {{-- <script src="{{ asset('html/js/charts.js') }}"></script> --}}
+    <script>
+        $(document).ready(function(){        
+            function loadProvinces(area_id, provinceId = null) {
+                var deferred = $.Deferred();
+
+                $('#province_id').empty().append('<option value="">กำลังโหลด...</option>');
+                $('#district_id').empty().append('<option value="">กำลังโหลด...</option>');
+                $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>');
+                $('#zipcode').val('');
+
+                if (area_id) {
+                    $.ajax({
+                        url: '/get-provinces/' + area_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#province_id').empty().append('<option value="">โปรดเลือก...</option>');
+                            $.each(data, function(id, name) {
+                                $('#province_id').append('<option value="' + id + '">' + name + '</option>');
+                            });
+                            if (provinceId) {
+                                $('#province_id').val(provinceId).change();
+                            }
+                            deferred.resolve();
+                        },
+                        error: function() {
+                            deferred.reject();
+                        }
+                    });
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise();
+            }
+
+            $('[name=area_id]').change(function() {
+                loadProvinces($(this).val());
+            });
+        });
+    </script>
 @endpush

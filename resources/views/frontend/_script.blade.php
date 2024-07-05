@@ -138,7 +138,7 @@
             });
         }
     });
-
+    
     function loadDistricts(provinceId, districtId = null) {
         var deferred = $.Deferred();
 

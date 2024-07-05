@@ -43,17 +43,17 @@ class StatController extends Controller
         $min_year = getenv('MIN_YEAR');
         $data['min_year'] = empty($min_year) ? date("Y") + 543 : $min_year;
 
-        $data['provinces'] = Province::orderBy('name', 'asc')->pluck('name','id');
-        $data['districts'] = $province_id ? District::whereRaw('left(id,2) = '.$province_id)->orderBy('name', 'asc')->pluck('name','id') : [];
-        $data['subdistricts'] = $district_id  ? Subdistrict::whereRaw('left(id,4) = '.$district_id)->orderBy('name', 'asc')->pluck('name','id') : [];
+        $data['provinces'] = !empty($area_id) ? Province::where('prevention_office_id',$area_id)->orderBy('name', 'asc')->pluck('name','id') :Province::orderBy('name', 'asc')->pluck('name','id');
+        $data['districts'] = !empty($province_id) ? District::whereRaw('left(id,2) = '.$province_id)->orderBy('name', 'asc')->pluck('name','id') : [];
+        $data['subdistricts'] = !empty($district_id)  ? Subdistrict::whereRaw('left(id,4) = '.$district_id)->orderBy('name', 'asc')->pluck('name','id') : [];
 
-        $data['curriculum_list_rep'] = $curriculum_id ? Curriculum::where('id',$curriculum_id)->get() : Curriculum::get();
+        $data['curriculum_list_rep'] = !empty($curriculum_id) ? Curriculum::where('id',$curriculum_id)->get() : Curriculum::get();
 
         $data['curriculum_condition'] = !empty($curriculum_id) ? " AND uceh.curriculum_id =".$curriculum_id : "";
         $data['user_type_condition'] = !empty($user_type_id) ? " AND u.user_type_id =".$user_type_id : "";
         $data['year_condition'] = !empty($exam_year) ? " and year(post_date_finished) =".($exam_year-543) : '';    
         $data['area_condition'] = !empty($area_id) ? " and (u.area_id = ".$area_id.' or p.prevention_office_id ='.$area_id.") " : '';        
-        $data['province_condition'] = !empty($area_id) ? " and u.province_id = ".$province_id : '';        
+        $data['province_condition'] = !empty($province_id) ? " and u.province_id = ".$province_id : '';        
         $data['district_condition'] = !empty($district_id) ? " and u.district_id = ".$district_id : '';        
         $data['subdistrict_condition'] = !empty($subdistrict_id) ? " and u.subdistrict_id = ".$subdistrict_id : '';        
         

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Province;
 use App\Models\District;
 use App\Models\Subdistrict;
 use Illuminate\Http\Request;
@@ -9,6 +10,15 @@ use Illuminate\Support\Facades\Cache;
 
 class AjaxController extends Controller
 {
+    public function getProvinces($area_id)
+    {
+        // ดึงข้อมูลจังหวัด จาก สคร
+        $provinces = Province::where('prevention_office_id', $area_id )->orderBy('id', 'asc')->pluck('name', 'id');
+
+        // ส่งข้อมูลในรูปแบบ JSON response
+        return response()->json($provinces);
+    }
+
     public function getDistricts($province)
     {
         // ดึงข้อมูลอำเภอที่ id เริ่มต้นด้วยเลขของจังหวัด
