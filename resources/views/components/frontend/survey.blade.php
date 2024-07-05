@@ -3,11 +3,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="surveyModalLabel">แบบสำรวจความพึงพอใจ</h5>
+                <h5 class="modal-title" id="surveyModalLabel">แบบสอบถามความพึงพอใจ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="surveyForm" method="POST">
+                <form id="surveyForm" class="fs-5" method="POST">
                     @csrf
                     <input type="hidden" name="curriculum_id" id="curriculum_id">
                     @foreach ($surveys as $key => $item)
