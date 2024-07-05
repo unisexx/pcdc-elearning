@@ -3,7 +3,7 @@
 @section('page', $curriculum_lesson->name)
 
 @section('content')
-    <div class="container fs-5">
+    <div id="tab1Page" class="container fs-5">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
             <div class="col-12">
                 <table class="table table-borderless">

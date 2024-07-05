@@ -2354,3 +2354,12 @@ TABS academic_results
 .smiley-group input[type="radio"]:checked+label {
 	opacity: 1;
 }
+
+.lessonContent{
+	font-weight: 400;
+	line-height: 45px;
+}
+
+#tab1Page .intro-text{
+	line-height: 35px;
+}
