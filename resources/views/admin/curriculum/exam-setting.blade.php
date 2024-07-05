@@ -166,7 +166,6 @@
 
             $("#prepost_pass_score").keydown(function(){
                 var n_total_prepost_question = $("#sp_sum_prepost_question").html();
-                console.log(n_total_prepost_question, $(this).val());
                 if(parseInt(n_total_prepost_question) < parseInt($(this).val())){
                     $(this).val('');
                     // $(this).addClass('border-danger');
@@ -176,7 +175,6 @@
 
             $("#prepost_pass_score").keyup(function(){
                 var n_total_prepost_question = $("#sp_sum_prepost_question").html();
-                console.log(n_total_prepost_question, $(this).val());
                 if(parseInt(n_total_prepost_question) < parseInt($(this).val())){
                     $(this).val('');
                     $(this).addClass('border-danger');
@@ -189,17 +187,13 @@
 
             $(".input-question, .input-score").keydown(function(){
                 var n_question_active = $(this).closest('tr').find("#n_question_active").val();
-                console.log(n_question_active, $(this).val());
                 if(parseInt(n_question_active) < parseInt($(this).val())){
                     $(this).val('');
-                    // $(this).addClass('border-danger');
-                    // $(this).attr('style','background:#ffd1d1;');
                 }
             });
 
             $(".input-question, .input-score").keyup(function(){
                 var n_question_active = $(this).closest('tr').find("#n_question_active").val();
-                console.log(n_question_active, $(this).val());
                 if(parseInt(n_question_active) < parseInt($(this).val())){
                     $(this).val('');
                     $(this).addClass('border-danger');
