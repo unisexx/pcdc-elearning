@@ -61,7 +61,7 @@
 
     .blog-btn {
         position: absolute;
-        bottom: 1rem;
+        /* bottom: 1rem; */
         /* ระยะห่างจากด้านล่าง */
         left: 50%;
         transform: translateX(-50%);

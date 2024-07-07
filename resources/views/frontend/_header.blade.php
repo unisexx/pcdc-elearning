@@ -115,13 +115,13 @@
                                     <a class="nav-link" href="{{ url('faq') }}">คำถามที่พบบ่อย</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('contact') }}">ติดต่อ</a>
+                                    <a class="nav-link" href="{{ url('contact') }}">ติดต่อเรา</a>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                 </div>
-                <div class="col-lg-1 ms-auto search_md">
+                {{-- <div class="col-lg-1 ms-auto search_md">
 
                     <div class="search-input-box">
                         <input type="text" placeholder="ค้นหา">
@@ -131,7 +131,7 @@
                         <i class="fa fa-times close-icon"></i>
                     </div>
 
-                </div>
+                </div> --}}
             </div>
         </div>
     </header>

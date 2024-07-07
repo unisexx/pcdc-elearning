@@ -299,7 +299,7 @@
                             </h2>
                             <div id="collapse_{{ $key }}" class="accordion-collapse collapse @if ($key == 0) show @endif" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{ @$item->answer }}
+                                    {!! nl2br(e(@$item->answer)) !!}
                                 </div>
                             </div>
                         </div>
