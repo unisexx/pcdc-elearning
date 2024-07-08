@@ -4,7 +4,7 @@
 <head>
     {{-- ถ้าขึ้น production ของจริงแล้วให้เอา robots ออก --}}
     <meta name="robots" content="noindex, nofollow">
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ config('app.name', 'e-learning โรคติดต่อในเด็กและโควิด 19') }}">
@@ -126,9 +126,9 @@
                                                     ->where('exam_type', 'pretest')
                                                     ->whereRaw('n_question = total_question')
                                                     ->count();
-                                                if($curriculum->curriculum_exam_setting){
+                                                if ($curriculum->curriculum_exam_setting) {
                                                     $pretest_exam = $curriculum->curriculum_exam_setting->pre_test_status == 'inactive' ? 1 : $pretest_exam;
-                                                }else{
+                                                } else {
                                                     $pretest_exam = 1;
                                                 }
                                                 $all_pass = false;
@@ -144,13 +144,13 @@
                                                         ->count();
 
                                                     //เปิดให้ทดสอบหรือไม่
-                                                    if($curriculum->curriculum_exam_setting){
-                                                    $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting
-                                                        ->curriculum_exam_setting_detail()
-                                                        ->where('curriculum_lesson_id', $lesson->id)
-                                                        ->where('exam_status', 'active')
-                                                        ->count();
-                                                    }else{
+                                                    if ($curriculum->curriculum_exam_setting) {
+                                                        $lesson_has_exam[$key] = $curriculum->curriculum_exam_setting
+                                                            ->curriculum_exam_setting_detail()
+                                                            ->where('curriculum_lesson_id', $lesson->id)
+                                                            ->where('exam_status', 'active')
+                                                            ->count();
+                                                    } else {
                                                         $lesson_has_exam[$key] = 0;
                                                     }
 
@@ -382,6 +382,18 @@
                             @if (!empty($posttest))
                                 @if ($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
                                     <div class="row box-bar text-center fs-5">
+                                        <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning
+                                            <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
+                                                แบบสอบถามความพึงพอใจ
+                                            </button>
+                                            @php
+                                                $n_survey = \App\Models\SurveyResult::where('user_id', \Auth::user()->id)
+                                                    ->where('curriculum_id', $curriculum->id)
+                                                    ->count();
+                                            @endphp
+                                            <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey, 0) }}">
+                                        </p>
+                                        @include('components.frontend.survey')
                                         <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร
                                             <button type="button" class="btn btn-success rounded-pill text-white btn-download-cert">
                                                 <em class="fa fa-download me-2"></em>
@@ -406,19 +418,7 @@
                                                 </script>
                                             @endpush
                                         </p>
-                                        <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning
-                                            <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
-                                                แบบสอบถามความพึงพอใจ
-                                            </button>
-                                            @php
-                                                $n_survey = \App\Models\SurveyResult::where('user_id', \Auth::user()->id)
-                                                    ->where('curriculum_id', $curriculum->id)
-                                                    ->count();
-                                            @endphp
-                                            <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey, 0) }}">
-                                        </p>
                                     </div>
-                                    @include('components.frontend.survey')
                                 @endif
                             @endif
                             <div class="row box-bar">
