@@ -14,14 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect()->route('home');
-});
-
 Auth::routes();
 
 /** Frontend */
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 Route::get('/front/login/form', [App\Http\Controllers\Frontend\LoginController::class, 'form'])->name('front.login.form');
 Route::any('/front/login', [App\Http\Controllers\Frontend\LoginController::class, 'login'])->name('front.login');

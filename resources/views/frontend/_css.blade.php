@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="{{ asset('html/css/all.min.css') }}" />
 
 <!-- Styles for this template -->
-<link href="{{ asset('html/css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('html/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('html/css/style.css') }}?v={{ time() }}" rel="stylesheet">
+<link href="{{ asset('html/css/custom.css') }}?v={{ time() }}" rel="stylesheet">
 
 <!-- Select2 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

@@ -4,7 +4,7 @@
 <head>
     {{-- ถ้าขึ้น production ของจริงแล้วให้เอา robots ออก --}}
     <meta name="robots" content="noindex, nofollow">
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ config('app.name', 'Laravel') }}">
@@ -30,7 +30,7 @@
     @include('frontend._header')
 
     {{-- Title Page กับ breadcrumb แสดงทุกหน้าที่ไม่ใช่หน้าแรก --}}
-    @if (!request()->routeIs('home'))
+    @if (!request()->routeIs('home') && !request()->is('/'))
         <div class="bg-theme">
             <div class="container">
                 <div class="title-page py-5 px-4">@yield('page')</div>

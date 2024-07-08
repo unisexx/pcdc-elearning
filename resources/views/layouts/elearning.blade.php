@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="{{ asset('elearning/css/all.min.css') }}" />
 
     <!-- Styles for this template -->
-    <link href="{{ asset('elearning/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('elearning/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('elearning/css/style.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('elearning/css/custom.css') }}?v={{ time() }}" rel="stylesheet">
+
     @stack('css')
 </head>
 
