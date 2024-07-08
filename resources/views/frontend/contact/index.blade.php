@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <img src="{{ asset('html/images/girl-contact.png') }}" alt="" class="img-fluid mx-auto d-block p-4 mt-5">
+                <img src="{{ asset('html/images/girl-contact2.png') }}" alt="" class="img-fluid mx-auto d-block p-4 mt-5">
             </div>
         </div>
     </div>

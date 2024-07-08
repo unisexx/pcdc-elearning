@@ -10,7 +10,7 @@
 body {
 	font-family: "Sarabun", sans-serif;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 18px;
 	color: #000;
 	background-color: #FFF;
 }
@@ -26,7 +26,7 @@ a:hover {
 }
 
 :root {
-	--theme-color: #2da0a5;
+	--theme-color: #0089cf;
 	--icon-font: "Font Awesome 6 Free";
 }
 
@@ -49,7 +49,7 @@ a:hover {
 }
 
 .bg-theme {
-	background-color: #2da0a5;
+	background-color: #0089cf;
 	position: relative;
 	/*z-index: 0;*/
 }
@@ -202,7 +202,7 @@ a:hover {
 		background-color: rgb(134, 218, 222) !important;
 	}
 
-	/*.topmenu li ul.dropdown-menu {display: none; ทำให้มี MouseOver ชี้เมาส์โดยไม่ต้องคลิก*/
+	/*.topmenu li ul.dropdown-menu {display: none; เธ—เธณเนเธซเนเธกเธต MouseOver เธเธตเนเน€เธกเธฒเธชเนเนเธ”เธขเนเธกเนเธ•เนเธญเธเธเธฅเธดเธ*/
 	.topmenu li ul.dropdown-menu {
 		display: none;
 		background: #36c2c8;
@@ -922,7 +922,7 @@ a:hover {
 }
 
 .blog-btn:hover {
-	background-color: #2da0a5;
+	background-color: #0089cf;
 }
 
 .lesson {
@@ -1147,15 +1147,15 @@ a:hover {
 	font-weight: 600;
 	font-family: "Kodchasan";
 	text-shadow:
-		2px 0 0 #2da0a5,
-		-2px 0 0 #2da0a5,
-		0 2px 0 #2da0a5,
-		0 -2px 0 #2da0a5,
-		1px 1px 0 #2da0a5,
-		-1px -1px 0 #2da0a5,
-		1px -1px 0 #2da0a5,
-		-1px 1px 0 #2da0a5,
-		1px 1px 5px #2da0a5;
+	    2px 0 0 #0089cf,
+		-2px 0 0 #0089cf,
+		0 2px 0 #0089cf,
+		0 -2px 0 #0089cf,
+		1px 1px 0 #0089cf,
+		-1px -1px 0 #0089cf,
+		1px -1px 0 #0089cf,
+		-1px 1px 0 #0089cf,
+		1px 1px 5px #0089cf;
 }
 
 .title-content {
@@ -1171,7 +1171,7 @@ a:hover {
 	min-height: 35px;
 	display: block;
 	font-family: Sarabun;
-	font-size: 13px;
+	font-size: 15px;
 	margin-top: -20px;
 	position: relative;
 	margin-bottom: 25px;
@@ -1203,7 +1203,7 @@ a:hover {
 .box-contact input,
 .box-contact textarea {
 	font-family: "Sarabun";
-	font-size: 16px;
+	font-size: 18px;
 }
 
 /* Register PAGE
@@ -1213,7 +1213,7 @@ a:hover {
 .register-form input,
 .register-form textarea {
 	font-family: "Sarabun";
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .invalid-feedback {
@@ -1222,7 +1222,7 @@ a:hover {
 }
 
 .title-form {
-	background-color: #2da0a5;
+	background-color: #0089cf;
 	color: #fff;
 	font-size: 18px;
 	padding: 5px 15px 5px 15px;
@@ -1493,7 +1493,7 @@ a:hover {
 /* Chart
 -------------------------------------------------- */
 .bg-chart-header {
-	background-color: #2da0a5;
+	background-color: #0089cf;
 	padding-top: 15px;
 }
 
@@ -1901,7 +1901,7 @@ TABS LESSON
 .title_welcome {
 	font-family: "Kodchasan";
 	font-weight: 600;
-	color: #0e9aa1;
+	color: #419ae8;
 	font-size: 30px;
 	text-align: center;
 }
@@ -2067,7 +2067,7 @@ TABS LESSON
 	scrollbar-color: #62c0f3 #c8e8fa;
 }
 
-/* ปรับแต่งขอบเขตของข้อความแจ้งเตือน */
+/* เธเธฃเธฑเธเนเธ•เนเธเธเธญเธเน€เธเธ•เธเธญเธเธเนเธญเธเธงเธฒเธกเนเธเนเธเน€เธ•เธทเธญเธ */
 .was-validated .label_answer {
 	color: red !important;
 }
@@ -2299,7 +2299,7 @@ TABS academic_results
 }
 
 .text_small_welcome {
-	font-size: 13px;
+	font-size: 15px;
 	color: #FFF;
 }
 

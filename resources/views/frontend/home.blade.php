@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-5 text-center text-lg-start wow bounceInRight">
-                                <img src="{{ asset('html/images/girl-1.png') }}" alt="" class="pt-lg-4 element1 mt-3 img-fluid" width="500" height="402">
+                                <img src="{{ asset('html/images/cartoon-1.png') }}" alt="" class="pt-lg-4 element1 mt-3 img-fluid" width="500" height="402">
                             </div>
                         </div>
                     </div>

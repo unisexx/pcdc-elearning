@@ -10,11 +10,10 @@
 body {
 	font-family: "Sarabun", sans-serif;
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 16px;
 	color: #000;
 	background-color: #FFF;
 }
-
 
 a {
 	cursor: pointer;
@@ -27,12 +26,8 @@ a:hover {
 }
 
 :root {
-	--theme-color: #0089cf;
+	--theme-color: #2da0a5;
 	--icon-font: "Font Awesome 6 Free";
-
-	.btn {
-		--bs-btn-font-size: 1.125rem !important;
-	}
 }
 
 .shape1 {
@@ -54,7 +49,7 @@ a:hover {
 }
 
 .bg-theme {
-	background-color: #0089cf;
+	background-color: #2da0a5;
 	position: relative;
 	/*z-index: 0;*/
 }
@@ -74,7 +69,7 @@ a:hover {
 .organization_name {
 	color: #FFF;
 	font-family: "Kodchasan";
-	font-size: 44px;
+	font-size: 40px;
 	padding-left: 20px;
 	font-weight: 600;
 }
@@ -86,7 +81,7 @@ a:hover {
 .organization_name2 {
 	color: #FFF;
 	font-family: "Kodchasan";
-	font-size: 18px;
+	font-size: 15.7px;
 	padding-left: 20px;
 	font-weight: 600;
 	margin-top: -7px;
@@ -119,7 +114,7 @@ a:hover {
 .topmenu {
 	font-family: "Kodchasan", sans-serif;
 	font-weight: 600;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .topmenu li {
@@ -150,7 +145,6 @@ a:hover {
 .topmenu .dropdown-menu .dropdown-item {
 	color: #212121 !important;
 	font-weight: 600;
-	font-size: 17px;
 }
 
 .topmenu a.nav-link.active {
@@ -177,7 +171,7 @@ a:hover {
 
 @media (min-width: 768px) and (max-width: 1199.98px) {
 	.topmenu .nav-item {
-		font-size: 17px;
+		font-size: 15px;
 	}
 
 	.topmenu .nav-link {
@@ -186,32 +180,32 @@ a:hover {
 	}
 
 	.topmenu a.nav-link {
-		font-size: 16px !important;
+		font-size: 14px !important;
 	}
 }
 
 /* ============ desktop view MouseOver Menu ================== */
 @media all and (min-width: 992px) {
 	.topmenu li ul li:hover {
-		background-color: rgb(115, 188, 252) !important;
+		background-color: rgb(94, 206, 211) !important;
 	}
 
 	.topmenu li ul li a.dropdown-item:hover {
-		background-color: rgb(115, 188, 252) !important;
+		background-color: rgb(94, 206, 211) !important;
 	}
 
 	.topmenu li ul li ul {
-		background-color: rgb(115, 188, 252) !important;
+		background-color: rgb(94, 206, 211) !important;
 	}
 
 	.topmenu li ul li ul li a.dropdown-item:hover {
-		background-color: rgb(145, 198, 252) !important;
+		background-color: rgb(134, 218, 222) !important;
 	}
 
-	/*.topmenu li ul.dropdown-menu {display: none; เธ—เธณเนเธซเนเธกเธต MouseOver เธเธตเนเน€เธกเธฒเธชเนเนเธ”เธขเนเธกเนเธ•เนเธญเธเธเธฅเธดเธ*/
+	/*.topmenu li ul.dropdown-menu {display: none; ทำให้มี MouseOver ชี้เมาส์โดยไม่ต้องคลิก*/
 	.topmenu li ul.dropdown-menu {
 		display: none;
-		background: #4ba9fb;
+		background: #36c2c8;
 		border-radius: 10px;
 		border: 0;
 		top: 35px;
@@ -265,20 +259,20 @@ a:hover {
 	}
 
 	.topmenu li ul.dropdown-menu {
-		background: #4ba9fb;
+		background: #36c2c8;
 		border-radius: 10px;
 		border: 0;
 	}
 
 	.topmenu li ul li ul.dropdown-menu {
-		background: rgb(145, 198, 252);
+		background: rgb(94, 206, 211);
 		border-radius: 2px;
 		border: 0;
 	}
 
 	.topmenu li ul li a.dropdown-item:hover,
 	.topmenu li ul li ul li a.dropdown-item:hover {
-		background-color: rgb(115, 188, 252) !important;
+		background-color: rgb(134, 218, 222) !important;
 	}
 
 	.dropstart .dropdown-toggle::before {
@@ -363,7 +357,7 @@ a:hover {
 	height: 100%;
 	width: 100%;
 	border-radius: 50px;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 400;
 	color: #FFF;
 	background-color: #fff;
@@ -619,7 +613,7 @@ a:hover {
 }
 
 .stat-info {
-	font-size: 26px;
+	font-size: 24px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 	color: #000;
@@ -642,7 +636,7 @@ a:hover {
 
 .all_tester {
 	color: #333;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 	margin-top: -12px;
@@ -730,7 +724,7 @@ a:hover {
 
 .text_step {
 	color: #FFF;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 	padding-bottom: 5px;
@@ -738,7 +732,7 @@ a:hover {
 
 .text2_step {
 	color: #333;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 }
@@ -917,7 +911,7 @@ a:hover {
 .blog-btn {
 	width: 100%;
 	display: block;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 700;
 	font-family: "Kodchasan";
 	border-radius: 9999px;
@@ -928,7 +922,7 @@ a:hover {
 }
 
 .blog-btn:hover {
-	background-color: #0089cf;
+	background-color: #2da0a5;
 }
 
 .lesson {
@@ -975,7 +969,7 @@ a:hover {
 	animation: nudge 7s linear infinite alternate;
 	position: absolute;
 	bottom: 30%;
-	right: -80px;
+	right: -125px;
 }
 
 .icon_book {
@@ -998,7 +992,7 @@ a:hover {
 	border-radius: 30px 50px 30px 50px;
 	background-color: var(--theme-color);
 	color: #FFF;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 }
@@ -1007,7 +1001,7 @@ a:hover {
 	border-radius: 30px 50px 30px 50px;
 	background-color: #f9f6f0;
 	color: #000;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 }
@@ -1091,7 +1085,7 @@ a:hover {
 
 .address {
 	color: #FFF;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	font-family: "Kodchasan";
 }
@@ -1105,7 +1099,7 @@ a:hover {
 .copy_right {
 	color: #FFF;
 	font-family: "Sarabun";
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .copy_right a {
@@ -1150,15 +1144,15 @@ a:hover {
 	font-weight: 600;
 	font-family: "Kodchasan";
 	text-shadow:
-		2px 0 0 #0089cf,
-		-2px 0 0 #0089cf,
-		0 2px 0 #0089cf,
-		0 -2px 0 #0089cf,
-		1px 1px 0 #0089cf,
-		-1px -1px 0 #0089cf,
-		1px -1px 0 #0089cf,
-		-1px 1px 0 #0089cf,
-		1px 1px 5px #0089cf;
+		2px 0 0 #2da0a5,
+		-2px 0 0 #2da0a5,
+		0 2px 0 #2da0a5,
+		0 -2px 0 #2da0a5,
+		1px 1px 0 #2da0a5,
+		-1px -1px 0 #2da0a5,
+		1px -1px 0 #2da0a5,
+		-1px 1px 0 #2da0a5,
+		1px 1px 5px #2da0a5;
 }
 
 .title-content {
@@ -1174,7 +1168,7 @@ a:hover {
 	min-height: 35px;
 	display: block;
 	font-family: Sarabun;
-	font-size: 15px;
+	font-size: 13px;
 	margin-top: -20px;
 	position: relative;
 	margin-bottom: 25px;
@@ -1206,7 +1200,7 @@ a:hover {
 .box-contact input,
 .box-contact textarea {
 	font-family: "Sarabun";
-	font-size: 18px;
+	font-size: 16px;
 }
 
 /* Register PAGE
@@ -1216,7 +1210,7 @@ a:hover {
 .register-form input,
 .register-form textarea {
 	font-family: "Sarabun";
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .invalid-feedback {
@@ -1554,30 +1548,30 @@ a:hover {
 /* Chart
 -------------------------------------------------- */
 .bg-chart-header {
-	background-color: #0089cf;
+	background-color: #2da0a5;
 	padding-top: 15px;
 }
 
 .graph_title {
 	line-height: 25px;
-	font-size: 20px;
+	font-size: 18px;
 	text-align: center;
 }
 
 .table-style1 thead th {
-	font-size: 16px;
+	font-size: 14px;
 	font-family: "sarabun";
 	width: 150px;
 }
 
 .table-style1 td {
-	font-size: 16px;
+	font-size: 14px;
 	font-family: "sarabun";
 }
 
 .title-table {
 	font-family: "Kodchasan";
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .table-style1 tbody th {
@@ -1913,7 +1907,7 @@ TABS HOME
 }
 
 .tab-class .nav-item a.active {
-	background-color: #0089cf !important;
+	background-color: #00bbae !important;
 }
 
 .tab-class .nav-item a {
@@ -1921,8 +1915,8 @@ TABS HOME
 	font-weight: 600;
 	padding: 10px 30px 13px;
 	color: #001430;
-	background-color: #edf9fb;
-	border: 1.5px dashed #0089cf;
+	background-color: #edfbfa;
+	border: 1.5px dashed #00bbae;
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-bottom: 10px;
@@ -1931,8 +1925,8 @@ TABS HOME
 .title_tab {
 	font-family: "Kodchasan";
 	font-weight: 600;
-	font-size: 22px;
-	color: #0089cf;
+	font-size: 20px;
+	color: #02a499;
 	text-align: center;
 	width: 100%;
 	margin-top: 10px;
@@ -2009,7 +2003,7 @@ TABS LESSON
 .tab_lesson_title {
 	background-color: #e6f4f8;
 	color: #000;
-	font-size: 19px;
+	font-size: 17px;
 	font-weight: 600;
 	padding: 5px 15px 5px 15px;
 	position: absolute;
@@ -2069,7 +2063,7 @@ TABS LESSON
 	display: block;
 	padding: 15px 20px 15px 20px;
 	margin: 10px 0 10px 0;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #000;
 	letter-spacing: 0.05em;
@@ -2142,7 +2136,7 @@ TABS LESSON
 	scrollbar-color: #62c0f3 #c8e8fa;
 }
 
-/* เธเธฃเธฑเธเนเธ•เนเธเธเธญเธเน€เธเธ•เธเธญเธเธเนเธญเธเธงเธฒเธกเนเธเนเธเน€เธ•เธทเธญเธ */
+/* ปรับแต่งขอบเขตของข้อความแจ้งเตือน */
 .was-validated .label_answer {
 	color: red !important;
 }
@@ -2374,6 +2368,6 @@ TABS academic_results
 }
 
 .text_small_welcome {
-	font-size: 15px;
+	font-size: 13px;
 	color: #FFF;
 }
