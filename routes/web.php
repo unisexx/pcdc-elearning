@@ -23,7 +23,9 @@ Auth::routes();
 
 /** Frontend */
 Route::get('/home', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/front/login/form', [App\Http\Controllers\Frontend\LoginController::class, 'form'])->name('front.login.form');
 Route::any('/front/login', [App\Http\Controllers\Frontend\LoginController::class, 'login'])->name('front.login');
+Route::post('/front/login2', [App\Http\Controllers\Frontend\LoginController::class, 'login2'])->name('front.login2');
 Route::get('/front/logout', [App\Http\Controllers\Frontend\LoginController::class, 'logout']);
 Route::get('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form']);
 Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register'])->name('front.register');
@@ -39,7 +41,7 @@ Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsCont
 Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
 Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
 Route::get('/certificate/verify/{verifyToken}', [App\Http\Controllers\Frontend\CertificateController::class, 'verify'])->name('certificate.verify');
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['frontend.auth'])->group(function () {
     Route::get('/profile/{user}/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}', [App\Http\Controllers\Frontend\ProfileController::class, 'update'])->name('profile.update');
     Route::get('/change_password/{user}/edit', [App\Http\Controllers\Frontend\ChangePasswordController::class, 'edit'])->name('change_password.edit');

@@ -20,7 +20,7 @@
                                 ยินดีต้อนรับ {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="{{ url('elearning/history')}}" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน"><i class="fas fa-clock"></i> ข้อมูลและประวัติการเรียน</a></li>
+                                <li><a class="dropdown-item" href="{{ url('elearning/history') }}" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน"><i class="fas fa-clock"></i> ข้อมูลและประวัติการเรียน</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว"><i class="fas fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
                                 <li><a class="dropdown-item" href="{{ route('change_password.edit', ['user' => Auth::user()->id]) }}" data-bs-toggle="popover" data-bs-content="เปลี่ยนรหัสผ่าน"><i class="fas fa-key"></i> เปลี่ยนรหัสผ่าน</a></li>
                                 <li><a class="dropdown-item" href="{{ url('front/logout') }}" data-bs-toggle="popover" data-bs-content="ออกจากระบบ"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
@@ -58,8 +58,11 @@
                             }
                         </style>
                     @else
-                        <div class="btn btn-red rounded-pill text-white">
+                        {{-- <div class="btn btn-red rounded-pill text-white">
                             <a id="loginBtn" href="#">เข้าสู่ระบบ</a>
+                        </div> --}}
+                        <div class="btn btn-red rounded-pill text-white">
+                            <a href="{{ url('front/login/form') }}">เข้าสู่ระบบ</a>
                         </div>
                         <div class="btn btn-red rounded-pill text-white ms-2">
                             <a href="{{ url('front/register') }}">สมัครสมาชิก</a>
@@ -82,33 +85,34 @@
                                     <a class="nav-link active text-nowrap" aria-current="page" href="{{ url('home') }}">หน้าแรก</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('stat') }}">ข้อมูลสถิติ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('elearning-steps') }}">ขั้นตอนการเรียน e-learning</a></li>                               
-                                @if(\Auth::user())
-                                @php
-                                $curriculum_menu = \App\Models\Curriculum::where('status','active')
-                                                ->where(function($q) {
-                                                        if(Auth::user()->is_admin!='1'){
-                                                            $q->whereHas('curriculum_user_type', function ($q) {
-                                                                $q->where('user_type_id', Auth::user()->user_type_id);
-                                                            });
-                                                        }
-                                                })
-                                                ->orderBy('pos','asc')->get();
-                                @endphp
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
-                                    <ul class="dropdown-menu shadow">
-                                        @foreach($curriculum_menu as $curriculum_menu)
-                                        @php
-                                            $url = env('CURRICULUM_CONTINUE') ? url("elearning/curriculum/".$curriculum_menu->id.'/continue') : url("elearning/curriculum/".$curriculum_menu->id);
-                                        @endphp
-                                        <li><a class="dropdown-item" href="{{ $url }}">{{ $curriculum_menu->name }}</a></li>
-                                        @endforeach                                        
-                                    </ul>
-                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('elearning-steps') }}">ขั้นตอนการเรียน e-learning</a></li>
+                                @if (\Auth::user())
+                                    @php
+                                        $curriculum_menu = \App\Models\Curriculum::where('status', 'active')
+                                            ->where(function ($q) {
+                                                if (Auth::user()->is_admin != '1') {
+                                                    $q->whereHas('curriculum_user_type', function ($q) {
+                                                        $q->where('user_type_id', Auth::user()->user_type_id);
+                                                    });
+                                                }
+                                            })
+                                            ->orderBy('pos', 'asc')
+                                            ->get();
+                                    @endphp
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="courses.html" data-bs-toggle="dropdown" data-bs-auto-close="outside">หลักสูตร</a>
+                                        <ul class="dropdown-menu shadow">
+                                            @foreach ($curriculum_menu as $curriculum_menu)
+                                                @php
+                                                    $url = env('CURRICULUM_CONTINUE') ? url('elearning/curriculum/' . $curriculum_menu->id . '/continue') : url('elearning/curriculum/' . $curriculum_menu->id);
+                                                @endphp
+                                                <li><a class="dropdown-item" href="{{ $url }}">{{ $curriculum_menu->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 @else
                                     <li class="nav-item dropdown">
-                                        <a id="CurriculumLoginMenu" class="nav-link dropdown-toggle" href="#">หลักสูตร</a>
+                                        <a id="CurriculumLoginMenu" class="nav-link dropdown-toggle" href="{{ url('front/login/form') }}">หลักสูตร</a>
                                     </li>
                                 @endif
                                 <li class="nav-item">
@@ -137,7 +141,7 @@
     </header>
 </div>
 
-@push('js')
+{{-- @push('js')
     @guest
         <script>
             document.getElementById('CurriculumLoginMenu').addEventListener('click', function() {
@@ -338,4 +342,4 @@
             });
         </script>
     @endguest
-@endpush
+@endpush --}}
