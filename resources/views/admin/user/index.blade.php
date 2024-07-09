@@ -15,6 +15,7 @@
                             <th scope="col">#</th>
                             <th scope="col">ชื่อ</th>
                             <th scope="col">อีเมล์</th>
+                            <th scope="col">แอดมิน</th>
                             <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
@@ -24,6 +25,13 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
+                                <td>
+                                    @if ($item->is_admin = '1')
+                                        <i class="fas fa-user-shield text-warning"></i>
+                                    @else
+                                        <i class="fas fa-user"></i>
+                                    @endif
+                                </td>
                                 <td>
                                     @component('components.table.button')
                                         @slot('itemID')

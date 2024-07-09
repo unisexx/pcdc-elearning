@@ -17,6 +17,9 @@
             <div class="col-12">
                 {{ Form::bsPassword('password_confirmation', 'ยืนยันรหัสผ่าน') }}
             </div>
+            <div class="col-12">
+                {{ Form::bsSwitch('is_admin', 'แอดมิน', @$rs->is_admin, '1', '0') }}
+            </div>
         </div>
 
         <div class="col-auto mt-3 float-end">

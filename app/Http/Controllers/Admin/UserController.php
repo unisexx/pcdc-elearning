@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\UserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
@@ -13,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderBy('is_admin', 'desc')->paginate(10);
 
         return view('admin.user.index', compact('users'));
     }
@@ -23,7 +24,7 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $input             = $request->all();
         $input['password'] = Hash::make($input['password']);
@@ -51,7 +52,7 @@ class UserController extends Controller
         return view('admin.user.edit', @compact('rs', 'userRole'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $input = $request->all();
 
