@@ -6,6 +6,15 @@
     @slot('form')
         <div class="row mt-3">
             <div class="col-12">
+                <label>หมวดหมู่หลักสูตร
+                {!! Form::select(
+                    'curriculum_category_id',
+                    \App\Models\CurriculumCategory::where('status','active')->orderBy('pos','asc')->pluck('name','id'),
+                    @$rs->curriculum_category_id,
+                    ['class' => 'form-select select2 form-control', 'id' => 'user_type_id', 'placeholder' => '--เลือกหมวดหมู่--'],
+                ) !!}  
+            </div>
+            <div class="col-12">
                 {{ Form::bsText('name', 'ชื่อหลักสูตร') }}
             </div>
             <div class="col-12">

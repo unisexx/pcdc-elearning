@@ -78,6 +78,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
     Route::resource('/survey', App\Http\Controllers\Admin\SurveyController::class)->names('admin.survey');
 
+    Route::resource('/curriculum-category', App\Http\Controllers\Admin\CurriculumCategoryController::class)->names('admin.curriculum-category');
     Route::resource('/curriculum', App\Http\Controllers\Admin\CurriculumController::class)->names('admin.curriculum');
     Route::resource('/curriculum-lesson', App\Http\Controllers\Admin\CurriculumLessonController::class)->names('admin.curriculum-lesson');
     Route::resource('/curriculum-lesson-question', App\Http\Controllers\Admin\CurriculumLessonQuestionController::class)->names('admin.curriculum-lesson-question');
@@ -87,6 +88,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/faq/update-order', [App\Http\Controllers\Admin\FaqController::class, 'updateOrder'])->name('faq.updateOrder');
     Route::post('/survey/update-order', [App\Http\Controllers\Admin\SurveyController::class, 'updateOrder'])->name('survey.updateOrder');
     Route::post('/curriculum-lesson-question/update-order', [App\Http\Controllers\Admin\CurriculumLessonQuestionController::class, 'updateOrder'])->name('admin.curriculum-lesson-question.updateOrder');
+    Route::post('/curriculum-category/update-order', [App\Http\Controllers\Admin\CurriculumCategoryController::class, 'updateOrder'])->name('admin.curriculum-category.updateOrder');
 
 });
 

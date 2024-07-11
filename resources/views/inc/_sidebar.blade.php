@@ -2,6 +2,7 @@
     $menuItems = [
         ['name' => 'แดชบอร์ด', 'route' => 'admin.dashboard', 'icon' => 'fa-house'],
         ['name' => 'หลักสูตร', 'route' => 'admin.curriculum.index', 'icon' => 'fa-graduation-cap', 'additional_routes' => ['admin.curriculum-lesson', 'admin.curriculum-lesson-question', 'admin.curriculum-exam-setting']],
+        ['name' => 'หมวดหมู่หลักสูตร', 'route' => 'admin.curriculum-category.index', 'icon' => 'fa-list'],
         ['name' => 'ไฮไลท์', 'route' => 'admin.hilight.index', 'icon' => 'fa-images'],
         ['name' => 'คำถามที่พบบ่อย', 'route' => 'admin.faq.index', 'icon' => 'fa-circle-question'],
         ['name' => 'ข้อมูลติดต่อ', 'route' => ['admin.contact.edit', ['contact' => 1]], 'icon' => 'fa-map-location-dot'],

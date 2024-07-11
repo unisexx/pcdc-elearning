@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th width="50" class="text-center" scope="col">#</th>
+                            <th width="200" scope="col">หมวดหมู่หลักสูตร</th>
                             <th width="200" scope="col">ภาพหน้าปก</th>
                             <th class="text-start" scope="col">ชื่อหลักสูตร</th>
                             <th class="text-start" scope="col">ประเภทสมาชิก</th>
@@ -24,6 +25,11 @@
                         @foreach ($rs as $item)
                             <tr>
                                 <td class="text-center">{{ autoNumber($rs) }}</td>
+                                <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">
+                                    @if($item->curriculum_category)
+                                        {{ $item->curriculum_category->name }}
+                                    @endif
+                                </td>
                                 <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="100"></td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">{{ @$item->name }}</td>
                                 <td style="vertical-align:top;padding-left:20px;">
