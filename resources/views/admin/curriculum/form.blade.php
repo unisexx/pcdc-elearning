@@ -6,13 +6,15 @@
     @slot('form')
         <div class="row mt-3">
             <div class="col-12">
-                <label>หมวดหมู่หลักสูตร
-                {!! Form::select(
-                    'curriculum_category_id',
-                    \App\Models\CurriculumCategory::where('status','active')->orderBy('pos','asc')->pluck('name','id'),
-                    @$rs->curriculum_category_id,
-                    ['class' => 'form-select select2 form-control', 'id' => 'user_type_id', 'placeholder' => '--เลือกหมวดหมู่--'],
-                ) !!}  
+                <div class="form-group">
+                    <label>หมวดหมู่หลักสูตร</label>
+                    {!! Form::select(
+                        'curriculum_category_id',
+                        \App\Models\CurriculumCategory::where('status', 'active')->orderBy('pos', 'asc')->pluck('name', 'id'),
+                        @$rs->curriculum_category_id,
+                        ['class' => 'form-select select2 form-control', 'id' => 'user_type_id', 'placeholder' => '--เลือกหมวดหมู่--'],
+                    ) !!}
+                </div>
             </div>
             <div class="col-12">
                 {{ Form::bsText('name', 'ชื่อหลักสูตร') }}
@@ -49,7 +51,10 @@
                             }
                         @endphp
                         <label>
-                            {!! Form::checkbox('user_type_id[]', $ut->id, @$checked, ['class' => 'form-check-input ms-2', 'style' => 'border:1px solid #CCC;']) !!}
+                            {!! Form::checkbox('user_type_id[]', $ut->id, @$checked, [
+                                'class' => 'form-check-input ms-2',
+                                'style' => 'border:1px solid #CCC;',
+                            ]) !!}
                             {{ $ut->name }}
                         </label>
                     @endforeach
