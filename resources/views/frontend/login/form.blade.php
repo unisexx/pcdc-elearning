@@ -52,7 +52,7 @@
                                     <button type="submit" class="btn btn-primary btn-md shadow rounded-pill btn-login-form" style="padding-left: 2.5rem; padding-right: 2.5rem;">เข้าสู่ระบบ</button>
                                 </div>
                                 <div>
-                                    <p class="small fw-bold mt-2 pt-3 mb-0">ยังไม่เป็นสมาชิก? <a href="{{ url('/front/register') }}" class="link-danger">สมัครสมาชิก</a></p>
+                                    <p class="small fw-bold mt-2 pt-3 mb-0 text-center">ยังไม่เป็นสมาชิก? <a href="{{ url('/front/register') }}" class="link-danger">สมัครสมาชิก</a></p>
                                 </div>
 
                                 <div class="divider2 d-flex align-items-center my-4">

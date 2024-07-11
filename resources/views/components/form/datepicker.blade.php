@@ -3,6 +3,8 @@
     @php
         $baseClass = 'form-control';
         $sizeClass = 'form-control-lg';
+        $additionalClasses = 'datepicker w-75';
+
         if (isset($attributes['class'])) {
             if (strpos($attributes['class'], 'form-control-sm') !== false) {
                 $sizeClass = 'form-control-sm';
@@ -12,9 +14,9 @@
                 $sizeClass = 'form-control-lg';
             }
         }
-        $additionalClasses = 'tiny';
+
         $attributes['class'] = $baseClass . ' ' . $sizeClass . ' ' . $additionalClasses . ($errors->has($name) ? ' is-invalid' : '') . ' ' . ($attributes['class'] ?? '');
     @endphp
-    {{ Form::textarea($name, $value, array_merge(['placeholder' => $label], $attributes)) }}
+    {{ Form::text($name, $value, array_merge(['placeholder' => $label], $attributes)) }}
     {!! $errors->first($name, '<span class="invalid-feedback d-block">:message</span>') !!}
 </div>

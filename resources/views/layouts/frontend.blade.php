@@ -66,6 +66,7 @@
     </main>
 
     @include('frontend._footer')
+    {{-- @include('frontend._cookie-consent') --}}
     @include('frontend._script')
     @stack('js')
 </body>

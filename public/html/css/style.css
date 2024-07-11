@@ -929,6 +929,7 @@ a:hover {
 
 .blog-btn:hover {
 	background-color: #0089cf;
+	color: #ffffff;
 }
 
 .lesson {
@@ -1225,7 +1226,7 @@ a:hover {
 }
 
 .title-form {
-	background-color: #2da0a5;
+	background-color: #0089cf;
 	color: #fff;
 	font-size: 18px;
 	padding: 5px 15px 5px 15px;
