@@ -1,5 +1,11 @@
 <div class="form-group">
+    @php
+        $isRequired = isset($attributes['required']) && $attributes['required'];
+    @endphp
     {{ Form::label($name, $label) }}
+    @if ($isRequired)
+        <span class="text-danger">*</span>
+    @endif
     @if ($value)
         @php
             $extension = pathinfo($value, PATHINFO_EXTENSION);

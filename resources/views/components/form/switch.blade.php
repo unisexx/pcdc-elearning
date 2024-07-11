@@ -1,5 +1,11 @@
 <div class="form-group">
+    @php
+        $isRequired = isset($attributes['required']) && $attributes['required'];
+    @endphp
     {{ Form::label($name, $label) }}
+    @if ($isRequired)
+        <span class="text-danger">*</span>
+    @endif
     <div class="form-switch">
         {!! Form::hidden($name, $disableValue) !!}
         @php
