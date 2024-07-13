@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        \Log::info('Cookie consent: ' . $request->cookie('cookie_consent'));
+
         /** Hilight */
         $hilights = Hilight::where('status', 'active')->orderBy('id', 'desc')->get();
 
@@ -26,7 +28,7 @@ class HomeController extends Controller
         // ->whereHas('curriculum_exam_setting', function ($q) {
         //     $q->where('post_test_status', 'active');
         // })
-        ->orderBy('pos', 'asc')->get();
+            ->orderBy('pos', 'asc')->get();
 
         return view('frontend.home', compact('hilights', 'faqs', 'curriculums', 'post_test_curriculum'));
     }

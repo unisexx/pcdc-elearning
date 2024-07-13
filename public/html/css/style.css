@@ -323,7 +323,7 @@ a:hover {
 }
 
 /* Search
--------------------------------------------------- */
+ -------------------------------------------------- */
 .search-input-box {
 	top: 5px;
 	cursor: pointer;
@@ -449,13 +449,13 @@ a:hover {
 
 	.organization_name,
 	.organization_name2 {
-		text-wrap: nowrap;
+		text-wrap: wrap;
 	}
 }
 
 
 /* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
+ -------------------------------------------------- */
 /* Carousel base class */
 .carousel-control-prev {
 	left: -5%;
@@ -592,7 +592,7 @@ a:hover {
 }
 
 /* Stat
--------------------------------------------------- */
+ -------------------------------------------------- */
 .bg-stat {
 	margin-top: -30px;
 	background-color: #FFF;
@@ -697,7 +697,7 @@ a:hover {
 }
 
 /* Step
--------------------------------------------------- */
+ -------------------------------------------------- */
 .step {
 	padding: 0.1px 30px 8px 20px;
 	position: relative;
@@ -810,7 +810,7 @@ a:hover {
 }
 
 /*.step:hover {cursor: pointer; transform:rotate(0) scale(1.1); animation:shake .1s 1; animation-delay:.1s;transition:all .3s cubic-bezier(.28,.05,.65,.97); }
-*/
+ */
 .step:hover {
 	cursor: pointer;
 	-webkit-animation-name: hvr-wobble-to-top-right;
@@ -889,7 +889,7 @@ a:hover {
 }
 
 /* courses
--------------------------------------------------- */
+ -------------------------------------------------- */
 .blog-style1 {
 	border: 3px solid #ffd600;
 	border-radius: 30px;
@@ -928,8 +928,7 @@ a:hover {
 }
 
 .blog-btn:hover {
-	background-color: #0089cf;
-	color: #ffffff;
+	background-color: #419ae8;
 }
 
 .lesson {
@@ -988,7 +987,7 @@ a:hover {
 
 
 /* FAQ
--------------------------------------------------- */
+ -------------------------------------------------- */
 .accordion-style1 .accordion-item:first-of-type>.accordion-header .accordion-button,
 .accordion-style1 .accordion-item:last-of-type>.accordion-header .accordion-button {
 	border-radius: 30px 50px 30px 50px;
@@ -1085,7 +1084,7 @@ a:hover {
 
 
 /* Footer
--------------------------------------------------- */
+ -------------------------------------------------- */
 .bg_footer {
 	background-color: var(--theme-color);
 }
@@ -1142,7 +1141,7 @@ a:hover {
 
 
 /* PAGE
--------------------------------------------------- */
+ -------------------------------------------------- */
 .title-page {
 	position: relative;
 	z-index: 1;
@@ -1182,7 +1181,7 @@ a:hover {
 }
 
 /* Contact PAGE
--------------------------------------------------- */
+ -------------------------------------------------- */
 .box-contact {
 	font-family: "Kodchasan";
 	color: #000;
@@ -1211,7 +1210,7 @@ a:hover {
 }
 
 /* Register PAGE
--------------------------------------------------- */
+ -------------------------------------------------- */
 .register-form select,
 .register-form::placeholder,
 .register-form input,
@@ -1226,7 +1225,7 @@ a:hover {
 }
 
 .title-form {
-	background-color: #0089cf;
+	background-color: #2da0a5;
 	color: #fff;
 	font-size: 18px;
 	padding: 5px 15px 5px 15px;
@@ -1240,7 +1239,7 @@ a:hover {
 }
 
 /* Login PAGE
--------------------------------------------------- */
+ -------------------------------------------------- */
 .title-login {
 	font-size: 22px;
 	font-weight: 600;
@@ -1347,7 +1346,7 @@ a:hover {
 }
 
 /* Floating Clouds
--------------------------------------------------- */
+ -------------------------------------------------- */
 #background-wrap {
 	position: absolute;
 	bottom: 0;
@@ -1553,7 +1552,7 @@ a:hover {
 
 
 /* Chart
--------------------------------------------------- */
+ -------------------------------------------------- */
 .bg-chart-header {
 	background-color: #0089cf;
 	padding-top: 15px;
@@ -1592,11 +1591,11 @@ a:hover {
 }
 
 /*
-.text_ver .tick { writing-mode: vertical-lr;  }
-*/
+ .text_ver .tick { writing-mode: vertical-lr;  }
+ */
 
 /* STEP e-learning
--------------------------------------------------- */
+ -------------------------------------------------- */
 .e-learning-p {
 	color: #6B6B84;
 }
@@ -1663,8 +1662,8 @@ svg:not(:root) {
 }
 
 /* -------------------------------- 
-Timeline Css 
--------------------------------- */
+ Timeline Css 
+ -------------------------------- */
 .main-timeline {
 	padding: 25px 10px;
 }
@@ -1907,14 +1906,14 @@ Timeline Css
 }
 
 /* -------------------------------- 
-TABS HOME
--------------------------------- */
+ TABS HOME
+ -------------------------------- */
 .title_courses {
 	z-index: 0;
 }
 
 .tab-class .nav-item a.active {
-	background-color: #0089cf !important;
+	background-color: #419ae8 !important;
 }
 
 .tab-class .nav-item a {
@@ -1923,7 +1922,7 @@ TABS HOME
 	padding: 10px 30px 13px;
 	color: #001430;
 	background-color: #edf9fb;
-	border: 1.5px dashed #0089cf;
+	border: 1.5px dashed #419ae8;
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-bottom: 10px;
@@ -1933,7 +1932,7 @@ TABS HOME
 	font-family: "Kodchasan";
 	font-weight: 600;
 	font-size: 22px;
-	color: #0089cf;
+	color: #419ae8;
 	text-align: center;
 	width: 100%;
 	margin-top: 10px;
@@ -1958,12 +1957,12 @@ TABS HOME
 }
 
 /* -------------------------------- 
-TABS LESSON
--------------------------------- */
+ TABS LESSON
+ -------------------------------- */
 .title_welcome {
 	font-family: "Kodchasan";
 	font-weight: 600;
-	color: #0e9aa1;
+	color: #419ae8;
 	font-size: 30px;
 	text-align: center;
 }
@@ -2233,8 +2232,8 @@ ol.nested-counter-list ol {
 }
 
 /* -------------------------------- 
-TABS academic_results
--------------------------------- */
+ TABS academic_results
+ -------------------------------- */
 .results_list1 {
 	list-style: none;
 	padding-left: 0;

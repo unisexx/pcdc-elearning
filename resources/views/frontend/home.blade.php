@@ -154,7 +154,7 @@
     <!--########### End Stat ###########-->
 
     <!--########### Start Step ###########-->
-    <div id="learning-step" class="container">
+    <div class="container">
         <div class="position-relative pb-2 mt-5">
             <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ขั้นตอนการเรียน e-learning</span>
         </div>
@@ -162,63 +162,90 @@
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4 my-5 justify-content-center wow flipInX">
 
-            <div class="col position-relative">
+            <div class="col">
                 <a href="register.html">
-                    <div class="step bg1">
-                        <div class="step_icon icon1">1</div>
-                        <div class="box_textstep">
-                            <div class="text_step">ลงทะเบียนเรียน</div>
-                            <div class="text2_step">Register</div>
+                    <div class="box_step bg_step1">
+                        <div class="step-number bg-step-1">
+                            <div class="runnumber">1</div>
                         </div>
+                        <div class="step-content">
+                            <p>ลงทะเบียนเรียน</p>
+                            <p class="step_text_eng">Register</p>
+                        </div>
+                        <div class="line_step1"></div>
                     </div>
                 </a>
             </div>
-            <div class="col position-relative">
-                <div class="step bg2">
-                    <div class="step_icon icon2">2</div>
-                    <div class="box_textstep">
-                        <div class="text_step">ทำแบบทดสอบ ก่อนเรียน</div>
-                        <div class="text2_step">Pre-test</div>
+            <div class="col">
+                <a href="#">
+                    <div class="box_step bg_step2">
+                        <div class="step-number bg-step-2">
+                            <div class="runnumber">2</div>
+                        </div>
+                        <div class="step-content">
+                            <p>ทำแบบทดสอบ ก่อนเรียน</p>
+                            <p class="step_text_eng">Pre-test</p>
+                        </div>
+                        <div class="line_step2"></div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col position-relative">
-                <div class="step bg3">
-                    <div class="step_icon icon3">3</div>
-                    <div class="box_textstep">
-                        <div class="text_step">เรียนรู้บทเรียน</div>
-                        <div class="text2_step">Learning</div>
+            <div class="col">
+                <a href="#">
+                    <div class="box_step bg_step3">
+                        <div class="step-number bg-step-3">
+                            <div class="runnumber">3</div>
+                        </div>
+                        <div class="step-content">
+                            <p>เรียนรู้บทเรียน</p>
+                            <p class="step_text_eng">Learning</p>
+                        </div>
+                        <div class="line_step3"></div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col position-relative">
-                <div class="step bg4">
-                    <div class="step_icon icon4">4</div>
-                    <div class="box_textstep">
-                        <div class="text_step">ทำแบบทดสอบ ท้ายบทเรียน</div>
-                        <div class="text2_step">Quiz</div>
+            <div class="col">
+                <a href="#">
+                    <div class="box_step bg_step4">
+                        <div class="step-number bg-step-4">
+                            <div class="runnumber">4</div>
+                        </div>
+                        <div class="step-content">
+                            <p>ทำแบบทดสอบ ท้ายบทเรียน</p>
+                            <p class="step_text_eng">Quiz</p>
+                        </div>
+                        <div class="line_step4"></div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col position-relative">
-                <div class="step bg5">
-                    <div class="step_icon icon5">5</div>
-                    <div class="box_textstep">
-                        <div class="text_step">วัดผลหลังเรียนรู้</div>
-                        <div class="text2_step">Post-test</div>
+            <div class="col">
+                <a href="#">
+                    <div class="box_step bg_step5">
+                        <div class="step-number bg-step-5">
+                            <div class="runnumber">5</div>
+                        </div>
+                        <div class="step-content">
+                            <p>วัดผลหลังเรียนรู้</p>
+                            <p class="step_text_eng">Post-test</p>
+                        </div>
+                        <div class="line_step5"></div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col position-relative">
-                <div class="step bg6">
-                    <div class="step_icon icon6">6</div>
-                    <div class="box_textstep">
-                        <div class="text_step">รับประกาศนียบัตร</div>
-                        <div class="text2_step">e-certificate</div>
+            <div class="col">
+                <a href="#">
+                    <div class="box_step bg_step6">
+                        <div class="step-number bg-step-6">
+                            <div class="runnumber">6</div>
+                        </div>
+                        <div class="step-content">
+                            <p>รับประกาศนียบัตร</p>
+                            <p class="step_text_eng">e-certificate</p>
+                        </div>
+                        <div class="line_step6"></div>
                     </div>
-                </div>
+                </a>
             </div>
-
         </div>
     </div>
     <!--########### End Step ###########-->

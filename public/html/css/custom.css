@@ -11,34 +11,458 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: red;
   }
+
   50% {
     background-color: orange;
   }
 }
+
 @keyframes nudge {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0);
   }
+
   50% {
     transform: translate(10px, 10px);
   }
+
   80% {
     transform: translate(-10px, 10px);
   }
-}/*# sourceMappingURL=custom.css.map */
-
-.carousel-control-prev>span{
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>")!important;
 }
 
-.carousel-control-next>span{
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>")!important;
+/*# sourceMappingURL=custom.css.map */
+
+.carousel-control-prev>span {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>") !important;
 }
 
-.history-table>thead>tr>th{
-  color:#FFF;
-   background:#2da0a5!important;
+.carousel-control-next>span {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.history-table>thead>tr>th {
+  color: #FFF;
+  background: #2da0a5 !important;
+}
+
+/* Cookie Consent
+-------------------------------------------------- */
+.cookie-consent {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+  background-color: rgb(254, 223, 158, 0.95);
+  z-index: 1;
+  border-radius: 0px;
+}
+
+.allow-button {
+  height: 20px;
+  width: 104px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 10px;
+  border-radius: 3px;
+  border: 1px solid green;
+  background-color: green;
+}
+
+.bg1_cookie {
+  padding: 20px 20px 20px 20px;
+  background-color: #ffffff;
+  border-radius: 30px 30px 30px 30px;
+  position: relative;
+}
+
+.bg1_cookie .inner-dashed-border {
+  stroke: #45b3df;
+}
+
+.bg1_cookie svg.inner-dashed-border {
+  position: absolute;
+  left: 0px;
+  top: 15px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: dashed_border_running 20s linear infinite both;
+  animation-play-state: paused;
+  stroke-width: 2;
+  stroke-dasharray: 9, 5;
+  /*stroke-dashoffset: 0;*/
+  stroke-linecap: round;
+  fill: none;
+  transition: 0.4s;
+}
+
+.bg1_cookie svg.inner-dashed-border:hover {
+  animation-play-state: running;
+}
+
+@keyframes dashed_border_running {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -20;
+    /* ปรับค่าให้เหมาะสม */
+  }
+}
+
+.cookie_title {
+  margin: 0px 0px 0px 0px;
+  font-size: 18px;
+  color: #12265a;
+  font-family: "Kodchasan";
+  font-weight: 600;
+}
+
+.cookie_icon {
+  background-color: #45b3df;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0px 8px 0px 8px;
+}
+
+.read_consent {
+  font-size: 16px;
+  color: #70747f;
+  padding-top: 10px;
+}
+
+.read_consent:hover {
+  text-decoration: underline;
+}
+
+.btn-allow {
+  font-family: "Kodchasan";
+  background-color: #008850;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 500;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.btn-allow:hover {
+  background-color: #03985b;
+  color: #FFF;
+}
+
+.close-btn {
+  position: absolute;
+  content: "\f00d";
+  top: 0px;
+  right: 7px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+  .icon_slide {
+    right: -37px !important;
+  }
+
+  .carousel-control-next {
+    right: 0;
+  }
+
+  .carousel-control-prev {
+    left: 0;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .icon_slide {
+    display: none;
+  }
+
+  .carousel-control-next {
+    right: 0;
+  }
+
+  .carousel-control-prev {
+    left: 0;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1080px) {
+  .icon_slide {
+    display: none;
+  }
+}
+
+@media (min-width: 299px) and (max-width: 576px) {
+  .btn-allow {
+    margin-top: -45px;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 280px) {
+  .inner-dashed-border rect {
+    width: 97%;
+    height: 89%;
+  }
+
+  .organization_name {
+    font-size: 35px;
+  }
+
+  .all_tester_count {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 281px) and (max-width: 576px) {
+  .inner-dashed-border rect {
+    width: 97%;
+    height: 82%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .inner-dashed-border rect {
+    width: 98%;
+    height: 80%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .inner-dashed-border rect {
+    width: 98.5%;
+    height: 77%;
+  }
+}
+
+@media (min-width: 993px) {
+  .inner-dashed-border rect {
+    width: 98.5%;
+    height: 73%;
+  }
+
+  .bg1_cookie {
+    padding: 40px 40px 40px 40px;
+  }
+}
+
+/* STEP
+-------------------------------------------------- */
+.box_step {
+  position: relative;
+  text-align: center;
+  color: #000;
+  font-family: "Kodchasan";
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 50px 15px 20px 15px;
+  height: 150px;
+  margin-bottom: 25px;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-number {
+  position: absolute;
+  width: 60px;
+  height: 55px;
+  line-height: 50px;
+  font-size: 24px;
+  top: -20px;
+  left: 15%;
+  transform: rotate(-15deg);
+  border-radius: 8px;
+  color: #FFF;
+}
+
+.step_text_eng {
+  margin-top: -20px;
+}
+
+.runnumber {
+  transform: rotate(15deg);
+}
+
+.bg-step-1 {
+  background-color: #ff3a72;
+}
+
+.line_step1 {
+  background-color: #ff3a72;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step1 {
+  background-color: #ffe4dd;
+}
+
+.box_step:hover.bg_step1 {
+  background-color: #feccda;
+}
+
+.bg-step-2 {
+  background-color: #ff5366;
+}
+
+.line_step2 {
+  background-color: #ff5366;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step2 {
+  background-color: #f9edef;
+}
+
+.box_step:hover.bg_step2 {
+  background-color: #fdc9cf;
+}
+
+.bg-step-3 {
+  background-color: #ff9e01;
+}
+
+.line_step3 {
+  background-color: #ff9e01;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step3 {
+  background-color: #fef1e0;
+}
+
+.box_step:hover.bg_step3 {
+  background-color: #fee9c9;
+}
+
+.bg-step-4 {
+  background-color: #a2d700;
+}
+
+.line_step4 {
+  background-color: #a2d700;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step4 {
+  background-color: #f2fae3;
+}
+
+.box_step:hover.bg_step4 {
+  background-color: #e9f7c0;
+}
+
+.bg-step-5 {
+  background-color: #2b7ae3;
+}
+
+.line_step5 {
+  background-color: #2b7ae3;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step5 {
+  background-color: #e8edf3;
+}
+
+.box_step:hover.bg_step5 {
+  background-color: #bed9fc;
+}
+
+.bg-step-6 {
+  background-color: #9b32d4;
+}
+
+.line_step6 {
+  background-color: #9b32d4;
+  position: absolute;
+  height: 8px;
+  border-radius: 10px;
+  width: 75%;
+  bottom: -2px;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg_step6 {
+  background-color: #e9e6ed;
+}
+
+.box_step:hover.bg_step6 {
+  background-color: #ecc8ff;
+}
+
+.box_step:hover {
+  cursor: pointer;
+  -webkit-animation-name: hvr-wobble-to-top-right;
+  animation-name: hvr-wobble-to-top-right;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
 }

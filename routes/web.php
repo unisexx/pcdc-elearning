@@ -63,6 +63,7 @@ Route::middleware(['frontend.auth'])->group(function () {
 
     Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
 });
+Route::post('/accept-cookie', [App\Http\Controllers\Frontend\CookieController::class, 'acceptCookie']);
 
 /** Admin */
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
