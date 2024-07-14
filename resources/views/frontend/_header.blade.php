@@ -21,7 +21,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @if (Auth::user()->is_admin == 1)
-                                    <li><a class="dropdown-item" href="{{ url('admin/dashboard') }}" data-bs-toggle="popover" data-bs-content="จัดการข้อมูลหลังบ้าน"><i class="fas fa-user-shield text-warning"></i> จัดการข้อมูลหลังบ้าน</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('admin/dashboard') }}" data-bs-toggle="popover" data-bs-content="จัดการข้อมูลหลังบ้าน"><i class="fas fa-user-shield text-danger"></i> จัดการข้อมูลหลังบ้าน</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="{{ url('elearning/history') }}" data-bs-toggle="popover" data-bs-content="ข้อมูลและประวัติการเรียน"><i class="fas fa-clock"></i> ข้อมูลและประวัติการเรียน</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.edit', ['user' => Auth::user()->id]) }}" data-bs-toggle="popover" data-bs-content="แก้ไขข้อมูลส่วนตัว"><i class="fas fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
