@@ -1,8 +1,8 @@
 @php
     $menuItems = [
         ['name' => 'แดชบอร์ด', 'route' => 'admin.dashboard', 'icon' => 'fa-house'],
-        ['name' => 'หลักสูตร', 'route' => 'admin.curriculum.index', 'icon' => 'fa-graduation-cap', 'additional_routes' => ['admin.curriculum-lesson', 'admin.curriculum-lesson-question', 'admin.curriculum-exam-setting']],
         ['name' => 'หมวดหมู่หลักสูตร', 'route' => 'admin.curriculum-category.index', 'icon' => 'fa-list'],
+        ['name' => 'หลักสูตร', 'route' => 'admin.curriculum.index', 'icon' => 'fa-graduation-cap', 'additional_routes' => ['admin.curriculum-lesson', 'admin.curriculum-lesson-question', 'admin.curriculum-exam-setting'], 'exclude_routes' => ['admin.curriculum-category']],
         ['name' => 'ไฮไลท์', 'route' => 'admin.hilight.index', 'icon' => 'fa-images'],
         ['name' => 'คำถามที่พบบ่อย', 'route' => 'admin.faq.index', 'icon' => 'fa-circle-question'],
         ['name' => 'ข้อมูลติดต่อ', 'route' => ['admin.contact.edit', ['contact' => 1]], 'icon' => 'fa-map-location-dot'],
@@ -15,24 +15,35 @@
 @endphp
 
 
+
+
 @php
-    function isActive($baseRoute, $additionalRoutes = [])
+    function isActive($baseRoute, $additionalRoutes = [], $excludeRoutes = [])
     {
         $routes = array_merge([$baseRoute], $additionalRoutes);
         $currentRoute = Route::currentRouteName();
+        $currentUri = Route::current()->uri();
 
+        // ตรวจสอบว่า currentRoute ไม่อยู่ใน excludeRoutes
+        foreach ($excludeRoutes as $excludeRoute) {
+            if (strpos($currentRoute, $excludeRoute) !== false || strpos($currentUri, $excludeRoute) !== false) {
+                return false;
+            }
+        }
+
+        // ตรวจสอบว่า currentRoute ตรงกับ routes ที่ต้องการ
         foreach ($routes as $route) {
-            // ตัดส่วนที่เป็น .index และ .edit ออก
-            $baseRouteOnly = preg_replace('/\.(index|edit)$/', '', $route);
-            $currentRouteOnly = preg_replace('/\.(index|edit)$/', '', $currentRoute);
+            $baseRouteOnly = preg_replace('/\.(index|edit|create)$/', '', $route);
+            $currentRouteOnly = preg_replace('/\.(index|edit|create)$/', '', $currentRoute);
 
-            if (strpos($currentRouteOnly, $baseRouteOnly) === 0) {
+            if (strpos($currentRouteOnly, $baseRouteOnly) === 0 || strpos($currentUri, $baseRouteOnly) !== false) {
                 return true;
             }
         }
         return false;
     }
 @endphp
+
 
 
 
@@ -51,9 +62,10 @@
                 @php
                     $baseRoute = $item['base_route'] ?? (is_array($item['route']) ? $item['route'][0] : $item['route']);
                     $additionalRoutes = $item['additional_routes'] ?? [];
+                    $excludeRoutes = $item['exclude_routes'] ?? [];
                 @endphp
-                <li class="nav-item {{ isActive($baseRoute, $additionalRoutes) ? 'active' : '' }}">
-                    <a class="nav-link {{ isActive($baseRoute, $additionalRoutes) ? 'active' : '' }}" href="{{ is_array($item['route']) ? route($item['route'][0], $item['route'][1]) : route($item['route']) }}">
+                <li class="nav-item {{ isActive($baseRoute, $additionalRoutes, $excludeRoutes) ? 'active' : '' }}">
+                    <a class="nav-link {{ isActive($baseRoute, $additionalRoutes, $excludeRoutes) ? 'active' : '' }}" href="{{ is_array($item['route']) ? route($item['route'][0], $item['route'][1]) : route($item['route']) }}">
                         <div class="icon text-center d-flex align-items-center justify-content-center">
                             <i class="fa-solid {{ $item['icon'] }} text-primary text-sm opacity-10"></i>
                         </div>
