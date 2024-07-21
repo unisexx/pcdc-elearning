@@ -78,6 +78,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('/faq', App\Http\Controllers\Admin\FaqController::class)->names('admin.faq');
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
     Route::resource('/survey', App\Http\Controllers\Admin\SurveyController::class)->names('admin.survey');
+    Route::resource('/log', App\Http\Controllers\Admin\LogController::class)->names('admin.log');
 
     Route::resource('/curriculum-category', App\Http\Controllers\Admin\CurriculumCategoryController::class)->names('admin.curriculum-category');
     Route::resource('/curriculum', App\Http\Controllers\Admin\CurriculumController::class)->names('admin.curriculum');

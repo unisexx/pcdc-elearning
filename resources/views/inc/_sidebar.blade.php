@@ -11,6 +11,7 @@
         ['name' => 'แบบสำรวจความพึงพอใจ', 'route' => 'admin.survey.index', 'icon' => 'fa-poll'],
         ['name' => 'ผู้ใช้งาน', 'route' => 'admin.user.index', 'icon' => 'fa-user'],
         ['name' => 'กล่องข้อความ', 'route' => 'admin.inbox.index', 'icon' => 'fa-inbox'],
+        ['name' => 'Logs', 'route' => 'admin.log.index', 'icon' => 'fa-history'],
     ];
 @endphp
 
