@@ -23,7 +23,7 @@
                             <div class="col-12 col-lg-5 text-center text-lg-start  wow bounceInLeft">
                                 <div class="pt-4 pt-lg-4 mt-4 px-3">
                                     <p class="upskill">Upskill & Reskill</p>
-                                    <p class="upskill_intro">ความรู้เรื่องโรคติดต่อในเด็กและโรคโควิด 19</p>
+                                    <p class="upskill_intro">ความรู้เรื่องโรคติดต่อและภัยสุขภาพในเด็ก</p>
                                     <p class="upskill_intro2">เรียนที่ไหน ตอนไหนก็ได้ สะดวก เข้าถึงง่าย<br>ได้ใบประกาศนียบัตร (e-Certificate)</p>
                                     <a href="#" class="btn btn-yellow rounded-pill">Click</a>
                                 </div>
