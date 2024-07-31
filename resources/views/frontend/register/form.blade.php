@@ -105,9 +105,9 @@
                 <div class="modal-body p-5" style="overflow-y: auto;">
                     {!! $privacy_policy->description !!}
                 </div>
-                <div class="modal-footer flex-column">
+                <div class="modal-footer flex-column bg-light">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="acceptTerms">
+                        <input class="form-check-input" type="checkbox" value="" id="acceptTerms" style="border: 1px solid #999;">
                         <label class="form-check-label" for="acceptTerms">
                             ข้าพเจ้ายอมรับ และได้อ่านข้อความในข้อตกลงและเงื่อนไขข้างต้นโดยละเอียดแล้ว
                         </label>
