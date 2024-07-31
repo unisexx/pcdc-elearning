@@ -163,7 +163,9 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4 my-5 justify-content-center wow flipInX">
 
             <div class="col">
-                <a href="register.html">
+                @guest
+                    <a href="{{ url('front/register') }}">
+                    @endguest
                     <div class="box_step bg_step1">
                         <div class="step-number bg-step-1">
                             <div class="runnumber">1</div>
@@ -174,77 +176,79 @@
                         </div>
                         <div class="line_step1"></div>
                     </div>
-                </a>
+                    @guest
+                    </a>
+                @endguest
             </div>
             <div class="col">
-                <a href="#">
-                    <div class="box_step bg_step2">
-                        <div class="step-number bg-step-2">
-                            <div class="runnumber">2</div>
-                        </div>
-                        <div class="step-content">
-                            <p>ทำแบบทดสอบ ก่อนเรียน</p>
-                            <p class="step_text_eng">Pre-test</p>
-                        </div>
-                        <div class="line_step2"></div>
+                {{-- <a href="#"> --}}
+                <div class="box_step bg_step2">
+                    <div class="step-number bg-step-2">
+                        <div class="runnumber">2</div>
                     </div>
-                </a>
+                    <div class="step-content">
+                        <p>ทำแบบทดสอบ ก่อนเรียน</p>
+                        <p class="step_text_eng">Pre-test</p>
+                    </div>
+                    <div class="line_step2"></div>
+                </div>
+                {{-- </a> --}}
             </div>
             <div class="col">
-                <a href="#">
-                    <div class="box_step bg_step3">
-                        <div class="step-number bg-step-3">
-                            <div class="runnumber">3</div>
-                        </div>
-                        <div class="step-content">
-                            <p>เรียนรู้บทเรียน</p>
-                            <p class="step_text_eng">Learning</p>
-                        </div>
-                        <div class="line_step3"></div>
+                {{-- <a href="#"> --}}
+                <div class="box_step bg_step3">
+                    <div class="step-number bg-step-3">
+                        <div class="runnumber">3</div>
                     </div>
-                </a>
+                    <div class="step-content">
+                        <p>เรียนรู้บทเรียน</p>
+                        <p class="step_text_eng">Learning</p>
+                    </div>
+                    <div class="line_step3"></div>
+                </div>
+                {{-- </a> --}}
             </div>
             <div class="col">
-                <a href="#">
-                    <div class="box_step bg_step4">
-                        <div class="step-number bg-step-4">
-                            <div class="runnumber">4</div>
-                        </div>
-                        <div class="step-content">
-                            <p>ทำแบบทดสอบ ท้ายบทเรียน</p>
-                            <p class="step_text_eng">Quiz</p>
-                        </div>
-                        <div class="line_step4"></div>
+                {{-- <a href="#"> --}}
+                <div class="box_step bg_step4">
+                    <div class="step-number bg-step-4">
+                        <div class="runnumber">4</div>
                     </div>
-                </a>
+                    <div class="step-content">
+                        <p>ทำแบบทดสอบ ท้ายบทเรียน</p>
+                        <p class="step_text_eng">Quiz</p>
+                    </div>
+                    <div class="line_step4"></div>
+                </div>
+                {{-- </a> --}}
             </div>
             <div class="col">
-                <a href="#">
-                    <div class="box_step bg_step5">
-                        <div class="step-number bg-step-5">
-                            <div class="runnumber">5</div>
-                        </div>
-                        <div class="step-content">
-                            <p>วัดผลหลังเรียนรู้</p>
-                            <p class="step_text_eng">Post-test</p>
-                        </div>
-                        <div class="line_step5"></div>
+                {{-- <a href="#"> --}}
+                <div class="box_step bg_step5">
+                    <div class="step-number bg-step-5">
+                        <div class="runnumber">5</div>
                     </div>
-                </a>
+                    <div class="step-content">
+                        <p>วัดผลหลังเรียนรู้</p>
+                        <p class="step_text_eng">Post-test</p>
+                    </div>
+                    <div class="line_step5"></div>
+                </div>
+                {{-- </a> --}}
             </div>
             <div class="col">
-                <a href="#">
-                    <div class="box_step bg_step6">
-                        <div class="step-number bg-step-6">
-                            <div class="runnumber">6</div>
-                        </div>
-                        <div class="step-content">
-                            <p>รับประกาศนียบัตร</p>
-                            <p class="step_text_eng">e-certificate</p>
-                        </div>
-                        <div class="line_step6"></div>
+                {{-- <a href="#"> --}}
+                <div class="box_step bg_step6">
+                    <div class="step-number bg-step-6">
+                        <div class="runnumber">6</div>
                     </div>
-                </a>
+                    <div class="step-content">
+                        <p>รับประกาศนียบัตร</p>
+                        <p class="step_text_eng">e-certificate</p>
+                    </div>
+                    <div class="line_step6"></div>
+                </div>
+                {{-- </a> --}}
             </div>
         </div>
     </div>
