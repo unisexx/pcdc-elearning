@@ -27,7 +27,7 @@
                                 @csrf
                                 <div class="col-lg-12 align-self-center">
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="email" name="email" class="form-control form-control-md" placeholder="Username" value="{{ old('email') }}" required />
+                                        <input type="text" id="email" name="email" class="form-control form-control-md" placeholder="Email" value="{{ old('email') }}" required />
                                         <label class="form-label sr-only" for="email">Email</label>
                                     </div>
                                     <div class="form-outline mb-3">

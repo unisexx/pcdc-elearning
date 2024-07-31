@@ -90,3 +90,58 @@
 @endpush
 
 {{-- @include('frontend.register.inc._regis_form_js') --}}
+
+@push('modal')
+    @php
+        $privacy_policy = \App\Models\PrivacyPolicy::find(1);
+    @endphp
+    <!-- Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" style="height: 93vh;">
+            <div class="modal-content" style="height: 100%;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">{{ $privacy_policy->title }}</h5>
+                </div>
+                <div class="modal-body p-5" style="overflow-y: auto;">
+                    {!! $privacy_policy->description !!}
+                </div>
+                <div class="modal-footer flex-column">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="acceptTerms">
+                        <label class="form-check-label" for="acceptTerms">
+                            ข้าพเจ้ายอมรับ และได้อ่านข้อความในข้อตกลงและเงื่อนไขข้างต้นโดยละเอียดแล้ว
+                        </label>
+                    </div>
+                    <div>
+                        <button id="acceptButton" type="button" class="btn btn-primary CloseModal" data-bs-dismiss="modal" disabled>ตกลง</button>
+                        <a href="{{ url('/') }}" class="btn btn-link">กลับหน้าแรก</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var termsModal = new bootstrap.Modal(document.getElementById('termsModal'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            var acceptTerms = document.getElementById('acceptTerms');
+            var acceptButton = document.getElementById('acceptButton');
+
+            acceptTerms.addEventListener('change', function() {
+                acceptButton.disabled = !this.checked;
+            });
+
+            acceptButton.addEventListener('click', function() {
+                termsModal.hide();
+            });
+
+            termsModal.show();
+        });
+    </script>
+@endpush
