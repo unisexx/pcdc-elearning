@@ -94,11 +94,17 @@
                     <div class="col my-4">
                         <div class="blog-style1 h-100 position-relative">
                             <div class="blog-img">
+                                <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
                                 <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
+                                </a>
                             </div>
                             <div class="blog-content">
                                 <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
-                                <h3 class="blog-title h5">{{ $lesson->name }}</h3>
+                                <h3 class="blog-title h5">
+                                    <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
+                                    {{ $lesson->name }}
+                                    </a>
+                                </h3>
                                 <p>{{ $lesson->description }}</p>
                             </div>                            
                             <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" class="blog-btn position-absolute bottom-0">
