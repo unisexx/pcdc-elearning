@@ -281,21 +281,31 @@
             @foreach ($curriculums as $index => $item)
                 <div class="tab-pane @if ($index === 0) wow fadeInDown active @else fade @endif" id="courses{{ $item->id }}" role="tabpanel" aria-labelledby="courses{{ $item->id }}-tab" tabindex="0">
                     <div class="w-100">
-                        <div class="title_tab"><span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}</div>
+                        <div class="title_tab">
+                            <a href="{{ url('elearning/curriculum/'.$item->id) }}">
+                                <span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}
+                            </a>
+                        </div>
                     </div>
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
                         @foreach ($item->curriculum_lesson as $key => $lesson)
                             <div class="col my-4">
                                 <div class="blog-style1 h-100 position-relative">
                                     <div class="blog-img">
-                                        <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
+                                        <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
+                                            <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
+                                        </a>
                                     </div>
                                     <div class="blog-content">
                                         <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
-                                        <h3 class="blog-title h5">{{ $lesson->name }}</h3>
+                                        <h3 class="blog-title h5">
+                                            <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
+                                                {{ $lesson->name }}
+                                            </a>
+                                        </h3>
                                         <p>{{ $lesson->description }}</p>
                                     </div>
-                                    <a href="{{ url('elearning/curriculum/' . $item->id) }}" class="blog-btn position-absolute bottom-0">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
+                                    <a href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" class="blog-btn position-absolute bottom-0">เข้าสู่บทเรียน <em class="fa fa-angle-right"></em></a>
                                 </div>
                             </div>
                         @endforeach
