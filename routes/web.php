@@ -27,6 +27,7 @@ Route::get('/front/register', [App\Http\Controllers\Frontend\RegisterController:
 Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register'])->name('front.register');
 Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::post('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
+Route::get('/stat/export-xls', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');

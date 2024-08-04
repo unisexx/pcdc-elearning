@@ -74,8 +74,8 @@ for($m=1;$m<=$max_month;$m++){
                 <table class="table table-bordered table-hover text-center table-style1">
                     <thead>
                         <tr>
-                            <th style="vertical-align: middle; " rowspan="2"></th>
-                            <th colspan="12">
+                            <th style="vertical-align: middle; " rowspan="2">เดือน</th>
+                            <th colspan="{{ $ncol = count($curriculum_month_pass_report) == 0 ? 1 : count($curriculum_month_pass_report) }}">
                                 <div class="title-table">จำนวนผู้ผ่านหลักสูตรต่างๆ (คน)</div>
                             </th>
                         </tr>

@@ -8,9 +8,9 @@
                     @else
                         รวมทุกหลักสูตร
                     @endif
-                    <br>จำแนกรายเขตและจังหวัด 
-                    @if(!empty($exam_year))
-                        ปี {{$exam_year}}
+                    <br>จำแนกรายเขตและจังหวัด
+                    @if (!empty($exam_year))
+                        ปี {{ $exam_year }}
                     @endif
                 </div>
             </div>
@@ -42,7 +42,8 @@
                 <table class="table table-bordered table-hover text-center table-style1">
                     <thead>
                         <tr>
-                            <th colspan="12">
+                            <th rowspan="2">จังหวัด</th>
+                            <th colspan="3">
                                 <div class="title-table">จำนวนผู้ผ่าน
                                     @if ($curriculum_id)
                                         หลักสูตร {{ $curriculum->name }}
@@ -56,7 +57,6 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>จังหวัด</th>
                             <th>จำนวนผู้ทดสอบทั้งหมด</th>
                             <th>จำนวนผู้ที่ผ่าน</th>
                             <th>จำนวนผู้ที่ไม่ผ่าน</th>
