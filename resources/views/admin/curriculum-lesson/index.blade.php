@@ -54,6 +54,14 @@
                                     <a href="{{ url('admin/curriculum-lesson-question?curriculum_lesson_id=' . $item->id) }}" class="mx-3">
                                         <i class="fas fa-check text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="จัดการแบบทดสอบท้ายบทเรียน"></i>
                                     </a>
+                                    <br>
+                                    <a href="{{ url('elearning/download-lesson/'.$item->id) }}" target="_blank" class="mx-3">
+                                        <i class="fa fa-download text-primary" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดเนื้อหาบทเรียน"></i>
+                                    </a>
+
+                                    <a href="{{ url('elearning/download-lesson-exam/'.$item->id) }}" target="_blank">
+                                        <i class="fa fa-download text-info" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดแบบทดสอบบทเรียน"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

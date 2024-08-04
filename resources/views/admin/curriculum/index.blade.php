@@ -54,6 +54,14 @@
                                     <a href="{{ url('admin/curriculum-exam-setting?curriculum_id=' . $item->id) }}" class="">
                                         <i class="fas fa-cog text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="กำหนดการการทำแบบทดสอบ"></i>
                                     </a>
+                                    <br>
+                                    <a href="{{ url('elearning/download-curriculum/'.$item->id) }}" target="_blank" class="mx-3">
+                                        <i class="fa fa-download text-primary" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดเนื้อหาบทเรียน"></i>
+                                    </a>
+
+                                    <a href="{{ url('elearning/download-curriculum-exam/'.$item->id) }}" target="_blank">
+                                        <i class="fa fa-download text-info" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดแบบทดสอบบทเรียน"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
