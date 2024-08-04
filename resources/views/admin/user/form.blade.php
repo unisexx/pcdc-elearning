@@ -28,6 +28,9 @@
                     ->orderBy('created_at', 'desc')
                     ->get();
             @endphp
+            <div class="d-flex align-items-center">
+                <h5 class="font-weight-bolder">ประวัติการเรียน</h5>
+            </div>
             <table class="history-table table table-bordered table-hover">
                 <thead>
                     <tr>
