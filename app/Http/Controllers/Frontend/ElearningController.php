@@ -16,6 +16,8 @@ use App\Models\CurriculumLessonQuestion;
 use App\Models\UserCurriculumExamHistory;
 use App\Models\CurriculumLessonQuestionAnswer;
 
+use PDF;
+
 class ElearningController extends Controller
 {
     public function index(Request $req)
@@ -302,5 +304,41 @@ class ElearningController extends Controller
         UserCurriculumPpExam::where("user_id",\Auth::user()->id)->where('curriculum_id',$curriculum_id)->delete();
         Certificate::where("user_id", \Auth::user()->id)->where('curriculum_id', $curriculum_id)->delete();
         return redirect(url('elearning/curriculum/'.$curriculum_id));
+    }
+
+    public function downloadCurriculum($curriculum_id){
+        $curriculum = Curriculum::find($curriculum_id);
+        $data['curriculum'] = $curriculum;
+        $pdf = PDF::loadView('frontend.elearning.download.curriculum', $data, []);        
+        return $pdf->stream("เนื้อหาหลักสูตร_".$curriculum->id.'_'.$curriculum->name.".pdf"); //แบบนี้จะ stream มา preview        
+    }
+
+    public function downloadLesson($lesson_id){
+        $lesson = CurriculumLesson::find($lesson_id);        
+        $lesson_detail = CurriculumLessonDetail::where('curriculum_lesson_id',$lesson->id)->orderBy('pos','asc')->get();        
+        $curriculum = Curriculum::find($lesson->curriculum_id);       
+        
+        $data['curriculum'] = $curriculum;
+        $data['lesson'] = $lesson;
+        $data['lesson_detail'] = $lesson_detail;
+
+        $pdf = PDF::loadView('frontend.elearning.download.lesson', $data, []);        
+        return $pdf->stream("เนื้อหาบทเรียน_".$lesson->id.'_'.$lesson->name.".pdf"); //แบบนี้จะ stream มา preview        
+    }
+
+    public function downloadCurriculumExam($curriculum_id){
+        $curriculum = Curriculum::find($curriculum_id);
+        $data['curriculum'] = $curriculum;
+        $pdf = PDF::loadView('frontend.elearning.download.curriculum-exam', $data, []);        
+        return $pdf->stream("แบบทดสอบท้ายลทเรียนหลักสูตร_".$curriculum->id.'_'.$curriculum->name.".pdf"); //แบบนี้จะ stream มา preview        
+    }
+
+    public function downloadLessonExam($lesson_id){        
+        $lesson = CurriculumLesson::find($lesson_id);                
+        $curriculum = Curriculum::find($lesson->curriculum_id);       
+        $data['curriculum'] = $curriculum;
+        $data['lesson'] = $lesson;
+        $pdf = PDF::loadView('frontend.elearning.download.lesson-exam', $data, []);        
+        return $pdf->stream("แบบทดสอบท้ายลทเรียน_".$lesson->id.'_'.$lesson->name.".pdf"); //แบบนี้จะ stream มา preview        
     }
 }

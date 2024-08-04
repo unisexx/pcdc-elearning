@@ -61,6 +61,12 @@ Route::middleware(['frontend.auth'])->group(function () {
 
     Route::get('/elearning/history', [App\Http\Controllers\Frontend\ElearningHistoryController::class, 'index'])->name('elearning.history.index');
 
+    Route::get('/elearning/download-curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadCurriculum']);
+    Route::get('/elearning/download-lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadLesson']);
+    
+    Route::get('/elearning/download-curriculum-exam/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadCurriculumExam']);
+    Route::get('/elearning/download-lesson-exam/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadLessonExam']);
+
     Route::get('/certificate/pdf/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdf'])->name('certificate.pdf');
 });
 Route::post('/accept-cookie', [App\Http\Controllers\Frontend\CookieController::class, 'acceptCookie']);

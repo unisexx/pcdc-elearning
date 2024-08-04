@@ -27,21 +27,24 @@
             <ul style="list-style-type: none;">
                 <li class="text-success">เนื้อหาหลักสูตรและบทเรียน</li>
                 <li style="padding-left:20px;">
-                    <a href="">
+                    <a href="{{ url('elearning/download-curriculum/'.$curriculum->id)}}" target="_blank">
                         <i class="fa fa-file-pdf"></i> เนื้อหาหลักสูตร "{{ $curriculum->name }}"
                     </a>
                 </li>
                 @if ($curriculum->curriculum_lesson)
                     @foreach ($curriculum->curriculum_lesson as $key => $lesson)
                         <li style="padding-left:60px;">
-                            <a href="">
+                            <a href="{{ url('elearning/download-lesson/'.$lesson->id)}}" target="_blank">
                                 <i class="fa fa-file-pdf"></i> เนื้อหาบทเรียน "{{ $lesson->name }}"
                             </a>
                         </li>
                     @endforeach
                 @endif
                 @if ($curriculum->curriculum_exam_setting)
-                    <li class="text-success">แบบทดสอบท้ายบทเรียน</li>
+                    <li class="text-success">แบบทดสอบท้ายบทเรียน</li>                    
+                    <a href="{{ url('elearning/download-curriculum-exam/'.$curriculum->id)}}" target="_blank">
+                        <i class="fa fa-file-pdf"></i> แบบทดสอบท้ายบทเรียน หลักสูตร "{{ $curriculum->name }}"
+                    </a>
                     @foreach ($curriculum->curriculum_lesson as $key => $lesson)
                         @php
                             if ($curriculum->curriculum_exam_setting) {
@@ -57,7 +60,7 @@
 
                         @if($has_lesson_exam > 0)
                             <li style="padding-left:60px;">
-                                <a href="">
+                                <a href="{{ url('elearning/download-lesson-exam/'.$lesson->id)}}" target="_blank">
                                     <i class="fa fa-file-pdf"></i> แบบทดสอบท้ายบทเรียน "{{ $lesson->name }}"
                                 </a>
                             </li>
