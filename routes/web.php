@@ -98,6 +98,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/curriculum-lesson-question/update-order', [App\Http\Controllers\Admin\CurriculumLessonQuestionController::class, 'updateOrder'])->name('admin.curriculum-lesson-question.updateOrder');
     Route::post('/curriculum-category/update-order', [App\Http\Controllers\Admin\CurriculumCategoryController::class, 'updateOrder'])->name('admin.curriculum-category.updateOrder');
 
+
+    Route::get('/certificate/pdf/{user_id}/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdfUser'])->name('certificate.pdf');
 });
 
 /** Ajax */

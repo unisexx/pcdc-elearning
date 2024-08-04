@@ -118,6 +118,111 @@ class CertificateController extends Controller
         return $pdf->stream('certificate.pdf');
     }
 
+    public function pdfUser($user_id, $curriculum_id)
+    {
+        ini_set('max_execution_time', -1);
+        ini_set("memory_limit", "-1");
+        /************ ส่วนของการสร้าง verify certificate  *************/
+        $user = \App\Models\User::find($user_id);
+        if (!$user) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // ค้นหา หลักสูตรที่ออกใบ cert
+        $curriculum = Curriculum::find($curriculum_id);
+        if (!$curriculum) {
+            abort(404, 'Curriculum not found.');
+        }
+
+        //ตรวจสอบว่า user ผ่าน posttest ของ หลักสูตรนั้นจริงไหม
+        $pass_posttest = UserCurriculumExamHistory::where('user_id', $user->id)
+            ->where('curriculum_id', $curriculum_id)
+            ->where('post_pass_status', 'y')
+            ->orderBy('post_date_finished', 'desc')->first();
+        if (!$pass_posttest) {
+            abort(404, 'Curriculum Post-Test not pass.');
+        }
+
+        $courseName  = $curriculum->name;
+        $currentYear = Carbon::now()->year + 543;
+
+        // ตรวจสอบว่ามี certificate ที่ออกให้ผู้ใช้และหลักสูตรนี้แล้วหรือไม่
+        $existingCertificate = Certificate::where('user_id', $user->id)
+            ->where('curriculum_id', $curriculum->id)
+            ->whereYear('issued_at', Carbon::now()->year)
+            ->first();
+
+        if ($existingCertificate) {
+            // ใช้ running number เดิม
+            $runningNumber = $existingCertificate->running_number;
+        } else {
+            // ค้นหา running number สูงสุดของปีปัจจุบันสำหรับผู้ใช้และเพิ่มหนึ่ง
+            $maxRunningNumber = Certificate::whereYear('issued_at', Carbon::now()->year)
+                ->max('running_number');
+            $runningNumber = $maxRunningNumber ? $maxRunningNumber + 1 : 1;
+        }
+
+        $formattedRunningNumber = $runningNumber . '/' . $currentYear;
+
+        // คำนวณวันหมดอายุ 3 ปีหลังจากวันที่ออก และเป็นวันสุดท้ายของปี (31 ธันวาคม)
+        $expiresAt         = Carbon::parse($pass_posttest->post_date_finished)->addYears(3)->endOfYear();
+        $expiresAtThaiYear = ($expiresAt->year + 543);
+
+        if (!$existingCertificate) {
+            // บันทึกใบประกาศนียบัตรใหม่ในฐานข้อมูล
+            $certificate = Certificate::create([
+                'user_id'        => $user->id,
+                'curriculum_id'  => $curriculum->id,
+                'running_number' => $runningNumber,
+                'issued_at'      => $pass_posttest->post_date_finished,
+                'expires_at'     => $expiresAt,
+                'verify_token'   => bin2hex(random_bytes(16)),
+            ]);
+        } else {
+            $certificate = $existingCertificate;
+        }
+
+        /************ ส่วนของการสร้าง verify certificate  *************/
+
+        /************ ข้อมูลสำหรับโชว์ในใบประกาศนียบัตร  *************/
+        $data = [
+            'title'          => 'ขอมอบประกาศนียบัตรฉบับนี้เพื่อแสดงว่า',
+            'name'           => $user->prefix . $user->first_name . ' ' . $user->last_name,
+            'description'    => 'ได้ผ่านการเรียนรู้ด้วยตนเองในรูปแบบออนไลน์ (e-Learning)',
+            'course'         => $courseName,
+            'date'           => $this->getFormattedDate($pass_posttest->post_date_finished),
+            'running_number' => $formattedRunningNumber,
+            'expires_at'     => $expiresAtThaiYear, // รูปแบบวันหมดอายุเป็นปีไทย
+        ];
+        /************ ดึงข้อมูลสำหรับโชว์ในใบประกาศนียบัตร  *************/
+
+        /************ ทำ qrcode สำหรับสแกน verify *************/
+        $qrcode = base64_encode(
+            QrCode::format('svg')
+                ->size(300)
+                ->margin(2)
+                ->errorCorrection('L')
+                ->backgroundColor(255, 255, 255)
+                ->color(0, 0, 0)->generate(route('certificate.verify', ['verifyToken' => $certificate->verify_token]))
+        );
+
+        // เพิ่ม QR Code ลงในข้อมูลที่ส่งไปยัง view
+        $data['qrcode'] = $qrcode;
+        /************ ทำ qrcode สำหรับสแกน  *************/
+
+        $pdf = PDF::loadView('frontend.certificate.pdf', $data);
+
+        $pdf->setPaper([0, 0, 3508, 2480]);
+
+        // การตั้งค่าฟอนต์ใน CSS
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled'      => true,
+        ]);
+
+        return $pdf->stream('certificate.pdf');
+    }
+
     private function getFormattedDate($post_date_finished)
     {
         // แปลง $post_date_finished เป็นวัตถุ Carbon
