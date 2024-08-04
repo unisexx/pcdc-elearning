@@ -39,7 +39,7 @@
                                             <input class="form-check-input me-2" type="checkbox" value="" id="remember" name="remember" />
                                             <label class="form-check-label" for="remember">จำรหัสผ่าน</label>
                                         </div>
-                                        <a href="#!" class="text-body">ลืมรหัสผ่าน?</a>
+                                        <a href="{{ route('password.request') }}" class="text-body">ลืมรหัสผ่าน?</a>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="form-check mb-0 mt-2">

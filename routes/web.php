@@ -25,6 +25,8 @@ Route::post('/front/login2', [App\Http\Controllers\Frontend\LoginController::cla
 Route::get('/front/logout', [App\Http\Controllers\Frontend\LoginController::class, 'logout']);
 Route::get('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'form']);
 Route::post('/front/register', [App\Http\Controllers\Frontend\RegisterController::class, 'register'])->name('front.register');
+Route::get('/front/password/forgot', [App\Http\Controllers\Frontend\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/front/password/email', [App\Http\Controllers\Frontend\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::post('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
@@ -63,7 +65,7 @@ Route::middleware(['frontend.auth'])->group(function () {
 
     Route::get('/elearning/download-curriculum/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadCurriculum']);
     Route::get('/elearning/download-lesson/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadLesson']);
-    
+
     Route::get('/elearning/download-curriculum-exam/{curriculum_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadCurriculumExam']);
     Route::get('/elearning/download-lesson-exam/{lesson_id}', [App\Http\Controllers\Frontend\ElearningController::class, 'downloadLessonExam']);
 
@@ -97,7 +99,6 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/survey/update-order', [App\Http\Controllers\Admin\SurveyController::class, 'updateOrder'])->name('survey.updateOrder');
     Route::post('/curriculum-lesson-question/update-order', [App\Http\Controllers\Admin\CurriculumLessonQuestionController::class, 'updateOrder'])->name('admin.curriculum-lesson-question.updateOrder');
     Route::post('/curriculum-category/update-order', [App\Http\Controllers\Admin\CurriculumCategoryController::class, 'updateOrder'])->name('admin.curriculum-category.updateOrder');
-
 
     Route::get('/certificate/pdf/{user_id}/{curriculum_id}', [App\Http\Controllers\Frontend\CertificateController::class, 'pdfUser'])->name('certificate.pdf');
 });
