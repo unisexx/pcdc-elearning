@@ -25,6 +25,8 @@ class StatController extends Controller
         $district_id = empty($req->district_id) ? '' : $req->district_id;
         $subdistrict_id = empty($req->subdistrict_id) ? '' : $req->subdistrict_id;
 
+        $export_param = 'curriculum_id='.$curriculum_id.'&user_type_id='.$user_type_id.'&exam_year='.$exam_year.'&area_id='.$area_id.'&province_id='.$province_id.'&district_id='.$district_id.'&subdistrict_id='.$subdistrict_id;
+
         $data['curriculum_id'] = $curriculum_id;
         $data['user_type_id'] = $user_type_id;
         $data['exam_year'] = $exam_year;
@@ -32,6 +34,7 @@ class StatController extends Controller
         $data['province_id'] = $province_id;
         $data['district_id'] = $district_id;
         $data['subdistrict_id'] = $subdistrict_id;
+        $data['export_param'] = $export_param;
 
         $data['curriculum'] = $curriculum_id ? Curriculum::find($curriculum_id) : "";
 
@@ -69,6 +72,13 @@ class StatController extends Controller
         //report4
         $data['province_exam'] = $this->provinceReportTable($data);
                 
+        if($req->export_type == 'xls'){            
+            header("Content-Type: application/xls");
+            header("Content-Disposition: attachment; filename=e-learning_stat.xls");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            return view('frontend.stat.excel', compact('data'));
+        }
 
         return view('frontend.stat.index', compact('data'));
     }

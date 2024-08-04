@@ -70,6 +70,12 @@
 
                     {!! Form::close() !!}
 
+                    <div class="row mt-3 mb-3">
+                        <div class="col-12 text-center">                            
+                            <a href="{{ url('stat/export-xls?export_type=xls&'.$export_param)}}" class="btn btn-lg btn-success" target="_blank"> <i class="fa fa-file-excel"></i> ดาวน์โหลด ตารางข้อมูล</a>
+                        </div>
+                    </div>
+
                     @include('frontend.stat.inc.report1')
 
                     <div class="row my-5">

@@ -29,6 +29,7 @@ Route::get('/front/password/forgot', [App\Http\Controllers\Frontend\ForgotPasswo
 Route::post('/front/password/email', [App\Http\Controllers\Frontend\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::post('/stat', [App\Http\Controllers\Frontend\StatController::class, 'index']);
+Route::get('/stat/export-xls', [App\Http\Controllers\Frontend\StatController::class, 'index']);
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\Frontend\ContactController::class, 'index']);
 Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::class, 'save'])->name('contact.save');
