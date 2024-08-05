@@ -43,9 +43,9 @@ class ForgotPasswordController extends Controller
 
         // ตรวจสอบสถานะการส่งลิงก์
         if ($response == Password::RESET_LINK_SENT) {
-            return back()->with('status', trans($response));
+            return back()->with('success', 'เราได้ส่งลิงก์รีเซ็ตรหัสผ่านของคุณไปทางอีเมลแล้ว!');
         }
 
-        return back()->withErrors(['email' => trans($response)]);
+        return back()->with('error', 'ไม่พบอีเมล์นี้ในระบบ');
     }
 }

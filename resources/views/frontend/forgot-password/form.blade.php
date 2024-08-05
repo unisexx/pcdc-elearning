@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row g-4 justify-content-between mb-5 wow fadeInDown">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-6 mx-auto">
                 <div class="box-contact">
                     <div class="title-register text-center mb-3">ลืมรหัสผ่าน</div>
 
