@@ -118,12 +118,12 @@
 
     .sign3prefix {
         top: 2050px;
-        left: 3300px;
+        left: 3100px;
     }
 
     .sign3 {
         top: 2200px;
-        left: 3300px;
+        left: 3150px;
     }
 
     .sign4 {
@@ -139,7 +139,7 @@
 
     .sign6 {
         top: 2650px;
-        left: 3450px;
+        left: 3340px;
     }
 
     .expire {
