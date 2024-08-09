@@ -18,7 +18,7 @@ class HomeController extends Controller
         $hilights = Hilight::where('status', 'active')->orderBy('id', 'desc')->get();
 
         /** หลักสูตร */
-        $curriculums = Curriculum::with('curriculum_lesson')->where('status', 'active')->orderBy('pos', 'asc')->get();
+        $curriculums = Curriculum::filterByUserType()->with('curriculum_lesson')->where('status', 'active')->orderBy('pos', 'asc')->get();
 
         /** Faq */
         $faqs = Faq::where('status', 'active')->orderBy('order', 'asc')->take(5)->get();
