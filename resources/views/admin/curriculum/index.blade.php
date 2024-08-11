@@ -9,7 +9,7 @@
         @endslot
         @slot('table')
             <div class="table-responsive">
-                <table id="datatable" class="table align-items-center">
+                <table id="datatable" class="table">
                     <thead>
                         <tr>
                             <th width="50" class="text-center" scope="col">#</th>
@@ -17,6 +17,7 @@
                             <th width="200" scope="col">ภาพหน้าปก</th>
                             <th class="text-start" scope="col">ชื่อหลักสูตร</th>
                             <th class="text-start" scope="col">ประเภทสมาชิก</th>
+                            <th>บทเรียน</th>
                             <th width="100" class="text-center" scope="col">เปิดใช้งาน</th>
                             <th width="200" class="text-center" scope="col">จัดการ</th>
                         </tr>
@@ -26,13 +27,13 @@
                             <tr>
                                 <td class="text-center">{{ autoNumber($rs) }}</td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">
-                                    @if($item->curriculum_category)
+                                    @if ($item->curriculum_category)
                                         {{ $item->curriculum_category->name }}
                                     @endif
                                 </td>
-                                <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="100"></td>
+                                <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="75"></td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">{{ @$item->name }}</td>
-                                <td style="vertical-align:top;padding-left:20px;">
+                                <td class="text-wrap" style="vertical-align:top;padding-left:20px;">
                                     @php
                                         if ($item->curriculum_user_type()->count() > 0) {
                                             foreach ($item->curriculum_user_type()->get() as $ut) {
@@ -40,6 +41,11 @@
                                             }
                                         }
                                     @endphp
+                                </td>
+                                <td>
+                                    @foreach ($item->curriculum_lesson as $lesson)
+                                        - {{ $lesson->name }}<br>
+                                    @endforeach
                                 </td>
                                 <td style="vertical-align:top;" class="text-center">{!! statusBadge(@$item->status) !!}</td>
                                 <td style="vertical-align:top;" class="text-center">
@@ -55,11 +61,11 @@
                                         <i class="fas fa-cog text-secondary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="กำหนดการการทำแบบทดสอบ"></i>
                                     </a>
                                     <br>
-                                    <a href="{{ url('elearning/download-curriculum/'.$item->id) }}" target="_blank" class="mx-3">
+                                    <a href="{{ url('elearning/download-curriculum/' . $item->id) }}" target="_blank" class="mx-3">
                                         <i class="fa fa-download text-primary" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดเนื้อหาบทเรียน"></i>
                                     </a>
 
-                                    <a href="{{ url('elearning/download-curriculum-exam/'.$item->id) }}" target="_blank">
+                                    <a href="{{ url('elearning/download-curriculum-exam/' . $item->id) }}" target="_blank">
                                         <i class="fa fa-download text-info" data-toggle="tooltip" data-placement="top" title="ดาวน์โหลดแบบทดสอบบทเรียน"></i>
                                     </a>
                                 </td>

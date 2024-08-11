@@ -15,7 +15,8 @@ class CurriculumController extends Controller
      */
     public function index()
     {
-        $rs = Curriculum::paginate(10);
+        $rs = Curriculum::with(['curriculum_user_type', 'curriculum_lesson'])
+            ->paginate(10);
 
         return view('admin.curriculum.index', compact('rs'));
     }
@@ -45,14 +46,13 @@ class CurriculumController extends Controller
         }
 
         $curriculum = Curriculum::create($input);
-        if(!empty($request->user_type_id)){
-            foreach($request->user_type_id as $ut){
+        if (!empty($request->user_type_id)) {
+            foreach ($request->user_type_id as $ut) {
                 $data['curriculum_id'] = $curriculum->id;
-                $data['user_type_id'] = $ut;
+                $data['user_type_id']  = $ut;
                 CurriculumUserType::create($data);
             }
         }
-
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 
@@ -97,11 +97,11 @@ class CurriculumController extends Controller
 
         $rs->update($input);
 
-        CurriculumUserType::where('curriculum_id',$id)->delete();
-        if(!empty($request->user_type_id)){
-            foreach($request->user_type_id as $ut){
+        CurriculumUserType::where('curriculum_id', $id)->delete();
+        if (!empty($request->user_type_id)) {
+            foreach ($request->user_type_id as $ut) {
                 $data['curriculum_id'] = $id;
-                $data['user_type_id'] = $ut;
+                $data['user_type_id']  = $ut;
                 CurriculumUserType::create($data);
             }
         }
