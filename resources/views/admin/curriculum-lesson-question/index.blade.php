@@ -25,12 +25,14 @@
         </div>
         <div class="card-body p-3">
             <div class="table-responsive">
-                <table id="datatable" class="table align-items-center">
+                <table id="datatable" class="table">
                     <thead>
                         <tr>
                             <th width="50" scope="col">จัดลำดับ</th>
                             <th width="50" class="text-center" scope="col">#</th>
                             <th scope="col">หัวข้อคำถาม</th>
+                            {{-- <th scope="col">คำตอบที่ถูก</th> --}}
+                            <th scope="col">จำนวนตัวเลือก</th>
                             <th width="50" scope="col">เปิดใช้งาน</th>
                             <th width="70" scope="col">จัดการ</th>
                         </tr>
@@ -40,7 +42,9 @@
                             <tr data-id="{{ $item->id }}">
                                 <td class="drag-handle"><i class="fas fa-grip-lines"></i></td>
                                 <td class="text-center td-item-no">{{ autoNumber($rs) }}</td>
-                                <td>{!! @$item->name !!}</td>
+                                <td class="text-wrap">{!! @$item->name !!}</td>
+                                {{-- <td class="text-wrap">{!! optional($item->curriculum_lesson_question_answer->where('score', 1)->first())->name !!}</td> --}}
+                                <td class="text-center">{{ $item->curriculum_lesson_question_answer->count() }}</td>
                                 <td class="text-center">{!! statusBadge(@$item->status) !!}</td>
                                 <td class="text-center">
                                     @component('components.table.button')

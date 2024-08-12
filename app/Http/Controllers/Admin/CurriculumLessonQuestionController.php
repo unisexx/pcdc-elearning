@@ -15,22 +15,24 @@ class CurriculumLessonQuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getCurriculumLesson($req){
-        if(empty($req->curriculum_lesson_id)){
+    public function getCurriculumLesson($req)
+    {
+        if (empty($req->curriculum_lesson_id)) {
             return redirect(url('admin/curriculum'));
         }
         $curriculum_lesson = CurriculumLesson::find($req->curriculum_lesson_id);
-        if(empty($curriculum_lesson)){
+        if (empty($curriculum_lesson)) {
             return redirect(url('admin/curriculum'));
         }
         return $curriculum_lesson;
     }
-    public function index(Request $req){
+    public function index(Request $req)
+    {
 
         $curriculum_lesson = $this->getCurriculumLesson($req);
-        $rs = CurriculumLessonQuestion::where('curriculum_lesson_id',$req->curriculum_lesson_id)->orderBy('pos','asc')->get();
+        $rs                = CurriculumLessonQuestion::with('curriculum_lesson_question_answer')->where('curriculum_lesson_id', $req->curriculum_lesson_id)->orderBy('pos', 'asc')->get();
 
-        return view('admin.curriculum-lesson-question.index', compact('rs','curriculum_lesson'));
+        return view('admin.curriculum-lesson-question.index', compact('rs', 'curriculum_lesson'));
     }
 
     /**
@@ -48,27 +50,27 @@ class CurriculumLessonQuestionController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'pos' => (CurriculumLessonQuestion::where('curriculum_lesson_id',$request->curriculum_lesson_id)->max('pos') + 1)
+            'pos' => (CurriculumLessonQuestion::where('curriculum_lesson_id', $request->curriculum_lesson_id)->max('pos') + 1),
         ]);
-        $input = $request->all();        
+        $input                      = $request->all();
         $curriculum_lesson_question = CurriculumLessonQuestion::create($input);
 
-        if(@$request->total_answer > 0){
-            for($i=1;$i<=$request->total_answer;$i++){
-                if(@$request->{'page_detail_'.$i}){
+        if (@$request->total_answer > 0) {
+            for ($i = 1; $i <= $request->total_answer; $i++) {
+                if (@$request->{'page_detail_' . $i}) {
                     $data['curriculum_lesson_question_id'] = $curriculum_lesson_question->id;
-                    $data['name'] = $request->{'page_detail_'.$i};
-                    $data['score'] = @$request->correct_answer == $i ? 1 : 0;
-                    $data['status'] = 'active';
-                    $data['pos'] = $request->{'answer_pos_'.$i};
-                    $curriculum_lession_detail = CurriculumLessonQuestionAnswer::create($data);
+                    $data['name']                          = $request->{'page_detail_' . $i};
+                    $data['score']                         = @$request->correct_answer == $i ? 1 : 0;
+                    $data['status']                        = 'active';
+                    $data['pos']                           = $request->{'answer_pos_' . $i};
+                    $curriculum_lession_detail             = CurriculumLessonQuestionAnswer::create($data);
                 }
-            }            
+            }
         }
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 
-        return redirect(url('admin/curriculum-lesson-question?curriculum_lesson_id='.$curriculum_lesson_question->curriculum_lesson_id));
+        return redirect(url('admin/curriculum-lesson-question?curriculum_lesson_id=' . $curriculum_lesson_question->curriculum_lesson_id));
     }
 
     /**
@@ -84,8 +86,8 @@ class CurriculumLessonQuestionController extends Controller
      */
     public function edit(string $id)
     {
-        $rs = CurriculumLessonQuestion::find($id);
-        $curriculum_lesson = CurriculumLesson::find($rs->curriculum_lesson_id);        
+        $rs                = CurriculumLessonQuestion::find($id);
+        $curriculum_lesson = CurriculumLesson::find($rs->curriculum_lesson_id);
         return view('admin.curriculum-lesson-question.edit', @compact('rs', 'curriculum_lesson'));
     }
 
@@ -99,34 +101,36 @@ class CurriculumLessonQuestionController extends Controller
         $rs = CurriculumLessonQuestion::find($id);
         $rs->update($input);
 
-        if(@$request->total_answer > 0){
-            for($i=1;$i<=$request->total_answer;$i++){
-                if(@$request->{'page_detail_'.$i}){
+        if (@$request->total_answer > 0) {
+            for ($i = 1; $i <= $request->total_answer; $i++) {
+                if (@$request->{'page_detail_' . $i}) {
                     $data['curriculum_lesson_question_id'] = $rs->id;
-                    $data['name'] = $request->{'page_detail_'.$i};
-                    $data['score'] = @$request->correct_answer == $i ? 1 : 0;
-                    $data['status'] = 'active';
-                    $data['pos'] = $request->{'answer_pos_'.$i};
-                    if($request->{'answer_id_'.$i} == 'new'){
+                    $data['name']                          = $request->{'page_detail_' . $i};
+                    $data['score']                         = @$request->correct_answer == $i ? 1 : 0;
+                    $data['status']                        = 'active';
+                    $data['pos']                           = $request->{'answer_pos_' . $i};
+                    if ($request->{'answer_id_' . $i} == 'new') {
                         CurriculumLessonQuestionAnswer::create($data);
-                    }else{
-                        CurriculumLessonQuestionAnswer::find($request->{'answer_id_'.$i})->update($data);
+                    } else {
+                        CurriculumLessonQuestionAnswer::find($request->{'answer_id_' . $i})->update($data);
                     }
-                    
+
                 }
-            }            
+            }
         }
 
-        if(!empty($request->delete_answer)){
-            foreach($request->delete_answer as $item){
-                if($item)
+        if (!empty($request->delete_answer)) {
+            foreach ($request->delete_answer as $item) {
+                if ($item) {
                     CurriculumLessonQuestionAnswer::find($item)->delete();
+                }
+
             }
         }
 
         set_notify('success', 'แก้ไขข้อมูลเรียบร้อย');
 
-        return redirect(url('admin/curriculum-lesson-question?curriculum_lesson_id='.$rs->curriculum_lesson_id));
+        return redirect(url('admin/curriculum-lesson-question?curriculum_lesson_id=' . $rs->curriculum_lesson_id));
     }
 
     /**
@@ -144,7 +148,7 @@ class CurriculumLessonQuestionController extends Controller
     {
         $order = $request->input('order');
         foreach ($order as $index => $id) {
-            $item        = CurriculumLessonQuestion::find($id);
+            $item      = CurriculumLessonQuestion::find($id);
             $item->pos = $index + 1;
             $item->save();
         }

@@ -13,11 +13,11 @@
                     <thead>
                         <tr>
                             <th width="50" class="text-center" scope="col">#</th>
-                            <th width="200" scope="col">หมวดหมู่หลักสูตร</th>
                             <th width="200" scope="col">ภาพหน้าปก</th>
+                            <th width="200" scope="col">หมวดหมู่หลักสูตร</th>
                             <th class="text-start" scope="col">ชื่อหลักสูตร</th>
                             <th class="text-start" scope="col">ประเภทสมาชิก</th>
-                            <th>บทเรียน</th>
+                            <th>บทเรียน / จำนวนเนื้อหา / คำถามท้ายบท</th>
                             <th width="100" class="text-center" scope="col">เปิดใช้งาน</th>
                             <th width="200" class="text-center" scope="col">จัดการ</th>
                         </tr>
@@ -26,12 +26,12 @@
                         @foreach ($rs as $item)
                             <tr>
                                 <td class="text-center">{{ autoNumber($rs) }}</td>
+                                <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="75"></td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">
                                     @if ($item->curriculum_category)
                                         {{ $item->curriculum_category->name }}
                                     @endif
                                 </td>
-                                <td><img src="{{ Storage::url('uploads/curriculum/' . @$item->cover_image) }}" height="75"></td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;word-wrap: break-word; max-width: 300px;">{{ @$item->name }}</td>
                                 <td class="text-wrap" style="vertical-align:top;padding-left:20px;">
                                     @php
@@ -44,7 +44,14 @@
                                 </td>
                                 <td>
                                     @foreach ($item->curriculum_lesson as $lesson)
-                                        - {{ $lesson->name }}<br>
+                                        - {{ $lesson->name }}
+                                        @if ($lesson->curriculum_lesson_detail->count() > 0)
+                                            <small class="text-primary">({{ $lesson->curriculum_lesson_detail->count() }} หน้า)</small>
+                                        @endif
+                                        @if ($lesson->curriculum_lesson_question->count() > 0)
+                                            <small class="text-success">({{ $lesson->curriculum_lesson_question->count() }} คำถาม)</small>
+                                        @endif
+                                        <br>
                                     @endforeach
                                 </td>
                                 <td style="vertical-align:top;" class="text-center">{!! statusBadge(@$item->status) !!}</td>

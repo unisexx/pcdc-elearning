@@ -15,7 +15,7 @@ class CurriculumController extends Controller
      */
     public function index()
     {
-        $rs = Curriculum::with(['curriculum_user_type', 'curriculum_lesson'])
+        $rs = Curriculum::with(['curriculum_user_type', 'curriculum_lesson.curriculum_lesson_question', 'curriculum_lesson.curriculum_lesson_detail'])
             ->paginate(10);
 
         return view('admin.curriculum.index', compact('rs'));
