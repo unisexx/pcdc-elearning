@@ -66,7 +66,7 @@ class CurriculumExamSettingController extends Controller
 
         }
 
-        $ces->update(['prepost_n_question' => $ces->curriculum_exam_setting_detail()->where('exam_status','active')->whereNotNull('n_prepost_lesson_question')->sum('n_prepost_lesson_question')]);
+        $ces->update(['prepost_n_question' => $ces->curriculum_exam_setting_detail()->whereNotNull('n_prepost_lesson_question')->sum('n_prepost_lesson_question')]);
 
         set_notify('success', 'บันทึกข้อมูลเรียบร้อย');
 

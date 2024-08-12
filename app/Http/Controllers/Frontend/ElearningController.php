@@ -113,7 +113,7 @@ class ElearningController extends Controller
     public function curriculumLessonExamPrePost($curriculum_id, $exam_type){
         $curriculum = Curriculum::find($curriculum_id);//ค้นหาหลักสูตร
         $curriculum_exam_setting = $curriculum->curriculum_exam_setting()->first(); //ค้นหาข้อมูลกำหนดค่าการทดสอบ
-        $exam_result = UserCurriculumPpExam::where("user_id", Auth::user()->id)->where("curriculum_id",$curriculum_id)->where("exam_type",$exam_type)->first();        
+        $exam_result = UserCurriculumPpExam::where("user_id", Auth::user()->id)->where("curriculum_id",$curriculum_id)->where("exam_type",$exam_type)->first();                
         if($exam_result){
             $n_question = $exam_result->n_question;
             $pass_score = $exam_result->pass_score;
@@ -167,7 +167,7 @@ class ElearningController extends Controller
 
         if($exam_type == 'pretest' || $exam_type =='posttest'){
             $n_question = 0;
-            foreach($curriculum_exam_setting->curriculum_exam_setting_detail()->where('exam_status','active')->get() as $item){                
+            foreach($curriculum_exam_setting->curriculum_exam_setting_detail()->where('n_prepost_lesson_question','>',0)->get() as $item){                
                 $n_prepost_lesson_question = $item->n_prepost_lesson_question;
                 $curriculum_lesson_id = $item->curriculum_lesson_id;
                 if($n_prepost_lesson_question > 0){

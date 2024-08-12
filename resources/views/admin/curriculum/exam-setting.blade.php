@@ -101,8 +101,8 @@
                                 <td class="text-center">
                                     <input type="number" style="" class="form-control text-center input-score" name="pass_score_{{ $item->id }}" value="{{ $pass_score }}">
                                 </td>
-                                <td class="text-center">
-                                    <input type="number" style="" class="form-control text-center input-score input-prepost-question" name="n_prepost_lesson_question_{{ $item->id }}" value="{{ $n_prepost_lesson_question }}">
+                                <td class="text-center">                                    
+                                    <input type="number" style="" class="form-control text-center input-prepost-question" name="n_prepost_lesson_question_{{ $item->id }}" value="{{ $n_prepost_lesson_question }}">
                                 </td>
                             </tr>
                         @endforeach
@@ -185,14 +185,14 @@
                 }
             });
 
-            $(".input-question, .input-score").keydown(function(){
+            $(".input-question, .input-score, .input-prepost-question").keydown(function(){
                 var n_question_active = $(this).closest('tr').find("#n_question_active").val();
                 if(parseInt(n_question_active) < parseInt($(this).val())){
                     $(this).val('');
                 }
             });
 
-            $(".input-question, .input-score").keyup(function(){
+            $(".input-question, .input-score, .input-prepost-question").keyup(function(){
                 var n_question_active = $(this).closest('tr').find("#n_question_active").val();
                 if(parseInt(n_question_active) < parseInt($(this).val())){
                     $(this).val('');

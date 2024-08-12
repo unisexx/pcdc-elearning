@@ -179,8 +179,10 @@
 
                                                     if ($lesson_has_exam[$key] > 0) {
                                                         $all_pass = empty($exam_lesson[$key]) || $exam_lesson[$key] == 0 ? false : true;
+                                                    }else{
+                                                        $all_pass = true;
                                                     }
-
+                                                    
                                                     $alert_msg_html = $key == 0 ? 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน</span>"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร' : 'กรุณาทำแบบทดสอบท้ายบท <br>"<span style="color:blue;">' . $lesson_name[$key - 1] . '</span>"<br><span style="color:green;">ให้ผ่าน</span><br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท';
                                                     // $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร <a href="'.url('elearning/curriculum/'.$curriculum->id.'/pretest').'" class="btn btn-primary">ไปทำแบบทดสอบก่อนเรียน (Pre-Test)</a>'
                                                     //                     : 'กรุณาทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท <a href="'.url('elearning/curriculum/lesson-exam/'.$lesson->id).'" class="btn btn-primary">ไปทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"</a>';
@@ -272,8 +274,8 @@
                                             @endforeach
                                             <hr>
                                             @if (!empty($curriculum->curriculum_exam_setting))
-                                                @if ($curriculum->curriculum_exam_setting->pre_test_status == 'active')
-                                                    @if ($curriculum->curriculum_exam_setting->pre_test_status == 'active')
+                                                @if ($curriculum->curriculum_exam_setting->post_test_status == 'active')
+                                                    {{-- @if ($curriculum->curriculum_exam_setting->pre_test_status == 'active') --}}
                                                         @php
                                                             $can_post_exam = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? $pretest_exam : $all_pass;
                                                             $alert_msg_html = $curriculum->curriculum_exam_setting->post_test_after_pre == 'active' ? 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน (Pre-test)</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)' : 'กรุณาทำ "<span style="color:blue;">ทำแบบทดสอบท้ายบทเรียนให้ผ่านทั้งหมด</span>"<br>ก่อนเริ่มทำวัดผลหลังเรียนรู้ (Post-test)';
@@ -315,7 +317,7 @@
                                                                 </div>
                                                             </li>
                                                         @endif
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 @endif
                                             @endif
                                         </ul>
