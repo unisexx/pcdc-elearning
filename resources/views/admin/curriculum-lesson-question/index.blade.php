@@ -32,7 +32,7 @@
                             <th width="50" class="text-center" scope="col">#</th>
                             <th scope="col">หัวข้อคำถาม</th>
                             {{-- <th scope="col">คำตอบที่ถูก</th> --}}
-                            <th scope="col">จำนวนตัวเลือก</th>
+                            <th scope="col" class="text-center">จำนวนตัวเลือก</th>
                             <th width="50" scope="col">เปิดใช้งาน</th>
                             <th width="70" scope="col">จัดการ</th>
                         </tr>

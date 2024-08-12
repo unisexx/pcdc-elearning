@@ -5,10 +5,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use App\Models\Curriculum;
 use App\Models\UserCurriculumExamHistory;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+// use PDF;
 use Illuminate\Support\Facades\Auth;
-use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CertificateController extends Controller
