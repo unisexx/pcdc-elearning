@@ -69,6 +69,10 @@
 
                         <div class="collapse" style="display:block">
                             <div class="col-12 mt-2">
+                                <lable class="form-label">ชื่อ/คำอธิบาย หน้าบทเรียน</lable>
+                                <input type="text" name="page_name[]" class="form-control form-control-lg" value="{!! $detail->name !!}">
+                            </div>
+                            <div class="col-12 mt-2">
                                 <textarea name="page_detail[]" class="form-control form-control-lg tiny">{!! $detail->detail !!}</textarea>
                             </div>
                         </div>
@@ -168,6 +172,10 @@
                 str_panel += '</div>';
                 str_panel += '</div>';
                 str_panel += '<div class="collapse" style="display:block">';
+                str_panel += '<div class="col-12 mt-2">';
+                str_panel += '<lable class="form-label">ชื่อ/คำอธิบาย หน้าบทเรียน</lable>';
+                str_panel += '<input type="text" name="page_name[]" class="form-control form-control-lg" value="">';
+                str_panel += '</div>';
                 str_panel += '<div class="col-12 mt-2">';
                 str_panel += '<textarea name="page_detail[]" class="form-control form-control-lg tiny"></textarea>';
                 str_panel += '</div>';

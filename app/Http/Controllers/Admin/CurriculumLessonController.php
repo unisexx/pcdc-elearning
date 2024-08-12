@@ -121,6 +121,7 @@ class CurriculumLessonController extends Controller
         if(!empty($request->page_detail)){
             foreach($request->page_detail as $key=>$detail){
                 $data['curriculum_lesson_id'] = $id;
+                $data['name'] = $request->page_name[$key];
                 $data['detail'] = $detail;
                 $data['status'] = 'active';
                 $data['pos'] = (CurriculumLessonDetail::where('curriculum_lesson_id',$id)->max('pos') + 1);

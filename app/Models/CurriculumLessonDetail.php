@@ -28,6 +28,7 @@ class CurriculumLessonDetail extends Model
 
     protected $fillable = [
         'curriculum_lesson_id',          
+        'name',
         'detail',     
         'pos',   
         'status',
