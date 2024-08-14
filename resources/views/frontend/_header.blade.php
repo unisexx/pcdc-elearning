@@ -5,8 +5,8 @@
                 <div class="col-lg-6 d-flex justify-content-center justify-content-sm-start align-items-center py-2">
                     <!-- logo -->
                     <div class="d-block d-sm-flex text-center">
-                        <img src="{{ asset('html/images/logo_pcdc.svg') }}" class="logo_pcdc me-2" alt="logo pcdc">
-                        <img src="{{ asset('html/images/logo_ddc_moph2.svg') }}" class="logo ms-2" alt="logo กรมควบคุมโรค">
+                        <img src="{{ asset('images/logo_pcdc2.svg') }}" class="logo_pcdc me-2" alt="logo pcdc">
+                        <img src="{{ asset('images/logo_ddc_moph3.svg') }}" class="logo ms-2" alt="logo กรมควบคุมโรค">
                         <a href="{{ url('home') }}" class="d-table mt-2">
                             <div class="organization_name text-start"><span class="text-e">e</span>-learning</div>
                             <div class="organization_name2">ด้านการป้องกันควบคุมโรคติดต่อและภัยสุขภาพในเด็ก</div>

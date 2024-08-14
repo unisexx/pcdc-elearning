@@ -87,6 +87,11 @@
         font-weight: bolder;
     }
 
+    .course2 {
+        font-size: 180px;
+        font-weight: bolder;
+    }
+
     .date {
         font-size: 150px;
     }
@@ -163,7 +168,8 @@
         <div class="title">{{ @$title }}</div>
         <div class="name">{{ @$name }}</div>
         <div class="description">{{ @$description }}</div>
-        <div class="course">{{ @$course }}</div>
+        <div class="course">หลักสูตร ด้านการป้องกันควบคุมโรคติดต่อและภัยสุขภาพในเด็ก</div>
+        <div class="course2">เรื่อง {{ @$course }}</div>
         <div class="date">{{ @$date }}</div>
     </div>
     <div class="sign sign1">
