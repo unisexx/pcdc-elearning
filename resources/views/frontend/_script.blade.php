@@ -138,12 +138,12 @@
             });
         }
     });
-    
+
     function loadDistricts(provinceId, districtId = null) {
         var deferred = $.Deferred();
 
-        $('#district_id').empty().append('<option value="">กำลังโหลด...</option>');
-        $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>');
+        $('#district_id').empty().append('<option value="">กำลังโหลด...</option>').prop('disabled', true);;
+        $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>').prop('disabled', true);;
         $('#zipcode').val('');
 
         if (provinceId) {
@@ -152,13 +152,14 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $('#district_id').empty().append('<option value="">โปรดเลือก...</option>');
+                    $('#district_id').empty().append('<option value="">--ทั้งหมด--</option>');
                     $.each(data, function(id, name) {
                         $('#district_id').append('<option value="' + id + '">' + name + '</option>');
                     });
                     if (districtId) {
                         $('#district_id').val(districtId).change();
                     }
+                    $('#district_id').prop('disabled', false);
                     deferred.resolve();
                 },
                 error: function() {
@@ -175,7 +176,7 @@
     function loadSubdistricts(districtId, subdistrictId = null) {
         var deferred = $.Deferred();
 
-        $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>');
+        $('#subdistrict_id').empty().append('<option value="">กำลังโหลด...</option>').prop('disabled', true);;
         $('#zipcode').val('');
 
         if (districtId) {
@@ -184,13 +185,14 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $('#subdistrict_id').empty().append('<option value="">โปรดเลือก...</option>');
+                    $('#subdistrict_id').empty().append('<option value="">--ทั้งหมด--</option>');
                     $.each(data, function(id, name) {
                         $('#subdistrict_id').append('<option value="' + id + '">' + name + '</option>');
                     });
                     if (subdistrictId) {
                         $('#subdistrict_id').val(subdistrictId).change();
                     }
+                    $('#subdistrict_id').prop('disabled', false);
                     deferred.resolve();
                 },
                 error: function() {

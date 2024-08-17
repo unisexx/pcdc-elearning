@@ -110,6 +110,7 @@ Route::get('/get-districts/{province}', [App\Http\Controllers\AjaxController::cl
 Route::get('/get-subdistricts/{district}', [App\Http\Controllers\AjaxController::class, 'getSubdistricts']);
 Route::get('/ajaxGetZipCode', [App\Http\Controllers\AjaxController::class, 'ajaxGetZipCode'])->name('ajaxGetZipCode');
 Route::get('/get-fieldset/{userTypeId}', [App\Http\Controllers\Frontend\RegisterController::class, 'getFieldset']);
+Route::get('/get-curriculum-list', [App\Http\Controllers\AjaxController::class, 'getCurriculumList'])->name('getCurriculumList');
 
 /** Social Login */
 Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class, 'redirect']);

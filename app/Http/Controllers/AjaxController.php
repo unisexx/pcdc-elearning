@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Province;
+use App\Models\Curriculum;
 use App\Models\District;
+use App\Models\Province;
 use App\Models\Subdistrict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -13,10 +14,11 @@ class AjaxController extends Controller
     public function getProvinces($area_id)
     {
         // ดึงข้อมูลจังหวัด จาก สคร
-        if(!empty($area_id))
-            $provinces = Province::where('prevention_office_id', $area_id )->orderBy('id', 'asc')->pluck('name', 'id');
-        else
+        if (!empty($area_id)) {
+            $provinces = Province::where('prevention_office_id', $area_id)->orderBy('id', 'asc')->pluck('name', 'id');
+        } else {
             $provinces = Province::orderBy('id', 'asc')->pluck('name', 'id');
+        }
 
         // ส่งข้อมูลในรูปแบบ JSON response
         return response()->json($provinces);
@@ -69,4 +71,14 @@ class AjaxController extends Controller
         return @$zipcode;
     }
 
+    // หาหลักสูตรตาม user_type_id ใช้ในหน้า stat ตรงส่วนค้นหา
+    public function getCurriculumList(Request $request)
+    {
+        $userTypeId     = $request->get('user_type_id');
+        $curriculumList = Curriculum::where('status', 'active')
+            ->whereHas('curriculum_user_type', function ($q) use ($userTypeId) {
+                $q->where('user_type_id', $userTypeId);
+            })->orderBy('pos', 'asc')->pluck('name', 'id');
+        return response()->json($curriculumList);
+    }
 }
