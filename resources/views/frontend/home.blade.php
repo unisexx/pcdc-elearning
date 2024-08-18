@@ -257,12 +257,12 @@
     <!--########### Start courses ###########-->
     <div class="container pt-2 pt-lg-5 position-relative pb-5 mb-5">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <div class="position-relative pb-2 my-4 title_courses">
                     <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">หลักสูตร (courses)</span>
                 </div>
             </div>
-            <div class="col-lg-8 text-center text-lg-end">
+            <div class="col-lg-12 text-center text-lg-end">
                 <!--##### Nav tabs #####-->
                 <ul class="nav nav-pills tab-class d-inline-flex flex-column flex-sm-row justify-content-lg-end wow bounceInUp" id="myTab" role="tablist">
                     @foreach ($curriculums as $index => $item)
@@ -282,7 +282,7 @@
                 <div class="tab-pane @if ($index === 0) wow fadeInDown active @else fade @endif" id="courses{{ $item->id }}" role="tabpanel" aria-labelledby="courses{{ $item->id }}-tab" tabindex="0">
                     <div class="w-100">
                         <div class="title_tab">
-                            <a href="{{ url('elearning/curriculum/'.$item->id) }}">
+                            <a href="{{ url('elearning/curriculum/' . $item->id) }}">
                                 <span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}
                             </a>
                         </div>
@@ -292,14 +292,14 @@
                             <div class="col my-4">
                                 <div class="blog-style1 h-100 position-relative">
                                     <div class="blog-img">
-                                        <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
+                                        <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}">
                                             <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
                                         </a>
                                     </div>
                                     <div class="blog-content">
                                         <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
                                         <h3 class="blog-title h5">
-                                            <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
+                                            <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}">
                                                 {{ $lesson->name }}
                                             </a>
                                         </h3>
