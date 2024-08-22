@@ -83,7 +83,7 @@ class CertificateController extends Controller
         /************ ข้อมูลสำหรับโชว์ในใบประกาศนียบัตร  *************/
         $data = [
             'title'          => 'ขอมอบประกาศนียบัตรฉบับนี้เพื่อแสดงว่า',
-            'name'           => $user->prefix . $user->first_name . ' ' . $user->last_name,
+            'name'           => $user->name,
             'description'    => 'ได้ผ่านการเรียนรู้ด้วยตนเองในรูปแบบออนไลน์ (e-Learning)',
             'course'         => $courseName,
             'date'           => $this->getFormattedDate($pass_posttest->post_date_finished),
@@ -188,7 +188,7 @@ class CertificateController extends Controller
         /************ ข้อมูลสำหรับโชว์ในใบประกาศนียบัตร  *************/
         $data = [
             'title'          => 'ขอมอบประกาศนียบัตรฉบับนี้เพื่อแสดงว่า',
-            'name'           => $user->prefix . $user->first_name . ' ' . $user->last_name,
+            'name'           => $user->name,
             'description'    => 'ได้ผ่านการเรียนรู้ด้วยตนเองในรูปแบบออนไลน์ (e-Learning)',
             'course'         => $courseName,
             'date'           => $this->getFormattedDate($pass_posttest->post_date_finished),
@@ -235,6 +235,7 @@ class CertificateController extends Controller
         $year  = $date->year + 543; // แปลงเป็นปี พ.ศ.
 
         return "ให้ไว้ ณ วันที่ $day เดือน $month พ.ศ. $year";
+        // return "ให้ไว้ ณ วันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เดือน &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; พ.ศ. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     }
 
     private function convertMonth($month)

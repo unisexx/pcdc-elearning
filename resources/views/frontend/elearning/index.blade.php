@@ -26,7 +26,11 @@
                             </a>
                         </div>
                         <div class="blog-content">
-                            <span class="lesson"><img src="{{ url('html/images/bulb.svg') }}" alt="" width="24">{{ $item->name }}</span>
+                            <div class="lesson d-inline-flex align-items-center">
+                                <img src="{{ url('html/images/bulb.svg') }}" alt="" width="24" class="me-2">
+                                <span class="mt-2">{{ $item->name }}</span>
+                            </div>
+
                             <h3 class="blog-title h5">
                                 <a href="{{ $url }}">{!! $item->intro !!}</a>
                             </h3>
