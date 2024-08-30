@@ -6,6 +6,9 @@
     @slot('form')
         <div class="row mt-3">
             <div class="col-12">
+                {{ Form::bsSelect('category_id', 'หมวดหมู่', ['1' => 'ด้านเนื้อหา', '2' => 'ด้านรูปแบบ', '3' => 'ด้านการนำไปใช้ประโยชน์']) }}
+            </div>
+            <div class="col-12">
                 {{ Form::bsText('title', 'หัวข้อแบบสำรวจ') }}
             </div>
             <div class="col-12">

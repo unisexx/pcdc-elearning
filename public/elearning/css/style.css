@@ -1147,7 +1147,7 @@ a:hover {
 	font-weight: 600;
 	font-family: "Kodchasan";
 	text-shadow:
-	    2px 0 0 #0089cf,
+		2px 0 0 #0089cf,
 		-2px 0 0 #0089cf,
 		0 2px 0 #0089cf,
 		0 -2px 0 #0089cf,
@@ -2323,7 +2323,7 @@ TABS academic_results
 
 .smiley-group label {
 	cursor: pointer;
-	font-size: 2rem;
+	font-size: 5rem;
 	transition: opacity 0.3s ease;
 }
 
@@ -2355,7 +2355,7 @@ TABS academic_results
 	opacity: 1;
 }
 
-.lessonContent{
+.lessonContent {
 	font-weight: 400;
 	line-height: 45px;
 }
@@ -2365,6 +2365,23 @@ TABS academic_results
 	height: auto;
 }
 
-#tab1Page .intro-text{
+#tab1Page .intro-text {
 	line-height: 35px;
+}
+
+.survey-category-header {
+	background-color: #d0e4f5;
+	/* ตัวอย่างสีที่ใกล้เคียง */
+	color: black;
+	/* สีข้อความ */
+	padding: 15px;
+	/* เพิ่ม padding */
+	/* border-radius: 8px; */
+	/* เพิ่มขอบมุมมน */
+	border: 1px solid #b0c4de;
+	/* เพิ่มขอบที่เข้ากันกับสีพื้นหลัง */
+	text-align: center;
+	/* จัดข้อความให้อยู่ตรงกลาง */
+	margin-bottom: 20px;
+	/* เพิ่มช่องว่างด้านล่าง */
 }

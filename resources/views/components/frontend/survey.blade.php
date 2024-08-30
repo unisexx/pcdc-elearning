@@ -1,18 +1,29 @@
 <!-- Modal -->
 <div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="surveyModalLabel">แบบสอบถามความพึงพอใจ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 80vh; overflow-y: auto;">
                 <form id="surveyForm" class="fs-5" method="POST">
                     @csrf
                     <input type="hidden" name="curriculum_id" id="curriculum_id">
+                    @php
+                        $currentCategory = null;
+                    @endphp
                     @foreach ($surveys as $key => $item)
+                        @if ($currentCategory !== $item->category_id)
+                            @php
+                                $currentCategory = $item->category_id;
+                            @endphp
+                            <div class="survey-category-header mt-4">
+                                <h5 class="fw-bold">{{ $item->categotyTxt() }}</h5>
+                            </div>
+                        @endif
                         <div class="mb-3">
-                            <label for="question{{ $item->id }}" class="form-label">{{ $key + 1 }}. {{ $item->title }}</label>
+                            <label for="question{{ $item->id }}" class="form-label text-start d-block">{{ $key + 1 }}. {{ $item->title }}</label>
                             <div class="smiley-group">
                                 <input type="radio" id="question{{ $item->id }}_1" name="question{{ $item->id }}" value="1">
                                 <label for="question{{ $item->id }}_1"><i class="fas fa-frown"></i></label>
@@ -31,8 +42,11 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="survey-category-header mt-4">
+                        <h5 class="fw-bold">ด้านอื่นๆ</h5>
+                    </div>
                     <div class="mb-3">
-                        <label for="suggestion" class="form-label">ข้อเสนอแนะ (ถ้ามี)</label>
+                        <label for="suggestion" class="form-label text-start d-block">ข้อเสนอแนะ (ถ้ามี)</label>
                         <textarea class="form-control" id="suggestion" name="suggestion" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
@@ -41,12 +55,13 @@
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
 
 @push('css')
-    <style>
+    {{-- <style>
         .smiley-group {
             display: flex;
             gap: 10px;
@@ -59,7 +74,7 @@
 
         .smiley-group label {
             cursor: pointer;
-            font-size: 2rem;
+            font-size: 3rem;
             transition: opacity 0.3s ease;
         }
 
@@ -90,7 +105,7 @@
         .smiley-group input[type="radio"]:checked+label {
             opacity: 1;
         }
-    </style>
+    </style> --}}
 @endpush
 
 @push('js')

@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th scope="col">จัดลำดับ</th>
+                            <th scope="col">หมวดหมู่</th>
                             <th scope="col">หัวข้อแบบสำรวจ</th>
                             <th scope="col">เปิดใช้งาน</th>
                             <th scope="col">จัดการ</th>
@@ -22,6 +23,7 @@
                         @foreach ($rs as $item)
                             <tr data-id="{{ $item->id }}">
                                 <td class="drag-handle"><i class="fas fa-grip-lines"></i></td>
+                                <td>{{ @$item->categotyTxt() }}</td>
                                 <td>{{ @$item->title }}</td>
                                 <td>{!! statusBadge(@$item->status) !!}</td>
                                 <td>
