@@ -8,7 +8,7 @@
                         <img src="{{ asset('images/logo_pcdc2.svg') }}" class="logo_pcdc me-2" alt="logo pcdc">
                         <img src="{{ asset('images/logo_ddc_moph3.svg') }}" class="logo ms-2" alt="logo กรมควบคุมโรค">
                         <a href="{{ url('home') }}" class="d-table mt-2">
-                            <div class="organization_name text-start"><span class="text-e">e</span>-learning</div>
+                            <div class="organization_name text-start"><span class="text-e">e</span>-Learning</div>
                             <div class="organization_name2">ด้านการป้องกันควบคุมโรคติดต่อและภัยสุขภาพในเด็ก</div>
                         </a>
                     </div>

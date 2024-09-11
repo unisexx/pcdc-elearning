@@ -7,14 +7,19 @@
                 errorClass: 'invalid-feedback',
 
                 errorPlacement: function (error, element) {
-                    // console.log(element.prop('type') +' = '+ element.hasClass("select2"));
+                    console.log(element.prop('type') +' = '+ element.prop('name'));
+
                     if (element.prop('type') === 'radio') {
                         element.closest('div.row').find('.errMsg').html(error);
                     }else if(element.prop('type') === 'select-one' && element.hasClass("select2")){
                         error.insertAfter(element.next('span.select2'));
+                    }else if(element.prop('name') === 'password' || element.prop('name') === 'password_confirmation'){
+                        element.closest('div.position-relative').find('.errMsg').html(error);
                     } else {
                         error.insertAfter(element);
                     }
+
+
                 },
                 highlight: function (element) {
                     $(element).removeClass('is-valid').addClass('is-invalid'); // add the Bootstrap error class to the control group
@@ -43,12 +48,12 @@
 
                     $('html, body').animate({
                         scrollTop: $(validator.errorList[0].element).offset().top
-                    },                       <?php echo Config::get('jsvalidation.duration_animate') ?>);
+                    },                                                                                                                                                                                 <?php echo Config::get('jsvalidation.duration_animate') ?>);
 
                 },
                 <?php endif;?>
 
-                rules:                       <?php echo json_encode($validator['rules']); ?>
+                rules:                                                                                                                                                                                 <?php echo json_encode($validator['rules']); ?>
             });
         });
     });

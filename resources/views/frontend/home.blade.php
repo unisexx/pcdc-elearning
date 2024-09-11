@@ -92,7 +92,7 @@
                                 <div class="carousel-item shadow-slide {{ $active }}">
                                     <div class="row">
                                         <div class="col-lg-5 col-xxl-4 text-center position-relative">
-                                            <img src="{{ asset('html/images/certificate_thumbnail.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
+                                            <img src="{{ asset('html/images/certificate_thumbnail2.jpg') }}" alt="" width="380" height="268" class="wow bounce shadow certificate_thumbnail mx-auto">
                                             <div class="circular"></div>
                                         </div>
                                         <div class="col-lg-7 col-xxl-6 mx-auto align-content-center wow flash">
@@ -156,7 +156,7 @@
     <!--########### Start Step ###########-->
     <div class="container">
         <div class="position-relative pb-2 mt-5">
-            <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ขั้นตอนการเรียน e-learning</span>
+            <img src="{{ asset('html/images/icon-hat.svg') }}" alt="" class="icon-hat"> <span class="stat-info">ขั้นตอนการเรียน e-Learning</span>
         </div>
         <p>เรียนที่ไหน ตอนไหนก็ได้ สะดวก เข้าถึงง่าย ได้ใบประกาศนียบัตร (e-Certificate) เพียง 6 ขั้นตอน</p>
 
