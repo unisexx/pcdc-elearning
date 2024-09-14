@@ -21,28 +21,28 @@
         </fieldset>
         <fieldset class="my-5 border rounded-3 pt-5 px-3 position-relative fs-5">
             <legend class="tab_lesson_title w-auto rounded-pill text-success">
-                <i class="fa fa-download"></i> 
+                <i class="fa fa-download"></i>
                 ดาวน์โหลด
             </legend>
             <ul style="list-style-type: none;">
-                <li class="text-success">เนื้อหาหลักสูตรและบทเรียน</li>
+                <li class="text-success">เนื้อหาบทเรียน</li>
                 <li style="padding-left:20px;">
-                    <a href="{{ url('elearning/download-curriculum/'.$curriculum->id)}}" target="_blank">
+                    <a href="{{ url('elearning/download-curriculum/' . $curriculum->id) }}" target="_blank">
                         <i class="fa fa-file-pdf"></i> เนื้อหาหลักสูตร "{{ $curriculum->name }}"
                     </a>
                 </li>
                 @if ($curriculum->curriculum_lesson)
                     @foreach ($curriculum->curriculum_lesson as $key => $lesson)
                         <li style="padding-left:60px;">
-                            <a href="{{ url('elearning/download-lesson/'.$lesson->id)}}" target="_blank">
-                                <i class="fa fa-file-pdf"></i> เนื้อหาบทเรียน "{{ $lesson->name }}"
+                            <a href="{{ url('elearning/download-lesson/' . $lesson->id) }}" target="_blank">
+                                <i class="fa fa-file-pdf"></i> เนื้อหาหัวข้อ "{{ $lesson->name }}"
                             </a>
                         </li>
                     @endforeach
                 @endif
                 @if ($curriculum->curriculum_exam_setting)
-                    <li class="text-success">แบบทดสอบท้ายบทเรียน</li>                    
-                    <a href="{{ url('elearning/download-curriculum-exam/'.$curriculum->id)}}" target="_blank">
+                    <li class="text-success">แบบทดสอบท้ายบทเรียน</li>
+                    <a href="{{ url('elearning/download-curriculum-exam/' . $curriculum->id) }}" target="_blank">
                         <i class="fa fa-file-pdf"></i> แบบทดสอบท้ายบทเรียน หลักสูตร "{{ $curriculum->name }}"
                     </a>
                     @foreach ($curriculum->curriculum_lesson as $key => $lesson)
@@ -58,9 +58,9 @@
                             }
                         @endphp
 
-                        @if($has_lesson_exam > 0)
+                        @if ($has_lesson_exam > 0)
                             <li style="padding-left:60px;">
-                                <a href="{{ url('elearning/download-lesson-exam/'.$lesson->id)}}" target="_blank">
+                                <a href="{{ url('elearning/download-lesson-exam/' . $lesson->id) }}" target="_blank">
                                     <i class="fa fa-file-pdf"></i> แบบทดสอบท้ายบทเรียน "{{ $lesson->name }}"
                                 </a>
                             </li>
@@ -80,41 +80,41 @@
                         @endif
                     @endif
                 @elseif ($curriculum->curriculum_lesson)
-                    <a href="{{ url('elearning/curriculum/lesson/' . $curriculum->curriculum_lesson->first()->id) }}" class="btn btn-lg btn-primary">เข้าสู่เนื้อหาบทเรียน <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>                    
+                    <a href="{{ url('elearning/curriculum/lesson/' . $curriculum->curriculum_lesson->first()->id) }}" class="btn btn-lg btn-primary">เข้าสู่เนื้อหาบทเรียน <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>
                 @endif
             </div>
         </div>
-        @if($curriculum->curriculum_lesson)        
-        <div class="w-100" style="margin-top:55px;">
-            <div class="title_tab"><span>บทเรียน</span> {{ $curriculum->name }}</div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center mt-3">
-            
+        @if ($curriculum->curriculum_lesson)
+            <div class="w-100" style="margin-top:55px;">
+                <div class="title_tab"><span>บทเรียน</span> {{ $curriculum->name }}</div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center mt-3">
+
                 @foreach ($curriculum->curriculum_lesson as $key => $lesson)
                     <div class="col my-4">
                         <div class="blog-style1 h-100 position-relative">
                             <div class="blog-img">
-                                <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
-                                <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
+                                <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}">
+                                    <img src="{{ Storage::url('uploads/curriculum_lesson/' . @$lesson->cover_image) }}" alt="" class="img-fluid w-100">
                                 </a>
                             </div>
                             <div class="blog-content">
                                 <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
                                 <h3 class="blog-title h5">
-                                    <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" >
-                                    {{ $lesson->name }}
+                                    <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}">
+                                        {{ $lesson->name }}
                                     </a>
                                 </h3>
                                 <p>{{ $lesson->description }}</p>
-                            </div>                            
+                            </div>
                             <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}" class="blog-btn position-absolute bottom-0">
                                 เข้าสู่บทเรียน <em class="fa fa-angle-right"></em>
                             </a>
                         </div>
                     </div>
                 @endforeach
-            
-        </div>
+
+            </div>
         @endif
     </div>
 @endsection

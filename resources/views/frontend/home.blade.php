@@ -283,7 +283,7 @@
                     <div class="w-100">
                         <div class="title_tab">
                             <a href="{{ url('elearning/curriculum/' . $item->id) }}">
-                                <span>หลักสูตรที่ {{ $index + 1 }}</span>{{ $item->name }}
+                                <span>บทเรียนที่ {{ $index + 1 }}</span>{{ $item->name }}
                             </a>
                         </div>
                     </div>
@@ -297,7 +297,7 @@
                                         </a>
                                     </div>
                                     <div class="blog-content">
-                                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> บทเรียนที่ {{ $key + 1 }}</span>
+                                        <span class="lesson"><img src="{{ asset('html/images/bulb.svg') }}" alt="" width="24"> หัวข้อที่ {{ $key + 1 }}</span>
                                         <h3 class="blog-title h5">
                                             <a id="a_lesson_{{ $lesson->id }}" href="{{ url('elearning/curriculum/lesson/' . $lesson->id) }}">
                                                 {{ $lesson->name }}

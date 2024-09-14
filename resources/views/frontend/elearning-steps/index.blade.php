@@ -4,8 +4,8 @@
 
 @section('content')
     <!--====================================================
-                        =                      CONTENT                         =
-                        =====================================================-->
+                            =                      CONTENT                         =
+                            =====================================================-->
     <div class="container-fluid bg_e_learning py-5">
 
         <!--########## START STEP ##########-->
@@ -32,21 +32,21 @@
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 2</h3>
                                 <div class="title_step_learning2">ทำแบบทดสอบ ก่อนเรียน <span>Pre-test</span></div>
-                                <p class="description">เริ่มทำแบบทดสอบก่อนเรียน (ทำข้อสอบทีละหลักสูตร) จำนวนข้อสอบ 5-10 ข้อ คะแนนเต็ม 10 คะแนน</p>
+                                <p class="description">เริ่มทำแบบทดสอบก่อนเรียน (ทำข้อสอบทีละบทเรียน) จำนวนข้อสอบ 5-10 ข้อ คะแนนเต็ม 10 คะแนน</p>
                             </a>
                         </div>
                         <div class="timeline wow bounceIn">
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 3</h3>
                                 <div class="title_step_learning2">เรียนรู้บทเรียน <span>Learning</span></div>
-                                <p class="description">เริ่มเรียนจากคลิปวิดีโอ เรียนทีละ 1 หลักสูตร ระยะเวลาในการเรียนในแต่ละหลักสูตร 1-2 ชั่วโมง</p>
+                                <p class="description">เริ่มเรียนจากคลิปวิดีโอ เรียนทีละ 1 บทเรียน ระยะเวลาในการเรียนในแต่ละบทเรียน 1-2 ชั่วโมง</p>
                             </a>
                         </div>
                         <div class="timeline wow bounceIn">
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 4</h3>
                                 <div class="title_step_learning2">ทำแบบทดสอบ ท้ายบทเรียน <span>Quiz</span></div>
-                                <p class="description">ทำแบบทดสอบหลังเรียนของแต่ละหลักสูตรหลังเรียนจบ</p>
+                                <p class="description">ทำแบบทดสอบหลังเรียนของแต่ละบทเรียนหลังเรียนจบ</p>
                             </a>
                         </div>
                         <div class="timeline wow bounceIn">
@@ -60,7 +60,7 @@
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 6</h3>
                                 <div class="title_step_learning2">รับประกาศนียบัตร <span>e-certificate</span></div>
-                                <p class="description">สามารถดาวน์โหลดใบประกาศนียบัตรจากระบบได้ โดยใบประกาศนียบัตรจะมีอายุการรับรองผลการเรียนหลักสูตรเป็นเวลา 3 ปี</p>
+                                <p class="description">สามารถดาวน์โหลดใบประกาศนียบัตรจากระบบได้ โดยใบประกาศนียบัตรจะมีอายุการรับรองผลการเรียนบทเรียนเป็นเวลา 3 ปี</p>
                             </a>
                         </div>
                     </div>
