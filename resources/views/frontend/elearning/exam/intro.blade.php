@@ -19,8 +19,10 @@
             </legend>
             <ul>
                 <li>จำนวนคำถามมีทั้งหมด&nbsp;<span class="text-danger fw-bolder">{{ $n_question }}</span> คำถาม</li>
+                @if($exam_type == 'pre')
                 <li>ต้องสอบได้คะแนนไม่ต่ำกว่า&nbsp;<span class="text-danger fw-bolder">{{ $pass_score }}</span> คะแนน</li>
                 <li>สามารถทดสอบได้ไม่จำกัดจำนวนครั้งจนกว่าจะผ่าน</li>
+                @endif
             </ul>
 
             <div class="row justify-content-center gx-5 box-bar">
