@@ -183,9 +183,15 @@
                                                         $all_pass = true;
                                                     }
                                                     
-                                                    $alert_msg_html = $key == 0 ? 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน</span>"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร' : 'กรุณาทำแบบทดสอบท้ายบท <br>"<span style="color:blue;">' . $lesson_name[$key - 1] . '</span>"<br><span style="color:green;">ให้ผ่าน</span><br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท';
-                                                    // $alert_msg_html = $key == 0 ? 'กรุณาทำแบบทดสอบก่อนเรียน<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร <a href="'.url('elearning/curriculum/'.$curriculum->id.'/pretest').'" class="btn btn-primary">ไปทำแบบทดสอบก่อนเรียน (Pre-Test)</a>'
-                                                    //                     : 'กรุณาทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท <a href="'.url('elearning/curriculum/lesson-exam/'.$lesson->id).'" class="btn btn-primary">ไปทำแบบทดสอบท้ายบท "'.$lesson_name[$key-1].'"</a>';
+                                                    if($key==0){
+                                                        $alert_msg_html = 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน</span>"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร';
+                                                    }else{
+                                                        if(@$lesson_has_exam[$key-1] > 0){
+                                                            $alert_msg_html ='กรุณาทำแบบทดสอบท้ายบท <br>"<span style="color:blue;">' . $lesson_name[$key - 1] . '</span>"<br><span style="color:green;">ให้ผ่าน</span><br>ก่อนเริ่มทำการเรียนรู้เนื้อหา/หรือทำแบบทดสอบท้ายบท';      
+                                                        }else{
+                                                            $alert_msg_html = 'กรุณาทำ "<span style="color:blue;">แบบทดสอบก่อนเรียน</span>"<br>ก่อนเริ่มทำการเรียนรู้เนื้อหาในหลักสูตร';
+                                                        }
+                                                    }                                                                                                                                                                                        
                                                 @endphp
                                                 @if ($can_action == 1)
                                                     <li>
