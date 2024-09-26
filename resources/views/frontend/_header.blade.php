@@ -2,7 +2,7 @@
     <header>
         <div class="container">
             <div class="row wow fadeInDown g-0">
-                <div class="col-lg-6 d-flex justify-content-center justify-content-sm-start align-items-center py-2">
+                <div class="col-lg-7 d-flex justify-content-center justify-content-sm-start align-items-center py-2">
                     <!-- logo -->
                     <div class="d-block d-sm-flex text-center">
                         <img src="{{ asset('images/logo_pcdc2.svg') }}" class="logo_pcdc me-2" alt="logo pcdc">
@@ -13,7 +13,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-end align-items-center py-2">
+                <div class="col-lg-5 d-flex justify-content-end align-items-center py-2">
                     @auth
                         <div class="dropdown">
                             <button class="btn rounded-pill btn-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

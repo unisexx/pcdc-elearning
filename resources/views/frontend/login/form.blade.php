@@ -55,7 +55,7 @@
                                     <p class="small fw-bold mt-2 pt-3 mb-0 text-center">ยังไม่เป็นสมาชิก? <a href="{{ url('/front/register') }}" class="link-danger">สมัครสมาชิก</a></p>
                                 </div>
 
-                                <div class="divider2 d-flex align-items-center my-4">
+                                {{-- <div class="divider2 d-flex align-items-center my-4">
                                     <p class="text-center fw-bold mx-3 mb-0 text-muted">หรือ เข้าสู่ระบบด้วย</p>
                                 </div>
 
@@ -66,7 +66,7 @@
                                     <a class="btn btn-md btn-block px-5 ms-3 rounded-4 btn-google" href="{{ url('login/google') }}" role="button">
                                         <em class="fab fa-google me-2"></em> google
                                     </a>
-                                </div>
+                                </div> --}}
                             </form>
 
                         </div>

@@ -131,119 +131,46 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-lg-4 mb-lg-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">ประเภทผู้ใช้งานทั้งหมด</h6>
+        <!-- ประเภทผู้ใช้งานทั้งหมด และ ช่องทางการลงทะเบียน อยู่ในคอลัมน์ซ้าย -->
+        <div class="col-lg-6 mb-4">
+            <div class="row">
+                <div class="col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-2">ประเภทผู้ใช้งานทั้งหมด</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="userTypePieChart" class="chart-canvas" height="300"></canvas>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="userTypePieChart" class="chart-canvas" height="300"></canvas>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-2">ช่องทางการลงทะเบียน</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="providerPieChart" class="chart-canvas" height="300"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-lg-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">ช่องทางการลงทะเบียน</h6>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <canvas id="providerPieChart" class="chart-canvas" height="300"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
+
+        <!-- คะแนนเฉลี่ยแบบประเมินความพึงพอใจ อยู่ในคอลัมน์ขวา -->
+        <div class="col-lg-6">
             <div class="card mb-4 h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-2">แบบประเมินความพึงพอใจ</h6>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center">
-                        <thead>
-                            <tr class="text-center">
-                                <th>หัวข้อ</th>
-                                <th>คะแนนเฉลี่ย (เต็ม 5)</th>
-                            </tr>
-                        </thead>
-                        {{-- Ajax Data Here --}}
-                        <tbody id="surveyResultsTable">
-                            <tr>
-                                <td class="w-50">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class=" mb-0">ความน่าสนใจของเนื้อหา</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class=" mb-0">0</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-50">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class=" mb-0">ความยากง่ายของบทเรียน</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class=" mb-0">0</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-50">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class=" mb-0">ความพึงพอใจ</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class=" mb-0">0</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-50">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class=" mb-0">ระบบง่ายต่อการใช้งาน</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class=" mb-0">0</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-50">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div class="ms-4">
-                                            <h6 class=" mb-0">ประโยชน์ต่อการนำไปใช้</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <h6 class=" mb-0">0</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <canvas id="surveyBarChart" class="chart-canvas" height="300"></canvas>
                 </div>
             </div>
         </div>
@@ -263,13 +190,13 @@
                     labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
                     datasets: [{
                             label: 'ผู้ทำแบบทดสอบไม่ผ่าน',
-                            data: [], // Initial empty data
+                            data: [],
                             backgroundColor: 'rgba(75, 192, 192, 0.6)',
                             stack: 'Stack 0',
                         },
                         {
                             label: 'ผู้ทำแบบทดสอบผ่าน',
-                            data: [], // Initial empty data
+                            data: [],
                             backgroundColor: 'rgba(153, 102, 255, 0.6)',
                             stack: 'Stack 0',
                         }
@@ -295,17 +222,49 @@
                             stacked: true,
                             ticks: {
                                 beginAtZero: true,
-                                stepSize: 1 // ตั้งค่าให้แกน y แสดงเฉพาะจำนวนเต็ม
+                                stepSize: 1
                             }
                         }
                     }
                 }
             });
 
-            // Load data when page loads
+            var surveyCtx = document.getElementById('surveyBarChart').getContext('2d');
+            var surveyBarChart = new Chart(surveyCtx, {
+                type: 'bar',
+                data: {
+                    labels: [], // หัวข้อแบบประเมินจะถูกอัพเดตจาก Ajax
+                    datasets: [{
+                        label: 'คะแนนเฉลี่ย (เต็ม 5)',
+                        data: [], // คะแนนเฉลี่ยจะถูกอัพเดตจาก Ajax
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)', // กำหนดสีของแท่งกราฟ
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y', // ทำให้กราฟเป็นแนวนอน
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 5 // ตั้งค่าขนาดสูงสุดของแกน X เป็น 5 เพื่อแสดงคะแนนเต็ม
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // ซ่อนตัวบ่งบอกสี (legend) เพราะมีเพียงชุดข้อมูลเดียว
+                        },
+                        title: {
+                            display: true,
+                            text: 'คะแนนเฉลี่ยแบบประเมินความพึงพอใจ (คะแนนเต็ม 5)'
+                        }
+                    }
+                }
+            });
+
             ajaxDashboard($('#curriculumSelect').val());
 
-            // Load data when curriculum changes
             $('#curriculumSelect').change(function() {
                 var curriculum_id = $(this).val();
                 ajaxDashboard(curriculum_id);
@@ -319,33 +278,25 @@
                         curriculum_id: curriculum_id
                     },
                     success: function(response) {
-                        var tbody = $('#surveyResultsTable');
-                        tbody.empty();
+                        // อัพเดตข้อมูลกราฟแท่งแนวนอน
+                        var surveyLabels = [];
+                        var surveyData = [];
 
                         $.each(response.surveyResults, function(index, survey) {
-                            var row = '<tr>' +
-                                '<td class="w-50">' +
-                                '<div class="d-flex px-2 py-1 align-items-center">' +
-                                '<div class="ms-4">' +
-                                '<h6 class=" mb-0">' + survey.survey.title + '</h6>' +
-                                '</div>' +
-                                '</div>' +
-                                '</td>' +
-                                '<td>' +
-                                '<div class="text-center">' +
-                                '<h6 class=" mb-0">' + parseFloat(survey.average_rating).toFixed(1) + '</h6>' +
-                                '</div>' +
-                                '</td>' +
-                                '</tr>';
-
-                            tbody.append(row);
+                            surveyLabels.push(survey.survey.title); // ชื่อหัวข้อ
+                            surveyData.push(parseFloat(survey.average_rating).toFixed(1)); // คะแนนเฉลี่ย
                         });
 
-                        // Update allPostExam and allPostExamPass with number_format
+                        // อัพเดตข้อมูลในกราฟแท่งแนวนอน
+                        surveyBarChart.data.labels = surveyLabels;
+                        surveyBarChart.data.datasets[0].data = surveyData;
+                        surveyBarChart.update();
+
+                        // อัพเดตจำนวนผู้ทำแบบทดสอบและผู้ผ่านแบบทดสอบ
                         $('#allPostExamCount').text(response.allPostExamCount.toLocaleString());
                         $('#allPostExamPassCount').text(response.allPostExamPassCount.toLocaleString());
 
-                        // Update chart data
+                        // อัพเดตข้อมูลในกราฟแท่ง
                         stackedBarChart.data.datasets[0].data = response.postExamNotPassDataChart;
                         stackedBarChart.data.datasets[1].data = response.postExamPassDataChart;
                         stackedBarChart.update();
