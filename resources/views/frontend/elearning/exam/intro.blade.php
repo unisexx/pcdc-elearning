@@ -18,8 +18,8 @@
                 <img src="{{ asset('elearning/images/persent2.svg') }}" alt="" height="35" class="me-2">เกณฑ์
             </legend>
             <ul>
-                <li>จำนวนคำถามมีทั้งหมด&nbsp;<span class="text-danger fw-bolder">{{ $n_question }}</span> คำถาม</li>
-                @if($exam_type == 'pre')
+                <li>จำนวนคำถามมีทั้งหมด&nbsp;<span class="text-danger fw-bolder">{{ $n_question }}</span> คำถาม</li>                
+                @if($exam_type != 'pretest')
                 <li>ต้องสอบได้คะแนนไม่ต่ำกว่า&nbsp;<span class="text-danger fw-bolder">{{ $pass_score }}</span> คะแนน</li>
                 <li>สามารถทดสอบได้ไม่จำกัดจำนวนครั้งจนกว่าจะผ่าน</li>
                 @endif
@@ -46,10 +46,12 @@
                                 คะแนน
                             </div>
                             @if ($exam_result->total_question == $exam_result->n_question)
-                                @if ($pass_score > $exam_result->total_score)
-                                    <div class="title_score_points"><span>ไม่ผ่าน</span></div>
-                                @else
-                                    <div class="title_score_points"><span style="color:#47a66c!important;">ผ่าน</span></div>
+                                @if($exam_type != 'pretest')                            
+                                    @if ($pass_score > $exam_result->total_score)
+                                        <div class="title_score_points"><span>ไม่ผ่าน</span></div>
+                                    @else
+                                        <div class="title_score_points"><span style="color:#47a66c!important;">ผ่าน</span></div>
+                                    @endif
                                 @endif
                             @else
                                 <div class="title_score_points"><span>อยู่ระหว่างการทำข้อสอบ</span></div>

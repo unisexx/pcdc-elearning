@@ -30,8 +30,6 @@ class CurriculumExamSettingDetail extends Model
     protected $fillable = [
         'curriculum_exam_setting_id',
         'curriculum_lesson_id',
-        'curriculum_exam_setting_id',
-        'curriculum_lesson_id',
         'exam_status',
         'question_random_status',
         'n_question',

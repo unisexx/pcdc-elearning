@@ -64,10 +64,14 @@
                 <!--##### Nav tabs #####-->
                 <ul class="nav nav-tabs fs-4" id="myTab" role="tablist">
                     <li class="nav-item mt-2" role="presentation">
-                        <a class="nav-link active" id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
+                        <a class="nav-link active" id="lesson-tab" data-bs-toggle="tab"
+                            data-bs-target="#lesson-tab-pane" type="button" role="tab"
+                            aria-controls="lesson-tab-pane" aria-selected="false">บทเรียน</a>
                     </li>
                     <li class="nav-item mt-2" role="presentation">
-                        <a class="nav-link" id="academic_results-tab" data-bs-toggle="tab" data-bs-target="#academic_results-tab-pane" type="button" role="tab" aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
+                        <a class="nav-link" id="academic_results-tab" data-bs-toggle="tab"
+                            data-bs-target="#academic_results-tab-pane" type="button" role="tab"
+                            aria-controls="academic_results-tab-pane" aria-selected="false">ผลการเรียน</a>
                     </li>
                 </ul>
 
@@ -80,18 +84,20 @@
                 <div class="tab-content" id="myTabContent">
                     <!-- Start Tab-content 1-->
                     <div class="container">
-                        <div class="tab-pane fade active show" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
+                        <div class="tab-pane fade active show" id="lesson-tab-pane" role="tabpanel"
+                            aria-labelledby="lesson-tab" tabindex="0">
                             <div class="row bg-white rounded-5 p-3">
                                 <div class="col-lg-12">
                                     @yield('content')
-                                </div>                            
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- End tab-content 1 -->
 
                     <!-- Start Tab-content 2-->
-                    <div class="tab-pane fade " id="academic_results-tab-pane" role="tabpanel" aria-labelledby="academic_results-tab" tabindex="0">
+                    <div class="tab-pane fade " id="academic_results-tab-pane" role="tabpanel"
+                        aria-labelledby="academic_results-tab" tabindex="0">
                         <div class="container">
                             <div class="title_disease">ผลการเรียน</div>
                             <hr>
@@ -102,7 +108,10 @@
                                         <div class="box_point_bg2"></div>
                                         <div class="card-text">คะแนนแบบทดสอบก่อนเรียน (pre-Test)</div>
                                         @php
-                                            $pretest = \App\Models\UserCurriculumPpExam::where('user_id', \Auth::user()->id)
+                                            $pretest = \App\Models\UserCurriculumPpExam::where(
+                                                'user_id',
+                                                \Auth::user()->id,
+                                            )
                                                 ->where('curriculum_id', $curriculum->id)
                                                 ->where('exam_type', 'pretest')
                                                 ->first();
@@ -125,7 +134,10 @@
                                         <div class="box_point_bg2"></div>
                                         <div class="card-text">คะแนนวัดผลหลังเรียนรู้ (Post-test)</div>
                                         @php
-                                            $posttest = \App\Models\UserCurriculumPpExam::where('user_id', \Auth::user()->id)
+                                            $posttest = \App\Models\UserCurriculumPpExam::where(
+                                                'user_id',
+                                                \Auth::user()->id,
+                                            )
                                                 ->where('curriculum_id', $curriculum->id)
                                                 ->where('exam_type', 'posttest')
                                                 ->first();
@@ -147,19 +159,26 @@
                                 @if ($posttest->total_question == $posttest->n_question && $posttest->total_score >= $posttest->pass_score)
                                     <div class="row box-bar text-center fs-5">
                                         <p>ขอความร่วมมือตอบแบบสอบถามความพึงพอใจ เพื่อนำข้อมูลไปพัฒนาระบบ e-Learning
-                                            <button type="button" class="btn btn-info rounded-pill open-survey-btn" data-bs-toggle="modal" data-bs-target="#surveyModal" data-curriculum-id="{{ $curriculum->id }}">
+                                            <button type="button" class="btn btn-info rounded-pill open-survey-btn"
+                                                data-bs-toggle="modal" data-bs-target="#surveyModal"
+                                                data-curriculum-id="{{ $curriculum->id }}">
                                                 แบบสอบถามความพึงพอใจ
                                             </button>
                                             @php
-                                                $n_survey = \App\Models\SurveyResult::where('user_id', \Auth::user()->id)
+                                                $n_survey = \App\Models\SurveyResult::where(
+                                                    'user_id',
+                                                    \Auth::user()->id,
+                                                )
                                                     ->where('curriculum_id', $curriculum->id)
                                                     ->count();
                                             @endphp
-                                            <input type="hidden" name="exists_survey" id="exists_survey" value="{{ number_format($n_survey, 0) }}">
+                                            <input type="hidden" name="exists_survey" id="exists_survey"
+                                                value="{{ number_format($n_survey, 0) }}">
                                         </p>
                                         @include('components.frontend.survey')
                                         <p>ผ่านการเรียนและทดสอบตามที่กำหนด คลิกที่นี่เพื่อรับใบประกาศนียบัตร
-                                            <button type="button" class="btn btn-success rounded-pill text-white btn-download-cert">
+                                            <button type="button"
+                                                class="btn btn-success rounded-pill text-white btn-download-cert">
                                                 <em class="fa fa-download me-2"></em>
                                                 ดาวน์โหลดใบประกาศนียบัตรของคุณ
                                             </button>
@@ -195,7 +214,13 @@
                                                 <div class="notyet_pass">
                                                     ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)
                                                 </div>
-                                            @elseif($pretest->total_question == $pretest->n_question && $pretest->total_score < $pretest->pass_score)
+                                            @else
+                                                <div class="results_pass">
+                                                    {{ number_format($pretest->total_score) }} /
+                                                    {{ $pretest->n_question }}
+                                                </div>
+                                            @endif
+                                            {{-- @elseif($pretest->total_question == $pretest->n_question && $pretest->total_score < $pretest->pass_score)
                                                 <div class="notyet_pass">
                                                     ยังไม่ผ่าน
                                                     {{ number_format($pretest->total_score) }} /
@@ -207,38 +232,49 @@
                                                     {{ number_format($pretest->total_score) }} /
                                                     {{ $pretest->n_question }}
                                                 </div>
-                                            @endif
+                                            @endif --}}
                                         </li>
                                         @foreach ($curriculum->curriculum_lesson()->where('status', 'active')->orderBy('pos', 'asc')->get() as $key => $lesson)
                                             @php
-                                                $lesson_exam = \App\Models\UserCurriculumPpExam::where('user_id', \Auth::user()->id)
-                                                    ->where('curriculum_lesson_id', $lesson->id)
-                                                    ->where('exam_type', 'lesson')
-                                                    ->first();
-                                                $total_score = empty($lesson_exam) ? 0 : $pretest->total_score;
-                                                $total_question = empty($lesson_exam) ? 0 : $pretest->n_question;
+                                                $cr_examsetting = \App\Models\CurriculumExamSettingDetail::where(
+                                                    'curriculum_lesson_id',
+                                                    $lesson->id,
+                                                )->first();
                                             @endphp
-                                            <li>
-                                                <strong>{{ $lesson->name }}</strong>
+                                            @if ($cr_examsetting == '1')
+                                                @php
+                                                    $lesson_exam = \App\Models\UserCurriculumPpExam::where(
+                                                        'user_id',
+                                                        \Auth::user()->id,
+                                                    )
+                                                        ->where('curriculum_lesson_id', $lesson->id)
+                                                        ->where('exam_type', 'lesson')
+                                                        ->first();
+                                                    $total_score = empty($lesson_exam) ? 0 : $pretest->total_score;
+                                                    $total_question = empty($lesson_exam) ? 0 : $pretest->n_question;
+                                                @endphp
+                                                <li>
+                                                    <strong>{{ $lesson->name }}</strong>
 
-                                                @if (empty($lesson_exam) || $lesson_exam->total_question < $lesson_exam->n_question)
-                                                    <div class="notyet_pass">
-                                                        ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)
-                                                    </div>
-                                                @elseif($lesson_exam->total_question == $lesson_exam->n_question && $lesson_exam->total_score < $lesson_exam->pass_score)
-                                                    <div class="notyet_pass">
-                                                        ยังไม่ผ่าน
-                                                        {{ number_format($lesson_exam->total_score) }} /
-                                                        {{ $lesson_exam->n_question }}
-                                                    </div>
-                                                @elseif($lesson_exam->total_question == $lesson_exam->n_question)
-                                                    <div class="results_pass">
-                                                        <em class="fa fa-check me-2"></em>ผ่าน
-                                                        {{ number_format($lesson_exam->total_score) }} /
-                                                        {{ $lesson_exam->n_question }}
-                                                    </div>
-                                                @endif
-                                            </li>
+                                                    @if (empty($lesson_exam) || $lesson_exam->total_question < $lesson_exam->n_question)
+                                                        <div class="notyet_pass">
+                                                            ยังไม่ผ่าน (ยังไม่แล้วเสร็จ)
+                                                        </div>
+                                                    @elseif($lesson_exam->total_question == $lesson_exam->n_question && $lesson_exam->total_score < $lesson_exam->pass_score)
+                                                        <div class="notyet_pass">
+                                                            ยังไม่ผ่าน
+                                                            {{ number_format($lesson_exam->total_score) }} /
+                                                            {{ $lesson_exam->n_question }}
+                                                        </div>
+                                                    @elseif($lesson_exam->total_question == $lesson_exam->n_question)
+                                                        <div class="results_pass">
+                                                            <em class="fa fa-check me-2"></em>ผ่าน
+                                                            {{ number_format($lesson_exam->total_score) }} /
+                                                            {{ $lesson_exam->n_question }}
+                                                        </div>
+                                                    @endif
+                                                </li>
+                                            @endif
                                         @endforeach
                                         <li>
                                             <strong>วัดผลหลังเรียนรู้ (Post-test)</strong>
@@ -269,7 +305,8 @@
                                                 'class' => 'form needs-validation',
                                                 'autocomplete' => 'off',
                                             ]) !!}
-                                            <button type="submit" class="btn btn-lg btn-danger ms-3 btn-reset-class" name="btn_reset" value="reset"><i class="fa fa-undo"></i>
+                                            <button type="submit" class="btn btn-lg btn-danger ms-3 btn-reset-class"
+                                                name="btn_reset" value="reset"><i class="fa fa-undo"></i>
                                                 เริ่มเรียนใหม่อีกครั้ง</button>
                                             {!! Form::close() !!}
                                         </li>
