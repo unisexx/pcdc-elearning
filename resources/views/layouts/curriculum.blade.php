@@ -241,7 +241,7 @@
                                                     $lesson->id,
                                                 )->first();
                                             @endphp
-                                            @if ($cr_examsetting == '1')
+                                            @if ($cr_examsetting->exam_status == 'active')
                                                 @php
                                                     $lesson_exam = \App\Models\UserCurriculumPpExam::where(
                                                         'user_id',
