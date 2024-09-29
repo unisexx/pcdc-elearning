@@ -83,7 +83,14 @@
                     </div>
 
 
-                    <div class="carousel-inner carousel-fade">
+                    @push('css')
+                        <style>
+                            .carousel-item {
+                                transition: none !important;
+                            }
+                        </style>
+                    @endpush
+                    <div class="carousel-inner">
                         @if ($post_test_curriculum)
                             @foreach ($post_test_curriculum as $pkey => $item)
                                 @php
@@ -92,7 +99,7 @@
                                 <div class="carousel-item shadow-slide {{ $active }}">
                                     <div class="row">
                                         <div class="col-lg-5 col-xxl-4 text-center position-relative">
-                                            <img src="{{ asset('html/images/certificate_thumbnail2.png') }}" alt="" width="380" height="268" class="shadow certificate_thumbnail mx-auto">
+                                            <img src="{{ asset('html/images/certificate_thumbnail2.jpg') }}" alt="" width="380" height="268" class="shadow certificate_thumbnail mx-auto">
                                             <div class="circular"></div>
                                         </div>
                                         <div class="col-lg-7 col-xxl-6 mx-auto align-content-center">
@@ -136,6 +143,7 @@
                             @endforeach
                         @endif
                     </div>
+
 
 
 
