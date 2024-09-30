@@ -119,7 +119,7 @@
                                 }
                                 if ($exam_type == 'posttest') {
                                     if ($exam_result->pass_score <= $exam_result->total_score) {
-                                        echo '<button type="button" class="btn btn-lg btn-success" id="btn-show-result">ตรวจสอบผลการเรียน/ดาวนโหลดใบประกาศ</a>';
+                                        echo '<button type="button" class="btn btn-lg btn-success" id="btn-show-result">ตรวจสอบผลการเรียน/ดาวน์โหลดใบประกาศนียบัตร</a>';
                                     }
                                 }
                             @endphp
