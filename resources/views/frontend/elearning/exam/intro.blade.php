@@ -50,7 +50,8 @@
                                     @if ($pass_score > $exam_result->total_score)
                                         <div class="title_score_points"><span>ไม่ผ่าน</span></div>
                                     @else
-                                        <div class="title_score_points"><span style="color:#47a66c!important;">ผ่าน</span></div>
+                                        <div class="title_score_points"><span style="color:#47a66c!important;">ผ่าน</span>
+                                        </div>
                                     @endif
                                 @endif
                             @else
@@ -72,7 +73,8 @@
                         <input type="hidden" name="curriculum_lesson_id" value="{{ $curriculum_lesson->id }}">
                     @endif
                     @if (empty($exam_result))
-                        <button type="submit" id="submit_start" name="submit_start" class="btn btn-lg btn-primary" value="start">
+                        <button type="submit" id="submit_start" name="submit_start" class="btn btn-lg btn-primary"
+                            value="start">
                             <em class="fa fa fa-pencil fs-5 me-2 icon_list_menu "></em>
                             เริ่มทำแบบทดสอบ
                         </button>
@@ -85,18 +87,24 @@
                         @endif
                         @if ($pass_score > $exam_result->total_score)
                             @if ($exam_type == 'lesson')
-                                <a href="{{ url('elearning/curriculum/lesson/' . $curriculum_lesson->id) }}" class="btn btn-lg btn-success"><i class="fa fa-book"></i> ทบทวนเนื้อหาบทเรียน</a>
+                                <a href="{{ url('elearning/curriculum/lesson/' . $curriculum_lesson->id) }}"
+                                    class="btn btn-lg btn-success"><i class="fa fa-book"></i> ทบทวนเนื้อหาบทเรียน</a>
                             @endif
-                            <button type="submit" id="submit_restart" name="submit_restart" class="btn btn-warning btn-lg btn-restart" value="restart">
-                                <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
-                                เริ่มทำใหม่อีกครั้ง
-                            </button>
+                            @if ($exam_type != 'pretest')
+                                <button type="submit" id="submit_restart" name="submit_restart"
+                                    class="btn btn-warning btn-lg btn-restart" value="restart">
+                                    <em class="fa fa fa-rotate-right fs-5 me-2 icon_list_menu "></em>
+                                    เริ่มทำใหม่อีกครั้ง
+                                </button>
+                            @endif
 
                             @if ($exam_type == 'pretest')
                                 @php
                                     $next_lesson = $curriculum->curriculum_lesson()->orderBy('pos', 'asc')->first();
                                     if ($next_lesson) {
-                                        echo '<a href="' . url('elearning/curriculum/lesson/' . $next_lesson->id) . '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                        echo '<a href="' .
+                                            url('elearning/curriculum/lesson/' . $next_lesson->id) .
+                                            '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
                                     }
                                 @endphp
                             @endif
@@ -105,9 +113,14 @@
                                 if ($exam_type == 'lesson') {
                                     $exam_curriculum_pos = $exam_result->curriculum_lesson->pos;
                                     if ($exam_curriculum_pos) {
-                                        $next_lesson = $curriculum->curriculum_lesson()->where('pos', '>', $exam_curriculum_pos)->first();
+                                        $next_lesson = $curriculum
+                                            ->curriculum_lesson()
+                                            ->where('pos', '>', $exam_curriculum_pos)
+                                            ->first();
                                         if ($next_lesson) {
-                                            echo '<a href="' . url('elearning/curriculum/lesson/' . $next_lesson->id) . '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                            echo '<a href="' .
+                                                url('elearning/curriculum/lesson/' . $next_lesson->id) .
+                                                '" class="btn btn-lg btn-success">ไปยังเนื้อหาบทถัดไป <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
                                         } else {
                                             if ($curriculum->curriculum_exam_setting) {
                                                 if ($curriculum->curriculum_exam_setting->post_test_status == 'active') {
