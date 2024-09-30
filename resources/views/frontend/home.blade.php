@@ -197,7 +197,7 @@
                     </div>
                     <div class="step-content">
                         <p>ทำแบบทดสอบ ก่อนเรียน</p>
-                        <p class="step_text_eng">Pre-test</p>
+                        <p class="step_text_eng">Pre-Test</p>
                     </div>
                     <div class="line_step2"></div>
                 </div>
@@ -239,7 +239,7 @@
                     </div>
                     <div class="step-content">
                         <p>วัดผลหลังเรียนรู้</p>
-                        <p class="step_text_eng">Post-test</p>
+                        <p class="step_text_eng">Post-Test</p>
                     </div>
                     <div class="line_step5"></div>
                 </div>
@@ -273,10 +273,10 @@
             </div>
             <div class="col-lg-12 text-center text-lg-end">
                 <!--##### Nav tabs #####-->
-                <ul class="nav nav-pills tab-class d-inline-flex flex-column flex-sm-row justify-content-lg-end wow bounceInUp" id="myTab" role="tablist">
+                <ul class="nav nav-pills tab-class d-inline-flex flex-column flex-sm-row justify-content-lg-end wow bounceInUp fs-4" id="myTab" role="tablist">
                     @foreach ($curriculums as $index => $item)
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link d-flex rounded-pill @if ($index === 0) active @endif" id="courses{{ $item->id }}-tab" data-bs-toggle="tab" data-bs-target="#courses{{ $item->id }}" type="button" role="tab" aria-controls="courses{{ $item->id }}" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                            <a class="nav-link d-flex rounded-pill @if ($index === 0) active @endif fs-4" id="courses{{ $item->id }}-tab" data-bs-toggle="tab" data-bs-target="#courses{{ $item->id }}" type="button" role="tab" aria-controls="courses{{ $item->id }}" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
                                 {{ $item->name }}
                             </a>
                         </li>

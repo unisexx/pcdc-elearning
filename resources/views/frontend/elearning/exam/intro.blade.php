@@ -18,10 +18,10 @@
                 <img src="{{ asset('elearning/images/persent2.svg') }}" alt="" height="35" class="me-2">เกณฑ์
             </legend>
             <ul>
-                <li>จำนวนคำถามมีทั้งหมด&nbsp;<span class="text-danger fw-bolder">{{ $n_question }}</span> คำถาม</li>                
-                @if($exam_type != 'pretest')
-                <li>ต้องสอบได้คะแนนไม่ต่ำกว่า&nbsp;<span class="text-danger fw-bolder">{{ $pass_score }}</span> คะแนน</li>
-                <li>สามารถทดสอบได้ไม่จำกัดจำนวนครั้งจนกว่าจะผ่าน</li>
+                <li>จำนวนคำถามมีทั้งหมด&nbsp;<span class="text-danger fw-bolder">{{ $n_question }}</span> คำถาม</li>
+                @if ($exam_type != 'pretest')
+                    <li>ต้องสอบได้คะแนนไม่ต่ำกว่า&nbsp;<span class="text-danger fw-bolder">{{ $pass_score }}</span> คะแนน</li>
+                    <li>สามารถทดสอบได้ไม่จำกัดจำนวนครั้งจนกว่าจะผ่าน</li>
                 @endif
             </ul>
 
@@ -46,7 +46,7 @@
                                 คะแนน
                             </div>
                             @if ($exam_result->total_question == $exam_result->n_question)
-                                @if($exam_type != 'pretest')                            
+                                @if ($exam_type != 'pretest')
                                     @if ($pass_score > $exam_result->total_score)
                                         <div class="title_score_points"><span>ไม่ผ่าน</span></div>
                                     @else
@@ -111,7 +111,7 @@
                                         } else {
                                             if ($curriculum->curriculum_exam_setting) {
                                                 if ($curriculum->curriculum_exam_setting->post_test_status == 'active') {
-                                                    echo '<a href="' . url('elearning/curriculum/' . $curriculum->id . '/posttest') . '" class="btn btn-lg btn-success">วัดผลหลังเรียนรู้ (Post-test) <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
+                                                    echo '<a href="' . url('elearning/curriculum/' . $curriculum->id . '/posttest') . '" class="btn btn-lg btn-success">วัดผลหลังเรียนรู้ (Post-Test) <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em></a>';
                                                 }
                                             }
                                         }

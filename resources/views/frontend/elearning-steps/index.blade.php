@@ -4,8 +4,8 @@
 
 @section('content')
     <!--====================================================
-                            =                      CONTENT                         =
-                            =====================================================-->
+                                    =                      CONTENT                         =
+                                    =====================================================-->
     <div class="container-fluid bg_e_learning py-5">
 
         <!--########## START STEP ##########-->
@@ -31,7 +31,7 @@
                         <div class="timeline wow bounceIn">
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 2</h3>
-                                <div class="title_step_learning2">ทำแบบทดสอบ ก่อนเรียน <span>Pre-test</span></div>
+                                <div class="title_step_learning2">ทำแบบทดสอบ ก่อนเรียน <span>Pre-Test</span></div>
                                 <p class="description">เริ่มทำแบบทดสอบก่อนเรียน (ทำข้อสอบทีละบทเรียน) จำนวนข้อสอบ 5-10 ข้อ คะแนนเต็ม 10 คะแนน</p>
                             </a>
                         </div>
@@ -52,7 +52,7 @@
                         <div class="timeline wow bounceIn">
                             <a href="#" class="timeline-content">
                                 <h3 class="title">ขั้นตอนที่ 5</h3>
-                                <div class="title_step_learning2">วัดผลหลังเรียนรู้ <span>Post-test</span></div>
+                                <div class="title_step_learning2">วัดผลหลังเรียนรู้ <span>Post-Test</span></div>
                                 <p class="description">ตรวจสอบคะแนนสอบ ทำได้ 80% ขึ้นไปถึงจะผ่าน</p>
                             </a>
                         </div>
