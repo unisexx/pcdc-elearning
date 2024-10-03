@@ -180,6 +180,8 @@
 @push('js')
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -212,6 +214,17 @@
                         title: {
                             display: true,
                             text: 'จำนวนผู้ทำแบบทดสอบผ่านและไม่ผ่านในแต่ละเดือน'
+                        },
+                        datalabels: {
+                            anchor: 'end', // กำหนดให้ label อยู่ด้านบนของแท่ง
+                            align: 'end', // ปรับตำแหน่ง
+                            formatter: (value, ctx) => {
+                                return value.toLocaleString(); // แปลงตัวเลขให้อยู่ในรูปแบบที่อ่านง่าย
+                            },
+                            color: 'black', // สีของตัวเลขบนกราฟ
+                            font: {
+                                weight: 'bold' // ทำให้ตัวเลขเป็นตัวหนา
+                            }
                         }
                     },
                     scales: {
@@ -226,8 +239,10 @@
                             }
                         }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // เพิ่มปลั๊กอิน datalabels
             });
+
 
             var surveyCtx = document.getElementById('surveyBarChart').getContext('2d');
             var surveyBarChart = new Chart(surveyCtx, {
@@ -258,10 +273,26 @@
                         title: {
                             display: true,
                             text: 'คะแนนเฉลี่ยแบบประเมินความพึงพอใจ (คะแนนเต็ม 5)'
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            formatter: (value, ctx) => {
+                                if (typeof value === 'number') {
+                                    return value.toFixed(1); // แสดงตัวเลขที่มีทศนิยม 1 ตำแหน่ง
+                                }
+                                return value; // ถ้าไม่ใช่ตัวเลข ให้แสดงค่าเดิม
+                            },
+                            color: 'black', // สีของตัวเลข
+                            font: {
+                                weight: 'bold' // ทำให้ตัวเลขหนา
+                            }
                         }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // เพิ่มปลั๊กอิน datalabels
             });
+
 
             ajaxDashboard($('#curriculumSelect').val());
 
@@ -338,10 +369,25 @@
                         title: {
                             display: true,
                             text: 'ประเภทผู้ใช้งานทั้งหมดในระบบ'
+                        },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = ctx.dataset.data.reduce((a, b) => a + b, 0); // หาผลรวมทั้งหมดของกราฟ
+                                let percentage = (value * 100 / sum).toFixed(2) + "%"; // คำนวณเปอร์เซ็นต์
+                                return percentage; // แสดงเป็นเปอร์เซ็นต์
+                            },
+                            color: '#000', // เปลี่ยนสีของตัวเลขเป็นสีดำ
+                            font: {
+                                weight: 'bold', // ทำให้ตัวเลขเป็นตัวหนา
+                                size: 14 // ขนาดของตัวเลข
+                            }
                         }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // เรียกใช้ปลั๊กอิน datalabels
             });
+
+
 
             // กราฟช่องทางการลงทะเบียน
             var ctx2 = document.getElementById('providerPieChart').getContext('2d');
@@ -371,10 +417,24 @@
                         title: {
                             display: true,
                             text: 'ช่องทางการลงทะเบียนผู้ใช้งาน'
+                        },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = ctx.dataset.data.reduce((a, b) => a + b, 0); // หาผลรวมทั้งหมดของกราฟ
+                                let percentage = (value * 100 / sum).toFixed(2) + "%"; // คำนวณเปอร์เซ็นต์
+                                return percentage; // แสดงเป็นเปอร์เซ็นต์
+                            },
+                            color: '#000', // เปลี่ยนสีของตัวเลขเป็นสีดำ
+                            font: {
+                                weight: 'bold', // ทำให้ตัวเลขเป็นตัวหนา
+                                size: 14 // ขนาดของตัวเลข
+                            }
                         }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // เรียกใช้ปลั๊กอิน datalabels
             });
+
         });
     </script>
 @endpush
