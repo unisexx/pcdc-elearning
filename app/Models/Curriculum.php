@@ -69,4 +69,9 @@ class Curriculum extends Model
     {return $this->hasOne(CurriculumExamSetting::class);}
     public function curriculum_category()
     {return $this->hasOne('App\Models\CurriculumCategory', 'id', 'curriculum_category_id');}
+
+    public function user_types()
+    {
+        return $this->hasMany(UserType::class, 'curriculum_id', 'id');
+    }
 }

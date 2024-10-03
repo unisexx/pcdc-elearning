@@ -7,27 +7,27 @@
     // categories: ['สคร.1', 'สคร.2', 'สคร.3', 'สคร.4', 'สคร.5', 'สคร.6', 'สคร.7', 'สคร.8', 'สคร.9', 'สคร.10', 'สคร.11', 'สคร.12', 'กทม.']
     $office_chart_name_str = '';
     foreach ($curriculum_office_report as $key => $item) {
-        $office_chart_name_str .=
-            $office_chart_name_str != '' ? ", '" . $item['name'] . "'" : "'" . $item['name'] . "'";
+        $office_chart_name_str .= $office_chart_name_str != '' ? ", '" . $item['name'] . "'" : "'" . $item['name'] . "'";
     }
 @endphp
-<div class="card">
-    <div class="card-header bg-chart-header text-white">
-        <div class="graph_title">
-            รายงานสถิติ ผู้ผ่านแบบทดสอบ
-            @if ($curriculum)
-                หลักสูตร {{ $curriculum->name }}
-            @else
-                รวมทุกหลักสูตร
-            @endif
-            <br>จำแนกรายเขตและจังหวัด
-            @if (!empty($exam_year))
-                ปี {{ $exam_year }}
-            @endif
+<div class="col-lg-12 mb-3">
+    <div class="card">
+        <div class="card-header bg-chart-header text-white">
+            <div class="graph_title">
+                รายงานสถิติ ผู้ผ่านแบบทดสอบ
+                @if ($curriculum)
+                    หลักสูตร {{ $curriculum->name }}
+                @else
+                    รวมทุกหลักสูตร
+                @endif
+                <br>จำแนกรายเขตและจังหวัด
+                @if (!empty($exam_year))
+                    ปี {{ $exam_year }}
+                @endif
+            </div>
         </div>
-    </div>
-    <div class="card-body">
-        {{-- <div class="d-flex justify-content-end">
+        <div class="card-body">
+            {{-- <div class="d-flex justify-content-end">
             <div class="dropdown show menu_print">
                 <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
                     <span class=""><em class="fas fa-bars fs-5"></em></span>
@@ -46,37 +46,38 @@
                 </div>
             </div>
         </div> --}}
-        {{-- <div id="chart-monthly" class="chartsh"></div> --}}
-        <div id="chart-office-sum" class="chartsh"></div>
-    </div>
-    <div class="table-responsive px-4">
-        <table class="table table-bordered table-hover text-center table-style1">
-            <thead>
-                <tr>
-                    <th style="vertical-align: middle; " rowspan="2"></th>
-                    <th colspan="12">
-                        <div class="title-table">จำนวนผู้ผ่าน @if ($curriculum)
-                                หลักสูตร {{ $curriculum->name }}
-                            @else
-                                รวมทุกหลักสูตร
-                            @endif (คน)</div>
-                    </th>
-                </tr>
-                <tr>
-                    @foreach ($curriculum_office_report as $key => $item)
-                        <th>{{ $item['name'] }}</th>
-                    @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ผ่าน</td>
-                    @foreach ($curriculum_office_report as $key => $item)
-                        <td>{{ number_format($item['n_pass'], 0) }}</td>
-                    @endforeach
-                </tr>
-            </tbody>
-        </table>
+            {{-- <div id="chart-monthly" class="chartsh"></div> --}}
+            <div id="chart-office-sum" class="chartsh"></div>
+        </div>
+        <div class="table-responsive px-4">
+            <table class="table table-bordered table-hover text-center table-style1">
+                <thead>
+                    <tr>
+                        <th style="vertical-align: middle; " rowspan="2"></th>
+                        <th colspan="12">
+                            <div class="title-table">จำนวนผู้ผ่าน @if ($curriculum)
+                                    หลักสูตร {{ $curriculum->name }}
+                                @else
+                                    รวมทุกหลักสูตร
+                                @endif (คน)</div>
+                        </th>
+                    </tr>
+                    <tr>
+                        @foreach ($curriculum_office_report as $key => $item)
+                            <th>{{ $item['name'] }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ผ่าน</td>
+                        @foreach ($curriculum_office_report as $key => $item)
+                            <td>{{ number_format($item['n_pass'], 0) }}</td>
+                        @endforeach
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @push('js')
