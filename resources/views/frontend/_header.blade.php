@@ -116,7 +116,7 @@
                                     <a class="nav-link" href="{{ url('contact') }}">ติดต่อเรา</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager//source/%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99_new.pdf') }}" target="_blank">คู่มือการใช้งาน</a>
+                                    <a class="nav-link" href="{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager//source/%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99_new2.pdf') }}" target="_blank">คู่มือการใช้งาน</a>
                                 </li>
                             </ul>
                         </div>

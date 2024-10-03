@@ -66,9 +66,13 @@ class DashboardController extends Controller
     {
         $curriculum_id = $request->curriculum_id;
 
+        // วันที่เริ่มต้นคือ 1 ตุลาคม 2024
+        $startDate = Carbon::create(2024, 10, 1);
+
         // ผู้เข้าร่วมทำแบบทดสอบ
         $allPostExamQuery = UserCurriculumExamHistory::query()
-            ->whereNotNull('post_date_finished');
+            ->whereNotNull('post_date_finished')
+            ->where('created_at', '>=', $startDate);
 
         if ($curriculum_id !== null) {
             $allPostExamQuery->where('curriculum_id', $curriculum_id);
@@ -79,7 +83,8 @@ class DashboardController extends Controller
         // ผู้ทำแบบทดสอบผ่าน
         $allPostExamPassQuery = UserCurriculumExamHistory::query()
             ->whereNotNull('post_date_finished')
-            ->where('post_pass_status', 'y');
+            ->where('post_pass_status', 'y')
+            ->where('created_at', '>=', $startDate);
 
         if ($curriculum_id !== null) {
             $allPostExamPassQuery->where('curriculum_id', $curriculum_id);
@@ -111,14 +116,16 @@ class DashboardController extends Controller
             ->whereYear('post_date_finished', $currentYear)
             ->whereNotNull('post_date_finished')
             ->where('post_pass_status', 'n')
-            ->groupByRaw('MONTH(post_date_finished)');
+            ->groupByRaw('MONTH(post_date_finished)')
+            ->where('created_at', '>=', $startDate);
 
         // ดึงข้อมูลผู้ทำแบบทดสอบผ่านในปีปัจจุบัน
         $postExamPassQuery = UserCurriculumExamHistory::selectRaw('MONTH(post_date_finished) as month, COUNT(*) as count')
             ->whereYear('post_date_finished', $currentYear)
             ->whereNotNull('post_date_finished')
             ->where('post_pass_status', 'y')
-            ->groupByRaw('MONTH(post_date_finished)');
+            ->groupByRaw('MONTH(post_date_finished)')
+            ->where('created_at', '>=', $startDate);
 
         if ($curriculum_id !== null) {
             $postExamNotPassQuery->where('curriculum_id', $curriculum_id);
