@@ -181,8 +181,6 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-
-
     <script>
         $(document).ready(function() {
             var ctx = document.getElementById('stackedBarChart').getContext('2d');

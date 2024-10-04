@@ -41,15 +41,11 @@
                                         </div>
                                         <a href="{{ url('/front/password/forgot') }}" class="text-body">ลืมรหัสผ่าน?</a>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="form-check mb-0 mt-2">
-                                            <input class="form-check-input me-2" type="checkbox" value="1" id="terms" name="terms" required />
-                                            <label class="form-check-label" for="terms">ยอมรับใน <a href="{{ url('/privacy-policy') }}">ข้อกำหนดและนโยบาย</a></label>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="text-center text-lg-start mt-4 pt-2 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary btn-md shadow rounded-pill btn-login-form" style="padding-left: 2.5rem; padding-right: 2.5rem;">เข้าสู่ระบบ</button>
+                                    <button type="submit" class="btn btn-primary btn-lg shadow rounded-pill btn-login-form" style="padding-left: 4rem; padding-right: 4rem; font-size: 1.5rem;">
+                                        เข้าสู่ระบบ
+                                    </button>
                                 </div>
                                 <div>
                                     <p class="small fw-bold mt-2 pt-3 mb-0 text-center">ยังไม่เป็นสมาชิก? <a href="{{ url('/front/register') }}" class="link-danger">สมัครสมาชิก</a></p>
@@ -83,7 +79,6 @@
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
-            let terms = document.getElementById('terms').checked;
 
             if (!email) {
                 Swal.fire({
@@ -99,16 +94,6 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'กรุณากรอกรหัสผ่าน',
-                    showConfirmButton: true
-                });
-                event.preventDefault(); // ป้องกันการส่งฟอร์ม
-                return;
-            }
-
-            if (!terms) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'กรุณายอมรับข้อกำหนดและนโยบาย',
                     showConfirmButton: true
                 });
                 event.preventDefault(); // ป้องกันการส่งฟอร์ม

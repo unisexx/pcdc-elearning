@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="col-md-4 col-lg-4">
-                            <label for="" class="form-label fs-5 text-primary">หลักสูตร</label>
+                            <label for="" class="form-label">หลักสูตร</label>
                             {!! Form::select('curriculum_id', $curriculum_list, $curriculum_id, ['class' => 'form-select select2 form-control-lg', 'id' => 'curriculum_id', 'placeholder' => '--ทั้งหมด--']) !!}
                         </div>
 
@@ -46,12 +46,11 @@
                             </select>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="fs-5 fw-medium text-primary">เขตพื้นที่</div>
                         <div class="col-12 col-sm-auto">
                             <label for="" class="form-label">เขตพื้นที่</label>
                             {!! Form::select('area_id', $prevention_office_list, @$area_id, ['class' => 'form-select select2 form-control-lg', 'id' => 'area_id', 'placeholder' => '--ทั้งหมด--']) !!}
                         </div>
-                        <div class="col-auto">หรือ</div>
+                        {{-- <div class="col-auto">หรือ</div> --}}
                         <div class="col-12 col-sm-3">
                             <label for="" class="form-label">จังหวัด</label>
                             {!! Form::select('province_id', $provinces, $province_id, ['id' => 'province_id', 'class' => 'form-select select2 form-control-lg', 'placeholder' => '--ทั้งหมด--']) !!}
@@ -81,6 +80,7 @@
                     @include('frontend.stat.inc.report2')
                     @include('frontend.stat.inc.report3')
                     @include('frontend.stat.inc.report4')
+
                     {{-- <div class="row my-5">
                         <div class="col-lg-6 col-md-12">
                             @include('frontend.stat.inc.report2')
