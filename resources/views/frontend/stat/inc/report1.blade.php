@@ -77,10 +77,15 @@
                 <table class="table table-bordered table-hover text-center table-style1">
                     <thead>
                         <tr>
-                            <th style="vertical-align: middle; " rowspan="2">เดือน</th>
+                            <th style="vertical-align: middle; " rowspan="3">เดือน</th>
                             <th colspan="{{ $ncol = count($curriculum_month_pass_report) == 0 ? 1 : count($curriculum_month_pass_report) }}">
                                 <div class="title-table">จำนวนผู้ผ่านหลักสูตรต่างๆ (คน)</div>
                             </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">ครูผู้ดูแลเด็กในศูนย์เด็กเล็กและ<br>โรงเรียนอนุบาล</th>
+                            <th colspan="4">ครูผู้ดูแลเด็กระดับประถมศึกษาปีที่ 1-6<br>ครูผู้ดูแลเด็กระดับมัธยมศึกษาปีที่ 1-3</th>
+                            <th colspan="4">เจ้าหน้าที่สาธารณสุขและประชาชนทั่วไป</th>
                         </tr>
                         <tr>
                             @foreach ($curriculum_month_pass_report as $key => $item)

@@ -99,24 +99,7 @@ class StatController extends Controller
         if ($option_type == '') {
 
             foreach ($curriculum_list_rep as $item) {
-
-                $userTypeNames = []; // อาเรย์สำหรับเก็บชื่อ user_type
-
-                // ตรวจสอบว่ามี user_types เชื่อมต่ออยู่หรือไม่
-                if ($item->curriculum_user_type) {
-                    // วนลูปผ่าน curriculum_user_type ที่เชื่อมโยง
-                    foreach ($item->curriculum_user_type as $curriculumUserType) {
-                        if ($curriculumUserType->user_type) {
-                            // เก็บชื่อของ user_type ในอาเรย์
-                            $userTypeNames[] = $curriculumUserType->user_type->name;
-                        }
-                    }
-                }
-
-                // รวมชื่อ user_type เป็นสตริง โดยใช้เครื่องหมาย ',' คั่น
-                $userTypeNameString = implode(', ', $userTypeNames);
-
-                $curriculum_month_pass_report[$item->id]['name'] = $item->name . '(' . $userTypeNameString . ')';
+                $curriculum_month_pass_report[$item->id]['name'] = $item->name;
 
                 for ($m = 1; $m <= 12; $m++) {
                     // Query for pass
