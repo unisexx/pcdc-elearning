@@ -17,6 +17,15 @@
             <div class="col-12">
                 {{ Form::bsTextArea('msg', 'ข้อความ') }}
             </div>
+
+            <!-- New Textarea for email reply -->
+            <div class="col-12">
+                <div class="mb-3 p-3 bg-light border rounded shadow-sm">
+                    {{ Form::bsTiny('reply', 'ข้อความตอบกลับ') }}
+                </div>
+            </div>
+
+
         </div>
 
         <div class="col-auto mt-3 float-end">

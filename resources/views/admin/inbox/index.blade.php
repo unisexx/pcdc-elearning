@@ -16,7 +16,8 @@
                             <th scope="col">ชื่อ</th>
                             <th scope="col">อีเมล์</th>
                             <th scope="col">เบอร์โทร</th>
-                            <th scope="col">ข้อความ</th>
+                            <th scope="col">ตอบแล้ว</th>
+                            {{-- <th scope="col">ข้อความ</th> --}}
                             <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
@@ -27,7 +28,19 @@
                                 <td>{{ @$item->name }}</td>
                                 <td>{{ @$item->email }}</td>
                                 <td>{{ @$item->tel }}</td>
-                                <td>{{ @$item->msg }}</td>
+                                <td>
+                                    @if (empty($item->reply))
+                                        <span class="badge bg-warning">
+                                            <i class="bi bi-hourglass-split"></i> รอการตอบกลับ
+                                        </span>
+                                    @else
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-check-circle"></i> ตอบกลับแล้ว
+                                        </span>
+                                    @endif
+                                </td>
+
+                                {{-- <td>{{ @$item->msg }}</td> --}}
                                 <td>
                                     @component('components.table.button')
                                         @slot('itemID')

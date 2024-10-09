@@ -14,5 +14,6 @@ class Inbox extends Model
         'email',
         'tel',
         'msg',
+        'reply',
     ];
 }

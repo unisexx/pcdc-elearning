@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Inbox;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InboxController extends Controller
 {
@@ -65,9 +66,24 @@ class InboxController extends Controller
     {
         $input = $request->all();
         $rs    = Inbox::find($id);
+
+        // Replace local image path with full URL
+        if (!empty($input['reply'])) {
+            $input['reply'] = str_replace(
+                '../../../js/',
+                'https://e-pcdc.ddc.moph.go.th/js/',
+                $input['reply']
+            );
+        }
+
         $rs->update($input);
 
         set_notify('success', 'แก้ไขข้อมูลเรียบร้อย');
+
+        // Send email after updating using email from form
+        if (!empty($input['email']) && !empty($input['reply'])) {
+            $this->sendEmailReply($input['email'], $input['reply']);
+        }
 
         return redirect()->route('admin.inbox.index');
     }
@@ -82,4 +98,19 @@ class InboxController extends Controller
 
         return back();
     }
+
+    /**
+     * Send email to the provided reply email with HTML content.
+     */
+    protected function sendEmailReply($email, $replyMsg)
+    {
+        $subject = 'e-Learning หลักสูตรการป้องกันควบคุมโรคติดต่อและภัยสุขภาพในเด็ก : ตอบกลับความเห็นของคุณ';
+
+        // Use Mail::html to send HTML content email
+        Mail::html($replyMsg, function ($msg) use ($email, $subject) {
+            $msg->to($email)
+                ->subject($subject);
+        });
+    }
+
 }
