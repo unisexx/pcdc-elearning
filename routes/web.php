@@ -36,6 +36,7 @@ Route::post('/contact/save', [App\Http\Controllers\Frontend\ContactController::c
 Route::get('/hilight/view/{id}', [App\Http\Controllers\Frontend\HilightController::class, 'view']);
 Route::get('/website-policy', [App\Http\Controllers\Frontend\WebsitePolicyController::class, 'index']);
 Route::get('/privacy-policy', [App\Http\Controllers\Frontend\PrivacyPolicyController::class, 'index']);
+Route::get('/cookie-policy', [App\Http\Controllers\Frontend\CookiePolicyController::class, 'index']);
 Route::get('/elearning-steps', [App\Http\Controllers\Frontend\ElearningStepsController::class, 'index']);
 Route::get('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'form'])->name('survey.form');
 Route::post('/survey', [App\Http\Controllers\Frontend\SurveyController::class, 'submit'])->name('survey.submit');
@@ -84,6 +85,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::resource('/contact', App\Http\Controllers\Admin\ContactController::class)->names('admin.contact');
     Route::resource('/website-policy', App\Http\Controllers\Admin\WebsitePolicyController::class)->names('admin.website-policy');
     Route::resource('/privacy-policy', App\Http\Controllers\Admin\PrivacyPolicyController::class)->names('admin.privacy-policy');
+    Route::resource('/cookie-policy', App\Http\Controllers\Admin\CookiePolicyController::class)->names('admin.cookie-policy');
     Route::resource('/faq', App\Http\Controllers\Admin\FaqController::class)->names('admin.faq');
     Route::resource('/inbox', App\Http\Controllers\Admin\InboxController::class)->names('admin.inbox');
     Route::resource('/survey', App\Http\Controllers\Admin\SurveyController::class)->names('admin.survey');

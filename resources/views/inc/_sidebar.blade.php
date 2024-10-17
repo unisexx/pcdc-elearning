@@ -8,6 +8,7 @@
         ['name' => 'ข้อมูลติดต่อ', 'route' => ['admin.contact.edit', ['contact' => 1]], 'icon' => 'fa-map-location-dot'],
         ['name' => 'นโยบายเว็บไซต์', 'route' => ['admin.website-policy.edit', ['website_policy' => 1]], 'icon' => 'fa-globe'],
         ['name' => 'นโยบายข้อมูลส่วนบุคคล', 'route' => ['admin.privacy-policy.edit', ['privacy_policy' => 1]], 'icon' => 'fa-shield-halved'],
+        ['name' => 'นโยบายคุกกี้', 'route' => ['admin.cookie-policy.edit', ['cookie_policy' => 1]], 'icon' => 'fa-cookie'],
         ['name' => 'แบบสำรวจความพึงพอใจ', 'route' => 'admin.survey.index', 'icon' => 'fa-poll'],
         ['name' => 'ผู้ใช้งาน', 'route' => 'admin.user.index', 'icon' => 'fa-user'],
         ['name' => 'กล่องข้อความ', 'route' => 'admin.inbox.index', 'icon' => 'fa-inbox'],
