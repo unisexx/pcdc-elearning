@@ -232,6 +232,7 @@
     });
 </script> --}}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script src="{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
@@ -256,6 +257,7 @@
         image_advtab: true,
         external_filemanager_path: "{{ asset('js/tinymce_5.10.9/tinymce/js/tinymce/plugins/responsive_filemanager/responsive_filemanager/filemanager') }}/",
         filemanager_title: "Responsive Filemanager",
+        filemanager_access_key: CryptoJS.SHA256('5tNpSKcv4WASHSyHhZY19jEQ8u0zrHjkZbmN0KFTdC9sdIahhl').toString(CryptoJS.enc.Hex), // เพิ่ม Access Key ที่กำหนดใน config.php
         // content_css: "{{ asset('front-html/css/bootstrap.min.css') }}, {{ asset('front-html/css/styles.css') }}",
         // relative_urls : false,
         // remove_script_host : false,
