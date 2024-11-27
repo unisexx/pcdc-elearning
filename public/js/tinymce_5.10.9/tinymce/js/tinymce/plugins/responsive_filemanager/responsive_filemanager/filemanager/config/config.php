@@ -374,23 +374,23 @@ $config = [
     'copy_cut_max_count'               => 200,
     //IF any of these limits reached, operation won't start and generate warning
 
-                                                                                                                                                                                                                                                                                                                                                                                        //**********************
-                                                                                                                                                                                                                                                                                                                                                                                        //Allowed extensions (lowercase insert)
-                                                                                                                                                                                                                                                                                                                                                                                        //**********************
-    'ext_img'                          => ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'ico'],                                                                                                                                                                                                                                                                                           //Images
-    'ext_file'                    => ['doc', 'docx', 'rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv', 'html', 'xhtml', 'psd', 'sql', 'log', 'fla', 'xml', 'ade', 'adp', 'mdb', 'accdb', 'ppt', 'pptx', 'odt', 'ots', 'ott', 'odb', 'odg', 'otp', 'otg', 'odf', 'ods', 'odp', 'css', 'ai', 'kmz', 'dwg', 'dxf', 'hpgl', 'plt', 'spl', 'step', 'stp', 'iges', 'igs', 'sat', 'cgm', 'tiff', ''], //Files
-    'ext_video'                            => ['mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg', 'wma', "flv", "webm"],                                                                                                                                                                                                                                                                        //Video
-    'ext_music'                      => ['mp3', 'mpga', 'm4a', 'ac3', 'aiff', 'mid', 'ogg', 'wav'],                                                                                                                                                                                                                                                                                     //Audio
-    'ext_misc'                   => ['zip', 'rar', 'gz', 'tar', 'iso', 'dmg'],                                                                                                                                                                                                                                                                                                          //Archives
+    //**********************
+    //Allowed extensions (lowercase insert)
+    //**********************
+    'ext_img'                          => ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'ico'],
+    'ext_file'                         => ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'csv'],
+    'ext_video'                        => ['mp4', 'mov', 'avi', 'mkv'],
+    'ext_music'                        => ['mp3', 'wav', 'ogg'],
+    'ext_misc'                         => ['zip', 'rar', '7z'], //Archives
 
-                                            //*********************
-                                            //  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
-                                            //  otherwise check Allowed extensions configuration
-                                            //*********************
-    'ext_blacklist'               => false, //['exe','bat','jpg'],
+    //*********************
+    //  If you insert an extensions blacklist array the filemanager don't check any extensions but simply block the extensions in the list
+    //  otherwise check Allowed extensions configuration
+    //*********************
+    'ext_blacklist'               => ['html', 'js', 'php', 'exe', 'bat', 'sh', 'cmd', 'txt'],
 
     //Empty filename permits like .htaccess, .env, ...
-    'empty_filename'              => false,
+    'empty_filename'                   => false,
 
     /*
     |--------------------------------------------------------------------------
