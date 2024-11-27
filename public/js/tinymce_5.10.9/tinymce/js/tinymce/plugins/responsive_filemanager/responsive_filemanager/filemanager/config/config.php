@@ -187,7 +187,7 @@ $config = [
     | Keys are CASE SENSITIVE!
     |
      */
-    'access_keys'                      => [hash('sha256', '5tNpSKcv4WASHSyHhZY19jEQ8u0zrHjkZbmN0KFTdC9sdIahhlบบบ')],
+    'access_keys'                      => [hash('sha256', '5tNpSKcv4WASHSyHhZY19jEQ8u0zrHjkZbmN0KFTdC9sdIahhl')],
 
     //--------------------------------------------------------------------------------------------------------
     // YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
