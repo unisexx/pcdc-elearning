@@ -13,9 +13,9 @@
         $index++;
         $row_value = "'data" . $index . "'";
         for ($m = 1; $m <= $max_month; $m++) {
-            $row_value .= ', ' . number_format($item['n_pass_m_' . $m], 0);
-        }
-        $chart_curriculum_name_value_str .= '[' . $row_value . '],';
+            $row_value .= ', ' . $item['n_pass_m_' . $m];
+        }        
+        $chart_curriculum_name_value_str .= $chart_curriculum_name_value_str != '' ? ',[' . $row_value . ']' : '[' . $row_value . ']';
     }
     // echo $chart_curriculum_name_value_str.'<hr>';
 
@@ -50,8 +50,8 @@
                 @endif
             </div>
         </div>
-        <div class="card-body">
-            <div class="d-flex justify-content-end">
+        <div class="card-body">            
+            <div class="d-flex justify-content-end">                
                 {{-- <div class="dropdown show menu_print">
                         <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
                             <span class=""><em class="fas fa-bars fs-5"></em></span>
