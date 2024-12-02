@@ -26,7 +26,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
-                                    @if ($item->is_admin = '1')
+                                    @if ($item->is_admin == '1')
                                         <i class="fas fa-user-shield text-warning"></i>
                                     @else
                                         <i class="fas fa-user"></i>
