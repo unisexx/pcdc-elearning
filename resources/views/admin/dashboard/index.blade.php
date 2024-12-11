@@ -167,7 +167,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-2">แบบประเมินความพึงพอใจ</h6>
-                        <a href="{{ route('export.survey') }}" class="text-success">
+                        <a href="{{ route('export.survey') }}" class="text-success" title="ส่งออก Excel">
                             <i class="fas fa-file-excel"></i>
                         </a>
                     </div>
