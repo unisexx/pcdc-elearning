@@ -117,3 +117,8 @@ Route::get('/get-curriculum-list', [App\Http\Controllers\AjaxController::class, 
 /** Social Login */
 Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class, 'redirect']);
 Route::get('/login/{provider}/callback', [App\Http\Controllers\SocialiteController::class, 'callback']);
+
+/** Export Excel */
+Route::get('/export-survey', function () {
+    return Maatwebsite\Excel\Facades\Excel::download(new App\Exports\SurveyExport, 'แบบประเมินความพึงพอใจ.xlsx');
+})->name('export.survey');
