@@ -175,7 +175,7 @@
                                 <i class="fas fa-file-excel"></i> รายงานสรุป
                             </a> --}}
                             <a href="{{ route('export.survey-report') }}" class="text-success" title="ส่งออก Excel">
-                                <i class="fas fa-file-excel"></i> รายงานลิสต์รายการ
+                                <i class="fas fa-file-excel"></i> ส่งออก Excel
                             </a>
                         </div>
                     </div>
