@@ -132,9 +132,21 @@
     </div>
     <div class="row mt-4">
         <!-- ประเภทผู้ใช้งานทั้งหมด และ ช่องทางการลงทะเบียน อยู่ในคอลัมน์ซ้าย -->
-        <div class="col-lg-6 mb-4">
+        <div class="col-lg-7 mb-4">
             <div class="row">
                 <div class="col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-2">จำนวนผู้ลงทะเบียนรายเดือน</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="registeredUsersBarChart" class="chart-canvas" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
                             <div class="d-flex justify-content-between">
@@ -146,7 +158,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
                             <div class="d-flex justify-content-between">
@@ -157,13 +169,13 @@
                             <canvas id="providerPieChart" class="chart-canvas" height="300"></canvas>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
         <!-- คะแนนเฉลี่ยแบบประเมินความพึงพอใจ อยู่ในคอลัมน์ขวา -->
-        <div class="col-lg-6">
-            <div class="card mb-4 h-100">
+        <div class="col-lg-5">
+            <div class="card mb-4">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- หัวข้ออยู่ทางซ้าย -->
@@ -444,6 +456,61 @@
                 plugins: [ChartDataLabels] // เรียกใช้ปลั๊กอิน datalabels
             });
 
+        });
+    </script>
+@endpush
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('registeredUsersBarChart').getContext('2d');
+            var registeredUsersBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+                    datasets: [{
+                        label: 'จำนวนผู้ลงทะเบียน',
+                        data: @json($registeredUsersData), // ข้อมูลที่ส่งมาจาก Controller
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'จำนวนผู้ลงทะเบียนรายเดือน'
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            formatter: (value) => value.toLocaleString(), // แสดงตัวเลขในรูปแบบที่อ่านง่าย
+                            color: 'black',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: false,
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
         });
     </script>
 @endpush

@@ -59,7 +59,21 @@ class DashboardController extends Controller
         }
         /************** Pie Chart ช่องทางการสมัคร **************/
 
-        return view('admin.dashboard.index', compact('userCount', 'userCountToday', 'curriculums', 'userTypeLabels', 'userTypeData', 'providerLabels', 'providerData'));
+        /************** StackedBar Chart ข้อมูลจำนวนผู้ลงทะเบียนรายเดือน **************/
+        $currentYear          = Carbon::now()->year; // ปีปัจจุบัน
+        $registeredUsersQuery = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->whereYear('created_at', $currentYear) // เฉพาะปีปัจจุบัน
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+
+        $registeredUsersData = array_fill(0, 12, 0); // ค่าเริ่มต้นเป็น 0 สำหรับทุกเดือน
+
+        foreach ($registeredUsersQuery as $data) {
+            $registeredUsersData[$data->month - 1] = $data->count; // เดือน - 1 เพราะ array เริ่มที่ 0
+        }
+        /***************************************************************/
+
+        return view('admin.dashboard.index', compact('userCount', 'userCountToday', 'curriculums', 'userTypeLabels', 'userTypeData', 'providerLabels', 'providerData', 'registeredUsersData'));
     }
 
     public function ajaxDashboard(Request $request)
