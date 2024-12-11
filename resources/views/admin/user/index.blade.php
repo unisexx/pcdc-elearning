@@ -8,6 +8,18 @@
             ผู้ใช้งาน
         @endslot
         @slot('table')
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Form ด้านซ้าย -->
+                <form method="GET" action="" class="d-flex align-items-center flex-grow-1 me-3">
+                    <input type="text" name="search" class="form-control me-2 flex-grow-1" placeholder="ค้นหาชื่อ, อีเมล์" value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary btn-sm mt-3">ค้นหา</button>
+                </form>
+
+                <!-- ปุ่ม Export ด้านขวา -->
+                <a href="{{ route('export.user') }}" class="btn btn-success btn-sm mt-3" title="ส่งออก Excel">
+                    ส่งออก Excel
+                </a>
+            </div>
             <div class="table-responsive">
                 <table id="datatable" class="table align-items-center">
                     <thead>

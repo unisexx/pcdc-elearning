@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\UserRequest;
+use App\Models\Curriculum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -12,9 +13,24 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('is_admin', 'desc')->paginate(10);
+        // รับค่าการค้นหา
+        $search = $request->input('search');
+
+        // Query ข้อมูลผู้ใช้งาน
+        $users = User::query();
+
+        // ตรวจสอบว่ามีการค้นหาหรือไม่
+        if (!empty($search)) {
+            $users->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        }
+
+        // เรียงลำดับและแบ่งหน้า
+        $users = $users->orderBy('is_admin', 'desc')->paginate(10);
 
         return view('admin.user.index', compact('users'));
     }

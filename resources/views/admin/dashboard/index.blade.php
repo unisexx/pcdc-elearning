@@ -165,11 +165,19 @@
         <div class="col-lg-6">
             <div class="card mb-4 h-100">
                 <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">แบบประเมินความพึงพอใจ</h6>
-                        <a href="{{ route('export.survey') }}" class="text-success" title="ส่งออก Excel">
-                            <i class="fas fa-file-excel"></i>
-                        </a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- หัวข้ออยู่ทางซ้าย -->
+                        <h6 class="mb-0">แบบประเมินความพึงพอใจ</h6>
+
+                        <!-- ลิงก์อยู่ทางขวา -->
+                        <div>
+                            {{-- <a href="{{ route('export.survey') }}" class="text-success me-3" title="ส่งออก Excel">
+                                <i class="fas fa-file-excel"></i> รายงานสรุป
+                            </a> --}}
+                            <a href="{{ route('export.survey-report') }}" class="text-success" title="ส่งออก Excel">
+                                <i class="fas fa-file-excel"></i> รายงานลิสต์รายการ
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

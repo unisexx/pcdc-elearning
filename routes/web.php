@@ -119,6 +119,17 @@ Route::get('/login/{provider}', [App\Http\Controllers\SocialiteController::class
 Route::get('/login/{provider}/callback', [App\Http\Controllers\SocialiteController::class, 'callback']);
 
 /** Export Excel */
+// แบบปะเมินความพึงพอใจ
 Route::get('/export-survey', function () {
     return Maatwebsite\Excel\Facades\Excel::download(new App\Exports\SurveyExport, 'แบบประเมินความพึงพอใจ.xlsx');
 })->name('export.survey');
+
+// แบบปะเมินความพึงพอใจ (แบบ list คำตอบ)
+Route::get('/export-survey-report', function () {
+    return Maatwebsite\Excel\Facades\Excel::download(new App\Exports\SurveyReportExport, 'รายงานแบบประเมินความพึงพอใจ.xlsx');
+})->name('export.survey-report');
+
+// ผู้ใช้งาน
+Route::get('/export-user', function () {
+    return Maatwebsite\Excel\Facades\Excel::download(new App\Exports\UserExport, 'ผู้ใช้งาน.xlsx');
+})->name('export.user');

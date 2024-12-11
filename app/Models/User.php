@@ -60,4 +60,24 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserType::class, 'id', 'user_type_id');
     }
+
+    public function province()
+    {
+        return $this->hasOne(Province::class, 'id', 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->hasOne(District::class, 'id', 'district_id');
+    }
+
+    public function subdistrict()
+    {
+        return $this->hasOne(Subdistrict::class, 'id', 'subdistrict_id');
+    }
+
+    public function UserCurriculumExamHistory()
+    {
+        return $this->hasMany(UserCurriculumExamHistory::class);
+    }
 }
