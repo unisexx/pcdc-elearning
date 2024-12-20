@@ -53,7 +53,7 @@ class StatController extends Controller
         $data['subdistricts'] = !empty($district_id) ? Subdistrict::whereRaw('left(id,4) = ' . $district_id)->orderBy('name', 'asc')->pluck('name', 'id') : [];
 
         $data['curriculum_list_rep'] = !empty($curriculum_id) ? Curriculum::where('status', 'active')->where('id', $curriculum_id)->with('curriculum_user_type.user_type')->get() : Curriculum::where('status', 'active')->with('curriculum_user_type.user_type')->get();
-
+        
         $data['curriculum_condition']  = !empty($curriculum_id) ? " AND uceh.curriculum_id =" . $curriculum_id : "";
         $data['user_type_condition']   = !empty($user_type_id) ? " AND u.user_type_id =" . $user_type_id : "";
         $data['year_condition']        = !empty($exam_year) ? " and year(post_date_finished) =" . ($exam_year - 543) : '';
@@ -64,6 +64,7 @@ class StatController extends Controller
 
         //report1
         $data['curriculum_month_pass_report'] = $this->curriculumMonthReport($data);
+        $data['curriculum_month_pass_report_by_type'] = $this->curriculumMonthReportByType($data);
 
         //report2
         $data['curriculum_stack_exam_report'] = $this->curriculumMonthReport($data, 'sum_curriculum');
@@ -99,8 +100,7 @@ class StatController extends Controller
         if ($option_type == '') {
 
             foreach ($curriculum_list_rep as $item) {
-                $curriculum_month_pass_report[$item->id]['name'] = $item->name;
-
+                $curriculum_month_pass_report[$item->id]['name'] = $item->name;                
                 for ($m = 1; $m <= 12; $m++) {
                     // Query for pass
                     $rep_sql                                                   = "SELECT count(*) n_pass_m_" . $m . $default_from . " WHERE 1=1 AND curriculum_id = " . $item->id . " AND post_pass_status = 'y'";
@@ -128,6 +128,50 @@ class StatController extends Controller
         }
 
         return $curriculum_month_pass_report;
+    }
+
+    function curriculumMonthReportByType($data, $option_type = '')
+    {
+        extract($data);
+        $curriculum_month_pass_report_by_type = [];
+        $default_condition            = $year_condition . $user_type_condition . $area_condition . $province_condition . $district_condition . $subdistrict_condition;
+        $default_from                 = " FROM user_curriculum_exam_histories uceh JOIN users u ON uceh.user_id = u.id left join provinces p on u.province_id = p.id ";
+
+        // Define the start date condition
+        $startDate      = Carbon::create(2024, 10, 1)->toDateString();
+        $date_condition = " AND uceh.created_at >= '$startDate'";
+
+        if ($option_type == '') {
+
+            foreach ($curriculum_list_rep as $item) {           
+                $curriculum_month_pass_report_by_type[$item->curriculum_user_type[0]->user_type_id][$item->id]['name'] = $item->name;                
+                for ($m = 1; $m <= 12; $m++) {
+                    // Query for pass
+                    $rep_sql                                                   = "SELECT count(*) n_pass_m_" . $m . $default_from . " WHERE 1=1 AND curriculum_id = " . $item->id . " AND post_pass_status = 'y'";
+                    $month_condition                                           = " and month(post_date_finished) =" . $m;
+                    $curriculum_month_pass_report_by_type[$item->curriculum_user_type[0]->user_type_id][$item->id]['n_pass_m_' . $m] = \DB::select($rep_sql . $default_condition . $month_condition . $date_condition)[0]->{'n_pass_m_' . $m};
+
+                    // Query for no pass
+                    $rep_sql                                                      = "SELECT count(*) n_no_pass_m_" . $m . $default_from . " WHERE 1=1 AND curriculum_id = " . $item->id . " AND post_pass_status = 'n'";
+                    $curriculum_month_pass_report_by_type[$item->curriculum_user_type[0]->user_type_id][$item->id]['n_no_pass_m_' . $m] = \DB::select($rep_sql . $default_condition . $month_condition . $date_condition)[0]->{'n_no_pass_m_' . $m};
+                }
+            }
+
+        } elseif ($option_type == 'sum_curriculum') {
+            $curriculum_condition = !empty($curriculum_id) ? ' and curriculum_id =' . $curriculum_id : '';
+            for ($m = 1; $m <= 12; $m++) {
+                // Sum pass query
+                $rep_sql                                        = "SELECT count(*) n_pass_m_" . $m . $default_from . " WHERE 1=1 AND post_pass_status = 'y'";
+                $month_condition                                = " and month(post_date_finished) =" . $m;
+                $curriculum_month_pass_report_by_type[$item->curriculum_user_type[0]->user_type_id]['n_pass_m_' . $m] = \DB::select($rep_sql . $default_condition . $month_condition . $curriculum_condition . $date_condition)[0]->{'n_pass_m_' . $m};
+
+                // Sum no pass query
+                $rep_sql                                           = "SELECT count(*) n_no_pass_m_" . $m . $default_from . " WHERE 1=1 AND post_pass_status = 'n'";
+                $curriculum_month_pass_report_by_type[$item->curriculum_user_type[0]->user_type_id]['n_no_pass_m_' . $m] = \DB::select($rep_sql . $year_condition . $month_condition . $user_type_condition . $date_condition)[0]->{'n_no_pass_m_' . $m};
+            }
+        }
+
+        return $curriculum_month_pass_report_by_type;
     }
 
     function curriculumOfficeReport($data)

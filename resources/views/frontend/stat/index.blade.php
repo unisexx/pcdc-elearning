@@ -76,7 +76,14 @@
                         </div>
                     </div>
 
-                    @include('frontend.stat.inc.report1')
+                    @php
+                        $arr_user_type = array_keys($curriculum_month_pass_report_by_type);                        
+                        $list_user_type = @$user_type_id ?  \App\Models\UserType::whereIn('id',$arr_user_type)->where('id',$user_type_id)->get() : \App\Models\UserType::whereIn('id',$arr_user_type)->get();                        
+                    @endphp
+                    @foreach($list_user_type as $ut_item)                        
+                        @include('frontend.stat.inc.report1-by-user-type') 
+                    @endforeach
+                    {{-- @include('frontend.stat.inc.report1')  --}}
                     @include('frontend.stat.inc.report2')
                     @include('frontend.stat.inc.report3')
                     @include('frontend.stat.inc.report4')

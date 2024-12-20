@@ -1,4 +1,6 @@
-@php
+@php        
+    $user_type_id = $ut_item->id;
+    $user_type_name = $ut_item->name;
 
     $chart_curriculum_name_value_str = '';
     $chart_curriculum_name_str_month = '';
@@ -9,7 +11,7 @@
     // For column chart value
     // ['data1', 11, 8, 15, 18, 19, 17],
     $index = 0;
-    foreach ($curriculum_month_pass_report as $key => $item) {
+    foreach ($curriculum_month_pass_report_by_type[$user_type_id] as $key => $item) {
         $index++;
         $row_value = "'data" . $index . "'";
         for ($m = 1; $m <= $max_month; $m++) {
@@ -22,7 +24,7 @@
     // 'data1': 'หลักสูตรที่ 1 โรคติดต่อในเด็กและโควิด 19',
     $chart_curriculum_name_array = [];
     $index = 0;
-    foreach ($curriculum_month_pass_report as $key => $item) {
+    foreach ($curriculum_month_pass_report_by_type[$user_type_id] as $key => $item) {
         $index++;
         // เก็บค่าลงในอาเรย์แทนการต่อสตริง
         $chart_curriculum_name_array['data' . $index] = $item['name'];
@@ -39,14 +41,12 @@
         $chart_curriculum_name_str_month .= $m > 1 ? ',' : '';
         $chart_curriculum_name_str_month .= "'" . $month_list[$m] . "'";
     }
-
-    if(@$_GET['debug'])dd($curriculum_month_pass_report);
 @endphp
 
 <div class="col-lg-12 mb-3">
     <div class="card">
         <div class="card-header bg-chart-header text-white">
-            <div class="graph_title">รายงานสถิติ จำนวนผู้ผ่านหลักสูตรต่างๆ
+            <div class="graph_title">รายงานสถิติ จำนวนผู้ผ่านหลักสูตรต่าง ๆ <br> ประเภท "{{ $user_type_name }}"
                 @if (!empty($exam_year))
                     ปี {{ $exam_year }}
                 @endif
@@ -73,7 +73,7 @@
                     </div>
                 </div> --}}
                 {{-- <div id="chart-bar2" class="chartsh"></div> --}}
-                <div id="chart-table-1" class="chartsh"></div>
+                <div id="chart-table-user-type-{{$user_type_id}}" class="chartsh"></div>
             </div>
             <div class="table-responsive px-4">
                 <table class="table table-bordered table-hover text-center table-style1">
@@ -85,12 +85,10 @@
                             </th>
                         </tr>
                         <tr>
-                            <th colspan="3">ครูผู้ดูแลเด็กในศูนย์เด็กเล็กและ<br>โรงเรียนอนุบาล</th>
-                            <th colspan="4">ครูผู้ดูแลเด็กระดับประถมศึกษาปีที่ 1-6<br>ครูผู้ดูแลเด็กระดับมัธยมศึกษาปีที่ 1-3</th>
-                            <th colspan="4">เจ้าหน้าที่สาธารณสุขและประชาชนทั่วไป</th>
+                            <th colspan="{{ count($curriculum_month_pass_report_by_type[$user_type_id]) }}">{{ $user_type_name }}</th>                            
                         </tr>
                         <tr>
-                            @foreach ($curriculum_month_pass_report as $key => $item)
+                            @foreach ($curriculum_month_pass_report_by_type[$user_type_id] as $key => $item)
                                 <th>{!! $item['name'] !!}</th>
                             @endforeach
                         </tr>
@@ -99,7 +97,7 @@
                         @for ($m = 1; $m <= $max_month; $m++)
                             <tr>
                                 <td>{{ get_month()[$m] }}</td>
-                                @foreach ($curriculum_month_pass_report as $key => $item)
+                                @foreach ($curriculum_month_pass_report_by_type[$user_type_id] as $key => $item)
                                     <th>{{ number_format($item['n_pass_m_' . $m], 0) }}</th>
                                 @endforeach
                             </tr>
@@ -115,7 +113,7 @@
     <script>
         $(document).ready(function() {
             var chart = c3.generate({
-                bindto: '#chart-table-1', // id of chart wrapper
+                bindto: '#chart-table-user-type-{{$user_type_id}}', // id of chart wrapper
                 data: {
                     columns: [{!! $chart_curriculum_name_value_str !!}],
                     type: 'bar', // default type of chart
