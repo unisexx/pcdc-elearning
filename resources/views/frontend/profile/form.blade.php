@@ -85,6 +85,17 @@
                 $('#loginSection, #registerSubmitBtn').hide();
             }
         }
+
+        // ห้ามเปลี่ยนประเภทผู้ใช้งาน
+        $(document).ready(function() {
+            // เพิ่มข้อความ <small> เข้าไปใน label
+            $('label[for="user_type_id"]').html('ประเภทผู้ใช้งาน <small class="text-muted fw-light ms-1">(ไม่สามารถเปลี่ยนได้)</small>');
+
+            // ปิดการโต้ตอบกับ select2
+            $('#user_type_id').on('select2:opening', function(e) {
+                e.preventDefault(); // ป้องกันการเปิด dropdown
+            });
+        });
     </script>
 @endpush
 
