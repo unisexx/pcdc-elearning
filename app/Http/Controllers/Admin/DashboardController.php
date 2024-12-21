@@ -38,8 +38,11 @@ class DashboardController extends Controller
         $userTypeData   = [];
 
         foreach ($userTypes as $userType) {
-            $userTypeLabels[] = $userType->userType->name ?? 'ไม่ระบุ';
-            $userTypeData[]   = $userType->count;
+            // ตรวจสอบว่ามีชื่อ UserType หรือไม่ ถ้าไม่มีจะไม่เพิ่มในกราฟ
+            if (!empty($userType->userType->name)) {
+                $userTypeLabels[] = $userType->userType->name;
+                $userTypeData[]   = $userType->count;
+            }
         }
         /************** Pie Chart ประเภทผู้ใช้งาน **************/
 
