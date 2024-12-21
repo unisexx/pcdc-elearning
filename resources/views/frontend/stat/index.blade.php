@@ -77,11 +77,11 @@
                     </div>
 
                     @php
-                        $arr_user_type = array_keys($curriculum_month_pass_report_by_type);                        
-                        $list_user_type = @$user_type_id ?  \App\Models\UserType::whereIn('id',$arr_user_type)->where('id',$user_type_id)->get() : \App\Models\UserType::whereIn('id',$arr_user_type)->get();                        
+                        $arr_user_type = array_keys($curriculum_month_pass_report_by_type);
+                        $list_user_type = @$user_type_id ? \App\Models\UserType::whereIn('id', $arr_user_type)->where('id', $user_type_id)->get() : \App\Models\UserType::whereIn('id', $arr_user_type)->get();
                     @endphp
-                    @foreach($list_user_type as $ut_item)                        
-                        @include('frontend.stat.inc.report1-by-user-type') 
+                    @foreach ($list_user_type as $ut_item)
+                        @include('frontend.stat.inc.report1-by-user-type')
                     @endforeach
                     {{-- @include('frontend.stat.inc.report1')  --}}
                     @include('frontend.stat.inc.report2')
@@ -108,6 +108,17 @@
 @push('css')
     <!-- Styles chart -->
     <link href="{{ asset('html/css/chart.css') }}" rel="stylesheet">
+    <style>
+        /* ปรับสีและความหนาของเส้น Grid */
+        .c3-grid line {
+            stroke: #cccccc;
+            /* สีของเส้น Grid */
+            stroke-width: 1px;
+            /* ความหนาของเส้น Grid */
+            stroke-dasharray: 3 3;
+            /* รูปแบบเส้นประ */
+        }
+    </style>
 @endpush
 
 @push('js')

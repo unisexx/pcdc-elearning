@@ -1,4 +1,4 @@
-@php        
+@php
     $user_type_id = $ut_item->id;
     $user_type_name = $ut_item->name;
 
@@ -16,7 +16,7 @@
         $row_value = "'data" . $index . "'";
         for ($m = 1; $m <= $max_month; $m++) {
             $row_value .= ', ' . $item['n_pass_m_' . $m];
-        }        
+        }
         $chart_curriculum_name_value_str .= $chart_curriculum_name_value_str != '' ? ',[' . $row_value . ']' : '[' . $row_value . ']';
     }
     // echo $chart_curriculum_name_value_str.'<hr>';
@@ -52,8 +52,8 @@
                 @endif
             </div>
         </div>
-        <div class="card-body">            
-            <div class="d-flex justify-content-end">                
+        <div class="card-body">
+            <div class="d-flex justify-content-end">
                 {{-- <div class="dropdown show menu_print">
                         <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
                             <span class=""><em class="fas fa-bars fs-5"></em></span>
@@ -73,7 +73,7 @@
                     </div>
                 </div> --}}
                 {{-- <div id="chart-bar2" class="chartsh"></div> --}}
-                <div id="chart-table-user-type-{{$user_type_id}}" class="chartsh"></div>
+                <div id="chart-table-user-type-{{ $user_type_id }}" class="chartsh"></div>
             </div>
             <div class="table-responsive px-4">
                 <table class="table table-bordered table-hover text-center table-style1">
@@ -85,7 +85,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th colspan="{{ count($curriculum_month_pass_report_by_type[$user_type_id]) }}">{{ $user_type_name }}</th>                            
+                            <th colspan="{{ count($curriculum_month_pass_report_by_type[$user_type_id]) }}">{{ $user_type_name }}</th>
                         </tr>
                         <tr>
                             @foreach ($curriculum_month_pass_report_by_type[$user_type_id] as $key => $item)
@@ -113,7 +113,7 @@
     <script>
         $(document).ready(function() {
             var chart = c3.generate({
-                bindto: '#chart-table-user-type-{{$user_type_id}}', // id of chart wrapper
+                bindto: '#chart-table-user-type-{{ $user_type_id }}', // id of chart wrapper
                 data: {
                     columns: [{!! $chart_curriculum_name_value_str !!}],
                     type: 'bar', // default type of chart
@@ -145,6 +145,14 @@
                 },
                 legend: {
                     show: true, //hide legend
+                },
+                grid: {
+                    x: {
+                        show: true // เปิดการแสดงเส้น grid บนแกน x
+                    },
+                    y: {
+                        show: true // เปิดการแสดงเส้น grid บนแกน y
+                    }
                 },
                 padding: {
                     bottom: 0,

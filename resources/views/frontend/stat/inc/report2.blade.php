@@ -176,6 +176,14 @@
                 legend: {
                     show: true, //hide legend
                 },
+                grid: {
+                    x: {
+                        show: true // เปิดการแสดงเส้น grid บนแกน x
+                    },
+                    y: {
+                        show: true // เปิดการแสดงเส้น grid บนแกน y
+                    }
+                },
                 padding: {
                     bottom: 0,
                     top: 0

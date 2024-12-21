@@ -69,7 +69,7 @@
                     @forelse($province_exam as $key=>$item)
                         @php
                             $province_list_str .= $province_list_str ? ",'" . $item->name . "'" : "'" . $item->name . "'";
-                            $province_pass_str .= $province_pass_str ? ',' . number_format($item->all_exam, 0) : number_format($item->all_exam, 0);
+                            $province_pass_str .= $province_pass_str ? ',' . $item->all_exam : $item->all_exam; // ใช้ค่าดิบโดยไม่ใช้ number_format()
                         @endphp
                         <tr>
                             <td>{{ $item->name }}</td>
@@ -81,47 +81,56 @@
                         <tr>
                             <td colspan="4" class="text-center">--ไม่มีข้อมูล--</td>
                         </tr>
-                    @endempty
-            </tbody>
-        </table>
+                    @endforelse
+
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-@push('js')
-    <script>
-        $(document).ready(function() {
-            var chart = c3.generate({
-                bindto: '#chart-monthly2',
-                data: {
-                    x: 'x',
-                    columns: [
-                        ['x', {!! $province_list_str !!}],
-                        ['ผ่าน', {!! $province_pass_str !!}],
-                    ],
-                    type: 'bar',
-                },
-                axis: {
-                    x: {
-                        type: 'category',
-                        tick: {
-                            rotate: 75,
-                            multiline: false,
-                        },
-                        height: 130
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                var chart = c3.generate({
+                    bindto: '#chart-monthly2',
+                    data: {
+                        x: 'x',
+                        columns: [
+                            ['x', {!! $province_list_str !!}],
+                            ['ผ่าน', {!! $province_pass_str !!}],
+                        ],
+                        type: 'bar',
                     },
-                    y: {
-                        min: 1,
-                    }
-                },
-                bar: {
-                    /*width: 6*/
-                    width: {
-                        ratio: 0.2
-                    }
-                },
-                legend: {
-                    show: false, //hide legend
-                },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            tick: {
+                                rotate: 75,
+                                multiline: false,
+                            },
+                            height: 130
+                        },
+                        y: {
+                            min: 1,
+                        }
+                    },
+                    bar: {
+                        /*width: 6*/
+                        width: {
+                            ratio: 0.2
+                        }
+                    },
+                    legend: {
+                        show: false, //hide legend
+                    },
+                    grid: {
+                        x: {
+                            show: true // เปิดการแสดงเส้น grid บนแกน x
+                        },
+                        y: {
+                            show: true // เปิดการแสดงเส้น grid บนแกน y
+                        }
+                    },
+                });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endpush
