@@ -44,7 +44,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if ($item->post_pass_status == 'y')
-                                        <a href="{{ url('certificate/pdf/' . $item->curriculum_id) }}" class="btn btn-success"><i class="fa fa-download"></i> ดาวน์โหลดใบประกาศ</a>
+                                        <a href="{{ url('certificate/pdf/' . $item->curriculum_id) }}" target="_blank" class="btn btn-success"><i class="fa fa-download"></i> ดาวน์โหลดใบประกาศ</a>
                                     @else
                                         <a href="{{ url('elearning/curriculum/' . $item->curriculum_id) }}" class="btn btn-primary">
                                             <em class="fa fa-arrow-alt-circle-right fs-5 me-2 icon_list_menu "></em>
