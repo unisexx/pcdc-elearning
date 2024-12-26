@@ -41,7 +41,7 @@
 
     body {
         font-family: "THSarabunNew";
-        background-image: url("{{ asset('images/certificate/certificate_bg_sign.jpg') }}");
+        background-image: url("{{ asset('images/certificate/certificate_bg_sign_2567.jpg') }}");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -112,7 +112,7 @@
 
     .sign1 {
         top: 2200px;
-        left: 465px;
+        left: 370px;
     }
 
     .sign2 {
@@ -173,11 +173,11 @@
         <div class="date">{!! @$date !!}</div>
     </div>
     <div class="sign sign1">
-        <div>(นายแพทย์ธงชัย กีรติหัตถยากร)</div>
+        <div>(นายแพทย์ภาณุมาศ ญาณเวทย์สกุล)</div>
         <div>อธิบดีกรมควบคุมโรค</div>
     </div>
     <div class="sign sign2">
-        <div>(แพทย์หญิงอัจฉรา นิธิอภิญญาสกุล)</div>
+        <div>(แพทย์หญิงอัมพร เบญจพลพิทักษ์)</div>
         <div>อธิบดีกรมอนามัย</div>
     </div>
     <div class="sign sign3prefix">ว่าที่ร้อยตรี</div>
