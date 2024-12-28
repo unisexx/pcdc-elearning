@@ -42,7 +42,7 @@ a:hover {
 .shape2 {
 	background-image: url(../images/shape2.svg);
 	width: 100%;
-	height: 170px;
+	height: 260px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top;
@@ -1600,8 +1600,8 @@ svg:not(:root) {
 	font-weight: 600;
 }
 
-/* -------------------------------- 
-Timeline Css 
+/* --------------------------------
+Timeline Css
 -------------------------------- */
 .main-timeline {
 	padding: 25px 10px;
@@ -1844,7 +1844,7 @@ Timeline Css
 	}
 }
 
-/* -------------------------------- 
+/* --------------------------------
 TABS HOME
 -------------------------------- */
 .title_courses {
@@ -1895,7 +1895,7 @@ TABS HOME
 	color: #0d6efd;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 TABS LESSON
 -------------------------------- */
 .title_welcome {
@@ -2156,7 +2156,7 @@ ol.nested-counter-list ol {
 	}
 }
 
-/* -------------------------------- 
+/* --------------------------------
 TABS academic_results
 -------------------------------- */
 .results_list1 {
