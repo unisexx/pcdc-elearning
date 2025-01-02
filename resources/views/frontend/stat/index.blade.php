@@ -37,7 +37,7 @@
                             <label for="" class="form-label">ปี</label>
                             <select class="form-select select2" id="exam_year" name="exam_year">
                                 <option value="">--ทั้งหมด--</option>
-                                @for ($i = date('Y') + 543; $i >= $min_year; $i--)
+                                @for ($i = date('Y') + 543; $i >= 2567; $i--)
                                     @php
                                         $selected = @$exam_year == $i ? 'selected="selected"' : '';
                                     @endphp
@@ -45,6 +45,7 @@
                                 @endfor
                             </select>
                         </div>
+
                         <div class="clearfix"></div>
                         <div class="col-12 col-sm-auto">
                             <label for="" class="form-label">เขตพื้นที่</label>
