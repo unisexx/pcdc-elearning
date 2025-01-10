@@ -99,7 +99,7 @@
                                 <div class="carousel-item shadow-slide {{ $active }}">
                                     <div class="row">
                                         <div class="col-lg-5 col-xxl-4 text-center position-relative">
-                                            <img src="{{ asset('images/certificate_thumbnail.png') }}" alt="" width="380" height="268" class="shadow certificate_thumbnail mx-auto">
+                                            <img src="{{ asset('images/certificate.png') }}" alt="" width="380" height="268" class="shadow certificate_thumbnail mx-auto">
                                             <div class="circular"></div>
                                         </div>
                                         <div class="col-lg-7 col-xxl-6 mx-auto align-content-center">
